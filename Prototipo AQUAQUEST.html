@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaQuest Colombia — Prueba de Concepto</title>
+<style>
+  :root {
+    --bg: #0a1929; --panel: #122b40; --panel-2: #0f2438; --border: #1f4160;
+    --text: #e8f1f8; --muted: #8ba3b8;
+    --water-1: #00b4d8; --water-2: #0077b6; --water-3: #90e0ef;
+    --green-1: #52b788; --green-2: #2d6a4f;
+    --warn: #ffb703; --danger: #e63946; --purple: #9d4edd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    padding: 24px 32px 20px;
+    background: linear-gradient(180deg, #0d2033 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px);
+  }
+  .brand { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .brand .logo { font-size: 32px; filter: drop-shadow(0 0 8px rgba(0,180,216,.4)); }
+  .brand h1 { font-size: 22px; font-weight: 700; letter-spacing: .3px; }
+  .brand h1 span { color: var(--water-1); }
+  .brand .tag {
+    font-size: 12px; color: var(--muted); margin-left: 4px; padding: 3px 10px;
+    border: 1px solid var(--border); border-radius: 999px;
+  }
+  .brand .badge-poc {
+    margin-left: auto; font-size: 11px; color: var(--warn);
+    border: 1px solid var(--warn); padding: 3px 10px;
+    border-radius: 999px; letter-spacing: .5px;
+  }
+
+  /* ---------- GRID SUPERIOR ---------- */
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    padding: 24px 32px 8px; max-width: 1500px; margin: 0 auto;
+  }
+  @media (max-width: 1000px) { .grid { grid-template-columns: 1fr; padding: 16px; } header { padding: 16px; } }
+
+  .col-header {
+    display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+    border-radius: 10px 10px 0 0; font-weight: 700; font-size: 15px; letter-spacing: .4px;
+  }
+  .col-data .col-header {
+    background: linear-gradient(90deg, rgba(0,119,182,.25), transparent);
+    border: 1px solid var(--water-2); border-bottom: none;
+  }
+  .col-game .col-header {
+    background: linear-gradient(90deg, rgba(82,183,136,.25), transparent);
+    border: 1px solid var(--green-2); border-bottom: none;
+  }
+  .col-header small { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: auto; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-top: none;
+    border-radius: 0 0 10px 10px; padding: 20px;
+  }
+  .col-data .panel { border-color: var(--water-2); }
+  .col-game .panel { border-color: var(--green-2); }
+
+  /* ---------- DATOS ---------- */
+  .info-punto {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 14px 16px; margin-bottom: 18px; font-size: 13.5px;
+  }
+  .info-punto h3 { color: var(--water-3); font-size: 14px; margin-bottom: 8px; }
+  .info-punto .grid-info { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+  .info-punto .k { color: var(--muted); font-size: 12px; }
+  .info-punto .v { color: var(--text); font-weight: 500; }
+
+  .vars-title, .chart-title, .tabla-title {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--muted); margin-bottom: 10px; margin-top: 18px;
+  }
+  .vars-title:first-of-type { margin-top: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 6px 12px; background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 999px; font-size: 12.5px; color: var(--text); cursor: pointer;
+    transition: all .15s ease; user-select: none;
+  }
+  .chip:hover { border-color: var(--water-1); color: var(--water-3); }
+  .chip.active {
+    background: var(--water-2); border-color: var(--water-1); color: #fff;
+    box-shadow: 0 0 0 2px rgba(0,180,216,.2);
+  }
+  .chip .u { color: var(--muted); font-size: 10.5px; margin-left: 4px; }
+  .chip.active .u { color: rgba(255,255,255,.7); }
+
+  .chart-wrap {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 10px 6px; margin-top: 6px;
+  }
+  .chart-legend {
+    display: flex; justify-content: space-between; font-size: 11.5px;
+    color: var(--muted); padding: 0 6px 8px;
+  }
+  .chart-legend strong { color: var(--water-3); }
+
+  table.datos { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+  table.datos th {
+    text-align: left; color: var(--muted); font-weight: 500; padding: 6px 8px;
+    border-bottom: 1px solid var(--border); font-size: 11.5px;
+    text-transform: uppercase; letter-spacing: .5px;
+  }
+  table.datos td { padding: 7px 8px; border-bottom: 1px solid rgba(31,65,96,.4); }
+  table.datos tr:last-child td { border-bottom: none; }
+  table.datos .fecha { color: var(--muted); font-size: 12px; }
+  table.datos .valor { font-variant-numeric: tabular-nums; }
+  .bajo-lcm { color: var(--warn); font-style: italic; font-size: 12px; }
+
+  .nota-lcm {
+    margin-top: 16px; padding: 12px 14px; background: rgba(255,183,3,.06);
+    border-left: 3px solid var(--warn); border-radius: 4px;
+    font-size: 12.5px; color: #d8e4ee; line-height: 1.55;
+  }
+  .nota-lcm strong { color: var(--warn); }
+  .fuente {
+    margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--border);
+    font-size: 11.5px; color: var(--muted); text-align: center; font-style: italic;
+  }
+
+  /* ---------- JUEGO ---------- */
+  .aviso-juego {
+    background: rgba(82,183,136,.08); border-left: 3px solid var(--green-1);
+    border-radius: 4px; padding: 10px 14px; font-size: 12.5px;
+    color: #c8e6d5; margin-bottom: 18px; line-height: 1.55;
+  }
+  .aviso-juego strong { color: var(--green-1); }
+
+  .perfil {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; margin-bottom: 18px;
+  }
+  .perfil-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-1), var(--water-2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .perfil-info { flex: 1; min-width: 0; }
+  .perfil-info input {
+    background: transparent; border: none; color: var(--text);
+    font-size: 15px; font-weight: 600; width: 100%; padding: 2px 0;
+    border-bottom: 1px dashed transparent; font-family: inherit;
+  }
+  .perfil-info input:hover, .perfil-info input:focus {
+    border-bottom-color: var(--border); outline: none;
+  }
+  .perfil-info .nivel { font-size: 12px; color: var(--green-1); margin-top: 2px; }
+  .xp-bloque { text-align: right; flex-shrink: 0; }
+  .xp-bloque .num {
+    font-size: 22px; font-weight: 700; color: var(--green-1);
+    font-variant-numeric: tabular-nums;
+  }
+  .xp-bloque .lbl { font-size: 10.5px; color: var(--muted); letter-spacing: .5px; }
+
+  .progreso { height: 8px; background: rgba(0,0,0,.35); border-radius: 999px; overflow: hidden; }
+  .progreso-fill {
+    height: 100%; background: linear-gradient(90deg, var(--green-2), var(--green-1));
+    border-radius: 999px; width: 0%; transition: width .5s ease;
+  }
+  .progreso-txt {
+    font-size: 11px; color: var(--muted); margin-top: 6px;
+    display: flex; justify-content: space-between;
+  }
+
+  .retos-title {
+    font-size: 12px; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .retos-lista { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .reto {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; display: flex; gap: 14px;
+    align-items: flex-start; transition: all .2s ease;
+  }
+  .reto:hover { border-color: var(--green-2); }
+  .reto.completado {
+    background: rgba(82,183,136,.06); border-color: var(--green-2); opacity: .85;
+  }
+  .reto-icon {
+    font-size: 22px; flex-shrink: 0; width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; background: rgba(82,183,136,.1);
+  }
+  .reto-body { flex: 1; min-width: 0; }
+  .reto-body h4 { font-size: 13.5px; margin-bottom: 4px; font-weight: 600; }
+  .reto-body p { font-size: 12px; color: var(--muted); line-height: 1.45; margin-bottom: 8px; }
+  .reto-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .xp-tag {
+    font-size: 11px; color: var(--green-1);
+    background: rgba(82,183,136,.12); border: 1px solid rgba(82,183,136,.3);
+    padding: 2px 8px; border-radius: 999px; font-weight: 600;
+  }
+  .btn-completar {
+    font-size: 11.5px; padding: 5px 12px; border-radius: 6px;
+    border: 1px solid var(--green-1); background: transparent;
+    color: var(--green-1); cursor: pointer; transition: all .15s ease;
+    font-family: inherit;
+  }
+  .btn-completar:hover { background: var(--green-1); color: var(--bg); }
+  .btn-completar:disabled { opacity: .5; cursor: default; }
+  .reto.completado .btn-completar { border-color: var(--muted); color: var(--muted); }
+
+  .bitacora {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px; max-height: 260px; overflow-y: auto;
+  }
+  .bitacora-vacia {
+    color: var(--muted); font-size: 12.5px; font-style: italic;
+    text-align: center; padding: 14px 0;
+  }
+  .bitacora-item {
+    padding: 8px 0; border-bottom: 1px dashed rgba(31,65,96,.6);
+    font-size: 12.5px; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .bitacora-item:last-child { border-bottom: none; }
+  .bitacora-item .f { color: var(--muted); font-size: 11px; flex-shrink: 0; min-width: 78px; }
+  .bitacora-item .t { flex: 1; }
+  .bitacora-item .xp { color: var(--green-1); font-weight: 600; flex-shrink: 0; }
+
+  .btn-reset {
+    margin-top: 14px; background: transparent; border: 1px solid var(--border);
+    color: var(--muted); padding: 6px 14px; border-radius: 6px;
+    font-size: 11.5px; cursor: pointer; font-family: inherit;
+    transition: all .15s ease;
+  }
+  .btn-reset:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* ---------- 💬 COMUNIDAD ---------- */
+  .comunidad-wrap { max-width: 1500px; margin: 0 auto; padding: 24px 32px 60px; }
+  @media (max-width: 1000px) { .comunidad-wrap { padding: 16px; } }
+
+  .comunidad-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 18px; border-radius: 10px 10px 0 0;
+    background: linear-gradient(90deg, rgba(157,78,221,.22), transparent);
+    border: 1px solid var(--purple); border-bottom: none;
+    font-weight: 700; font-size: 15px; letter-spacing: .4px;
+  }
+  .comunidad-header small {
+    font-weight: 400; color: var(--muted); font-size: 12px; margin-left: auto;
+  }
+  .comunidad-panel {
+    background: var(--panel); border: 1px solid var(--purple);
+    border-top: none; border-radius: 0 0 10px 10px; padding: 22px;
+  }
+
+  .comunidad-aviso {
+    background: rgba(157,78,221,.08); border-left: 3px solid var(--purple);
+    border-radius: 4px; padding: 10px 14px; font-size: 12.5px;
+    color: #dcc4f0; margin-bottom: 20px; line-height: 1.55;
+  }
+  .comunidad-aviso strong { color: #c77dff; }
+
+  .composer {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; margin-bottom: 20px;
+  }
+  .composer-top { display: flex; gap: 12px; align-items: flex-start; }
+  .composer-avatar {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--purple), var(--water-2));
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .composer textarea {
+    flex: 1; background: transparent; border: none; color: var(--text);
+    font-family: inherit; font-size: 13.5px; resize: vertical; min-height: 60px;
+    line-height: 1.5;
+  }
+  .composer textarea:focus { outline: none; }
+  .composer textarea::placeholder { color: var(--muted); }
+
+  .composer-categorias {
+    display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0;
+    padding-left: 50px;
+  }
+  .cat-btn {
+    padding: 4px 10px; border-radius: 999px; font-size: 11.5px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--muted); cursor: pointer; font-family: inherit;
+    transition: all .15s ease;
+  }
+  .cat-btn:hover { color: var(--text); border-color: var(--muted); }
+  .cat-btn.active {
+    background: var(--purple); border-color: var(--purple); color: #fff;
+  }
+
+  .composer-preview {
+    margin: 10px 0 10px 50px; position: relative; display: none;
+    max-width: 260px; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .composer-preview.activa { display: block; }
+  .composer-preview img { width: 100%; display: block; }
+  .composer-preview .quitar {
+    position: absolute; top: 6px; right: 6px;
+    background: rgba(0,0,0,.7); color: #fff; border: none;
+    width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
+    font-size: 14px; line-height: 1;
+  }
+
+  .composer-footer {
+    display: flex; gap: 8px; align-items: center; padding-left: 50px;
+    border-top: 1px solid var(--border); padding-top: 12px; margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .btn-adjuntar {
+    padding: 6px 12px; border-radius: 8px; border: 1px dashed var(--border);
+    background: transparent; color: var(--muted); font-size: 12px;
+    cursor: pointer; font-family: inherit; transition: all .15s ease;
+  }
+  .btn-adjuntar:hover { border-color: var(--purple); color: #c77dff; }
+
+  .btn-publicar {
+    margin-left: auto; padding: 8px 20px; border-radius: 8px; border: none;
+    background: var(--purple); color: #fff; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: all .15s ease;
+  }
+  .btn-publicar:hover:not(:disabled) { background: #b06ae8; }
+  .btn-publicar:disabled { opacity: .4; cursor: default; }
+
+  .xp-nota {
+    font-size: 11px; color: var(--muted); margin-left: 8px; font-style: italic;
+  }
+
+  .filtros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .filtro-btn {
+    padding: 5px 14px; border-radius: 999px; font-size: 12px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--muted); cursor: pointer; font-family: inherit;
+    transition: all .15s ease;
+  }
+  .filtro-btn:hover { color: var(--text); }
+  .filtro-btn.active {
+    background: var(--panel-2); border-color: var(--purple); color: #c77dff;
+  }
+
+  .feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; }
+
+  .post {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; display: flex; flex-direction: column;
+    transition: all .2s ease;
+  }
+  .post:hover { border-color: rgba(157,78,221,.5); }
+
+  .post-header { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .post-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--purple), var(--water-2));
+  }
+  .post-meta { flex: 1; min-width: 0; }
+  .post-meta .nombre {
+    font-size: 13px; font-weight: 600;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .post-meta .fecha { font-size: 11px; color: var(--muted); }
+
+  .post-cat {
+    font-size: 10.5px; padding: 3px 9px; border-radius: 999px;
+    font-weight: 600; letter-spacing: .3px; flex-shrink: 0;
+  }
+  .cat-accion   { background: rgba(82,183,136,.15);  color: #95d5b2; border: 1px solid rgba(82,183,136,.3); }
+  .cat-idea     { background: rgba(255,183,3,.13);   color: #ffd166; border: 1px solid rgba(255,183,3,.3); }
+  .cat-pregunta { background: rgba(0,180,216,.13);   color: #90e0ef; border: 1px solid rgba(0,180,216,.3); }
+  .cat-logro    { background: rgba(157,78,221,.15);  color: #c77dff; border: 1px solid rgba(157,78,221,.3); }
+
+  .post-cuerpo {
+    font-size: 13px; line-height: 1.55; color: #d6e3ee;
+    margin-bottom: 12px; word-wrap: break-word; white-space: pre-wrap;
+  }
+  .post-imagen {
+    margin: 0 -16px 12px; max-height: 320px; overflow: hidden;
+    background: #000; display: flex; align-items: center; justify-content: center;
+  }
+  .post-imagen img { width: 100%; height: auto; max-height: 320px; object-fit: cover; display: block; }
+
+  .post-footer {
+    display: flex; gap: 14px; align-items: center;
+    padding-top: 10px; border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .btn-reaccion {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--muted); font-size: 12.5px; font-family: inherit;
+    display: flex; gap: 5px; align-items: center; padding: 4px 8px;
+    border-radius: 6px; transition: all .15s ease;
+  }
+  .btn-reaccion:hover { color: var(--text); background: rgba(255,255,255,.04); }
+  .btn-reaccion.reaccionado { color: var(--danger); }
+  .btn-reaccion .num { font-variant-numeric: tabular-nums; }
+
+  .btn-comentar {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--muted); font-size: 12.5px; font-family: inherit;
+    display: flex; gap: 5px; align-items: center; padding: 4px 8px;
+    border-radius: 6px; transition: all .15s ease; margin-left: auto;
+  }
+  .btn-comentar:hover { color: var(--text); background: rgba(255,255,255,.04); }
+
+  .comentarios {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--border); display: none;
+  }
+  .comentarios.abierto { display: block; }
+  .comentarios-lista { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+  .comentario {
+    font-size: 12.5px; line-height: 1.45;
+    padding-left: 10px; border-left: 2px solid rgba(157,78,221,.3);
+  }
+  .comentario .c-nombre { color: #c77dff; font-weight: 600; }
+  .comentario .c-fecha { color: var(--muted); font-size: 10.5px; margin-left: 6px; }
+  .comentario .c-texto { color: #cfdae5; }
+
+  .comentario-form { display: flex; gap: 8px; }
+  .comentario-form input {
+    flex: 1; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); padding: 6px 10px;
+    font-size: 12px; font-family: inherit;
+  }
+  .comentario-form input:focus { outline: none; border-color: var(--purple); }
+  .comentario-form button {
+    padding: 6px 12px; border-radius: 6px; border: none;
+    background: var(--purple); color: #fff; font-size: 12px;
+    cursor: pointer; font-family: inherit;
+  }
+  .comentario-form button:hover { background: #b06ae8; }
+
+  .feed-vacio {
+    grid-column: 1 / -1; text-align: center; padding: 40px 20px;
+    color: var(--muted); font-size: 13px; font-style: italic;
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-fondo {
+    position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 20px;
+  }
+  .modal-fondo.activo { display: flex; }
+  .modal {
+    background: var(--panel); border: 1px solid var(--green-2);
+    border-radius: 12px; padding: 24px; max-width: 460px; width: 100%;
+  }
+  .modal h3 { font-size: 16px; margin-bottom: 6px; color: var(--green-1); }
+  .modal p { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; line-height: 1.55; }
+  .modal textarea {
+    width: 100%; min-height: 90px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+    padding: 10px 12px; font-family: inherit; font-size: 13px; resize: vertical;
+  }
+  .modal textarea:focus { outline: none; border-color: var(--green-1); }
+  .modal-botones { display: flex; gap: 10px; justify-content: flex-end; margin-top: 14px; }
+  .btn { padding: 8px 18px; border-radius: 8px; border: none; font-size: 13px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all .15s ease; }
+  .btn-sec { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+  .btn-sec:hover { color: var(--text); border-color: var(--muted); }
+  .btn-pri { background: var(--green-1); color: var(--bg); }
+  .btn-pri:hover { background: #7ce0a4; }
+  .btn-pri:disabled { opacity: .4; cursor: default; }
+
+  .toast {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--green-2); color: #fff;
+    padding: 14px 22px; border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    font-size: 14px; font-weight: 600; z-index: 200;
+    transform: translateY(100px); opacity: 0;
+    transition: all .4s cubic-bezier(.2,.8,.3,1.2);
+    pointer-events: none; max-width: 340px;
+  }
+  .toast.visible { transform: translateY(0); opacity: 1; }
+  .toast .xp { color: var(--warn); }
+  .toast.purple { background: var(--purple); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="logo">💧</span>
+    <h1>AquaQuest <span>Colombia</span></h1>
+    <span class="tag">Explora · Comprende · Protege · Comparte</span>
+    <span class="badge-poc">PRUEBA DE CONCEPTO</span>
+  </div>
+</header>
+
+<main class="grid">
+
+  <!-- 🌎 DATOS REALES -->
+  <section class="col-data">
+    <div class="col-header">
+      🌎 Datos reales
+      <small>Fuente: IDEAM — no modificables</small>
+    </div>
+    <div class="panel">
+      <div class="info-punto">
+        <h3 id="punto-nombre">—</h3>
+        <div class="grid-info">
+          <div><span class="k">Código:</span> <span class="v" id="punto-codigo">—</span></div>
+          <div><span class="k">Corriente:</span> <span class="v" id="punto-corriente">—</span></div>
+          <div><span class="k">Cuenca:</span> <span class="v" id="punto-cuenca">—</span></div>
+          <div><span class="k">Subzona:</span> <span class="v" id="punto-subzona">—</span></div>
+          <div><span class="k">Departamento:</span> <span class="v" id="punto-depto">—</span></div>
+          <div><span class="k">Municipio:</span> <span class="v" id="punto-muni">—</span></div>
+          <div><span class="k">Coordenadas:</span> <span class="v" id="punto-coord">—</span></div>
+          <div><span class="k">Elevación:</span> <span class="v" id="punto-elev">—</span></div>
+        </div>
+      </div>
+
+      <div class="vars-title">Variables medidas (toca una para ver su serie)</div>
+      <div class="chips" id="chips-vars"></div>
+
+      <div class="chart-title">Serie histórica · <span id="chart-nombre">—</span></div>
+      <div class="chart-wrap">
+        <div class="chart-legend">
+          <span>Unidad: <strong id="chart-unidad">—</strong></span>
+          <span id="chart-rango">—</span>
+        </div>
+        <svg id="chart" viewBox="0 0 520 200" preserveAspectRatio="none" style="width:100%;height:200px;display:block"></svg>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);padding:4px 8px 0">
+          <span id="chart-min">—</span>
+          <span id="chart-max">—</span>
+        </div>
+      </div>
+
+      <div class="tabla-title">Últimas mediciones del punto</div>
+      <table class="datos" id="tabla-datos">
+        <thead>
+          <tr><th>Fecha</th><th>Variable</th><th style="text-align:right">Valor</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="nota-lcm">
+        <strong>Nota sobre los valores "&lt;X":</strong> cuando el IDEAM reporta un valor como
+        <em>&lt;0,05</em>, significa que el resultado está <strong>por debajo del Límite de
+        Cuantificación del Método (LCM)</strong>. El LCM puede cambiar con el tiempo para la
+        misma variable. Por eso AquaQuest muestra estos valores tal como fueron reportados,
+        sin inventar cifras.
+      </div>
+
+      <div class="fuente">
+        Datos: IDEAM — Red de Referencia Nacional de Calidad del Agua.<br>
+        Cobertura 2005 – 2026. Última actualización: julio 2026.
+      </div>
+    </div>
+  </section>
+
+  <!-- 🎮 JUEGO -->
+  <section class="col-game">
+    <div class="col-header">
+      🎮 Tu juego
+      <small>Acciones tuyas — no vienen de los datos</small>
+    </div>
+    <div class="panel">
+      <div class="aviso-juego">
+        <strong>Importante:</strong> el XP aquí se gana por <em>lo que tú haces</em> por el agua,
+        no por los valores que reporta el IDEAM. El XP <strong>solo</strong> sirve como tu
+        reputación personal: refleja tu camino, no desbloquea nada. Los datos de la izquierda
+        te inspiran; tu acción es lo que cuenta.
+      </div>
+
+      <div class="perfil">
+        <div class="perfil-top">
+          <div class="avatar">🐟</div>
+          <div class="perfil-info">
+            <input id="usuario-nombre" type="text" value="Guardiana del agua" maxlength="30" title="Haz clic para editar tu nombre">
+            <div class="nivel" id="usuario-nivel">Nivel 1 · Semilla</div>
+          </div>
+          <div class="xp-bloque">
+            <div class="num" id="usuario-xp">0</div>
+            <div class="lbl">XP TOTAL</div>
+          </div>
+        </div>
+        <div class="progreso"><div class="progreso-fill" id="progreso-fill"></div></div>
+        <div class="progreso-txt">
+          <span id="progreso-txt-min">0 XP</span>
+          <span id="progreso-txt-max">100 XP al siguiente nivel</span>
+        </div>
+      </div>
+
+      <div class="retos-title">Retos de acción real (tipo B)</div>
+      <div class="retos-lista" id="retos-lista"></div>
+
+      <div class="retos-title">Tu bitácora de acciones</div>
+      <div class="bitacora" id="bitacora">
+        <div class="bitacora-vacia">Aún no has registrado acciones.<br>Completa un reto para empezar.</div>
+      </div>
+
+      <button class="btn-reset" id="btn-reset">🔄 Reiniciar mi progreso</button>
+    </div>
+  </section>
+
+</main>
+
+<!-- 💬 COMUNIDAD -->
+<section class="comunidad-wrap">
+  <div class="comunidad-header">
+    💬 Comunidad
+    <small>Lo que compartimos entre todos — no son datos del IDEAM</small>
+  </div>
+  <div class="comunidad-panel">
+    <div class="comunidad-aviso">
+      <strong>Este es un espacio entre personas.</strong> Aquí compartimos lo que hacemos
+      por el agua: acciones, ideas, preguntas y logros. Nada de esto viene del IDEAM.
+      Aquí no se gana XP: se comparte porque vale la pena. La recompensa es inspirar
+      a otras personas a cuidar el agua.
+    </div>
+
+    <!-- Composer -->
+    <div class="composer">
+      <div class="composer-top">
+        <div class="composer-avatar" id="composer-avatar">🐟</div>
+        <textarea id="post-texto" placeholder="¿Qué hiciste hoy por el agua? ¿Una idea? ¿Una pregunta? Cuéntanos..." maxlength="500"></textarea>
+      </div>
+
+      <div class="composer-categorias" id="composer-categorias">
+        <button class="cat-btn active" data-cat="accion">🌱 Acción</button>
+        <button class="cat-btn" data-cat="idea">💡 Idea</button>
+        <button class="cat-btn" data-cat="pregunta">❓ Pregunta</button>
+        <button class="cat-btn" data-cat="logro">🏆 Logro</button>
+      </div>
+
+      <div class="composer-preview" id="composer-preview">
+        <img id="composer-preview-img" alt="Vista previa">
+        <button class="quitar" id="composer-quitar" title="Quitar foto">✕</button>
+      </div>
+
+      <div class="composer-footer">
+        <input type="file" id="input-foto" accept="image/*" style="display:none">
+        <button class="btn-adjuntar" id="btn-adjuntar">📷 Añadir foto</button>
+        <span class="xp-nota">Compartir no da XP — solo inspira</span>
+        <button class="btn-publicar" id="btn-publicar" disabled>Publicar</button>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filtros" id="filtros">
+      <button class="filtro-btn active" data-filtro="todos">Todos</button>
+      <button class="filtro-btn" data-filtro="accion">🌱 Acciones</button>
+      <button class="filtro-btn" data-filtro="idea">💡 Ideas</button>
+      <button class="filtro-btn" data-filtro="pregunta">❓ Preguntas</button>
+      <button class="filtro-btn" data-filtro="logro">🏆 Logros</button>
+    </div>
+
+    <!-- Feed -->
+    <div class="feed" id="feed"></div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-fondo" id="modal-fondo">
+  <div class="modal">
+    <h3 id="modal-titulo">Registrar acción</h3>
+    <p id="modal-desc">Cuéntanos brevemente qué hiciste. Esta evidencia es para ti: te ayuda a recordar y a reflexionar sobre tu acción.</p>
+    <textarea id="modal-evidencia" placeholder="Ej: Cerré la llave mientras me cepillé durante 2 minutos esta mañana..."></textarea>
+    <div class="modal-botones">
+      <button class="btn btn-sec" id="modal-cancelar">Cancelar</button>
+      <button class="btn btn-pri" id="modal-confirmar" disabled>Registrar y ganar XP</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   🌎 DATOS REALES — subconjunto del CSV del IDEAM
+   ============================================================ */
+const PUNTO = {
+  nombre: "RCA_ATRATO_CHO_EL CARMEN_SIETE EL",
+  codigo: "11027030", corriente: "Atrato", cuenca: "Atrato - Darién",
+  subzona: "Alto Atrato", departamento: "Chocó", municipio: "El Carmen",
+  lat: 5.8620, lon: -76.15205556, elevacion: 2300
+};
+
+const VARIABLES = {
+  ph:      { nombre: "pH",                  unidad: "unidades de pH", categoria: "Fisicoquímico" },
+  od:      { nombre: "Oxígeno disuelto",    unidad: "mg O2/L",        categoria: "Fisicoquímico" },
+  temp:    { nombre: "Temperatura",         unidad: "°C",             categoria: "Fisicoquímico" },
+  cond:    { nombre: "Conductividad",       unidad: "µS/cm",          categoria: "Fisicoquímico" },
+  turb:    { nombre: "Turbidez",            unidad: "NTU",            categoria: "Fisicoquímico" },
+  dqo:     { nombre: "DQO",                 unidad: "mg O2/L",        categoria: "Materia orgánica" },
+  sst:     { nombre: "Sólidos suspendidos", unidad: "mg/L",           categoria: "Fisicoquímico" },
+  fe:      { nombre: "Hierro total",        unidad: "mg Fe/L",        categoria: "Metal" },
+  al:      { nombre: "Aluminio total",      unidad: "mg Al/L",        categoria: "Metal" },
+  mn:      { nombre: "Manganeso total",     unidad: "mg Mn/L",        categoria: "Metal" },
+  zn:      { nombre: "Zinc total",          unidad: "mg Zn/L",        categoria: "Metal" },
+  no3:     { nombre: "Nitrato",             unidad: "mg N-NO3-/L",    categoria: "Nutriente" },
+  p_total: { nombre: "Fósforo total",       unidad: "mg P/L",         categoria: "Nutriente" }
+};
+
+const MUESTRAS = [
+  { fecha: "30/07/2014", valores: { ph:"7.89", od:"6.6", temp:"21.7", cond:"103.5", turb:"13", dqo:"20", sst:"32", fe:"3.18", al:"1.68", mn:"0.082", zn:"0.055", no3:"0.25", p_total:"0.1" } },
+  { fecha: "25/05/2015", valores: { ph:"6.49", od:"7.2", temp:"17.8", cond:"104.2", turb:"1910", dqo:"130", sst:"1950", fe:"127", al:"95.1", mn:"1.49", zn:"0.292", no3:"1.3", p_total:null } },
+  { fecha: "21/06/2016", valores: { ph:"7.43", od:"7.4", temp:"20.9", cond:"79.2", turb:"1200", dqo:"21", sst:"1050", fe:"38.1", al:"36", mn:"0.484", zn:"0.178", no3:"1.2", p_total:null } },
+  { fecha: "19/10/2016", valores: { ph:"7.89", od:"7.3", temp:"19.7", cond:"82.2", turb:"180", dqo:"16", sst:"300", fe:"18.2", al:"12.3", mn:"0.213", zn:"0.142", no3:"1.3", p_total:"0.29" } },
+  { fecha: "06/04/2018", valores: { ph:"5.09", od:"6.9", temp:"16.5", cond:"73.2", turb:null, dqo:null, sst:null, fe:"52", al:"34.2", mn:"1", zn:"0.208", no3:"2.8", p_total:"0.53" } },
+  { fecha: "19/07/2021", valores: { ph:"7.64", od:"5.9", temp:"21.5", cond:"87", turb:"170", dqo:"<10", sst:"210", fe:"6.37", al:"3.88", mn:"<0.2", zn:"<0.2", no3:null, p_total:"0.23" } },
+  { fecha: "26/04/2022", valores: { ph:"7.77", od:"7.6", temp:"16.2", cond:"89.8", turb:"90", dqo:"<10", sst:"86", fe:"3.674", al:"2.216", mn:"<0.2", zn:"<0.2", no3:null, p_total:"0.085" } },
+  { fecha: "22/05/2024", valores: { ph:"7.44", od:"7.4", temp:"22.1", cond:"94.6", turb:"380", dqo:"14", sst:"436", fe:"16.2", al:"9.11", mn:"0.235", zn:"<0.2", no3:"0.167", p_total:"0.24" } }
+];
+
+/* ============================================================
+   🎮 RETOS TIPO B — acciones reales del usuario
+   ============================================================ */
+const RETOS = [
+  { id:"r1", icono:"🚰", xp:20, titulo:"Cierra la llave mientras te cepillas",
+    desc:"Durante tu próximo cepillado, cierra la llave mientras no la necesites. Es una de las acciones más simples y con mayor impacto diario." },
+  { id:"r2", icono:"🔧", xp:40, titulo:"Reporta una fuga de agua",
+    desc:"Encuentra una fuga en tu colegio, casa o barrio. Repórtala a quien corresponda (profesor, administración, acueducto)." },
+  { id:"r3", icono:"🗑️", xp:50, titulo:"Recoge 5 residuos de una fuente hídrica",
+    desc:"Ve a un río, quebrada o humedal cercano. Recoge al menos 5 residuos y dispónlos correctamente." },
+  { id:"r4", icono:"📚", xp:30, titulo:"Aprende y explica qué es la DQO",
+    desc:"Investiga qué significa la Demanda Química de Oxígeno y explícalo a alguien (familiar, amigo, compañero). Enseñar es la mejor forma de aprender." },
+  { id:"r5", icono:"🚿", xp:25, titulo:"Un día de ducha corta",
+    desc:"Reduce tu ducha a 5 minutos o menos durante un día completo. Anota cuánta agua crees que ahorraste." },
+  { id:"r6", icono:"📢", xp:15, titulo:"Comparte algo aprendido",
+    desc:"Cuéntale a alguien de tu familia o a un amigo algo que hayas visto en la sección de datos reales. Compartir es proteger." }
+];
+
+/* ============================================================
+   💬 COMUNIDAD — posts semilla
+   ============================================================ */
+const POSTS_SEMILLA = [
+  {
+    id: "seed1",
+    autor: "Camila R.",
+    avatar: "🌊",
+    categoria: "accion",
+    fecha: "10/09/2026",
+    texto: "Hoy con mi curso recogimos 32 botellas y 12 bolsas de la orilla del río. La cantidad de plástico que llega al agua es impresionante. ¡Hagamos más jornadas así!",
+    imagen: null,
+    likes: 14,
+    comentarios: [
+      { autor: "Andrés", fecha: "10/09/2026", texto: "¡Uff, gran trabajo! ¿En qué río fue?" },
+      { autor: "Camila R.", fecha: "10/09/2026", texto: "En la quebrada cerca al colegio. Estaba llena de basura." }
+    ]
+  },
+  {
+    id: "seed2",
+    autor: "Profe Julián",
+    avatar: "📘",
+    categoria: "idea",
+    fecha: "09/09/2026",
+    texto: "Idea para colegios: instalar un 'medidor de agua' visible en el patio. Que los estudiantes vean cuánta consume el colegio cada semana y propongan metas de reducción. Es una manera fácil de hacer visible lo invisible.",
+    imagen: null,
+    likes: 22,
+    comentarios: [
+      { autor: "Sofía", fecha: "09/09/2026", texto: "¡Me encanta! Lo propongo en mi institución." }
+    ]
+  },
+  {
+    id: "seed3",
+    autor: "Nicolás M.",
+    avatar: "🐢",
+    categoria: "pregunta",
+    fecha: "08/09/2026",
+    texto: "Alguien sabe por qué el hierro total en agua puede subir tanto en una muestra? Vi en los datos del Atrato que en 2018 salió 52 mg/L y en 2022 apenas 3.67 mg/L. ¿Es normal tanta variación?",
+    imagen: null,
+    likes: 8,
+    comentarios: [
+      { autor: "Profe Julián", fecha: "08/09/2026", texto: "Buena pregunta. Suele estar asociado a escorrentía por lluvias y a la geología de la cuenca. Los metales en agua varían mucho entre temporadas." }
+    ]
+  },
+  {
+    id: "seed4",
+    autor: "Valentina",
+    avatar: "💧",
+    categoria: "logro",
+    fecha: "07/09/2026",
+    texto: "¡Llegué a 'Guardián de río' con 500 XP! Empecé hace una semana con retos pequeños: cerrar llaves, ducha corta, y contarle a mi familia lo que aprendí. Súper recomendado.",
+    imagen: null,
+    likes: 31,
+    comentarios: []
+  }
+];
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+const STORAGE_KEY = "aquaquest_poc_v3";
+
+let estado = {
+  usuario: "Guardiana del agua",
+  avatar: "🐟",
+  xp: 0,
+  acciones: [],
+  retosCompletados: [],
+  comunidad: {
+    posts: [],
+    likesDados: []
+  }
+};
+
+let variableActual = "ph";
+let filtroActual = "todos";
+let categoriaComposer = "accion";
+let imagenComposer = null;
+
+/* ---------- Persistencia ---------- */
+function cargarEstado() {
+  try {
+    const g = localStorage.getItem(STORAGE_KEY);
+    if (g) {
+      const parsed = JSON.parse(g);
+      estado = { ...estado, ...parsed };
+      estado.comunidad = { posts: [], likesDados: [], ...(parsed.comunidad || {}) };
+    }
+    if (estado.comunidad.posts.length === 0) {
+      estado.comunidad.posts = [...POSTS_SEMILLA];
+    }
+  } catch (e) { estado.comunidad.posts = [...POSTS_SEMILLA]; }
+}
+function guardarEstado() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(estado)); }
+  catch (e) {
+    console.warn("No se pudo guardar. Posible límite de almacenamiento alcanzado.");
+    mostrarToast("⚠️ Espacio lleno. Considera borrar algunas fotos.");
+  }
+}
+
+/* ---------- Niveles ---------- */
+const NIVELES = [
+  { xp: 0,    nombre: "Semilla" },
+  { xp: 100,  nombre: "Brote" },
+  { xp: 250,  nombre: "Guardián de quebrada" },
+  { xp: 500,  nombre: "Guardián de río" },
+  { xp: 900,  nombre: "Guardián de cuenca" },
+  { xp: 1500, nombre: "Guardián del agua" }
+];
+function calcularNivel(xp) {
+  let actual = NIVELES[0], siguiente = NIVELES[1] || null;
+  for (let i = NIVELES.length - 1; i >= 0; i--) {
+    if (xp >= NIVELES[i].xp) { actual = NIVELES[i]; siguiente = NIVELES[i+1] || null; break; }
+  }
+  const piso = actual.xp, techo = siguiente ? siguiente.xp : actual.xp + 1;
+  const pct = siguiente ? Math.min(100, ((xp - piso) / (techo - piso)) * 100) : 100;
+  return { actual, siguiente, piso, techo, pct };
+}
+
+/* ---------- Helpers ---------- */
+function formatearNumero(n) {
+  if (Math.abs(n) >= 1000) return n.toFixed(0);
+  if (Math.abs(n) >= 100) return n.toFixed(1);
+  if (Math.abs(n) >= 10) return n.toFixed(2);
+  return n.toFixed(3).replace(/\.?0+$/, "");
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+}
+function hoyDisplay() {
+  return new Date().toLocaleDateString("es-CO", { day:"2-digit", month:"2-digit", year:"numeric" });
+}
+
+/* ============================================================
+   RENDER DATOS
+   ============================================================ */
+function renderInfoPunto() {
+  document.getElementById("punto-nombre").textContent = PUNTO.nombre;
+  document.getElementById("punto-codigo").textContent = PUNTO.codigo;
+  document.getElementById("punto-corriente").textContent = PUNTO.corriente;
+  document.getElementById("punto-cuenca").textContent = PUNTO.cuenca;
+  document.getElementById("punto-subzona").textContent = PUNTO.subzona;
+  document.getElementById("punto-depto").textContent = PUNTO.departamento;
+  document.getElementById("punto-muni").textContent = PUNTO.municipio;
+  document.getElementById("punto-coord").textContent = PUNTO.lat.toFixed(4) + ", " + PUNTO.lon.toFixed(4);
+  document.getElementById("punto-elev").textContent = PUNTO.elevacion.toLocaleString("es-CO") + " m.s.n.m.";
+}
+
+function renderChips() {
+  const cont = document.getElementById("chips-vars");
+  cont.innerHTML = "";
+  Object.entries(VARIABLES).forEach(([id, v]) => {
+    const el = document.createElement("div");
+    el.className = "chip" + (id === variableActual ? " active" : "");
+    el.innerHTML = `${v.nombre}<span class="u">${v.unidad}</span>`;
+    el.onclick = () => { variableActual = id; renderChips(); renderChart(); };
+    cont.appendChild(el);
+  });
+}
+
+function renderChart() {
+  const v = VARIABLES[variableActual];
+  document.getElementById("chart-nombre").textContent = v.nombre;
+  document.getElementById("chart-unidad").textContent = v.unidad;
+
+  const svg = document.getElementById("chart");
+  const W = 520, H = 200, pad = { l: 40, r: 14, t: 16, b: 22 };
+  const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
+
+  const puntos = [];
+  MUESTRAS.forEach((m, i) => {
+    const raw = m.valores[variableActual];
+    if (raw === null || raw === undefined) return;
+    if (typeof raw === "string" && raw.startsWith("<")) return;
+    const num = parseFloat(raw);
+    if (isNaN(num)) return;
+    puntos.push({ idx: i, fecha: m.fecha, valor: num });
+  });
+
+  svg.innerHTML = "";
+  if (puntos.length === 0) {
+    svg.innerHTML = `<text x="${W/2}" y="${H/2}" fill="#8ba3b8" font-size="12" text-anchor="middle" font-style="italic">Sin datos numéricos para graficar</text>`;
+    document.getElementById("chart-rango").textContent = "—";
+    document.getElementById("chart-min").textContent = "";
+    document.getElementById("chart-max").textContent = "";
+    return;
+  }
+  const vals = puntos.map(p => p.valor);
+  let min = Math.min(...vals), max = Math.max(...vals);
+  if (min === max) { min -= 1; max += 1; }
+  const rangoY = max - min;
+  const x = (i) => pad.l + (i / (MUESTRAS.length - 1)) * innerW;
+  const y = (val) => pad.t + innerH - ((val - min) / rangoY) * innerH;
+
+  const grid = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  for (let i = 0; i <= 4; i++) {
+    const yv = pad.t + (i / 4) * innerH;
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", pad.l); line.setAttribute("x2", W - pad.r);
+    line.setAttribute("y1", yv); line.setAttribute("y2", yv);
+    line.setAttribute("stroke", "#1f4160"); line.setAttribute("stroke-dasharray", "3 4");
+    grid.appendChild(line);
+    const etiqueta = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    etiqueta.setAttribute("x", pad.l - 6); etiqueta.setAttribute("y", yv + 3);
+    etiqueta.setAttribute("fill", "#8ba3b8"); etiqueta.setAttribute("font-size", "9.5");
+    etiqueta.setAttribute("text-anchor", "end");
+    etiqueta.textContent = formatearNumero(max - (i / 4) * rangoY);
+    grid.appendChild(etiqueta);
+  }
+  svg.appendChild(grid);
+
+  if (puntos.length > 1) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    let d = `M ${x(puntos[0].idx)} ${y(puntos[0].valor)}`;
+    for (let i = 1; i < puntos.length; i++) d += ` L ${x(puntos[i].idx)} ${y(puntos[i].valor)}`;
+    path.setAttribute("d", d); path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#00b4d8"); path.setAttribute("stroke-width", "2.2");
+    path.setAttribute("stroke-linejoin", "round"); path.setAttribute("stroke-linecap", "round");
+    svg.appendChild(path);
+  }
+
+  puntos.forEach(p => {
+    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("cx", x(p.idx)); c.setAttribute("cy", y(p.valor));
+    c.setAttribute("r", "4"); c.setAttribute("fill", "#90e0ef");
+    c.setAttribute("stroke", "#0077b6"); c.setAttribute("stroke-width", "1.5");
+    svg.appendChild(c);
+    const t = document.createElementNS("http://www.w3.org/2000/svg", "title");
+    t.textContent = `${p.fecha} · ${formatearNumero(p.valor)} ${v.unidad}`;
+    c.appendChild(t);
+  });
+
+  document.getElementById("chart-min").textContent = MUESTRAS[0].fecha;
+  document.getElementById("chart-max").textContent = MUESTRAS[MUESTRAS.length - 1].fecha;
+  document.getElementById("chart-rango").textContent = `Rango: ${formatearNumero(min)} – ${formatearNumero(max)} ${v.unidad}`;
+}
+
+function renderTabla() {
+  const tbody = document.querySelector("#tabla-datos tbody");
+  tbody.innerHTML = "";
+  const ultimas = [...MUESTRAS].slice(-4).reverse();
+  ultimas.forEach(m => {
+    Object.entries(VARIABLES).forEach(([id, v]) => {
+      const raw = m.valores[id];
+      if (raw === null || raw === undefined) return;
+      const tr = document.createElement("tr");
+      const esBajo = typeof raw === "string" && raw.startsWith("<");
+      tr.innerHTML = `
+        <td class="fecha">${m.fecha}</td>
+        <td>${v.nombre}</td>
+        <td class="valor" style="text-align:right">
+          ${esBajo
+            ? `<span class="bajo-lcm">&lt;${raw.slice(1)}</span>`
+            : `${raw} <span style="color:var(--muted);font-size:11px">${v.unidad}</span>`}
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  });
+}
+
+/* ============================================================
+   RENDER JUEGO
+   ============================================================ */
+function renderPerfil() {
+  document.getElementById("usuario-nombre").value = estado.usuario;
+  document.getElementById("composer-avatar").textContent = estado.avatar;
+  document.getElementById("usuario-xp").textContent = estado.xp;
+  const n = calcularNivel(estado.xp);
+  document.getElementById("usuario-nivel").textContent = `Nivel ${NIVELES.indexOf(n.actual) + 1} · ${n.actual.nombre}`;
+  document.getElementById("progreso-fill").style.width = n.pct + "%";
+  document.getElementById("progreso-txt-min").textContent = `${estado.xp} XP`;
+  document.getElementById("progreso-txt-max").textContent =
+    n.siguiente ? `${n.techo} XP al siguiente nivel` : "Nivel máximo alcanzado";
+}
+
+function renderRetos() {
+  const cont = document.getElementById("retos-lista");
+  cont.innerHTML = "";
+  RETOS.forEach(r => {
+    const completado = estado.retosCompletados.includes(r.id);
+    const el = document.createElement("div");
+    el.className = "reto" + (completado ? " completado" : "");
+    el.innerHTML = `
+      <div class="reto-icon">${r.icono}</div>
+      <div class="reto-body">
+        <h4>${r.titulo}</h4>
+        <p>${r.desc}</p>
+        <div class="reto-meta">
+          <span class="xp-tag">+${r.xp} XP</span>
+          <button class="btn-completar" ${completado ? "disabled" : ""}>
+            ${completado ? "✓ Completado" : "Registrar acción"}
+          </button>
+        </div>
+      </div>`;
+    if (!completado) el.querySelector(".btn-completar").onclick = () => abrirModal(r);
+    cont.appendChild(el);
+  });
+}
+
+function renderBitacora() {
+  const cont = document.getElementById("bitacora");
+  if (estado.acciones.length === 0) {
+    cont.innerHTML = `<div class="bitacora-vacia">Aún no has registrado acciones.<br>Completa un reto para empezar.</div>`;
+    return;
+  }
+  cont.innerHTML = "";
+  [...estado.acciones].reverse().forEach(a => {
+    const reto = RETOS.find(r => r.id === a.retoId);
+    const div = document.createElement("div");
+    div.className = "bitacora-item";
+    div.innerHTML = `
+      <span class="f">${a.fecha}</span>
+      <span class="t">
+        <strong>${reto ? reto.icono + " " + reto.titulo : a.retoId}</strong><br>
+        <span style="color:var(--muted);font-size:11.5px">${escapeHtml(a.evidencia || "(sin evidencia)")}</span>
+      </span>
+      <span class="xp">+${a.xp}</span>`;
+    cont.appendChild(div);
+  });
+}
+
+/* ============================================================
+   💬 RENDER COMUNIDAD
+   ============================================================ */
+const CATEGORIAS = {
+  accion:   { label: "🌱 Acción",   clase: "cat-accion" },
+  idea:     { label: "💡 Idea",     clase: "cat-idea" },
+  pregunta: { label: "❓ Pregunta", clase: "cat-pregunta" },
+  logro:    { label: "🏆 Logro",    clase: "cat-logro" }
+};
+
+function renderFeed() {
+  const cont = document.getElementById("feed");
+  cont.innerHTML = "";
+
+  let posts = [...estado.comunidad.posts];
+  if (filtroActual !== "todos") posts = posts.filter(p => p.categoria === filtroActual);
+
+  if (posts.length === 0) {
+    cont.innerHTML = `<div class="feed-vacio">No hay publicaciones en esta categoría todavía.<br>¡Sé la primera persona en compartir algo!</div>`;
+    return;
+  }
+  posts.sort((a, b) => (b.orden || 0) - (a.orden || 0));
+
+  posts.forEach(p => {
+    const cat = CATEGORIAS[p.categoria] || CATEGORIAS.accion;
+    const reaccionado = estado.comunidad.likesDados.includes(p.id);
+    const numLikes = p.likes + (reaccionado ? 1 : 0);
+
+    const post = document.createElement("article");
+    post.className = "post";
+    post.innerHTML = `
+      <div class="post-header">
+        <div class="post-avatar">${p.avatar || "💧"}</div>
+        <div class="post-meta">
+          <div class="nombre">${escapeHtml(p.autor)}</div>
+          <div class="fecha">${p.fecha}</div>
+        </div>
+        <span class="post-cat ${cat.clase}">${cat.label}</span>
+      </div>
+      <div class="post-cuerpo">${escapeHtml(p.texto)}</div>
+      ${p.imagen ? `<div class="post-imagen"><img src="${p.imagen}" alt="Imagen del post" loading="lazy"></div>` : ""}
+      <div class="post-footer">
+        <button class="btn-reaccion ${reaccionado ? "reaccionado" : ""}" data-accion="like">
+          ${reaccionado ? "❤️" : "🤍"} <span class="num">${numLikes}</span>
+        </button>
+        <button class="btn-comentar" data-accion="comentar">
+          💬 <span class="num">${p.comentarios.length}</span>
+        </button>
+      </div>
+      <div class="comentarios" data-comentarios>
+        <div class="comentarios-lista">
+          ${p.comentarios.map(c => `
+            <div class="comentario">
+              <span class="c-nombre">${escapeHtml(c.autor)}</span>
+              <span class="c-fecha">${c.fecha}</span><br>
+              <span class="c-texto">${escapeHtml(c.texto)}</span>
+            </div>`).join("")}
+        </div>
+        <div class="comentario-form">
+          <input type="text" placeholder="Escribe un comentario..." maxlength="200" data-input-comentario>
+          <button data-accion="enviar-comentario">Enviar</button>
+        </div>
+      </div>
+    `;
+
+    post.querySelector('[data-accion="like"]').onclick = () => toggleLike(p.id);
+    const btnComentar = post.querySelector('[data-accion="comentar"]');
+    const bloqueComentarios = post.querySelector("[data-comentarios]");
+    btnComentar.onclick = () => bloqueComentarios.classList.toggle("abierto");
+    const inputComentario = post.querySelector("[data-input-comentario]");
+    const btnEnviar = post.querySelector('[data-accion="enviar-comentario"]');
+    const enviar = () => {
+      const txt = inputComentario.value.trim();
+      if (txt.length < 2) return;
+      agregarComentario(p.id, txt);
+    };
+    btnEnviar.onclick = enviar;
+    inputComentario.addEventListener("keydown", e => { if (e.key === "Enter") enviar(); });
+
+    cont.appendChild(post);
+  });
+}
+
+function toggleLike(postId) {
+  const idx = estado.comunidad.likesDados.indexOf(postId);
+  if (idx === -1) estado.comunidad.likesDados.push(postId);
+  else estado.comunidad.likesDados.splice(idx, 1);
+  guardarEstado();
+  renderFeed();
+}
+
+function agregarComentario(postId, texto) {
+  const post = estado.comunidad.posts.find(p => p.id === postId);
+  if (!post) return;
+  post.comentarios.push({
+    autor: estado.usuario,
+    fecha: hoyDisplay(),
+    texto: texto
+  });
+  guardarEstado();
+  renderFeed();
+  // Reabrir el bloque de comentarios del post recién comentado
+  setTimeout(() => {
+    document.querySelectorAll(".post").forEach(el => {
+      if (el.innerHTML.includes(escapeHtml(texto))) {
+        el.querySelector("[data-comentarios]")?.classList.add("abierto");
+      }
+    });
+  }, 30);
+}
+
+/* ---------- Composer (sin XP — solo compartir) ---------- */
+function setupComposer() {
+  const ta = document.getElementById("post-texto");
+  const btnPub = document.getElementById("btn-publicar");
+  const btnAdj = document.getElementById("btn-adjuntar");
+  const inputFoto = document.getElementById("input-foto");
+  const preview = document.getElementById("composer-preview");
+  const previewImg = document.getElementById("composer-preview-img");
+  const btnQuitar = document.getElementById("composer-quitar");
+
+  // Categorías
+  document.querySelectorAll("#composer-categorias .cat-btn").forEach(b => {
+    b.onclick = () => {
+      document.querySelectorAll("#composer-categorias .cat-btn").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      categoriaComposer = b.dataset.cat;
+    };
+  });
+
+  // Habilitar publicar
+  const validar = () => { btnPub.disabled = ta.value.trim().length < 3; };
+  ta.addEventListener("input", validar);
+
+  // Foto
+  btnAdj.onclick = () => inputFoto.click();
+  inputFoto.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      mostrarToast("⚠️ Solo se permiten imágenes");
+      return;
+    }
+    try {
+      const dataUrl = await comprimirImagen(file, 800, 0.7);
+      imagenComposer = dataUrl;
+      previewImg.src = dataUrl;
+      preview.classList.add("activa");
+    } catch (err) {
+      mostrarToast("⚠️ No se pudo procesar la imagen");
+    }
+    inputFoto.value = "";
+  };
+  btnQuitar.onclick = () => {
+    imagenComposer = null;
+    preview.classList.remove("activa");
+    previewImg.src = "";
+  };
+
+  // Publicar — SIN XP. Solo se comparte.
+  btnPub.onclick = () => {
+    const texto = ta.value.trim();
+    if (texto.length < 3) return;
+
+    const nuevoPost = {
+      id: "u_" + Date.now(),
+      autor: estado.usuario,
+      avatar: estado.avatar,
+      categoria: categoriaComposer,
+      fecha: hoyDisplay(),
+      texto: texto,
+      imagen: imagenComposer,
+      likes: 0,
+      comentarios: [],
+      orden: Date.now()
+    };
+
+    estado.comunidad.posts.unshift(nuevoPost);
+    guardarEstado();
+
+    ta.value = "";
+    imagenComposer = null;
+    preview.classList.remove("activa");
+    previewImg.src = "";
+    validar();
+    renderFeed();
+    mostrarToast("Publicado · Gracias por compartir 🌊", "purple");
+  };
+
+  // Filtros
+  document.querySelectorAll("#filtros .filtro-btn").forEach(b => {
+    b.onclick = () => {
+      document.querySelectorAll("#filtros .filtro-btn").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      filtroActual = b.dataset.filtro;
+      renderFeed();
+    };
+  });
+}
+
+/* ---------- Comprimir imagen ---------- */
+function comprimirImagen(file, maxW = 800, quality = 0.7) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let { width, height } = img;
+        if (width > maxW) { height = (height * maxW) / width; width = maxW; }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = reject;
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+let retoSeleccionado = null;
+
+function abrirModal(reto) {
+  retoSeleccionado = reto;
+  document.getElementById("modal-titulo").textContent = "Registrar: " + reto.titulo;
+  document.getElementById("modal-desc").innerHTML =
+    `Cuéntanos brevemente qué hiciste. Esta evidencia es para ti y quedará en tu bitácora.<br><br>
+     <span style="color:var(--green-1);font-weight:600">Recompensa: +${reto.xp} XP por la acción.</span>`;
+  document.getElementById("modal-evidencia").value = "";
+  document.getElementById("modal-confirmar").disabled = true;
+  document.getElementById("modal-fondo").classList.add("activo");
+  setTimeout(() => document.getElementById("modal-evidencia").focus(), 100);
+}
+function cerrarModal() {
+  document.getElementById("modal-fondo").classList.remove("activo");
+  retoSeleccionado = null;
+}
+function confirmarAccion() {
+  if (!retoSeleccionado) return;
+  const texto = document.getElementById("modal-evidencia").value.trim();
+  if (texto.length < 3) return;
+  estado.acciones.push({
+    retoId: retoSeleccionado.id,
+    fecha: hoyDisplay(),
+    evidencia: texto,
+    xp: retoSeleccionado.xp
+  });
+  estado.retosCompletados.push(retoSeleccionado.id);
+  estado.xp += retoSeleccionado.xp;
+  guardarEstado();
+  const xpGanado = retoSeleccionado.xp;
+  cerrarModal();
+  renderPerfil();
+  renderRetos();
+  renderBitacora();
+  mostrarToast(`+${xpGanado} XP · ¡Acción registrada!`);
+}
+
+function mostrarToast(msg, tipo) {
+  const t = document.getElementById("toast");
+  t.innerHTML = msg.replace(/(\+?\d+\s*XP)/, '<span class="xp">$1</span>');
+  t.className = "toast" + (tipo === "purple" ? " purple" : "");
+  void t.offsetWidth;
+  t.classList.add("visible");
+  setTimeout(() => t.classList.remove("visible"), 2600);
+}
+
+function resetProgreso() {
+  if (!confirm("¿Seguro que quieres borrar tu progreso (XP, retos, bitácora y posts propios)?\nLos posts de ejemplo se mantendrán.")) return;
+  estado.xp = 0;
+  estado.acciones = [];
+  estado.retosCompletados = [];
+  estado.comunidad.posts = [...POSTS_SEMILLA];
+  estado.comunidad.likesDados = [];
+  guardarEstado();
+  renderPerfil();
+  renderRetos();
+  renderBitacora();
+  renderFeed();
+  mostrarToast("Progreso reiniciado");
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init() {
+  cargarEstado();
+  renderInfoPunto();
+  renderChips();
+  renderChart();
+  renderTabla();
+  renderPerfil();
+  renderRetos();
+  renderBitacora();
+  renderFeed();
+  setupComposer();
+
+  document.getElementById("usuario-nombre").addEventListener("input", e => {
+    estado.usuario = e.target.value || "Anónimo";
+    document.getElementById("composer-avatar").textContent = estado.avatar;
+    guardarEstado();
+  });
+  document.getElementById("modal-evidencia").addEventListener("input", e => {
+    document.getElementById("modal-confirmar").disabled = e.target.value.trim().length < 3;
+  });
+  document.getElementById("modal-cancelar").onclick = cerrarModal;
+  document.getElementById("modal-confirmar").onclick = confirmarAccion;
+  document.getElementById("modal-fondo").addEventListener("click", e => {
+    if (e.target.id === "modal-fondo") cerrarModal();
+  });
+  document.getElementById("btn-reset").onclick = resetProgreso;
+}
+
+init();
+</script>
+</body>
+</html>
