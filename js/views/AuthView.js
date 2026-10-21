@@ -130,6 +130,11 @@
     },
     bindPasswordInput(handler) {
       $("reg-password").addEventListener("input", e => handler(e.target.value));
+    },
+    bindOmitir(handler) {
+      document.querySelectorAll("[data-omitir-auth]").forEach(btn => {
+        btn.addEventListener("click", e => { e.preventDefault(); handler(); });
+      });
     }
   };
 })();

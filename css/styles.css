@@ -50,6 +50,12 @@ header {
 .user-menu .u-info { line-height: 1.2; max-width: 180px; }
 .user-menu .u-nombre { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .user-menu .u-correo { font-size: 10.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btn-ver-login {
+  background: rgba(0,180,216,.12); border: 1px solid var(--water-2); color: var(--water-3);
+  padding: 6px 12px; border-radius: 999px; font-size: 12px; cursor: pointer;
+  font-family: inherit; font-weight: 600; transition: all .15s ease;
+}
+.btn-ver-login:hover { background: var(--water-2); color: #fff; }
 .btn-logout {
   background: transparent; border: 1px solid var(--border); color: var(--muted);
   padding: 6px 12px; border-radius: 999px; font-size: 12px; cursor: pointer;

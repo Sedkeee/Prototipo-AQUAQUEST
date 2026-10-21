@@ -37,7 +37,13 @@
     },
 
     bindLogout(handler) {
-      $("btn-logout").addEventListener("click", handler);
+      const btn = $("btn-logout");
+      if (btn) btn.addEventListener("click", handler);
+    },
+
+    bindVerLogin(handler) {
+      const btn = $("btn-ver-login");
+      if (btn) btn.addEventListener("click", handler);
     }
   };
 })();

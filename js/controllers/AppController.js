@@ -7,6 +7,14 @@
   const UI = AQ.views.UI;
   let datosIniciados = false;
 
+  const USUARIO_INVITADO = {
+    id: "u_demo",
+    nombre: "Explorador/a",
+    correo: "invitado@aquaquest.co",
+    avatar: "AQ",
+    rol: "explorador"
+  };
+
   function entrarApp(usuario, esNuevo) {
     UI.mostrarPantalla("app");
     UI.renderHeaderUsuario(usuario);
@@ -23,20 +31,25 @@
       : `Hola de nuevo, ${usuario.nombre}`);
   }
 
-  function salir() {
-    Auth.cerrarSesion();
+  function mostrarLoginVisual() {
     UI.mostrarPantalla("auth");
     AQ.controllers.Auth.mostrar("login");
+  }
+
+  function salir() {
+    Auth.cerrarSesion();
+    mostrarLoginVisual();
   }
 
   AQ.controllers.App = {
     init() {
       AQ.controllers.Auth.init(entrarApp);
       UI.bindLogout(salir);
+      UI.bindVerLogin(mostrarLoginVisual);
 
-      const usuario = Auth.usuarioActual();
-      if (usuario) entrarApp(usuario, false);
-      else { UI.mostrarPantalla("auth"); AQ.controllers.Auth.mostrar("login"); }
+      // Ingreso directo como invitado sin forzar login obligatorio
+      const usuario = Auth.usuarioActual() || USUARIO_INVITADO;
+      entrarApp(usuario, false);
     }
   };
 
