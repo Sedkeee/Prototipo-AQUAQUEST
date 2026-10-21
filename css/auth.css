@@ -178,11 +178,6 @@
   font-size: 11px; color: var(--muted); text-align: center; line-height: 1.5;
 }
 
-.auth-badge-demo {
-  font-size: 10px; font-weight: 700; letter-spacing: .5px;
-  color: var(--warn); background: rgba(255,183,3,.12);
-  border: 1px solid rgba(255,183,3,.3); padding: 3px 8px; border-radius: 999px;
-}
 .btn-volver-app {
   background: transparent; border: 1px solid var(--border); color: var(--muted);
   font-family: inherit; font-size: 11.5px; padding: 3px 10px; border-radius: 6px;

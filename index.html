@@ -44,13 +44,12 @@
 
   <div class="auth-panel">
     <div class="auth-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span class="auth-badge-demo">DEMO VISUAL</span>
-        <button class="btn-volver-app" data-omitir-auth type="button" title="Volver a la aplicación">Cerrar ✕</button>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+        <button class="btn-volver-app" data-omitir-auth type="button" title="Cerrar">✕</button>
       </div>
       <div class="mini-brand"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--water-1);vertical-align:middle;margin-right:6px"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>AquaQuest <span>Colombia</span></div>
       <h1>Bienvenida/o</h1>
-      <p class="sub">Diseño del login (sin cuenta obligatoria mientras se integra MySQL).</p>
+      <p class="sub">Inicia sesión para guardar tu progreso y participar en la comunidad.</p>
 
       <div class="auth-tabs" role="tablist">
         <button class="auth-tab active" id="tab-login" role="tab" aria-selected="true" type="button">Iniciar sesión</button>
@@ -78,9 +77,9 @@
           <label class="check"><input type="checkbox" id="login-recordar"> Recordarme</label>
         </div>
         <div class="auth-error" id="login-error" role="alert" hidden></div>
-        <button class="btn-auth" id="btn-login" type="submit">Entrar (Visual)</button>
-        <button class="btn-auth btn-invitado" id="btn-omitir-auth" data-omitir-auth type="button">Explorar sin cuenta (Invitado)</button>
-        <p class="auth-alt">¿No tienes cuenta? <a href="#" data-ir-tab="registro">Crear cuenta (Visual)</a></p>
+        <button class="btn-auth" id="btn-login" type="submit">Entrar</button>
+        <button class="btn-auth btn-invitado" id="btn-omitir-auth" data-omitir-auth type="button">Continuar sin cuenta</button>
+        <p class="auth-alt">¿No tienes cuenta? <a href="#" data-ir-tab="registro">Créala gratis</a></p>
       </form>
 
       <!-- Registro -->
@@ -124,12 +123,12 @@
           <div class="avatares" id="reg-avatares"></div>
         </div>
         <div class="auth-error" id="reg-error" role="alert" hidden></div>
-        <button class="btn-auth verde" id="btn-registro" type="submit">Crear cuenta (Visual)</button>
-        <button class="btn-auth btn-invitado" data-omitir-auth type="button">Explorar sin cuenta (Invitado)</button>
+        <button class="btn-auth verde" id="btn-registro" type="submit">Crear cuenta y entrar</button>
+        <button class="btn-auth btn-invitado" data-omitir-auth type="button">Continuar sin cuenta</button>
         <p class="auth-alt">¿Ya tienes cuenta? <a href="#" data-ir-tab="login">Inicia sesión</a></p>
       </form>
 
-      <p class="auth-nota">Prototipo visual: el ingreso con cuenta no es obligatorio. La base de datos se conectará más adelante con MySQL.</p>
+      <!-- Nota: la persistencia en base de datos se conectará posteriormente con MySQL -->
     </div>
   </div>
 </section>
@@ -149,10 +148,10 @@
       <div class="u-avatar" id="header-avatar">AQ</div>
       <div class="u-info">
         <div class="u-nombre" id="header-nombre">Explorador/a</div>
-        <div class="u-correo" id="header-correo">invitado@aquaquest.co</div>
+        <div class="u-correo" id="header-correo">explorador@aquaquest.co</div>
       </div>
-      <button class="btn-ver-login" id="btn-ver-login" type="button" title="Ver pantalla de login visual">Login visual</button>
-      <button class="btn-logout" id="btn-logout" type="button" title="Cerrar sesión / Ver Login">Salir</button>
+      <button class="btn-ver-login" id="btn-ver-login" type="button" title="Iniciar sesión">Iniciar sesión</button>
+      <button class="btn-logout" id="btn-logout" type="button" title="Cerrar sesión">Salir</button>
     </div>
   </div>
 </header>
