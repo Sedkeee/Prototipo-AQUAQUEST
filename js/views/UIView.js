@@ -5,6 +5,19 @@
   const $ = AQ.utils.$;
   const esc = AQ.utils.escapeHtml;
   let toastTimer = null;
+  let logoutHandler = null;
+  let verLoginHandler = null;
+
+  function renderBotonesHeader() {
+    const { h, mount, HeaderActions } = AQ.components;
+    mount(
+      $("header-actions-root"),
+      h(HeaderActions, {
+        onVerLogin: () => verLoginHandler && verLoginHandler(),
+        onLogout: () => logoutHandler && logoutHandler()
+      })
+    );
+  }
 
   AQ.views.UI = {
     mostrarToast(msg, tipo) {
@@ -34,16 +47,17 @@
       $("header-avatar").textContent = usuario.avatar;
       $("header-nombre").textContent = usuario.nombre;
       $("header-correo").textContent = usuario.correo;
+      renderBotonesHeader();
     },
 
     bindLogout(handler) {
-      const btn = $("btn-logout");
-      if (btn) btn.addEventListener("click", handler);
+      logoutHandler = handler;
+      renderBotonesHeader();
     },
 
     bindVerLogin(handler) {
-      const btn = $("btn-ver-login");
-      if (btn) btn.addEventListener("click", handler);
+      verLoginHandler = handler;
+      renderBotonesHeader();
     }
   };
 })();

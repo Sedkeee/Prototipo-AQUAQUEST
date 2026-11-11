@@ -1,6 +1,6 @@
 /* ============================================================
-   VISTA · Login / Registro
-   Solo manipula el DOM; la lógica vive en AuthController.
+   VISTA · Login / Registro (con botones en React)
+   Solo manipula el DOM / componentes React; la lógica vive en AuthController.
    ============================================================ */
 (function () {
   const $ = AQ.utils.$;
@@ -12,46 +12,85 @@
     { txt: "Muy segura", clase: "f4" }
   ];
 
+  let listaAvatares = [];
   let avatarSel = null;
+  let tabActual = "login";
+  let cargandoLogin = false;
+  let cargandoRegistro = false;
+  let tabHandler = null;
+  let omitirHandler = null;
+
+  function renderTabs() {
+    const { h, mount, AuthTabs } = AQ.components;
+    mount(
+      $("auth-tabs"),
+      h(AuthTabs, {
+        activeTab: tabActual,
+        onSelectTab: t => tabHandler && tabHandler(t)
+      })
+    );
+  }
+
+  function renderAvatares() {
+    const { h, mount, AvatarSelector } = AQ.components;
+    mount(
+      $("reg-avatares"),
+      h(AvatarSelector, {
+        avatares: listaAvatares,
+        seleccionado: avatarSel,
+        onSelect: a => {
+          avatarSel = a;
+          renderAvatares();
+        }
+      })
+    );
+  }
+
+  function renderAccionesAuth() {
+    const { h, mount, CloseAuthButton, AuthFormActions } = AQ.components;
+    mount(
+      $("auth-close-root"),
+      h(CloseAuthButton, { onOmitir: () => omitirHandler && omitirHandler() })
+    );
+    mount(
+      $("login-actions-root"),
+      h(AuthFormActions, {
+        modo: "login",
+        cargando: cargandoLogin,
+        onOmitir: () => omitirHandler && omitirHandler()
+      })
+    );
+    mount(
+      $("reg-actions-root"),
+      h(AuthFormActions, {
+        modo: "registro",
+        cargando: cargandoRegistro,
+        onOmitir: () => omitirHandler && omitirHandler()
+      })
+    );
+  }
+
+  function renderPasswordToggles() {
+    const { h, mount, PasswordToggleButton } = AQ.components;
+    document.querySelectorAll("[data-toggle-pass-root]").forEach(cont => {
+      mount(cont, h(PasswordToggleButton, { inputId: cont.dataset.togglePassRoot }));
+    });
+  }
 
   AQ.views.Auth = {
     init(avatares) {
+      listaAvatares = avatares;
       avatarSel = avatares[0];
-      const cont = $("reg-avatares");
-      cont.innerHTML = "";
-      avatares.forEach(a => {
-        const b = document.createElement("button");
-        b.type = "button";
-        b.className = "avatar-opt" + (a === avatarSel ? " active" : "");
-        b.textContent = a;
-        b.setAttribute("aria-label", "Elegir avatar " + a);
-        b.addEventListener("click", () => {
-          avatarSel = a;
-          cont.querySelectorAll(".avatar-opt").forEach(x => x.classList.toggle("active", x === b));
-        });
-        cont.appendChild(b);
-      });
-
-      // Mostrar / ocultar contraseña
-      document.querySelectorAll("[data-toggle-pass]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const input = $(btn.dataset.togglePass);
-          const visible = input.type === "text";
-          input.type = visible ? "password" : "text";
-          btn.innerHTML = visible
-            ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`
-            : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>`;
-          btn.setAttribute("aria-label", visible ? "Mostrar contraseña" : "Ocultar contraseña");
-        });
-      });
+      renderTabs();
+      renderAvatares();
+      renderAccionesAuth();
+      renderPasswordToggles();
     },
 
     mostrarTab(tab) {
+      tabActual = tab;
       const login = tab === "login";
-      $("tab-login").classList.toggle("active", login);
-      $("tab-registro").classList.toggle("active", !login);
-      $("tab-login").setAttribute("aria-selected", login);
-      $("tab-registro").setAttribute("aria-selected", !login);
+      renderTabs();
       $("form-login").hidden = !login;
       $("form-registro").hidden = login;
       this.limpiarErrores();
@@ -92,9 +131,9 @@
     },
 
     setCargando(form, cargando) {
-      const btn = $(form === "login" ? "btn-login" : "btn-registro");
-      btn.disabled = cargando;
-      btn.classList.toggle("cargando", cargando);
+      if (form === "login") cargandoLogin = cargando;
+      else cargandoRegistro = cargando;
+      renderAccionesAuth();
     },
 
     renderFuerza(nivel) {
@@ -117,8 +156,8 @@
 
     /* ---------- Bindings (la vista avisa, el controlador decide) ---------- */
     bindTabs(handler) {
-      $("tab-login").addEventListener("click", () => handler("login"));
-      $("tab-registro").addEventListener("click", () => handler("registro"));
+      tabHandler = handler;
+      renderTabs();
       document.querySelectorAll("[data-ir-tab]").forEach(a =>
         a.addEventListener("click", e => { e.preventDefault(); handler(a.dataset.irTab); }));
     },
@@ -132,9 +171,8 @@
       $("reg-password").addEventListener("input", e => handler(e.target.value));
     },
     bindOmitir(handler) {
-      document.querySelectorAll("[data-omitir-auth]").forEach(btn => {
-        btn.addEventListener("click", e => { e.preventDefault(); handler(); });
-      });
+      omitirHandler = handler;
+      renderAccionesAuth();
     }
   };
 })();

@@ -1,5 +1,5 @@
 /* ============================================================
-   VISTA · DATOS REALES (info del punto, chips, gráfica, tabla)
+   VISTA · DATOS REALES (info del punto, chips en React, gráfica, tabla)
    ============================================================ */
 (function () {
   const $ = AQ.utils.$;
@@ -26,16 +26,11 @@
     },
 
     renderChips(variables, actual, onSelect) {
-      const cont = $("chips-vars");
-      cont.innerHTML = "";
-      Object.entries(variables).forEach(([id, v]) => {
-        const el = document.createElement("button");
-        el.type = "button";
-        el.className = "chip" + (id === actual ? " active" : "");
-        el.innerHTML = `${v.nombre}<span class="u">${v.unidad}</span>`;
-        el.addEventListener("click", () => onSelect(id));
-        cont.appendChild(el);
-      });
+      const { h, mount, VariableChips } = AQ.components;
+      mount(
+        $("chips-vars"),
+        h(VariableChips, { variables, actual, onSelect })
+      );
     },
 
     renderChart(variable, serie) {

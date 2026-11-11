@@ -1,9 +1,66 @@
 /* ============================================================
-   VISTA · COMUNIDAD (composer, filtros y feed)
+   VISTA · COMUNIDAD (composer, filtros y feed con botones en React)
    ============================================================ */
 (function () {
   const $ = AQ.utils.$;
   const esc = AQ.utils.escapeHtml;
+
+  let categoriaActiva = "accion";
+  let filtroActivo = "todos";
+  let publicarHabilitado = false;
+  let composerHandlers = {};
+  let filtroHandler = null;
+
+  function renderCategorias() {
+    const { h, mount, ComposerCategoryButtons } = AQ.components;
+    mount(
+      $("composer-categorias"),
+      h(ComposerCategoryButtons, {
+        activa: categoriaActiva,
+        onSelect: cat => {
+          categoriaActiva = cat;
+          renderCategorias();
+          if (composerHandlers.onCategoria) composerHandlers.onCategoria(cat);
+        }
+      })
+    );
+  }
+
+  function renderComposerFooter() {
+    const { h, mount, ComposerFooterActions, RemovePreviewButton } = AQ.components;
+    mount(
+      $("composer-quitar-root"),
+      h(RemovePreviewButton, {
+        onClick: () => composerHandlers.onQuitarFoto && composerHandlers.onQuitarFoto()
+      })
+    );
+    mount(
+      $("composer-footer-root"),
+      h(ComposerFooterActions, {
+        publicarHabilitado,
+        onAdjuntar: () => {
+          const inputFoto = $("input-foto");
+          if (inputFoto) inputFoto.click();
+        },
+        onPublicar: () => composerHandlers.onPublicar && composerHandlers.onPublicar()
+      })
+    );
+  }
+
+  function renderFiltros() {
+    const { h, mount, CommunityFilterButtons } = AQ.components;
+    mount(
+      $("filtros"),
+      h(CommunityFilterButtons, {
+        activo: filtroActivo,
+        onSelect: f => {
+          filtroActivo = f;
+          renderFiltros();
+          if (filtroHandler) filtroHandler(f);
+        }
+      })
+    );
+  }
 
   function plantillaPost(p, cat) {
     return `
@@ -18,14 +75,7 @@
       <div class="post-cuerpo">${esc(p.texto)}</div>
       ${p.imagen && String(p.imagen).startsWith("data:image/")
         ? `<div class="post-imagen"><img src="${p.imagen}" alt="Imagen del post" loading="lazy"></div>` : ""}
-      <div class="post-footer">
-        <button class="btn-reaccion ${p.reaccionado ? "reaccionado" : ""}" data-accion="like">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="${p.reaccionado ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> <span class="num">${p.totalLikes}</span>
-        </button>
-        <button class="btn-comentar" data-accion="comentar">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> <span class="num">${p.comentarios.length}</span>
-        </button>
-      </div>
+      <div class="post-footer" data-post-footer></div>
       <div class="comentarios" data-comentarios>
         <div class="comentarios-lista">
           ${p.comentarios.map(c => `
@@ -37,7 +87,7 @@
         </div>
         <div class="comentario-form">
           <input type="text" placeholder="Escribe un comentario..." maxlength="200" data-input-comentario>
-          <button data-accion="enviar-comentario">Enviar</button>
+          <span data-comentario-btn-root style="display:contents"></span>
         </div>
       </div>`;
   }
@@ -46,10 +96,11 @@
     /**
      * @param posts       lista ya preparada por el modelo
      * @param categorias  diccionario de categorías
-     * @param handlers    { onLike(id), onComentar(id, texto) }
+     * @param handlers    { onLike(id), onComentar(id, texto), onToggleComentarios(id, abierto) }
      * @param abiertos    Set de ids con comentarios desplegados
      */
     renderFeed(posts, categorias, handlers, abiertos) {
+      const { h, mount, PostFooterButtons, CommentSendButton } = AQ.components;
       const cont = $("feed");
       cont.innerHTML = "";
 
@@ -67,15 +118,26 @@
         const bloque = el.querySelector("[data-comentarios]");
         if (abiertos.has(p.id)) bloque.classList.add("abierto");
 
-        el.querySelector('[data-accion="like"]').addEventListener("click", () => handlers.onLike(p.id));
-        el.querySelector('[data-accion="comentar"]').addEventListener("click", () => {
-          bloque.classList.toggle("abierto");
-          handlers.onToggleComentarios(p.id, bloque.classList.contains("abierto"));
-        });
+        mount(
+          el.querySelector("[data-post-footer]"),
+          h(PostFooterButtons, {
+            reaccionado: p.reaccionado,
+            totalLikes: p.totalLikes,
+            totalComentarios: p.comentarios.length,
+            onLike: () => handlers.onLike(p.id),
+            onToggleComentarios: () => {
+              bloque.classList.toggle("abierto");
+              handlers.onToggleComentarios(p.id, bloque.classList.contains("abierto"));
+            }
+          })
+        );
 
         const input = el.querySelector("[data-input-comentario]");
         const enviar = () => handlers.onComentar(p.id, input.value);
-        el.querySelector('[data-accion="enviar-comentario"]').addEventListener("click", enviar);
+        mount(
+          el.querySelector("[data-comentario-btn-root]"),
+          h(CommentSendButton, { onSend: enviar })
+        );
         input.addEventListener("keydown", e => { if (e.key === "Enter") enviar(); });
 
         cont.appendChild(el);
@@ -85,7 +147,10 @@
     /* ---------- Composer ---------- */
     renderComposerAvatar(avatar) { $("composer-avatar").textContent = avatar; },
     textoComposer() { return $("post-texto").value; },
-    setPublicarHabilitado(ok) { $("btn-publicar").disabled = !ok; },
+    setPublicarHabilitado(ok) {
+      publicarHabilitado = Boolean(ok);
+      renderComposerFooter();
+    },
 
     mostrarPreview(dataUrl) {
       $("composer-preview-img").src = dataUrl;
@@ -101,37 +166,25 @@
       this.setPublicarHabilitado(false);
     },
 
-    marcarActivo(selectorGrupo, boton) {
-      document.querySelectorAll(selectorGrupo).forEach(x => x.classList.toggle("active", x === boton));
-    },
-
     /* ---------- Bindings ---------- */
     bindComposer({ onTexto, onCategoria, onFoto, onQuitarFoto, onPublicar }) {
+      composerHandlers = { onTexto, onCategoria, onFoto, onQuitarFoto, onPublicar };
       $("post-texto").addEventListener("input", e => onTexto(e.target.value));
 
-      document.querySelectorAll("#composer-categorias .cat-btn").forEach(b =>
-        b.addEventListener("click", () => {
-          this.marcarActivo("#composer-categorias .cat-btn", b);
-          onCategoria(b.dataset.cat);
-        }));
+      renderCategorias();
+      renderComposerFooter();
 
       const inputFoto = $("input-foto");
-      $("btn-adjuntar").addEventListener("click", () => inputFoto.click());
       inputFoto.addEventListener("change", e => {
         const file = e.target.files[0];
         inputFoto.value = "";
         if (file) onFoto(file);
       });
-      $("composer-quitar").addEventListener("click", onQuitarFoto);
-      $("btn-publicar").addEventListener("click", onPublicar);
     },
 
     bindFiltros(handler) {
-      document.querySelectorAll("#filtros .filtro-btn").forEach(b =>
-        b.addEventListener("click", () => {
-          this.marcarActivo("#filtros .filtro-btn", b);
-          handler(b.dataset.filtro);
-        }));
+      filtroHandler = handler;
+      renderFiltros();
     }
   };
 })();

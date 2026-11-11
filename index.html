@@ -44,17 +44,12 @@
 
   <div class="auth-panel">
     <div class="auth-card">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
-        <button class="btn-volver-app" data-omitir-auth type="button" title="Cerrar">✕</button>
-      </div>
+      <div id="auth-close-root" style="display:flex;justify-content:flex-end;margin-bottom:8px;"></div>
       <div class="mini-brand"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--water-1);vertical-align:middle;margin-right:6px"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>AquaQuest <span>Colombia</span></div>
       <h1>Bienvenida/o</h1>
       <p class="sub">Inicia sesión para guardar tu progreso y participar en la comunidad.</p>
 
-      <div class="auth-tabs" role="tablist">
-        <button class="auth-tab active" id="tab-login" role="tab" aria-selected="true" type="button">Iniciar sesión</button>
-        <button class="auth-tab" id="tab-registro" role="tab" aria-selected="false" type="button">Crear cuenta</button>
-      </div>
+      <div class="auth-tabs" id="auth-tabs" role="tablist"></div>
 
       <!-- Login -->
       <form class="auth-form" id="form-login" novalidate>
@@ -70,15 +65,14 @@
           <div class="input-wrap">
             <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
             <input id="login-password" type="password" autocomplete="current-password" placeholder="Tu contraseña">
-            <button type="button" class="toggle-pass" data-toggle-pass="login-password" aria-label="Mostrar u ocultar contraseña"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <span data-toggle-pass-root="login-password" style="display:contents"></span>
           </div>
         </div>
         <div class="fila-opciones">
           <label class="check"><input type="checkbox" id="login-recordar"> Recordarme</label>
         </div>
         <div class="auth-error" id="login-error" role="alert" hidden></div>
-        <button class="btn-auth" id="btn-login" type="submit">Entrar</button>
-        <button class="btn-auth btn-invitado" id="btn-omitir-auth" data-omitir-auth type="button">Continuar sin cuenta</button>
+        <div id="login-actions-root" style="display:contents"></div>
         <p class="auth-alt">¿No tienes cuenta? <a href="#" data-ir-tab="registro">Créala gratis</a></p>
       </form>
 
@@ -103,7 +97,7 @@
           <div class="input-wrap">
             <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
             <input id="reg-password" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
-            <button type="button" class="toggle-pass" data-toggle-pass="reg-password" aria-label="Mostrar u ocultar contraseña"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <span data-toggle-pass-root="reg-password" style="display:contents"></span>
           </div>
           <div class="fuerza">
             <div class="fuerza-track"><div class="fuerza-barra" id="fuerza-barra"></div></div>
@@ -115,7 +109,7 @@
           <div class="input-wrap">
             <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
             <input id="reg-password2" type="password" autocomplete="new-password" placeholder="Repite la contraseña">
-            <button type="button" class="toggle-pass" data-toggle-pass="reg-password2" aria-label="Mostrar u ocultar contraseña"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <span data-toggle-pass-root="reg-password2" style="display:contents"></span>
           </div>
         </div>
         <div class="campo">
@@ -123,8 +117,7 @@
           <div class="avatares" id="reg-avatares"></div>
         </div>
         <div class="auth-error" id="reg-error" role="alert" hidden></div>
-        <button class="btn-auth verde" id="btn-registro" type="submit">Crear cuenta y entrar</button>
-        <button class="btn-auth btn-invitado" data-omitir-auth type="button">Continuar sin cuenta</button>
+        <div id="reg-actions-root" style="display:contents"></div>
         <p class="auth-alt">¿Ya tienes cuenta? <a href="#" data-ir-tab="login">Inicia sesión</a></p>
       </form>
 
@@ -150,8 +143,7 @@
         <div class="u-nombre" id="header-nombre">Explorador/a</div>
         <div class="u-correo" id="header-correo">explorador@aquaquest.co</div>
       </div>
-      <button class="btn-ver-login" id="btn-ver-login" type="button" title="Iniciar sesión">Iniciar sesión</button>
-      <button class="btn-logout" id="btn-logout" type="button" title="Cerrar sesión">Salir</button>
+      <div id="header-actions-root" style="display:contents"></div>
     </div>
   </div>
 </header>
@@ -259,7 +251,7 @@
         <div class="bitacora-vacia">Aún no has registrado acciones.<br>Completa un reto para empezar.</div>
       </div>
 
-      <button class="btn-reset" id="btn-reset">Reiniciar mi progreso</button>
+      <div id="btn-reset-root" style="display:contents"></div>
     </div>
   </section>
 
@@ -286,34 +278,21 @@
         <textarea id="post-texto" placeholder="¿Qué hiciste hoy por el agua? ¿Una idea? ¿Una pregunta? Cuéntanos..." maxlength="500"></textarea>
       </div>
 
-      <div class="composer-categorias" id="composer-categorias">
-        <button class="cat-btn active" data-cat="accion">Acción</button>
-        <button class="cat-btn" data-cat="idea">Idea</button>
-        <button class="cat-btn" data-cat="pregunta">Pregunta</button>
-        <button class="cat-btn" data-cat="logro">Logro</button>
-      </div>
+      <div class="composer-categorias" id="composer-categorias"></div>
 
       <div class="composer-preview" id="composer-preview">
         <img id="composer-preview-img" alt="Vista previa">
-        <button class="quitar" id="composer-quitar" title="Quitar foto">✕</button>
+        <span id="composer-quitar-root" style="display:contents"></span>
       </div>
 
       <div class="composer-footer">
         <input type="file" id="input-foto" accept="image/*" style="display:none">
-        <button class="btn-adjuntar" id="btn-adjuntar">Adjuntar foto</button>
-        <span class="xp-nota">Compartir no da XP — solo inspira</span>
-        <button class="btn-publicar" id="btn-publicar" disabled>Publicar</button>
+        <div id="composer-footer-root" style="display:contents"></div>
       </div>
     </div>
 
     <!-- Filtros -->
-    <div class="filtros" id="filtros">
-      <button class="filtro-btn active" data-filtro="todos">Todos</button>
-      <button class="filtro-btn" data-filtro="accion">Acciones</button>
-      <button class="filtro-btn" data-filtro="idea">Ideas</button>
-      <button class="filtro-btn" data-filtro="pregunta">Preguntas</button>
-      <button class="filtro-btn" data-filtro="logro">Logros</button>
-    </div>
+    <div class="filtros" id="filtros"></div>
 
     <!-- Feed -->
     <div class="feed" id="feed"></div>
@@ -326,10 +305,7 @@
     <h3 id="modal-titulo">Registrar acción</h3>
     <p id="modal-desc">Cuéntanos brevemente qué hiciste.</p>
     <textarea id="modal-evidencia" placeholder="Ej: Cerré la llave mientras me cepillé durante 2 minutos esta mañana..."></textarea>
-    <div class="modal-botones">
-      <button class="btn btn-sec" id="modal-cancelar">Cancelar</button>
-      <button class="btn btn-pri" id="modal-confirmar" disabled>Registrar y ganar XP</button>
-    </div>
+    <div class="modal-botones" id="modal-botones"></div>
   </div>
 </div>
 
@@ -338,9 +314,13 @@
 <div class="toast" id="toast"></div>
 
 <!-- =========================================================
-     SCRIPTS (el orden importa: utils → models → views → controllers)
+     REACT 18 (CDN) + SCRIPTS (utils → components → models → views → controllers)
      ========================================================= -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
 <script src="js/utils/helpers.js"></script>
+<script src="js/components/ReactButtons.js"></script>
 
 <script src="js/models/StorageService.js"></script>
 <script src="js/models/AuthModel.js"></script>

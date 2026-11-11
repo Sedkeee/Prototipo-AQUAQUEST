@@ -5,29 +5,31 @@ prototipo inicial de futura pagina web
 Abre `index.html` en el navegador (doble clic). No requiere instalar nada.
 La primera vez crea una cuenta en la pestaña **Crear cuenta**.
 
-## Arquitectura MVC
+## Arquitectura MVC + Componentes React
 
 ```
-index.html              → plantilla HTML (login + app)
+index.html              → plantilla HTML (login + app + carga de React 18 CDN)
 css/
   styles.css            → estilos de la aplicación
   auth.css              → estilos del login / registro
 js/
   utils/helpers.js      → namespace global AQ + utilidades
+  components/           → componentes reutilizables en React 18
+    ReactButtons.js     → todos los botones de la app en React
   models/               → DATOS y reglas de negocio (no tocan el DOM)
     StorageService.js   → acceso a localStorage
     AuthModel.js        → usuarios, contraseñas (SHA-256 + sal), sesión
     DatosModel.js       → datos IDEAM (solo lectura)
     JuegoModel.js       → retos, XP, niveles, bitácora (por usuario)
     ComunidadModel.js   → posts, likes, comentarios
-  views/                → solo pintan el DOM y capturan eventos
+  views/                → pintan el DOM, montan componentes React y capturan eventos
     UIView.js, AuthView.js, DatosView.js, JuegoView.js, ComunidadView.js
   controllers/          → conectan vistas con modelos
     AuthController.js, DatosController.js, JuegoController.js,
     ComunidadController.js, AppController.js (arranque + sesión)
 ```
 
-Orden de carga de scripts: `utils → models → views → controllers`.
+Orden de carga de scripts: `React CDN → utils → components → models → views → controllers`.
 
 > **Nota:** El login es una simulación en el navegador (localStorage). Para producción
 > se necesita un backend con base de datos (ver `diagrama de aquaquest.jpeg`).

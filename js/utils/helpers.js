@@ -4,7 +4,7 @@
    funcione abriendo el HTML con doble clic (file://), sin servidor.
    Este archivo SIEMPRE debe cargarse primero.
    ============================================================ */
-window.AQ = window.AQ || { models: {}, views: {}, controllers: {}, utils: {} };
+window.AQ = window.AQ || { components: {}, models: {}, views: {}, controllers: {}, utils: {} };
 
 AQ.utils = {
   $(id) { return document.getElementById(id); },

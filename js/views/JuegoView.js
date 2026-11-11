@@ -1,9 +1,35 @@
 /* ============================================================
-   VISTA · JUEGO (perfil, retos, bitácora y modal)
+   VISTA · JUEGO (perfil, retos, bitácora y modal con botones en React)
    ============================================================ */
 (function () {
   const $ = AQ.utils.$;
   const esc = AQ.utils.escapeHtml;
+
+  let modalConfirmarHabilitado = false;
+  let modalHandlers = { onCancelar: () => {}, onConfirmar: () => {} };
+  let resetHandler = null;
+
+  function renderBotonesModal() {
+    const { h, mount, ModalActions } = AQ.components;
+    mount(
+      $("modal-botones"),
+      h(ModalActions, {
+        confirmarHabilitado: modalConfirmarHabilitado,
+        onCancelar: () => modalHandlers.onCancelar && modalHandlers.onCancelar(),
+        onConfirmar: () => modalHandlers.onConfirmar && modalHandlers.onConfirmar()
+      })
+    );
+  }
+
+  function renderBotonReset() {
+    const { h, mount, ResetProgressButton } = AQ.components;
+    mount(
+      $("btn-reset-root"),
+      h(ResetProgressButton, {
+        onClick: () => resetHandler && resetHandler()
+      })
+    );
+  }
 
   AQ.views.Juego = {
     renderPerfil(usuario, xp, nivel) {
@@ -19,6 +45,7 @@
     },
 
     renderRetos(retos, completados, onRegistrar) {
+      const { h, mount, RetoActionButton } = AQ.components;
       const cont = $("retos-lista");
       cont.innerHTML = "";
       retos.forEach(r => {
@@ -32,12 +59,16 @@
             <p>${r.desc}</p>
             <div class="reto-meta">
               <span class="xp-tag">+${r.xp} XP</span>
-              <button class="btn-completar" ${hecho ? "disabled" : ""}>
-                ${hecho ? "Completado" : "Registrar acción"}
-              </button>
+              <span class="reto-btn-root" style="display:contents"></span>
             </div>
           </div>`;
-        if (!hecho) el.querySelector(".btn-completar").addEventListener("click", () => onRegistrar(r.id));
+        mount(
+          el.querySelector(".reto-btn-root"),
+          h(RetoActionButton, {
+            hecho,
+            onClick: () => onRegistrar(r.id)
+          })
+        );
         cont.appendChild(el);
       });
     },
@@ -71,21 +102,24 @@
         `Cuéntanos brevemente qué hiciste. Esta evidencia es para ti y quedará en tu bitácora.<br><br>
          <span style="color:var(--green-1);font-weight:600">Recompensa: +${reto.xp} XP por la acción.</span>`;
       $("modal-evidencia").value = "";
-      $("modal-confirmar").disabled = true;
+      this.setConfirmarHabilitado(false);
       $("modal-fondo").classList.add("activo");
       setTimeout(() => $("modal-evidencia").focus(), 100);
     },
     cerrarModal() { $("modal-fondo").classList.remove("activo"); },
     evidencia() { return $("modal-evidencia").value; },
-    setConfirmarHabilitado(ok) { $("modal-confirmar").disabled = !ok; },
+    setConfirmarHabilitado(ok) {
+      modalConfirmarHabilitado = Boolean(ok);
+      renderBotonesModal();
+    },
 
     /* ---------- Bindings ---------- */
     bindNombre(handler) {
       $("usuario-nombre").addEventListener("input", e => handler(e.target.value));
     },
     bindModal({ onCancelar, onConfirmar, onEvidencia }) {
-      $("modal-cancelar").addEventListener("click", onCancelar);
-      $("modal-confirmar").addEventListener("click", onConfirmar);
+      modalHandlers = { onCancelar, onConfirmar };
+      renderBotonesModal();
       $("modal-evidencia").addEventListener("input", e => onEvidencia(e.target.value));
       $("modal-fondo").addEventListener("click", e => { if (e.target.id === "modal-fondo") onCancelar(); });
       document.addEventListener("keydown", e => {
@@ -93,7 +127,8 @@
       });
     },
     bindReset(handler) {
-      $("btn-reset").addEventListener("click", handler);
+      resetHandler = handler;
+      renderBotonReset();
     }
   };
 })();
