@@ -1,0 +1,32 @@
+{
+  "tabla": "USUARIOS",
+  "usuarios": {
+    "camila@aquaquest.co": {
+      "id_usuario": 1,
+      "id": "u_1",
+      "nombre": "Camila Ríos",
+      "correo": "camila@aquaquest.co",
+      "avatar": "CO",
+      "rol": "consultor",
+      "xp_total": 120,
+      "creado": "2026-09-01T10:00:00.000Z",
+      "sal": "a1b2c3d4e5f60123456789abcdef0123",
+      "hash": "9a0596fb64fb587fa0404523b8f64be36d6a985dc42ff70fa19f89c566d66642",
+      "contrasena_hash": "a1b2c3d4e5f60123456789abcdef0123:9a0596fb64fb587fa0404523b8f64be36d6a985dc42ff70fa19f89c566d66642"
+    },
+    "admin@aquaquest.co": {
+      "id_usuario": 2,
+      "id": "u_2",
+      "nombre": "Admin IDEAM",
+      "correo": "admin@aquaquest.co",
+      "avatar": "ID",
+      "rol": "admin",
+      "xp_total": 500,
+      "creado": "2026-09-01T10:00:00.000Z",
+      "sal": "f6e5d4c3b2a10123456789abcdef9876",
+      "hash": "173e69ba7bd672625971f42c445d4454213cc1f1545735c14f3d6731f3b4d0da",
+      "contrasena_hash": "f6e5d4c3b2a10123456789abcdef9876:173e69ba7bd672625971f42c445d4454213cc1f1545735c14f3d6731f3b4d0da"
+    }
+  }
+}
+

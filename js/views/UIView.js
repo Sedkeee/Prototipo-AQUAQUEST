@@ -7,12 +7,14 @@
   let toastTimer = null;
   let logoutHandler = null;
   let verLoginHandler = null;
+  let verSwaggerHandler = null;
 
   function renderBotonesHeader() {
     const { h, mount, HeaderActions } = AQ.components;
     mount(
       $("header-actions-root"),
       h(HeaderActions, {
+        onVerSwagger: () => verSwaggerHandler && verSwaggerHandler(),
         onVerLogin: () => verLoginHandler && verLoginHandler(),
         onLogout: () => logoutHandler && logoutHandler()
       })
@@ -57,6 +59,11 @@
 
     bindVerLogin(handler) {
       verLoginHandler = handler;
+      renderBotonesHeader();
+    },
+
+    bindVerSwagger(handler) {
+      verSwaggerHandler = handler;
       renderBotonesHeader();
     }
   };

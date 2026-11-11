@@ -1,0 +1,398 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AquaQuest Colombia API + Base de Datos IDEAM",
+    "version": "1.1.0",
+    "description": "Documentación interactiva OpenAPI 3.0 de **AquaQuest Colombia** (Base de Datos Relacional IDEAM, Autenticación, Juego de retos de acción real y Comunidad). Usa **Try it out → Execute** para probar cualquier endpoint en vivo contra las tablas y estaciones del CSV del IDEAM."
+  },
+  "servers": [
+    {
+      "url": "https://api.aquaquest.local/v1",
+      "description": "Conexión interactiva en vivo con la Base de Datos de AquaQuest"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Base de Datos Relacional",
+      "description": "Estado de conexión, tablas del Diagrama Relacional (ZONAS_HIDROGRAFICAS, PUNTOS_MONITOREO, MUESTRAS, MEDICIONES) e importación CSV"
+    },
+    {
+      "name": "Datos IDEAM",
+      "description": "Consulta de datos reales de calidad del agua por estación y variable"
+    },
+    {
+      "name": "Autenticación",
+      "description": "Registro, inicio de sesión (SHA-256 + sal) y perfil del explorador/a"
+    },
+    {
+      "name": "Juego y Retos",
+      "description": "Retos de acción real (tipo B), reputación XP, niveles y bitácora"
+    },
+    {
+      "name": "Comunidad",
+      "description": "Muro comunitario de acciones, ideas, preguntas, logros, likes y comentarios"
+    }
+  ],
+  "paths": {
+    "/api/db/status": {
+      "get": {
+        "tags": ["Base de Datos Relacional"],
+        "summary": "Consultar estado de la base de datos relacional y resumen del CSV del IDEAM",
+        "responses": {
+          "200": { "description": "Resumen de tablas, registros totales del CSV y estación activa" }
+        }
+      }
+    },
+    "/api/datos/zonas": {
+      "get": {
+        "tags": ["Base de Datos Relacional"],
+        "summary": "Listar tabla ZONAS_HIDROGRAFICAS cargadas desde el CSV",
+        "responses": {
+          "200": { "description": "Lista de zonas y subzonas hidrográficas (SZH)" }
+        }
+      }
+    },
+    "/api/datos/estaciones": {
+      "get": {
+        "tags": ["Base de Datos Relacional"],
+        "summary": "Listar tabla PUNTOS_MONITOREO (estaciones del IDEAM disponibles)",
+        "responses": {
+          "200": { "description": "Lista de estaciones de monitoreo con coordenadas y muestras" }
+        }
+      }
+    },
+    "/api/datos/estacion-activa": {
+      "patch": {
+        "tags": ["Base de Datos Relacional"],
+        "summary": "Cambiar la estación de monitoreo activa en la aplicación",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["codigo"],
+                "properties": {
+                  "codigo": {
+                    "type": "string",
+                    "example": "21207960",
+                    "description": "Código IDEAM de la estación (ej. 11027030, 21027010, 21207960, 26167070)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Estación seleccionada y actualizada en pantalla" }
+        }
+      }
+    },
+    "/api/datos/punto": {
+      "get": {
+        "tags": ["Datos IDEAM"],
+        "summary": "Obtener información de la estación de monitoreo activa",
+        "responses": {
+          "200": { "description": "Metadatos geográficos e hidrológicos de la estación activa" }
+        }
+      }
+    },
+    "/api/datos/variables": {
+      "get": {
+        "tags": ["Datos IDEAM"],
+        "summary": "Listar tabla VARIABLES (las 13 variables medidas por el IDEAM)",
+        "responses": {
+          "200": { "description": "Diccionario de variables con nombre, unidad, categoría y matriz" }
+        }
+      }
+    },
+    "/api/datos/serie/{variableId}": {
+      "get": {
+        "tags": ["Datos IDEAM"],
+        "summary": "Obtener la serie histórica graficable de una variable en la estación activa",
+        "parameters": [
+          {
+            "name": "variableId",
+            "in": "path",
+            "required": true,
+            "description": "Identificador de la variable medida",
+            "schema": {
+              "type": "string",
+              "enum": ["ph", "od", "temp", "cond", "turb", "dqo", "sst", "fe", "al", "mn", "zn", "no3", "p_total"],
+              "default": "ph"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Serie histórica de puntos numéricos" },
+          "404": { "description": "Variable no encontrada" }
+        }
+      }
+    },
+    "/api/datos/mediciones": {
+      "get": {
+        "tags": ["Datos IDEAM"],
+        "summary": "Consultar tabla MEDICIONES / MUESTRAS recientes de la estación activa",
+        "parameters": [
+          {
+            "name": "limite",
+            "in": "query",
+            "required": false,
+            "description": "Cantidad de fechas de muestreo recientes a incluir (1–16)",
+            "schema": { "type": "integer", "default": 4, "minimum": 1, "maximum": 16 }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de mediciones con valores exactos o bajo LCM (<X)" }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Autenticación"],
+        "summary": "Registrar una nueva cuenta en la tabla USUARIOS",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RegistroInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuario creado exitosamente" },
+          "400": { "description": "Datos inválidos o correo ya registrado" }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Autenticación"],
+        "summary": "Iniciar sesión con correo y contraseña",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Sesión iniciada correctamente" },
+          "401": { "description": "Credenciales inválidas" }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": ["Autenticación"],
+        "summary": "Obtener el perfil del usuario actual",
+        "responses": {
+          "200": { "description": "Perfil del usuario activo o invitado" }
+        }
+      }
+    },
+    "/api/auth/profile": {
+      "patch": {
+        "tags": ["Autenticación"],
+        "summary": "Actualizar nombre o avatar del usuario actual",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string", "example": "Guardiana del Atrato" },
+                  "avatar": { "type": "string", "enum": ["AQ", "CO", "AG", "EX", "PR", "ID", "CU", "SN"], "example": "AG" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Perfil actualizado" }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["Autenticación"],
+        "summary": "Cerrar la sesión activa",
+        "responses": {
+          "200": { "description": "Sesión cerrada correctamente" }
+        }
+      }
+    },
+    "/api/juego/retos": {
+      "get": {
+        "tags": ["Juego y Retos"],
+        "summary": "Listar tablas RETOS y LOGROS (niveles de reputación)",
+        "responses": {
+          "200": { "description": "Catálogo de retos y niveles de reputación" }
+        }
+      }
+    },
+    "/api/juego/progreso": {
+      "get": {
+        "tags": ["Juego y Retos"],
+        "summary": "Consultar XP, nivel actual y tabla ACCIONES_USUARIO del jugador",
+        "responses": {
+          "200": { "description": "Estado de progreso del jugador actual" }
+        }
+      },
+      "delete": {
+        "tags": ["Juego y Retos"],
+        "summary": "Reiniciar el progreso (XP, bitácora y retos) del usuario actual",
+        "responses": {
+          "200": { "description": "Progreso reiniciado a cero" }
+        }
+      }
+    },
+    "/api/juego/acciones": {
+      "post": {
+        "tags": ["Juego y Retos"],
+        "summary": "Insertar registro en ACCIONES_USUARIO (completar reto y ganar XP)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AccionInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Acción registrada y XP sumado" },
+          "400": { "description": "Reto ya completado, inexistente o evidencia insuficiente" }
+        }
+      }
+    },
+    "/api/comunidad/posts": {
+      "get": {
+        "tags": ["Comunidad"],
+        "summary": "Obtener publicaciones del muro comunitario",
+        "parameters": [
+          {
+            "name": "categoria",
+            "in": "query",
+            "required": false,
+            "description": "Filtrar por categoría de publicación",
+            "schema": {
+              "type": "string",
+              "enum": ["todos", "accion", "idea", "pregunta", "logro"],
+              "default": "todos"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de publicaciones ordenadas de más reciente a más antigua" }
+        }
+      },
+      "post": {
+        "tags": ["Comunidad"],
+        "summary": "Crear una nueva publicación en la comunidad (sin XP)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NuevoPostInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Publicación creada exitosamente" },
+          "400": { "description": "Texto demasiado corto" }
+        }
+      }
+    },
+    "/api/comunidad/posts/{postId}/like": {
+      "post": {
+        "tags": ["Comunidad"],
+        "summary": "Alternar reacción 'Me gusta' en una publicación",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "example": "seed1" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Reacción actualizada" }
+        }
+      }
+    },
+    "/api/comunidad/posts/{postId}/comentarios": {
+      "post": {
+        "tags": ["Comunidad"],
+        "summary": "Agregar un comentario a una publicación",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "example": "seed1" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["texto"],
+                "properties": {
+                  "texto": { "type": "string", "example": "¡Excelente iniciativa por el agua!" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Comentario agregado exitosamente" },
+          "400": { "description": "Comentario inválido o publicación no encontrada" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistroInput": {
+        "type": "object",
+        "required": ["nombre", "correo", "password"],
+        "properties": {
+          "nombre": { "type": "string", "example": "Camila Ríos" },
+          "correo": { "type": "string", "example": "camila@aquaquest.co" },
+          "password": { "type": "string", "example": "AguaSegura2026!" },
+          "avatar": { "type": "string", "enum": ["AQ", "CO", "AG", "EX", "PR", "ID", "CU", "SN"], "default": "AQ" }
+        }
+      },
+      "LoginInput": {
+        "type": "object",
+        "required": ["correo", "password"],
+        "properties": {
+          "correo": { "type": "string", "example": "camila@aquaquest.co" },
+          "password": { "type": "string", "example": "AguaSegura2026!" },
+          "recordar": { "type": "boolean", "default": true }
+        }
+      },
+      "AccionInput": {
+        "type": "object",
+        "required": ["retoId", "evidencia"],
+        "properties": {
+          "retoId": { "type": "string", "enum": ["r1", "r2", "r3", "r4", "r5", "r6"], "example": "r1" },
+          "evidencia": { "type": "string", "example": "Cerré la llave durante el cepillado de dientes toda la mañana." }
+        }
+      },
+      "NuevoPostInput": {
+        "type": "object",
+        "required": ["categoria", "texto"],
+        "properties": {
+          "categoria": { "type": "string", "enum": ["accion", "idea", "pregunta", "logro"], "default": "accion" },
+          "texto": { "type": "string", "example": "Hoy revisamos todas las llaves del colegio para detectar fugas a tiempo." }
+        }
+      }
+    }
+  }
+}
+

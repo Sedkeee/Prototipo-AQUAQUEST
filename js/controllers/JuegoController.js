@@ -33,6 +33,7 @@
     if (!retoSeleccionado) return;
     const xpGanado = Model.registrarAccion(retoSeleccionado.id, View.evidencia());
     if (xpGanado === null) return;
+    Auth.actualizarPerfil({ xp_total: Model.xp() });
     cerrarModal();
     renderTodo();
     UI.mostrarToast(`+${xpGanado} XP · ¡Acción registrada!`);
@@ -48,6 +49,7 @@
   function resetProgreso() {
     if (!UI.confirmar("¿Seguro que quieres borrar tu progreso (XP, retos, bitácora y posts propios)?\nLas publicaciones de otras personas se mantendrán.")) return;
     Model.reset();
+    Auth.actualizarPerfil({ xp_total: 0 });
     AQ.models.Comunidad.resetUsuario();
     renderTodo();
     AQ.controllers.Comunidad.refrescar();

@@ -1,0 +1,7316 @@
+/* ============================================================
+   DATOS PRECARGADOS DESDE EL CSV OFICIAL DEL IDEAM
+   Archivo origen: Data_Histórica_de_Calidad_de_Agua_Superficial_y_Sedimentos_20260911.csv (143.818 registros,
+   243 estaciones de monitoreo y 101 subzonas hidrográficas)
+   Generado automáticamente por database/import_csv.js
+   ============================================================ */
+window.AQ = window.AQ || { components: {}, models: {}, views: {}, controllers: {}, utils: {} };
+AQ.models.IdeamCsvData = {
+  "fuente": "Data_Histórica_de_Calidad_de_Agua_Superficial_y_Sedimentos_20260911.csv",
+  "totalFilasCSV": 143818,
+  "totalZonasCSV": 101,
+  "totalEstacionesCSV": 243,
+  "fechaImportacion": "2026-11-11T20:45:37.329Z",
+  "zonas_hidrograficas": [
+    {
+      "id_zona": 1,
+      "codigo_szh": "1102",
+      "zona": "Atrato - Darién",
+      "subzona": "Alto Atrato"
+    },
+    {
+      "id_zona": 2,
+      "codigo_szh": "1117",
+      "zona": "Atrato - Darién",
+      "subzona": "Río Cabí y otros Directos Atrato (md)"
+    },
+    {
+      "id_zona": 3,
+      "codigo_szh": "1303",
+      "zona": "Sinú",
+      "subzona": "Bajo Sinú"
+    },
+    {
+      "id_zona": 4,
+      "codigo_szh": "1506",
+      "zona": "Caribe - Guajira",
+      "subzona": "Río Ranchería"
+    },
+    {
+      "id_zona": 5,
+      "codigo_szh": "1508",
+      "zona": "Caribe - Guajira",
+      "subzona": "Río Carraipía - Paraguachón, Directos al Golfo Maracaibo"
+    },
+    {
+      "id_zona": 6,
+      "codigo_szh": "1601",
+      "zona": "Catatumbo",
+      "subzona": "Río Pamplonita"
+    },
+    {
+      "id_zona": 7,
+      "codigo_szh": "1602",
+      "zona": "Catatumbo",
+      "subzona": "Río Zulia"
+    },
+    {
+      "id_zona": 8,
+      "codigo_szh": "1603",
+      "zona": "Catatumbo",
+      "subzona": "Río Nuevo Presidente - Tres Bocas (Sardinata, Tibú)"
+    },
+    {
+      "id_zona": 9,
+      "codigo_szh": "1605",
+      "zona": "Catatumbo",
+      "subzona": "Río Algodonal (Alto Catatumbo)"
+    },
+    {
+      "id_zona": 10,
+      "codigo_szh": "1607",
+      "zona": "Catatumbo",
+      "subzona": "Bajo Catatumbo"
+    },
+    {
+      "id_zona": 11,
+      "codigo_szh": "2101",
+      "zona": "Alto Magdalena",
+      "subzona": "Alto Magdalena"
+    },
+    {
+      "id_zona": 12,
+      "codigo_szh": "2102",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Timaná y otros Directos al Magdalena"
+    },
+    {
+      "id_zona": 13,
+      "codigo_szh": "2103",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Suaza"
+    },
+    {
+      "id_zona": 14,
+      "codigo_szh": "2104",
+      "zona": "Alto Magdalena",
+      "subzona": "Ríos Directos al Magdalena (mi)"
+    },
+    {
+      "id_zona": 15,
+      "codigo_szh": "2106",
+      "zona": "Alto Magdalena",
+      "subzona": "Ríos Directos Magdalena (md)"
+    },
+    {
+      "id_zona": 16,
+      "codigo_szh": "2105",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Páez"
+    },
+    {
+      "id_zona": 17,
+      "codigo_szh": "2108",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Yaguará y río Íquira"
+    },
+    {
+      "id_zona": 18,
+      "codigo_szh": "2109",
+      "zona": "Alto Magdalena",
+      "subzona": "Juncal y otros ríos Directos al Magdalena"
+    },
+    {
+      "id_zona": 19,
+      "codigo_szh": "2110",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Neiva"
+    },
+    {
+      "id_zona": 20,
+      "codigo_szh": "2111",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Fortalecillas y otros"
+    },
+    {
+      "id_zona": 21,
+      "codigo_szh": "2112",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Baché"
+    },
+    {
+      "id_zona": 22,
+      "codigo_szh": "2113",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Aipe, río Chenche y otros Directos al Magdalena"
+    },
+    {
+      "id_zona": 23,
+      "codigo_szh": "2115",
+      "zona": "Alto Magdalena",
+      "subzona": "Directos Magdalena entre ríos Cabrera y Sumapaz"
+    },
+    {
+      "id_zona": 24,
+      "codigo_szh": "2114",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Cabrera"
+    },
+    {
+      "id_zona": 25,
+      "codigo_szh": "2118",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Luisa y otros Directos al Magdalena"
+    },
+    {
+      "id_zona": 26,
+      "codigo_szh": "2119",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Sumapaz"
+    },
+    {
+      "id_zona": 27,
+      "codigo_szh": "2120",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Bogotá"
+    },
+    {
+      "id_zona": 28,
+      "codigo_szh": "2121",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Coello"
+    },
+    {
+      "id_zona": 29,
+      "codigo_szh": "2122",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Opía y otros Directos al Magdalena (mi)"
+    },
+    {
+      "id_zona": 30,
+      "codigo_szh": "2125",
+      "zona": "Alto Magdalena",
+      "subzona": "Río Lagunilla y otros Directos al Magdalena"
+    },
+    {
+      "id_zona": 31,
+      "codigo_szh": "2208",
+      "zona": "Saldaña",
+      "subzona": "Bajo Saldaña"
+    },
+    {
+      "id_zona": 32,
+      "codigo_szh": "2301",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Gualí"
+    },
+    {
+      "id_zona": 33,
+      "codigo_szh": "2302",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Guarinó"
+    },
+    {
+      "id_zona": 34,
+      "codigo_szh": "2303",
+      "zona": "Medio Magdalena",
+      "subzona": "Directos al Magdalena entre Río Seco y Río Negro (md)"
+    },
+    {
+      "id_zona": 35,
+      "codigo_szh": "2305",
+      "zona": "Medio Magdalena",
+      "subzona": "Río La Miel (Samaná)"
+    },
+    {
+      "id_zona": 36,
+      "codigo_szh": "2306",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Negro"
+    },
+    {
+      "id_zona": 37,
+      "codigo_szh": "2308",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Nare"
+    },
+    {
+      "id_zona": 38,
+      "codigo_szh": "2312",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Carare (Minero)"
+    },
+    {
+      "id_zona": 39,
+      "codigo_szh": "2314",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Opón"
+    },
+    {
+      "id_zona": 40,
+      "codigo_szh": "2317",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Cimitarra y otros Directos al Magdalena"
+    },
+    {
+      "id_zona": 41,
+      "codigo_szh": "2319",
+      "zona": "Medio Magdalena",
+      "subzona": "Río Lebrija y otros Directos al Magdalena"
+    },
+    {
+      "id_zona": 42,
+      "codigo_szh": "2907",
+      "zona": "Bajo Magdalena",
+      "subzona": "Directos Bajo Magdalena entre El Banco y El Plato"
+    },
+    {
+      "id_zona": 43,
+      "codigo_szh": "2320",
+      "zona": "Medio Magdalena",
+      "subzona": "Directos al Magdalena (Brazo Morales)"
+    },
+    {
+      "id_zona": 44,
+      "codigo_szh": "2401",
+      "zona": "Sogamoso",
+      "subzona": "Río Suárez"
+    },
+    {
+      "id_zona": 45,
+      "codigo_szh": "2402",
+      "zona": "Sogamoso",
+      "subzona": "Río Fonce"
+    },
+    {
+      "id_zona": 46,
+      "codigo_szh": "2403",
+      "zona": "Sogamoso",
+      "subzona": "Río Chicamocha"
+    },
+    {
+      "id_zona": 47,
+      "codigo_szh": "2405",
+      "zona": "Sogamoso",
+      "subzona": "Río Sogamoso"
+    },
+    {
+      "id_zona": 48,
+      "codigo_szh": "2501",
+      "zona": "Bajo Magdalena- Cauca -San Jorge",
+      "subzona": "Alto San Jorge"
+    },
+    {
+      "id_zona": 49,
+      "codigo_szh": "2502",
+      "zona": "Bajo Magdalena- Cauca -San Jorge",
+      "subzona": "Bajo San Jorge - La Mojana"
+    },
+    {
+      "id_zona": 50,
+      "codigo_szh": "2625",
+      "zona": "Cauca",
+      "subzona": "Directos al Cauca entre Pto. Valdivia y río Nechí"
+    }
+  ],
+  "estaciones": [
+    {
+      "id_punto": 1,
+      "id": "11027030",
+      "nombre": "RCA_ATRATO_CHO_EL CARMEN_SIETE EL",
+      "codigo": "11027030",
+      "corriente": "ATRATO",
+      "cuenca": "Atrato - Darién",
+      "subzona": "Alto Atrato",
+      "codigo_szh": "1102",
+      "id_zona": 1,
+      "departamento": "CHOCO",
+      "municipio": "EL CARMEN",
+      "lat": 5.862,
+      "lon": -76.15205556,
+      "elevacion": 2300,
+      "totalMuestrasCSV": 8,
+      "muestras": [
+        {
+          "fecha": "30/07/2014",
+          "codigo_muestra": "23386",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.68",
+            "cond": "103.5",
+            "dqo": "20",
+            "p_total": "0.1",
+            "fe": "3.18",
+            "mn": "0.082",
+            "no3": "0.25",
+            "od": "6.6",
+            "ph": "7.89",
+            "sst": "32",
+            "temp": "21.7",
+            "turb": "13",
+            "zn": "0.055"
+          }
+        },
+        {
+          "fecha": "25/05/2015",
+          "codigo_muestra": "23891",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "95.1",
+            "cond": "104.2",
+            "dqo": "130",
+            "fe": "127",
+            "mn": "1.49",
+            "no3": "1.3",
+            "od": "7.2",
+            "ph": "6.49",
+            "sst": "1950",
+            "temp": "17.8",
+            "turb": "1910",
+            "zn": "0.292"
+          }
+        },
+        {
+          "fecha": "21/06/2016",
+          "codigo_muestra": "24742",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "36",
+            "cond": "79.2",
+            "dqo": "21",
+            "fe": "38.1",
+            "mn": "0.484",
+            "no3": "1.2",
+            "od": "7.4",
+            "ph": "7.43",
+            "sst": "1050",
+            "temp": "20.9",
+            "turb": "1200",
+            "zn": "0.178"
+          }
+        },
+        {
+          "fecha": "19/10/2016",
+          "codigo_muestra": "25413",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "12.3",
+            "cond": "82.2",
+            "dqo": "16",
+            "p_total": "0.29",
+            "fe": "18.2",
+            "mn": "0.213",
+            "no3": "1.3",
+            "od": "7.3",
+            "ph": "7.89",
+            "sst": "300",
+            "temp": "19.7",
+            "turb": "180",
+            "zn": "0.142"
+          }
+        },
+        {
+          "fecha": "06/04/2018",
+          "codigo_muestra": "26888",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "34.2",
+            "cond": "73.2",
+            "p_total": "0.53",
+            "fe": "52",
+            "mn": "1",
+            "no3": "2.8",
+            "od": "6.9",
+            "ph": "5.09",
+            "temp": "16.5",
+            "zn": "0.208"
+          }
+        },
+        {
+          "fecha": "19/07/2021",
+          "codigo_muestra": "28424",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3.88",
+            "cond": "87",
+            "dqo": "<10",
+            "p_total": "0.23",
+            "fe": "6.37",
+            "mn": "<0.2",
+            "od": "5.9",
+            "ph": "7.64",
+            "sst": "210",
+            "temp": "21.5",
+            "turb": "170",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "26/04/2022",
+          "codigo_muestra": "28791",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "2.216",
+            "cond": "89.8",
+            "dqo": "<10",
+            "p_total": "0.085",
+            "fe": "3.674",
+            "mn": "<0.2",
+            "od": "7.6",
+            "ph": "7.77",
+            "sst": "86",
+            "temp": "16.2",
+            "turb": "90",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "22/05/2024",
+          "codigo_muestra": "29822",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "9.11",
+            "cond": "94.6",
+            "dqo": "14",
+            "p_total": "0.24",
+            "fe": "16.2",
+            "mn": "0.235",
+            "no3": "0.167",
+            "od": "7.4",
+            "ph": "7.44",
+            "sst": "436",
+            "temp": "22.1",
+            "turb": "380",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 36,
+      "id": "21057060",
+      "nombre": "RCA_PAEZ_HUI_TESALIA_PAICOL",
+      "codigo": "21057060",
+      "corriente": "PÁEZ",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Río Páez",
+      "codigo_szh": "2105",
+      "id_zona": 16,
+      "departamento": "HUILA",
+      "municipio": "TESALIA",
+      "lat": 2.46,
+      "lon": -75.76,
+      "elevacion": 788,
+      "totalMuestrasCSV": 85,
+      "muestras": [
+        {
+          "fecha": "08/10/2021",
+          "codigo_muestra": "28525",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "84.6",
+            "dqo": "21",
+            "p_total": "0.1",
+            "no3": "<0.1",
+            "od": "5.9",
+            "ph": "7.55",
+            "sst": "27",
+            "temp": "32.5",
+            "turb": "28"
+          }
+        },
+        {
+          "fecha": "20/04/2022",
+          "codigo_muestra": "28781",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "81",
+            "dqo": "34",
+            "p_total": "0.34",
+            "no3": "0.17",
+            "od": "7.9",
+            "ph": "7.69",
+            "sst": "292",
+            "temp": "19.4",
+            "turb": "240"
+          }
+        },
+        {
+          "fecha": "07/09/2022",
+          "codigo_muestra": "28991",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "129",
+            "dqo": "18",
+            "p_total": "0.14",
+            "no3": "<0.1",
+            "od": "6.9",
+            "ph": "7.88",
+            "sst": "130",
+            "temp": "20.9",
+            "turb": "32"
+          }
+        },
+        {
+          "fecha": "14/10/2022",
+          "codigo_muestra": "29096",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "158",
+            "dqo": "31",
+            "p_total": "0.57",
+            "no3": "0.4",
+            "od": "7.8",
+            "ph": "8.01",
+            "sst": "605",
+            "temp": "20",
+            "turb": "350"
+          }
+        },
+        {
+          "fecha": "14/11/2022",
+          "codigo_muestra": "29162",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "113",
+            "dqo": "66",
+            "p_total": "1.42",
+            "no3": "0.65",
+            "od": "7.1",
+            "ph": "8",
+            "sst": "1342",
+            "temp": "19.8",
+            "turb": "770"
+          }
+        },
+        {
+          "fecha": "24/07/2023",
+          "codigo_muestra": "29495",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "88.3",
+            "dqo": "17",
+            "p_total": "0.093",
+            "no3": "0.055",
+            "od": "4.8",
+            "ph": "7.96",
+            "sst": "51",
+            "temp": "18.1",
+            "turb": "45"
+          }
+        },
+        {
+          "fecha": "26/09/2023",
+          "codigo_muestra": "29548",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "241",
+            "dqo": "30",
+            "p_total": "0.063",
+            "no3": "0.044",
+            "od": "6.1",
+            "ph": "8.19",
+            "sst": "11",
+            "temp": "21.7",
+            "turb": "13"
+          }
+        },
+        {
+          "fecha": "09/11/2023",
+          "codigo_muestra": "29647",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "153",
+            "dqo": "15",
+            "p_total": "0.06",
+            "no3": "0.032",
+            "od": "6.1",
+            "ph": "8.02",
+            "sst": "29",
+            "temp": "23.1",
+            "turb": "15"
+          }
+        },
+        {
+          "fecha": "04/03/2024",
+          "codigo_muestra": "29749",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "al": "0.524",
+            "cond": "179",
+            "dqo": "23",
+            "p_total": "0.54",
+            "fe": "0.8",
+            "mn": "<0.2",
+            "no3": "0.073",
+            "od": "8.1",
+            "ph": "7.9",
+            "sst": "33",
+            "temp": "24.6",
+            "turb": "23",
+            "zn": "0.37"
+          }
+        },
+        {
+          "fecha": "14/05/2024",
+          "codigo_muestra": "29818",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "al": "4.67",
+            "cond": "114",
+            "dqo": "24",
+            "p_total": "0.2",
+            "fe": "4.37",
+            "mn": "<0.2",
+            "no3": "0.19",
+            "od": "7.6",
+            "ph": "7.73",
+            "sst": "262",
+            "temp": "21.1",
+            "turb": "260",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "29/09/2024",
+          "codigo_muestra": "29938",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "206.65",
+            "dqo": "23",
+            "p_total": "0.3",
+            "no3": "0.164",
+            "od": "7",
+            "ph": "7.88",
+            "sst": "166",
+            "temp": "20.8",
+            "turb": "85"
+          }
+        },
+        {
+          "fecha": "10/11/2024",
+          "codigo_muestra": "30008",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "155",
+            "dqo": "42",
+            "p_total": "0.24",
+            "no3": "0.22",
+            "od": "6.1",
+            "ph": "7.32",
+            "sst": "394",
+            "temp": "21.9",
+            "turb": "220"
+          }
+        },
+        {
+          "fecha": "20/06/2025",
+          "codigo_muestra": "30257",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "al": "1.037",
+            "cond": "88",
+            "dqo": "14",
+            "p_total": "0.13",
+            "fe": "0.994",
+            "mn": "<0.2",
+            "no3": "0.155",
+            "od": "7.5",
+            "ph": "7.12",
+            "sst": "45",
+            "temp": "18",
+            "turb": "50",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "13/09/2025",
+          "codigo_muestra": "30340",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "147",
+            "dqo": "<10",
+            "p_total": "0.054",
+            "no3": "0.143",
+            "od": "5.2",
+            "ph": "7.87",
+            "sst": "12",
+            "temp": "20.1",
+            "turb": "11"
+          }
+        },
+        {
+          "fecha": "02/10/2025",
+          "codigo_muestra": "30396",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "150",
+            "dqo": "50",
+            "p_total": "0.082",
+            "no3": "0.115",
+            "od": "6.5",
+            "ph": "7.54",
+            "sst": "37",
+            "temp": "20.5",
+            "turb": "26"
+          }
+        },
+        {
+          "fecha": "02/11/2025",
+          "codigo_muestra": "30458",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "146",
+            "dqo": "18",
+            "p_total": "0.186",
+            "no3": "0.145",
+            "od": "7",
+            "ph": "7.87",
+            "sst": "138",
+            "temp": "19.4",
+            "turb": "100"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 64,
+      "id": "21137050",
+      "nombre": "RCA_MAGDALENA_TOL_NATAGAIMA_ANGOSTURA",
+      "codigo": "21137050",
+      "corriente": "MAGDALENA",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Directos Magdalena entre ríos Cabrera y Sumapaz",
+      "codigo_szh": "2115",
+      "id_zona": 23,
+      "departamento": "TOLIMA",
+      "municipio": "NATAGAIMA",
+      "lat": 3.44,
+      "lon": -75.12,
+      "elevacion": 345,
+      "totalMuestrasCSV": 81,
+      "muestras": [
+        {
+          "fecha": "20/09/2020",
+          "codigo_muestra": "27984",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "127",
+            "dqo": "33",
+            "p_total": "0.55",
+            "no3": "0.54",
+            "od": "2.9",
+            "ph": "6.93",
+            "sst": "339",
+            "temp": "26.3",
+            "turb": "260"
+          }
+        },
+        {
+          "fecha": "10/11/2020",
+          "codigo_muestra": "28087",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "106",
+            "dqo": "13",
+            "p_total": "0.074",
+            "no3": "0.26",
+            "od": "4.9",
+            "ph": "7.27",
+            "sst": "33",
+            "temp": "26.2",
+            "turb": "28"
+          }
+        },
+        {
+          "fecha": "10/08/2021",
+          "codigo_muestra": "28436",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "104",
+            "dqo": "13",
+            "p_total": "0.3",
+            "no3": "0.41",
+            "od": "7",
+            "ph": "8.7",
+            "sst": "217",
+            "temp": "23.3",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "26/04/2022",
+          "codigo_muestra": "28790",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "122",
+            "dqo": "30",
+            "p_total": "0.22",
+            "no3": "0.35",
+            "od": "7.7",
+            "ph": "7.72",
+            "sst": "175",
+            "temp": "25.7",
+            "turb": "210"
+          }
+        },
+        {
+          "fecha": "15/10/2022",
+          "codigo_muestra": "29105",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "132",
+            "dqo": "36",
+            "p_total": "1.1",
+            "no3": "0.64",
+            "od": "5.7",
+            "ph": "7.98",
+            "sst": "3986",
+            "temp": "19.4",
+            "turb": "1800"
+          }
+        },
+        {
+          "fecha": "15/11/2022",
+          "codigo_muestra": "29166",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "124",
+            "dqo": "27",
+            "p_total": "0.42",
+            "no3": "0.45",
+            "od": "6.4",
+            "ph": "7.64",
+            "sst": "265",
+            "temp": "25.4",
+            "turb": "260"
+          }
+        },
+        {
+          "fecha": "28/07/2023",
+          "codigo_muestra": "29490",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "107",
+            "dqo": "24",
+            "p_total": "0.14",
+            "no3": "0.15",
+            "od": "6.1",
+            "ph": "7.28",
+            "sst": "48",
+            "temp": "24.1",
+            "turb": "50"
+          }
+        },
+        {
+          "fecha": "29/09/2023",
+          "codigo_muestra": "29567",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "195",
+            "dqo": "14",
+            "p_total": "0.055",
+            "no3": "0.162",
+            "od": "6.7",
+            "ph": "7.86",
+            "sst": "20",
+            "temp": "26.3",
+            "turb": "22"
+          }
+        },
+        {
+          "fecha": "12/11/2023",
+          "codigo_muestra": "29657",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "140",
+            "dqo": "13",
+            "p_total": "0.081",
+            "no3": "0.262",
+            "od": "6.5",
+            "ph": "7.7",
+            "sst": "13",
+            "temp": "25.2",
+            "turb": "15"
+          }
+        },
+        {
+          "fecha": "28/02/2024",
+          "codigo_muestra": "29747",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "129",
+            "dqo": "22",
+            "p_total": "<0.05",
+            "no3": "0.298",
+            "od": "6.3",
+            "ph": "7.37",
+            "sst": "27",
+            "temp": "26.1",
+            "turb": "26"
+          }
+        },
+        {
+          "fecha": "26/05/2024",
+          "codigo_muestra": "29832",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "121",
+            "dqo": "27",
+            "p_total": "0.22",
+            "no3": "0.286",
+            "od": "6.2",
+            "ph": "7.53",
+            "sst": "251",
+            "temp": "25.2",
+            "turb": "230"
+          }
+        },
+        {
+          "fecha": "06/10/2024",
+          "codigo_muestra": "29966",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "142.1",
+            "dqo": "17",
+            "p_total": "0.45",
+            "no3": "0.385",
+            "od": "3",
+            "ph": "7.83",
+            "sst": "506",
+            "temp": "26",
+            "turb": "500"
+          }
+        },
+        {
+          "fecha": "17/11/2024",
+          "codigo_muestra": "30042",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "138",
+            "dqo": "43",
+            "p_total": "0.44",
+            "no3": "0.452",
+            "od": "5.8",
+            "ph": "7.25",
+            "sst": "908",
+            "temp": "24.3",
+            "turb": "550"
+          }
+        },
+        {
+          "fecha": "25/06/2025",
+          "codigo_muestra": "30263",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "121",
+            "dqo": "<10",
+            "p_total": "0.36",
+            "no3": "0.267",
+            "od": "7.1",
+            "ph": "7.69",
+            "sst": "232",
+            "temp": "24.2",
+            "turb": "250"
+          }
+        },
+        {
+          "fecha": "06/10/2025",
+          "codigo_muestra": "30409",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "123",
+            "dqo": "28",
+            "p_total": "0.11",
+            "no3": "0.299",
+            "od": "5.5",
+            "ph": "7.77",
+            "sst": "25",
+            "temp": "27",
+            "turb": "45"
+          }
+        },
+        {
+          "fecha": "09/11/2025",
+          "codigo_muestra": "30478",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "106",
+            "dqo": "36",
+            "p_total": "0.145",
+            "no3": "0.32",
+            "od": "6.1",
+            "ph": "7",
+            "sst": "97",
+            "temp": "25.2",
+            "turb": "120"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 96,
+      "id": "23067050",
+      "nombre": "RCA_NEGRO_CUN_GUADUAS_GUADUERO",
+      "codigo": "23067050",
+      "corriente": "NEGRO",
+      "cuenca": "Medio Magdalena",
+      "subzona": "Río Negro",
+      "codigo_szh": "2306",
+      "id_zona": 36,
+      "departamento": "CUNDINAMARCA",
+      "municipio": "GUADUAS",
+      "lat": 5.192373,
+      "lon": -74.575622,
+      "elevacion": 410,
+      "totalMuestrasCSV": 65,
+      "muestras": [
+        {
+          "fecha": "20/06/2021",
+          "codigo_muestra": "28343",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "477",
+            "dqo": "27",
+            "p_total": "0.7",
+            "no3": "0.29",
+            "od": "6.7",
+            "ph": "8.22",
+            "sst": "295",
+            "temp": "25.4",
+            "turb": "190"
+          }
+        },
+        {
+          "fecha": "15/10/2021",
+          "codigo_muestra": "28545",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "437",
+            "dqo": "69",
+            "p_total": "2",
+            "no3": "0.49",
+            "od": "4.9",
+            "ph": "8.19",
+            "sst": "1012",
+            "temp": "30.7",
+            "turb": "750"
+          }
+        },
+        {
+          "fecha": "23/11/2021",
+          "codigo_muestra": "28604",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "468",
+            "dqo": "195",
+            "p_total": "3.1",
+            "no3": "0.45",
+            "od": "6.4",
+            "ph": "7.98",
+            "sst": "2318",
+            "temp": "25.1",
+            "turb": "1000"
+          }
+        },
+        {
+          "fecha": "24/02/2022",
+          "codigo_muestra": "28719",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "276",
+            "dqo": "302",
+            "p_total": "6.7",
+            "no3": "1.02",
+            "od": "4.7",
+            "ph": "7.97",
+            "sst": "5535",
+            "temp": "23.2",
+            "turb": "3100"
+          }
+        },
+        {
+          "fecha": "28/04/2022",
+          "codigo_muestra": "28807",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "459",
+            "dqo": "156",
+            "p_total": "2.9",
+            "no3": "0.33",
+            "od": "6.1",
+            "ph": "7.92",
+            "sst": "2837",
+            "temp": "26.2",
+            "turb": "1800"
+          }
+        },
+        {
+          "fecha": "01/07/2022",
+          "codigo_muestra": "28940",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "415",
+            "dqo": "44",
+            "p_total": "1.87",
+            "no3": "0.5",
+            "od": "4.3",
+            "ph": "8.36",
+            "sst": "534",
+            "temp": "25.8",
+            "turb": "450"
+          }
+        },
+        {
+          "fecha": "29/09/2022",
+          "codigo_muestra": "29060",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "557",
+            "dqo": "190",
+            "p_total": "0.46",
+            "no3": "1.02",
+            "od": "6.7",
+            "ph": "8.18",
+            "sst": "2614",
+            "temp": "24.2",
+            "turb": "950"
+          }
+        },
+        {
+          "fecha": "25/11/2022",
+          "codigo_muestra": "29216",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "35.3",
+            "dqo": "252",
+            "p_total": "2.4",
+            "od": "6.7",
+            "ph": "7.96",
+            "sst": "5205",
+            "temp": "24.9"
+          }
+        },
+        {
+          "fecha": "12/06/2023",
+          "codigo_muestra": "29400",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "507",
+            "dqo": "<10",
+            "p_total": "0.12",
+            "no3": "0.248",
+            "od": "5.5",
+            "ph": "7.82",
+            "sst": "59",
+            "temp": "26.9",
+            "turb": "65"
+          }
+        },
+        {
+          "fecha": "17/07/2023",
+          "codigo_muestra": "29443",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "576",
+            "dqo": "11",
+            "p_total": "0.059",
+            "no3": "0.159",
+            "od": "6",
+            "ph": "8.38",
+            "sst": "12",
+            "temp": "28",
+            "turb": "14"
+          }
+        },
+        {
+          "fecha": "27/09/2023",
+          "codigo_muestra": "29559",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "595",
+            "dqo": "84",
+            "p_total": "0.05",
+            "no3": "0.211",
+            "od": "6.5",
+            "ph": "8.44",
+            "sst": "27",
+            "temp": "24.1",
+            "turb": "19"
+          }
+        },
+        {
+          "fecha": "18/10/2023",
+          "codigo_muestra": "29588",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "209",
+            "dqo": "27",
+            "p_total": "0.64",
+            "no3": "0.516",
+            "od": "6.1",
+            "ph": "8",
+            "sst": "510",
+            "temp": "30.8",
+            "turb": "160"
+          }
+        },
+        {
+          "fecha": "17/02/2024",
+          "codigo_muestra": "29715",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "507",
+            "dqo": "<10",
+            "p_total": "0.086",
+            "no3": "0.371",
+            "od": "6.8",
+            "ph": "8.18",
+            "sst": "56",
+            "temp": "26.8",
+            "turb": "39"
+          }
+        },
+        {
+          "fecha": "22/05/2024",
+          "codigo_muestra": "29827",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "451",
+            "dqo": "18",
+            "p_total": "0.21",
+            "no3": "0.257",
+            "od": "6.5",
+            "ph": "7.81",
+            "sst": "115",
+            "temp": "23.6",
+            "turb": "95"
+          }
+        },
+        {
+          "fecha": "19/07/2025",
+          "codigo_muestra": "30295",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "559",
+            "dqo": "18",
+            "p_total": "0.21",
+            "fe": "0.263",
+            "mn": "<0.2",
+            "no3": "0.343",
+            "od": "6.2",
+            "ph": "8.46",
+            "sst": "5",
+            "temp": "27.1",
+            "turb": "3.5",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "08/12/2025",
+          "codigo_muestra": "30532",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.716",
+            "cond": "401",
+            "dqo": "13",
+            "p_total": "0.252",
+            "fe": "1.28",
+            "mn": "<0.2",
+            "no3": "0.248",
+            "od": "8",
+            "ph": "7.85",
+            "sst": "279",
+            "temp": "27.3",
+            "turb": "190",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 133,
+      "id": "24037190",
+      "nombre": "RCA_CHICAMOCHA_BOY_TIBASOSA_SAN RAFAEL",
+      "codigo": "24037190",
+      "corriente": "CHICAMOCHA",
+      "cuenca": "Sogamoso",
+      "subzona": "Río Chicamocha",
+      "codigo_szh": "2403",
+      "id_zona": 46,
+      "departamento": "BOYACÁ",
+      "municipio": "TIBASOSA",
+      "lat": 5.807611111,
+      "lon": -73.01380556,
+      "elevacion": 2500,
+      "totalMuestrasCSV": 53,
+      "muestras": [
+        {
+          "fecha": "10/06/2015",
+          "codigo_muestra": "23929",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "364.7",
+            "dqo": "37",
+            "p_total": "0.37",
+            "no3": "2.4",
+            "od": "7.1",
+            "ph": "7.75",
+            "sst": "34",
+            "temp": "23.5",
+            "turb": "17"
+          }
+        },
+        {
+          "fecha": "09/09/2015",
+          "codigo_muestra": "24133",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "al": "0.686",
+            "cond": "339.2",
+            "dqo": "38",
+            "p_total": "0.44",
+            "fe": "1.51",
+            "mn": "0.0779",
+            "no3": "2.2",
+            "od": "6.4",
+            "ph": "7.41",
+            "sst": "37",
+            "temp": "19.9",
+            "turb": "21",
+            "zn": "0.0944"
+          }
+        },
+        {
+          "fecha": "02/12/2015",
+          "codigo_muestra": "24388",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "319.4",
+            "dqo": "73",
+            "p_total": "0.68",
+            "no3": "2.1",
+            "od": "7.3",
+            "ph": "8.56",
+            "sst": "58",
+            "temp": "20.5",
+            "turb": "39"
+          }
+        },
+        {
+          "fecha": "11/05/2016",
+          "codigo_muestra": "24546",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "al": "1.69",
+            "cond": "285",
+            "dqo": "44",
+            "p_total": "0.47",
+            "fe": "3.55",
+            "mn": "0.16",
+            "no3": "1.9",
+            "od": "4.8",
+            "ph": "6.9",
+            "sst": "66",
+            "temp": "23.1",
+            "turb": "75",
+            "zn": "0.165"
+          }
+        },
+        {
+          "fecha": "09/08/2016",
+          "codigo_muestra": "24906",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "427.7",
+            "dqo": "38",
+            "p_total": "0.3",
+            "no3": "0.66",
+            "od": "9.3",
+            "ph": "8.75",
+            "sst": "72",
+            "temp": "19.8",
+            "turb": "42"
+          }
+        },
+        {
+          "fecha": "18/04/2017",
+          "codigo_muestra": "26275",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "al": "3.04",
+            "cond": "739",
+            "dqo": "34",
+            "p_total": "0.4",
+            "fe": "5.42",
+            "mn": "0.4",
+            "no3": "0.92",
+            "od": "5.9",
+            "ph": "6.74",
+            "sst": "37",
+            "temp": "18.4",
+            "turb": "40",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "16/08/2017",
+          "codigo_muestra": "26496",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "al": "0.397",
+            "cond": "709",
+            "dqo": "35",
+            "p_total": "0.24",
+            "fe": "3.23",
+            "mn": "0.251",
+            "no3": "2.2",
+            "od": "7.2",
+            "ph": "6.92",
+            "sst": "19",
+            "temp": "19",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "19/02/2018",
+          "codigo_muestra": "26806",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "al": "0.89",
+            "cond": "293",
+            "dqo": "18",
+            "p_total": "0.32",
+            "fe": "2.92",
+            "mn": "<0.2",
+            "no3": "0.89",
+            "od": "4.3",
+            "ph": "7.04",
+            "sst": "34",
+            "temp": "24.2",
+            "turb": "35",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "30/03/2019",
+          "codigo_muestra": "27364",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "al": "0.665",
+            "cond": "304",
+            "dqo": "30",
+            "p_total": "0.21",
+            "fe": "2.31",
+            "mn": "<0.2",
+            "no3": "0.61",
+            "od": "6.3",
+            "ph": "6.73",
+            "sst": "52",
+            "temp": "19.3",
+            "turb": "61",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "13/07/2021",
+          "codigo_muestra": "28374",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "479",
+            "dqo": "24",
+            "p_total": "0.27",
+            "no3": "1.83",
+            "od": "4.7",
+            "ph": "7.18",
+            "sst": "29",
+            "temp": "16.9",
+            "turb": "37"
+          }
+        },
+        {
+          "fecha": "28/09/2021",
+          "codigo_muestra": "28491",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "443",
+            "dqo": "20",
+            "p_total": "0.41",
+            "no3": "2.04",
+            "od": "5.1",
+            "ph": "7.26",
+            "sst": "20",
+            "temp": "15.9",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "05/11/2021",
+          "codigo_muestra": "28573",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "288",
+            "dqo": "47",
+            "p_total": "0.32",
+            "no3": "0.7",
+            "od": "4.4",
+            "ph": "6.39",
+            "sst": "34",
+            "temp": "16.5",
+            "turb": "50"
+          }
+        },
+        {
+          "fecha": "17/05/2022",
+          "codigo_muestra": "28838",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "401",
+            "dqo": "46",
+            "p_total": "0.32",
+            "no3": "1.63",
+            "od": "5.7",
+            "ph": "6.88",
+            "sst": "47",
+            "temp": "21.4",
+            "turb": "50"
+          }
+        },
+        {
+          "fecha": "16/09/2022",
+          "codigo_muestra": "29008",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "532",
+            "dqo": "42",
+            "p_total": "0.32",
+            "no3": "1.57",
+            "od": "5.1",
+            "ph": "6.99",
+            "sst": "29",
+            "temp": "17.9",
+            "turb": "50"
+          }
+        },
+        {
+          "fecha": "22/06/2023",
+          "codigo_muestra": "29427",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "618",
+            "dqo": "36",
+            "p_total": "0.26",
+            "no3": "0.775",
+            "od": "5.8",
+            "ph": "7.3",
+            "sst": "34",
+            "temp": "19.1",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "04/07/2024",
+          "codigo_muestra": "29898",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "617",
+            "dqo": "34",
+            "p_total": "0.32",
+            "no3": "1.331",
+            "od": "4.4",
+            "ph": "7.45",
+            "sst": "56",
+            "temp": "18.3",
+            "turb": "36"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 230,
+      "id": "51027020",
+      "nombre": "RCA_GUIZA_NAR_RICAURTE_PILISPI",
+      "codigo": "51027020",
+      "corriente": "GUIZA",
+      "cuenca": "Mira",
+      "subzona": "Río Mira",
+      "codigo_szh": "5102",
+      "id_zona": 96,
+      "departamento": "NARIÑO",
+      "municipio": "RICAURTE",
+      "lat": 1.206083333,
+      "lon": -77.98513889,
+      "elevacion": 1259,
+      "totalMuestrasCSV": 49,
+      "muestras": [
+        {
+          "fecha": "21/11/2016",
+          "codigo_muestra": "25416",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.344",
+            "cond": "80.88",
+            "dqo": "22",
+            "p_total": "<0.05",
+            "fe": "0.385",
+            "mn": "<0.05",
+            "no3": "0.12",
+            "od": "6.8",
+            "ph": "8.05",
+            "sst": "9.2",
+            "temp": "16.8",
+            "turb": "5.6",
+            "zn": "0.11"
+          }
+        },
+        {
+          "fecha": "29/04/2017",
+          "codigo_muestra": "26317",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "83.8",
+            "dqo": "<10",
+            "p_total": "0.029",
+            "od": "7.5",
+            "ph": "6.94",
+            "sst": "6.8",
+            "temp": "18.3",
+            "turb": "4.2"
+          }
+        },
+        {
+          "fecha": "21/07/2017",
+          "codigo_muestra": "26468",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.171",
+            "cond": "149",
+            "dqo": "<10",
+            "p_total": "0.059",
+            "fe": "<0.1",
+            "mn": "<0.05",
+            "no3": "<0.1",
+            "od": "6.9",
+            "ph": "8.2",
+            "sst": "<4.5",
+            "temp": "20.9",
+            "turb": "3.5",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "25/01/2018",
+          "codigo_muestra": "26794",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.255",
+            "cond": "90",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "fe": "0.343",
+            "mn": "<0.2",
+            "no3": "0.11",
+            "od": "8",
+            "ph": "6.25",
+            "sst": "7",
+            "temp": "20.3",
+            "turb": "3",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "20/09/2018",
+          "codigo_muestra": "27039",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.204",
+            "cond": "210",
+            "dqo": "<10",
+            "p_total": "0.15",
+            "fe": "0.443",
+            "mn": "<0.2",
+            "no3": "0.12",
+            "od": "7.6",
+            "ph": "8.21",
+            "sst": "<5",
+            "temp": "18.9",
+            "turb": "<2",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "25/04/2022",
+          "codigo_muestra": "28788",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "58.5",
+            "dqo": "14",
+            "p_total": "0.14",
+            "no3": "8.84",
+            "od": "8.4",
+            "ph": "7.84",
+            "sst": "63",
+            "temp": "17.5",
+            "turb": "55"
+          }
+        },
+        {
+          "fecha": "19/10/2022",
+          "codigo_muestra": "29130",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "77.2",
+            "dqo": "<10",
+            "p_total": "0.059",
+            "no3": "0.1",
+            "od": "7.1",
+            "ph": "7.94",
+            "sst": "26",
+            "temp": "19.4",
+            "turb": "15"
+          }
+        },
+        {
+          "fecha": "07/05/2023",
+          "codigo_muestra": "29369",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "91",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "0.0242",
+            "od": "5.9",
+            "ph": "7.93",
+            "sst": "9",
+            "temp": "18.2",
+            "turb": "2.9"
+          }
+        },
+        {
+          "fecha": "25/08/2023",
+          "codigo_muestra": "29508",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "186",
+            "dqo": "<10",
+            "p_total": "0.055",
+            "no3": "0.108",
+            "od": "7.1",
+            "ph": "6.54",
+            "sst": "<5",
+            "temp": "19.2",
+            "turb": "2.2"
+          }
+        },
+        {
+          "fecha": "26/09/2023",
+          "codigo_muestra": "29582",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "215",
+            "od": "6.7",
+            "ph": "7.8",
+            "temp": "21.2"
+          }
+        },
+        {
+          "fecha": "14/02/2024",
+          "codigo_muestra": "29707",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "106",
+            "dqo": "<10",
+            "p_total": "0.057",
+            "no3": "0.201",
+            "od": "7.1",
+            "ph": "7.23",
+            "sst": "16",
+            "temp": "22.3",
+            "turb": "6.3"
+          }
+        },
+        {
+          "fecha": "17/06/2024",
+          "codigo_muestra": "29861",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "85.1",
+            "dqo": "<10",
+            "p_total": "0.064",
+            "no3": "0.172",
+            "od": "8.5",
+            "ph": "7.57",
+            "sst": "15",
+            "temp": "21",
+            "turb": "7.4"
+          }
+        },
+        {
+          "fecha": "25/09/2024",
+          "codigo_muestra": "29924",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "230",
+            "dqo": "<10",
+            "p_total": "0.062",
+            "no3": "0.159",
+            "od": "6.7",
+            "ph": "8.39",
+            "sst": "<5",
+            "temp": "22.9",
+            "turb": "2.2"
+          }
+        },
+        {
+          "fecha": "28/11/2024",
+          "codigo_muestra": "30071",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "82.6",
+            "dqo": "<10",
+            "p_total": "0.084",
+            "no3": "0.19",
+            "od": "6.7",
+            "ph": "7.93",
+            "sst": "37",
+            "temp": "18.3",
+            "turb": "25"
+          }
+        },
+        {
+          "fecha": "03/04/2025",
+          "codigo_muestra": "30164",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "66",
+            "dqo": "17",
+            "p_total": "0.053",
+            "no3": "0.173",
+            "od": "6.3",
+            "ph": "7.85",
+            "sst": "35",
+            "temp": "18.4",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "07/08/2025",
+          "codigo_muestra": "30315",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "190",
+            "dqo": "<10",
+            "p_total": "0.73",
+            "no3": "0.236",
+            "od": "6.1",
+            "ph": "8.19",
+            "sst": "14",
+            "temp": "18.6",
+            "turb": "9"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 129,
+      "id": "24017590",
+      "nombre": "RCA_SUAREZ_SAN_PUENTE NACIONAL_PTE.NACIONAL",
+      "codigo": "24017590",
+      "corriente": "SUÁREZ",
+      "cuenca": "Sogamoso",
+      "subzona": "Río Suárez",
+      "codigo_szh": "2401",
+      "id_zona": 44,
+      "departamento": "SANTANDER",
+      "municipio": "PUENTE NACIONAL",
+      "lat": 5.872777778,
+      "lon": -73.67777778,
+      "elevacion": 1650,
+      "totalMuestrasCSV": 45,
+      "muestras": [
+        {
+          "fecha": "26/02/2019",
+          "codigo_muestra": "27275",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "293",
+            "dqo": "14",
+            "p_total": "0.097",
+            "od": "8.8",
+            "ph": "8.23",
+            "sst": "20",
+            "turb": "13"
+          }
+        },
+        {
+          "fecha": "12/12/2019",
+          "codigo_muestra": "27780",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "216",
+            "dqo": "<10",
+            "p_total": "0.074",
+            "od": "6.7",
+            "ph": "8.02",
+            "sst": "32",
+            "temp": "18.9"
+          }
+        },
+        {
+          "fecha": "06/10/2020",
+          "codigo_muestra": "28003",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "259",
+            "dqo": "<10",
+            "p_total": "0.13",
+            "od": "7.3",
+            "ph": "8.37",
+            "sst": "41",
+            "temp": "25.9",
+            "turb": "45"
+          }
+        },
+        {
+          "fecha": "08/12/2020",
+          "codigo_muestra": "28164",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "211",
+            "dqo": "49",
+            "p_total": "0.63",
+            "od": "7.5",
+            "ph": "8.24",
+            "sst": "423",
+            "temp": "18.6",
+            "turb": "260"
+          }
+        },
+        {
+          "fecha": "08/04/2021",
+          "codigo_muestra": "28242",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "212",
+            "dqo": "24",
+            "p_total": "0.23",
+            "no3": "0.44",
+            "od": "7",
+            "ph": "8.2",
+            "sst": "77",
+            "temp": "21.4",
+            "turb": "85"
+          }
+        },
+        {
+          "fecha": "26/07/2021",
+          "codigo_muestra": "28415",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "237",
+            "dqo": "23",
+            "p_total": "0.63",
+            "no3": "0.68",
+            "od": "7",
+            "ph": "8.34",
+            "sst": "244",
+            "temp": "20.5",
+            "turb": "190"
+          }
+        },
+        {
+          "fecha": "12/10/2021",
+          "codigo_muestra": "28540",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "179",
+            "dqo": "21",
+            "p_total": "0.32",
+            "no3": "0.41",
+            "od": "6.7",
+            "ph": "8.18",
+            "sst": "109",
+            "temp": "18.1",
+            "turb": "110"
+          }
+        },
+        {
+          "fecha": "03/11/2021",
+          "codigo_muestra": "28572",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "212",
+            "dqo": "44",
+            "p_total": "0.3",
+            "no3": "0.23",
+            "od": "4.9",
+            "ph": "7.59",
+            "sst": "55",
+            "temp": "18.3",
+            "turb": "110"
+          }
+        },
+        {
+          "fecha": "20/03/2022",
+          "codigo_muestra": "28734",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "171",
+            "dqo": "71",
+            "p_total": "0.28",
+            "no3": "0.43",
+            "od": "5.1",
+            "ph": "8.25",
+            "sst": "180",
+            "temp": "19.7",
+            "turb": "190"
+          }
+        },
+        {
+          "fecha": "09/06/2022",
+          "codigo_muestra": "28905",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "dqo": "55",
+            "p_total": "0.65",
+            "no3": "0.91",
+            "sst": "121",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "10/06/2022",
+          "codigo_muestra": "28905",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "183",
+            "od": "6.2",
+            "ph": "7.98",
+            "temp": "19"
+          }
+        },
+        {
+          "fecha": "17/09/2022",
+          "codigo_muestra": "29020",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "211",
+            "dqo": "98",
+            "p_total": "1.3",
+            "no3": "0.67",
+            "od": "5.9",
+            "ph": "8.17",
+            "sst": "940",
+            "temp": "19.6",
+            "turb": "750"
+          }
+        },
+        {
+          "fecha": "11/05/2023",
+          "codigo_muestra": "29374",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "234",
+            "dqo": "14",
+            "p_total": "0.26",
+            "no3": "0.066",
+            "od": "5.9",
+            "ph": "7.74",
+            "sst": "101",
+            "temp": "18.3",
+            "turb": "110"
+          }
+        },
+        {
+          "fecha": "30/06/2023",
+          "codigo_muestra": "29440",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "232",
+            "dqo": "26",
+            "p_total": "0.13",
+            "no3": "0.154",
+            "od": "6.9",
+            "ph": "8.36",
+            "sst": "40",
+            "temp": "20.5",
+            "turb": "55"
+          }
+        },
+        {
+          "fecha": "29/04/2024",
+          "codigo_muestra": "29802",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "286",
+            "dqo": "130",
+            "p_total": "2",
+            "no3": "0.439",
+            "od": "2.1",
+            "ph": "7.54",
+            "sst": "1211",
+            "temp": "21.3",
+            "turb": "300"
+          }
+        },
+        {
+          "fecha": "15/06/2025",
+          "codigo_muestra": "30222",
+          "proyecto": "Convenio Ecopetrol - Ideam",
+          "valores": {
+            "cond": "300",
+            "dqo": "10",
+            "p_total": "0.6",
+            "no3": "0.242",
+            "od": "5.5",
+            "ph": "7.4",
+            "sst": "600",
+            "temp": "15.8",
+            "turb": "300"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 218,
+      "id": "35217010",
+      "nombre": "RCA_CRAVO SUR_CAS_YOPAL_PTE.YOPAL",
+      "codigo": "35217010",
+      "corriente": "CRAVO SUR",
+      "cuenca": "Meta",
+      "subzona": "Río Cravo Sur",
+      "codigo_szh": "3521",
+      "id_zona": 88,
+      "departamento": "CASANARE",
+      "municipio": "YOPAL",
+      "lat": 5.369,
+      "lon": -72.41372222,
+      "elevacion": 343,
+      "totalMuestrasCSV": 45,
+      "muestras": [
+        {
+          "fecha": "26/11/2013",
+          "codigo_muestra": "22908",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "129",
+            "dqo": "33",
+            "p_total": "0.21",
+            "od": "6.7",
+            "ph": "5.57",
+            "sst": "55",
+            "temp": "24.4",
+            "turb": "76"
+          }
+        },
+        {
+          "fecha": "22/05/2014",
+          "codigo_muestra": "23264",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "108.5",
+            "p_total": "0.86",
+            "od": "8.3",
+            "ph": "6.3",
+            "sst": "270",
+            "temp": "22.2",
+            "turb": "210"
+          }
+        },
+        {
+          "fecha": "08/02/2015",
+          "codigo_muestra": "23761",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "162.2",
+            "dqo": "<10",
+            "p_total": "0.26",
+            "od": "5.7",
+            "ph": "8.41",
+            "sst": "16",
+            "temp": "35.2",
+            "turb": "11"
+          }
+        },
+        {
+          "fecha": "16/06/2015",
+          "codigo_muestra": "23938",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "95.41",
+            "dqo": "44",
+            "p_total": "0.93",
+            "od": "8.4",
+            "ph": "8.02",
+            "sst": "800",
+            "temp": "22.3",
+            "turb": "580"
+          }
+        },
+        {
+          "fecha": "18/08/2015",
+          "codigo_muestra": "24028",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "111.5",
+            "dqo": "37",
+            "p_total": "4.3",
+            "od": "7",
+            "ph": "8.12",
+            "sst": "2920",
+            "temp": "23.2",
+            "turb": "1150"
+          }
+        },
+        {
+          "fecha": "12/10/2015",
+          "codigo_muestra": "24185",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "115.6",
+            "dqo": "46",
+            "p_total": "0.28",
+            "od": "8.2",
+            "ph": "7.16",
+            "temp": "21.7",
+            "turb": "460"
+          }
+        },
+        {
+          "fecha": "12/09/2016",
+          "codigo_muestra": "25118",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "107",
+            "dqo": "28",
+            "p_total": "0.57",
+            "od": "7.1",
+            "ph": "7.75",
+            "sst": "670",
+            "temp": "23.4",
+            "turb": "460"
+          }
+        },
+        {
+          "fecha": "21/03/2017",
+          "codigo_muestra": "25873",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "200",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "od": "6.8",
+            "ph": "7.34",
+            "sst": "<4.5",
+            "temp": "22.7",
+            "turb": "6.5"
+          }
+        },
+        {
+          "fecha": "18/05/2017",
+          "codigo_muestra": "26358",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "125",
+            "dqo": "55",
+            "p_total": "4.3",
+            "od": "7.8",
+            "ph": "8",
+            "sst": "3130",
+            "temp": "23.8",
+            "turb": "1570"
+          }
+        },
+        {
+          "fecha": "23/10/2017",
+          "codigo_muestra": "26656",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "107",
+            "dqo": "18",
+            "p_total": "0.14",
+            "od": "7.8",
+            "ph": "7.95",
+            "sst": "50",
+            "temp": "21.7"
+          }
+        },
+        {
+          "fecha": "26/04/2018",
+          "codigo_muestra": "26917",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "62.4",
+            "od": "8",
+            "ph": "6.11",
+            "temp": "21"
+          }
+        },
+        {
+          "fecha": "25/07/2022",
+          "codigo_muestra": "28977",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "96.5",
+            "dqo": "11",
+            "p_total": "0.19",
+            "no3": "0.11",
+            "od": "7",
+            "ph": "7.95",
+            "sst": "72",
+            "temp": "21.9",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "19/02/2024",
+          "codigo_muestra": "29726",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "177",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "<0.023",
+            "od": "8.1",
+            "ph": "8.71",
+            "sst": "8",
+            "temp": "25.6",
+            "turb": "7.8"
+          }
+        },
+        {
+          "fecha": "21/06/2024",
+          "codigo_muestra": "29895",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "112",
+            "dqo": "52",
+            "p_total": "0.19",
+            "no3": "0.184",
+            "od": "7.1",
+            "ph": "8.18",
+            "sst": "2654",
+            "temp": "23.4",
+            "turb": "700"
+          }
+        },
+        {
+          "fecha": "06/11/2024",
+          "codigo_muestra": "29990",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "116",
+            "dqo": "<10",
+            "p_total": "0.15",
+            "no3": "0.148",
+            "od": "6.6",
+            "ph": "8.04",
+            "sst": "117",
+            "temp": "24.8",
+            "turb": "85"
+          }
+        },
+        {
+          "fecha": "26/08/2025",
+          "codigo_muestra": "30313",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "85",
+            "dqo": "11",
+            "p_total": "1.8",
+            "no3": "0.155",
+            "od": "7",
+            "ph": "7.15",
+            "sst": "570",
+            "temp": "22.8",
+            "turb": "360"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 224,
+      "id": "44037060",
+      "nombre": "RCA_HACHA_CAQ_FLORENCIA_FLORENCIA",
+      "codigo": "44037060",
+      "corriente": "HACHA",
+      "cuenca": "Caquetá",
+      "subzona": "Río Orteguaza",
+      "codigo_szh": "4403",
+      "id_zona": 93,
+      "departamento": "CAQUETA",
+      "municipio": "FLORENCIA",
+      "lat": 1.621166667,
+      "lon": -75.61922222,
+      "elevacion": 270,
+      "totalMuestrasCSV": 45,
+      "muestras": [
+        {
+          "fecha": "19/05/2016",
+          "codigo_muestra": "24557",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "46.16",
+            "dqo": "14",
+            "p_total": "<0.05",
+            "od": "6.2",
+            "ph": "7.25",
+            "sst": "<4.5",
+            "temp": "23.2",
+            "turb": "2.8"
+          }
+        },
+        {
+          "fecha": "15/09/2016",
+          "codigo_muestra": "25121",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "37.02",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "od": "6.9",
+            "ph": "7.08",
+            "sst": "<4.5",
+            "temp": "24.5",
+            "turb": "2.4"
+          }
+        },
+        {
+          "fecha": "21/11/2016",
+          "codigo_muestra": "25408",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "29.17",
+            "dqo": "<10",
+            "p_total": "0.057",
+            "od": "6.1",
+            "ph": "7.51",
+            "sst": "33",
+            "temp": "24.4",
+            "turb": "2.9"
+          }
+        },
+        {
+          "fecha": "21/03/2017",
+          "codigo_muestra": "25871",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "27.82",
+            "dqo": "11",
+            "p_total": "0.17",
+            "od": "8.9",
+            "ph": "6.82",
+            "sst": "24",
+            "temp": "22.9",
+            "turb": "27"
+          }
+        },
+        {
+          "fecha": "17/05/2017",
+          "codigo_muestra": "26354",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "30.5",
+            "dqo": "<10",
+            "p_total": "0.06",
+            "od": "8.1",
+            "ph": "7.57",
+            "sst": "6.4",
+            "temp": "23",
+            "turb": "2.8"
+          }
+        },
+        {
+          "fecha": "11/09/2017",
+          "codigo_muestra": "26522",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "37.7",
+            "dqo": "19",
+            "p_total": "0.14",
+            "od": "7.3",
+            "ph": "7.5",
+            "sst": "8.8",
+            "temp": "24.6",
+            "turb": "7.3"
+          }
+        },
+        {
+          "fecha": "04/04/2018",
+          "codigo_muestra": "26906",
+          "proyecto": "Ideam",
+          "valores": {
+            "od": "7.9",
+            "ph": "6.95",
+            "temp": "22.8"
+          }
+        },
+        {
+          "fecha": "13/03/2019",
+          "codigo_muestra": "27288",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "293",
+            "dqo": "18",
+            "p_total": "0.12",
+            "od": "4.7",
+            "ph": "7.25",
+            "sst": "28",
+            "temp": "23.9",
+            "turb": "6"
+          }
+        },
+        {
+          "fecha": "04/03/2020",
+          "codigo_muestra": "27869",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "32.4",
+            "dqo": "11",
+            "p_total": "<0.05",
+            "od": "7.5",
+            "ph": "7.35",
+            "sst": "6",
+            "temp": "23.9",
+            "turb": "7.31"
+          }
+        },
+        {
+          "fecha": "13/10/2021",
+          "codigo_muestra": "28541",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "27.1",
+            "dqo": "<10",
+            "p_total": "0.053",
+            "no3": "0.11",
+            "od": "7.3",
+            "ph": "7.46",
+            "sst": "14",
+            "temp": "23.9",
+            "turb": "18"
+          }
+        },
+        {
+          "fecha": "02/06/2022",
+          "codigo_muestra": "28877",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "26.9",
+            "dqo": "<10",
+            "p_total": "0.093",
+            "no3": "<0.1",
+            "od": "7.5",
+            "ph": "7.41",
+            "sst": "7",
+            "temp": "24.3",
+            "turb": "2.8"
+          }
+        },
+        {
+          "fecha": "10/06/2023",
+          "codigo_muestra": "29397",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "27",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "<0.023",
+            "od": "7.1",
+            "ph": "8",
+            "sst": "5",
+            "temp": "23.5",
+            "turb": "7.5"
+          }
+        },
+        {
+          "fecha": "19/03/2024",
+          "codigo_muestra": "29764",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "33.2",
+            "dqo": "14",
+            "p_total": "0.061",
+            "no3": "0.106",
+            "od": "7",
+            "ph": "7.67",
+            "sst": "7",
+            "temp": "23.8",
+            "turb": "6"
+          }
+        },
+        {
+          "fecha": "16/06/2024",
+          "codigo_muestra": "29860",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "16.7",
+            "dqo": "29",
+            "p_total": "0.22",
+            "no3": "0.189",
+            "od": "7.1",
+            "ph": "7.24",
+            "sst": "104",
+            "temp": "22.7",
+            "turb": "85"
+          }
+        },
+        {
+          "fecha": "27/07/2025",
+          "codigo_muestra": "30291",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "24",
+            "dqo": "<10",
+            "p_total": "0.4",
+            "no3": "0.154",
+            "od": "6.9",
+            "ph": "7.5",
+            "sst": "16",
+            "temp": "22.9",
+            "turb": "7.8"
+          }
+        },
+        {
+          "fecha": "28/09/2025",
+          "codigo_muestra": "30382",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "32",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "0.13",
+            "od": "6.3",
+            "ph": "7.32",
+            "sst": "5",
+            "temp": "24.5",
+            "turb": "4.3"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 197,
+      "id": "32077070",
+      "nombre": "RCA_GUEJAR_MET_VISTA HERMOSA_PINALITO",
+      "codigo": "32077070",
+      "corriente": "GUEJAR",
+      "cuenca": "Guaviare",
+      "subzona": "Río Güejar",
+      "codigo_szh": "3207",
+      "id_zona": 76,
+      "departamento": "META",
+      "municipio": "VISTA HERMOSA",
+      "lat": 2.97548,
+      "lon": -73.67673,
+      "elevacion": 230,
+      "totalMuestrasCSV": 41,
+      "muestras": [
+        {
+          "fecha": "28/02/2014",
+          "codigo_muestra": "23141",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "84.7",
+            "dqo": "<10",
+            "p_total": "0.068",
+            "od": "5.1",
+            "ph": "6.73",
+            "temp": "26.2",
+            "turb": "91"
+          }
+        },
+        {
+          "fecha": "14/05/2015",
+          "codigo_muestra": "23872",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "65.9",
+            "dqo": "14",
+            "p_total": "0.068",
+            "ph": "6.85",
+            "sst": "71",
+            "temp": "24.3",
+            "turb": "39"
+          }
+        },
+        {
+          "fecha": "06/09/2015",
+          "codigo_muestra": "24150",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "59.32",
+            "dqo": "<10",
+            "p_total": "0.098",
+            "od": "6.4",
+            "ph": "7.41",
+            "sst": "48",
+            "temp": "25.5",
+            "turb": "31"
+          }
+        },
+        {
+          "fecha": "29/11/2015",
+          "codigo_muestra": "24383",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "98.9",
+            "dqo": "31",
+            "p_total": "0.67",
+            "od": "6.7",
+            "ph": "8.14",
+            "sst": "510",
+            "temp": "25.8",
+            "turb": "630"
+          }
+        },
+        {
+          "fecha": "04/07/2016",
+          "codigo_muestra": "24759",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "54",
+            "dqo": "<10",
+            "p_total": "0.23",
+            "od": "6.6",
+            "ph": "7.22",
+            "sst": "180",
+            "temp": "23.6",
+            "turb": "140"
+          }
+        },
+        {
+          "fecha": "06/10/2016",
+          "codigo_muestra": "25189",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "64.27",
+            "dqo": "57",
+            "p_total": "0.11",
+            "od": "6.9",
+            "ph": "6.99",
+            "sst": "100",
+            "temp": "26.2",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "02/02/2017",
+          "codigo_muestra": "25777",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "67.6",
+            "dqo": "24",
+            "p_total": "0.079",
+            "od": "6.3",
+            "ph": "6.95",
+            "sst": "33",
+            "temp": "27.5",
+            "turb": "39"
+          }
+        },
+        {
+          "fecha": "08/05/2017",
+          "codigo_muestra": "26328",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "46.8",
+            "dqo": "24",
+            "p_total": "0.29",
+            "od": "5.8",
+            "ph": "7.05",
+            "sst": "250",
+            "temp": "26.6",
+            "turb": "240"
+          }
+        },
+        {
+          "fecha": "15/08/2017",
+          "codigo_muestra": "26506",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "79.8",
+            "dqo": "24",
+            "p_total": "0.26",
+            "od": "6.5",
+            "ph": "7.2",
+            "sst": "24",
+            "temp": "25.4",
+            "turb": "25"
+          }
+        },
+        {
+          "fecha": "19/08/2018",
+          "codigo_muestra": "26993",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "1402",
+            "dqo": "<10",
+            "p_total": "0.1",
+            "od": "6.2",
+            "ph": "7.13",
+            "sst": "26",
+            "temp": "28.6",
+            "turb": "30"
+          }
+        },
+        {
+          "fecha": "13/03/2020",
+          "codigo_muestra": "27896",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "127",
+            "dqo": "<10",
+            "p_total": "0.21",
+            "od": "5",
+            "ph": "7.1",
+            "sst": "11",
+            "temp": "26.5",
+            "turb": "5.17"
+          }
+        },
+        {
+          "fecha": "14/06/2021",
+          "codigo_muestra": "28331",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "99.5",
+            "dqo": "38",
+            "p_total": "1.7",
+            "no3": "<0.1",
+            "od": "5.1",
+            "ph": "7.47",
+            "sst": "1270",
+            "temp": "25.4",
+            "turb": "550"
+          }
+        },
+        {
+          "fecha": "01/06/2022",
+          "codigo_muestra": "28892",
+          "proyecto": "Ideam",
+          "valores": {
+            "dqo": "21",
+            "p_total": "0.55",
+            "no3": "0.45",
+            "od": "6",
+            "ph": "7.44",
+            "sst": "300",
+            "temp": "25.2",
+            "turb": "180"
+          }
+        },
+        {
+          "fecha": "14/06/2022",
+          "codigo_muestra": "28892",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "94.4"
+          }
+        },
+        {
+          "fecha": "25/06/2024",
+          "codigo_muestra": "29908",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "112",
+            "dqo": "14",
+            "p_total": "0.65",
+            "no3": "0.251",
+            "od": "6.2",
+            "ph": "8.52",
+            "sst": "678",
+            "temp": "24.4",
+            "turb": "350"
+          }
+        },
+        {
+          "fecha": "24/09/2025",
+          "codigo_muestra": "30413",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "2.14",
+            "cond": "75.8",
+            "dqo": "<10",
+            "p_total": "0.45",
+            "fe": "3.583",
+            "mn": "<0.2",
+            "no3": "0.282",
+            "od": "5.6",
+            "ph": "7.06",
+            "sst": "264",
+            "temp": "25.6",
+            "turb": "220",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 226,
+      "id": "47017070",
+      "nombre": "RCA_PUTUMAYO_PUT_SANTIAGO_EDEN EL",
+      "codigo": "47017070",
+      "corriente": "PUTUMAYO",
+      "cuenca": "Putumayo",
+      "subzona": "Alto río Putumayo",
+      "codigo_szh": "4701",
+      "id_zona": 94,
+      "departamento": "PUTUMAYO",
+      "municipio": "SANTIAGO",
+      "lat": 1.106305556,
+      "lon": -76.985,
+      "elevacion": 1450,
+      "totalMuestrasCSV": 41,
+      "muestras": [
+        {
+          "fecha": "06/09/2015",
+          "codigo_muestra": "24131",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "63.4",
+            "dqo": "26",
+            "p_total": "0.11",
+            "no3": "0.18",
+            "od": "6.9",
+            "ph": "6.42",
+            "sst": "30",
+            "temp": "14.3",
+            "turb": "16"
+          }
+        },
+        {
+          "fecha": "24/11/2015",
+          "codigo_muestra": "24379",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "46",
+            "dqo": "44",
+            "p_total": "0.27",
+            "no3": "0.24",
+            "od": "6.7",
+            "ph": "6.68",
+            "sst": "90",
+            "temp": "16.9",
+            "turb": "44"
+          }
+        },
+        {
+          "fecha": "22/09/2016",
+          "codigo_muestra": "25150",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "66.2",
+            "dqo": "<10",
+            "p_total": "0.084",
+            "no3": "0.22",
+            "od": "6.3",
+            "ph": "6.52",
+            "sst": "34",
+            "temp": "15.1",
+            "turb": "25"
+          }
+        },
+        {
+          "fecha": "02/02/2017",
+          "codigo_muestra": "25778",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "72",
+            "dqo": "<10",
+            "p_total": "0.056",
+            "no3": "<0.1",
+            "od": "7.3",
+            "ph": "7",
+            "sst": "17",
+            "temp": "15",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "25/04/2017",
+          "codigo_muestra": "26311",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "89.6",
+            "dqo": "22",
+            "p_total": "0.06",
+            "no3": "0.28",
+            "od": "7.7",
+            "ph": "7.18",
+            "sst": "16",
+            "temp": "16.7",
+            "turb": "15"
+          }
+        },
+        {
+          "fecha": "23/08/2017",
+          "codigo_muestra": "26514",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "56.4",
+            "dqo": "19",
+            "p_total": "0.21",
+            "no3": "<0.1",
+            "od": "7.9",
+            "ph": "7.06",
+            "sst": "34",
+            "temp": "14.7",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "16/03/2018",
+          "codigo_muestra": "26836",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "82.9",
+            "dqo": "12",
+            "p_total": "0.081",
+            "no3": "0.16",
+            "od": "6.2",
+            "ph": "6.44",
+            "sst": "11",
+            "temp": "15.1",
+            "turb": "9.4"
+          }
+        },
+        {
+          "fecha": "11/07/2018",
+          "codigo_muestra": "26950",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "56.5",
+            "dqo": "13",
+            "p_total": "0.14",
+            "no3": "0.17",
+            "od": "7.3",
+            "ph": "6.83",
+            "sst": "41",
+            "temp": "13.6",
+            "turb": "22"
+          }
+        },
+        {
+          "fecha": "18/05/2019",
+          "codigo_muestra": "27407",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "72.5",
+            "dqo": "20",
+            "p_total": "0.14",
+            "od": "6.2",
+            "ph": "6.77",
+            "sst": "51",
+            "temp": "16",
+            "turb": "34"
+          }
+        },
+        {
+          "fecha": "27/10/2020",
+          "codigo_muestra": "28041",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "84.5",
+            "dqo": "<10",
+            "p_total": "0.11",
+            "no3": "<0.1",
+            "od": "6.8",
+            "ph": "7.19",
+            "sst": "12",
+            "temp": "23.9",
+            "turb": "10.9"
+          }
+        },
+        {
+          "fecha": "03/05/2022",
+          "codigo_muestra": "28816",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.402",
+            "cond": "88",
+            "dqo": "<10",
+            "p_total": "0.098",
+            "fe": "1.85",
+            "mn": "<0.2",
+            "no3": "0.24",
+            "od": "6.9",
+            "ph": "7.1",
+            "sst": "18",
+            "temp": "14.5",
+            "turb": "18",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "14/07/2023",
+          "codigo_muestra": "29450",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.222",
+            "cond": "69.9",
+            "dqo": "14",
+            "p_total": "0.079",
+            "fe": "1.384",
+            "mn": "<0.2",
+            "no3": "0.121",
+            "od": "6.6",
+            "ph": "6.54",
+            "sst": "44",
+            "temp": "21.5",
+            "turb": "24",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "14/02/2024",
+          "codigo_muestra": "29709",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "73.4",
+            "dqo": "16",
+            "p_total": "0.062",
+            "fe": "0.823",
+            "mn": "<0.2",
+            "no3": "0.408",
+            "od": "6.7",
+            "ph": "7.3",
+            "sst": "12",
+            "temp": "18.3",
+            "turb": "11",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "20/06/2024",
+          "codigo_muestra": "29883",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.46",
+            "cond": "59.9",
+            "dqo": "28",
+            "p_total": "0.1",
+            "fe": "1.83",
+            "mn": "<0.2",
+            "no3": "0.186",
+            "od": "4.5",
+            "ph": "7.08",
+            "sst": "124",
+            "temp": "16.8",
+            "turb": "70",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "13/11/2024",
+          "codigo_muestra": "30026",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "122",
+            "dqo": "<10",
+            "p_total": "0.059",
+            "fe": "0.94",
+            "mn": "<0.2",
+            "no3": "0.304",
+            "od": "6.9",
+            "ph": "7.35",
+            "sst": "<5",
+            "temp": "19.5",
+            "turb": "3.3",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "09/07/2025",
+          "codigo_muestra": "30273",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3.88",
+            "cond": "65",
+            "dqo": "17",
+            "p_total": "0.48",
+            "fe": "4.081",
+            "mn": "0.207",
+            "no3": "0.179",
+            "od": "6.5",
+            "ph": "7.16",
+            "sst": "270",
+            "temp": "14.1",
+            "turb": "170",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 219,
+      "id": "35257040",
+      "nombre": "RCA_META_VIC_PUERTO CARRENO_ACEITICO",
+      "codigo": "35257040",
+      "corriente": "META",
+      "cuenca": "Meta",
+      "subzona": "Directos Bajo Meta entre ríos Casanare y Orinoco",
+      "codigo_szh": "3525",
+      "id_zona": 89,
+      "departamento": "VICHADA",
+      "municipio": "PUERTO CARREÑO",
+      "lat": 6.1835,
+      "lon": -68.441556,
+      "elevacion": 68,
+      "totalMuestrasCSV": 40,
+      "muestras": [
+        {
+          "fecha": "29/11/2013",
+          "codigo_muestra": "22977",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "59",
+            "dqo": "19",
+            "p_total": "0.52",
+            "no3": "0.5",
+            "od": "6.3",
+            "ph": "6.31",
+            "sst": "270",
+            "temp": "28.4",
+            "turb": "360"
+          }
+        },
+        {
+          "fecha": "29/05/2015",
+          "codigo_muestra": "23924",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "70.91",
+            "dqo": "12",
+            "no3": "0.44",
+            "od": "6.1",
+            "ph": "7.17",
+            "sst": "330",
+            "temp": "28.9",
+            "turb": "260"
+          }
+        },
+        {
+          "fecha": "11/09/2015",
+          "codigo_muestra": "24152",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "47.7",
+            "dqo": "31",
+            "p_total": "0.12",
+            "no3": "0.59",
+            "od": "5.2",
+            "ph": "7",
+            "sst": "470",
+            "temp": "28.4",
+            "turb": "340"
+          }
+        },
+        {
+          "fecha": "06/12/2015",
+          "codigo_muestra": "24395",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "61.9",
+            "dqo": "19",
+            "p_total": "0.49",
+            "no3": "0.55",
+            "od": "6.3",
+            "ph": "6.82",
+            "temp": "28.4",
+            "turb": "300"
+          }
+        },
+        {
+          "fecha": "06/07/2016",
+          "codigo_muestra": "24768",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "44.39",
+            "dqo": "<10",
+            "p_total": "0.47",
+            "no3": "0.4",
+            "od": "5.7",
+            "ph": "6.66",
+            "sst": "240",
+            "temp": "26.5",
+            "turb": "240"
+          }
+        },
+        {
+          "fecha": "12/10/2016",
+          "codigo_muestra": "25271",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "54",
+            "dqo": "14",
+            "p_total": "0.34",
+            "no3": "0.28",
+            "od": "5.7",
+            "ph": "6.76",
+            "sst": "440",
+            "temp": "29.8",
+            "turb": "330"
+          }
+        },
+        {
+          "fecha": "17/06/2017",
+          "codigo_muestra": "26442",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "84.8",
+            "dqo": "20",
+            "p_total": "0.98",
+            "no3": "0.15",
+            "od": "6.5",
+            "ph": "6.64",
+            "sst": "190",
+            "temp": "27.4",
+            "turb": "500"
+          }
+        },
+        {
+          "fecha": "24/10/2017",
+          "codigo_muestra": "26658",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "9.9",
+            "dqo": "20",
+            "p_total": "0.7",
+            "od": "5.8",
+            "ph": "3.95",
+            "sst": "31",
+            "temp": "29.3"
+          }
+        },
+        {
+          "fecha": "12/07/2018",
+          "codigo_muestra": "26952",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "1422",
+            "dqo": "10",
+            "p_total": "0.29",
+            "no3": "0.33",
+            "od": "5.7",
+            "ph": "6.41",
+            "sst": "193",
+            "temp": "27.4",
+            "turb": "250"
+          }
+        },
+        {
+          "fecha": "10/07/2021",
+          "codigo_muestra": "28380",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "41.7",
+            "dqo": "12",
+            "p_total": "0.33",
+            "no3": "<0.1",
+            "od": "5.9",
+            "ph": "6.55",
+            "sst": "179",
+            "temp": "27.6",
+            "turb": "190"
+          }
+        },
+        {
+          "fecha": "05/05/2022",
+          "codigo_muestra": "28835",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "52.6",
+            "dqo": "<10",
+            "p_total": "0.44",
+            "no3": "0.92",
+            "od": "5.7",
+            "sst": "602",
+            "temp": "28.4",
+            "turb": "600"
+          }
+        },
+        {
+          "fecha": "18/05/2022",
+          "codigo_muestra": "28835",
+          "proyecto": "Ideam",
+          "valores": {
+            "ph": "6.86"
+          }
+        },
+        {
+          "fecha": "14/09/2022",
+          "codigo_muestra": "29029",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "56.9",
+            "dqo": "21",
+            "p_total": "0.4",
+            "no3": "0.7",
+            "od": "6.6",
+            "ph": "6.88",
+            "sst": "366",
+            "temp": "27.9",
+            "turb": "450"
+          }
+        },
+        {
+          "fecha": "03/08/2023",
+          "codigo_muestra": "29517",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "55",
+            "dqo": "19",
+            "p_total": "0.26",
+            "no3": "0.136",
+            "od": "5.7",
+            "ph": "6.41",
+            "sst": "754",
+            "temp": "28.3",
+            "turb": "340"
+          }
+        },
+        {
+          "fecha": "29/05/2024",
+          "codigo_muestra": "29843",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "15",
+            "dqo": "36",
+            "p_total": "0.19",
+            "no3": "0.126",
+            "od": "6.6",
+            "ph": "6.12",
+            "sst": "372",
+            "temp": "25.8",
+            "turb": "240"
+          }
+        },
+        {
+          "fecha": "30/09/2025",
+          "codigo_muestra": "30436",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.234",
+            "cond": "24",
+            "dqo": "10",
+            "p_total": "0.128",
+            "fe": "2.962",
+            "mn": "0.203",
+            "no3": "0.502",
+            "od": "7.7",
+            "ph": "6.09",
+            "sst": "145",
+            "temp": "27.5",
+            "turb": "130",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 10,
+      "id": "16017010",
+      "nombre": "RCA_PAMPLONITA_NOR_CUCUTA_AGUAS CLARAS",
+      "codigo": "16017010",
+      "corriente": "PAMPLONITA",
+      "cuenca": "Catatumbo",
+      "subzona": "Río Pamplonita",
+      "codigo_szh": "1601",
+      "id_zona": 6,
+      "departamento": "NORTE DE SANTANDER",
+      "municipio": "CÚCUTA",
+      "lat": 8.233611111,
+      "lon": -72.41722222,
+      "elevacion": 70,
+      "totalMuestrasCSV": 39,
+      "muestras": [
+        {
+          "fecha": "13/08/2015",
+          "codigo_muestra": "24017",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.321",
+            "cond": "484",
+            "dqo": "28",
+            "p_total": "0.9",
+            "fe": "0.658",
+            "mn": "<0.04",
+            "od": "8.4",
+            "ph": "7.24",
+            "sst": "11",
+            "temp": "18.8",
+            "turb": "5.1",
+            "zn": "0.0827"
+          }
+        },
+        {
+          "fecha": "02/07/2016",
+          "codigo_muestra": "24757",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "2.05",
+            "cond": "360.1",
+            "dqo": "27",
+            "p_total": "0.66",
+            "fe": "2.86",
+            "mn": "<0.05",
+            "no3": "2.8",
+            "od": "5.9",
+            "ph": "7.55",
+            "sst": "86",
+            "temp": "30.6",
+            "turb": "88",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "12/10/2016",
+          "codigo_muestra": "25204",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.76",
+            "cond": "427.6",
+            "dqo": "15",
+            "p_total": "0.92",
+            "fe": "2.59",
+            "mn": "0.0933",
+            "no3": "4.2",
+            "od": "5.4",
+            "ph": "7.18",
+            "sst": "60",
+            "temp": "33",
+            "turb": "57",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "06/05/2017",
+          "codigo_muestra": "26326",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.35",
+            "cond": "360",
+            "dqo": "29",
+            "p_total": "0.32",
+            "fe": "8.32",
+            "mn": "0.169",
+            "no3": "2.1",
+            "od": "4.4",
+            "ph": "7.07",
+            "sst": "220",
+            "temp": "21.6",
+            "turb": "210",
+            "zn": "0.204"
+          }
+        },
+        {
+          "fecha": "21/07/2017",
+          "codigo_muestra": "26469",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "14.6",
+            "cond": "216",
+            "dqo": "95",
+            "p_total": "2.2",
+            "fe": "10",
+            "mn": "0.171",
+            "no3": "1.8",
+            "od": "4.6",
+            "ph": "6.92",
+            "sst": "1330",
+            "temp": "25.5",
+            "turb": "980",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "20/09/2017",
+          "codigo_muestra": "26543",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.414",
+            "cond": "445",
+            "dqo": "19",
+            "p_total": "0.68",
+            "fe": "1.16",
+            "mn": "<0.05",
+            "no3": "3.5",
+            "od": "4.8",
+            "ph": "7.61",
+            "sst": "24",
+            "temp": "32.3",
+            "turb": "17",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "15/12/2019",
+          "codigo_muestra": "27779",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "383",
+            "dqo": "12",
+            "p_total": "0.28",
+            "od": "3.7",
+            "ph": "7.64",
+            "sst": "36",
+            "temp": "27.3"
+          }
+        },
+        {
+          "fecha": "18/02/2020",
+          "codigo_muestra": "27830",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "573",
+            "dqo": "29",
+            "p_total": "1.1",
+            "fe": "0.471",
+            "mn": "<0.2",
+            "no3": "4.8",
+            "od": "5.7",
+            "ph": "6.83",
+            "sst": "<5",
+            "temp": "30.8",
+            "turb": "2.28",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "09/10/2020",
+          "codigo_muestra": "28006",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.329",
+            "cond": "516",
+            "dqo": "10",
+            "p_total": "0.56",
+            "fe": "0.849",
+            "mn": "<0.2",
+            "no3": "2.94",
+            "od": "4.9",
+            "ph": "7.76",
+            "sst": "22",
+            "temp": "28.6",
+            "turb": "31",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "11/12/2020",
+          "codigo_muestra": "28170",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "417",
+            "dqo": "23",
+            "p_total": "0.47",
+            "no3": "1.65",
+            "od": "5.6",
+            "ph": "7.5",
+            "sst": "160",
+            "temp": "27.9",
+            "turb": "65"
+          }
+        },
+        {
+          "fecha": "02/11/2021",
+          "codigo_muestra": "28570",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "222",
+            "dqo": "165",
+            "p_total": "3.2",
+            "no3": "1.57",
+            "od": "4.6",
+            "ph": "7.18",
+            "sst": "6612",
+            "temp": "24.5",
+            "turb": "4200"
+          }
+        },
+        {
+          "fecha": "03/05/2022",
+          "codigo_muestra": "28814",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "360",
+            "dqo": "10",
+            "p_total": "0.46",
+            "no3": "0.96",
+            "od": "2.3",
+            "ph": "7.32",
+            "sst": "195",
+            "temp": "29.5",
+            "turb": "180"
+          }
+        },
+        {
+          "fecha": "17/07/2023",
+          "codigo_muestra": "29464",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "303",
+            "dqo": "46",
+            "p_total": "0.69",
+            "no3": "2.18",
+            "od": "6.2",
+            "ph": "7.6",
+            "sst": "474",
+            "temp": "30.6",
+            "turb": "270"
+          }
+        },
+        {
+          "fecha": "18/04/2024",
+          "codigo_muestra": "29784",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "542",
+            "dqo": "108",
+            "p_total": "2",
+            "no3": "4.273",
+            "od": "3.4",
+            "ph": "7.58",
+            "sst": "634",
+            "temp": "32.6",
+            "turb": "330"
+          }
+        },
+        {
+          "fecha": "18/06/2025",
+          "codigo_muestra": "30234",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "258",
+            "dqo": "<10",
+            "p_total": "0.67",
+            "no3": "1.33",
+            "od": "5.8",
+            "ph": "7.43",
+            "sst": "793",
+            "temp": "26.5",
+            "turb": "400"
+          }
+        },
+        {
+          "fecha": "17/09/2025",
+          "codigo_muestra": "30343",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "471",
+            "dqo": "19",
+            "p_total": "0.82",
+            "no3": "3.4",
+            "od": "6.4",
+            "ph": "6.91",
+            "sst": "30",
+            "temp": "30.5",
+            "turb": "14"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 181,
+      "id": "25027020",
+      "nombre": "RCA_MAGDALENA_MAG_EL BANCO_EL BANCO",
+      "codigo": "25027020",
+      "corriente": "MAGDALENA",
+      "cuenca": "Cesar",
+      "subzona": "Bajo Cesar",
+      "codigo_szh": "2805",
+      "id_zona": 68,
+      "departamento": "MAGDALENA",
+      "municipio": "EL BANCO",
+      "lat": 8.992527778,
+      "lon": -73.96944444,
+      "elevacion": 29,
+      "totalMuestrasCSV": 39,
+      "muestras": [
+        {
+          "fecha": "22/08/2011",
+          "codigo_muestra": "20620",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "155.1",
+            "dqo": "150",
+            "p_total": "0.75",
+            "no3": "5.6",
+            "od": "5.8",
+            "ph": "7.01",
+            "sst": "760",
+            "temp": "28.6",
+            "turb": "540"
+          }
+        },
+        {
+          "fecha": "11/11/2011",
+          "codigo_muestra": "20920",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "14.1",
+            "cond": "172.1",
+            "dqo": "110",
+            "p_total": "0.76",
+            "fe": "22.6",
+            "mn": "0.315",
+            "no3": "3.6",
+            "od": "6.3",
+            "ph": "7.71",
+            "sst": "730",
+            "temp": "28.5",
+            "turb": "650",
+            "zn": "0.17"
+          }
+        },
+        {
+          "fecha": "01/06/2012",
+          "codigo_muestra": "21580",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.2",
+            "cond": "171",
+            "dqo": "42",
+            "p_total": "0.56",
+            "fe": "7.17",
+            "mn": "0.133",
+            "no3": "0.53",
+            "od": "7.5",
+            "ph": "7.59",
+            "sst": "300",
+            "temp": "30.2",
+            "turb": "230",
+            "zn": "0.0555"
+          }
+        },
+        {
+          "fecha": "10/09/2012",
+          "codigo_muestra": "21741",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "160.1",
+            "dqo": "12",
+            "p_total": "0.36",
+            "no3": "0.72",
+            "od": "5.8",
+            "ph": "7.61",
+            "sst": "320",
+            "temp": "31.4",
+            "turb": "260"
+          }
+        },
+        {
+          "fecha": "01/12/2012",
+          "codigo_muestra": "22045",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "4.64",
+            "cond": "173.9",
+            "dqo": "31",
+            "p_total": "0.35",
+            "fe": "6.7",
+            "mn": "0.101",
+            "no3": "0.7",
+            "od": "5.1",
+            "ph": "6.53",
+            "sst": "280",
+            "temp": "29.4",
+            "turb": "260",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "11/07/2013",
+          "codigo_muestra": "22429",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "4.86",
+            "cond": "167.2",
+            "dqo": "25",
+            "p_total": "0.39",
+            "fe": "11.7",
+            "mn": "0.175",
+            "no3": "0.58",
+            "od": "6.2",
+            "ph": "6.69",
+            "sst": "240",
+            "temp": "30.6",
+            "turb": "110",
+            "zn": "0.089"
+          }
+        },
+        {
+          "fecha": "09/10/2013",
+          "codigo_muestra": "22593",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "7.56",
+            "cond": "141",
+            "dqo": "35",
+            "p_total": "0.92",
+            "fe": "12.1",
+            "mn": "0.185",
+            "no3": "0.6",
+            "od": "4.9",
+            "ph": "5.98",
+            "sst": "340",
+            "temp": "30.4",
+            "turb": "270",
+            "zn": "0.105"
+          }
+        },
+        {
+          "fecha": "08/09/2016",
+          "codigo_muestra": "25119",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "10.9",
+            "cond": "132.5",
+            "dqo": "15",
+            "p_total": "0.74",
+            "fe": "12.5",
+            "mn": "0.218",
+            "no3": "14",
+            "od": "4.7",
+            "ph": "7.51",
+            "sst": "460",
+            "temp": "31.3",
+            "turb": "200",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "24/10/2016",
+          "codigo_muestra": "25318",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "7.28",
+            "cond": "146.1",
+            "dqo": "42",
+            "fe": "8.83",
+            "mn": "0.246",
+            "no3": "0.69",
+            "od": "4.9",
+            "ph": "6.2",
+            "temp": "28.6",
+            "turb": "150",
+            "zn": "0.134"
+          }
+        },
+        {
+          "fecha": "12/07/2017",
+          "codigo_muestra": "26463",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.9",
+            "cond": "160",
+            "dqo": "21",
+            "p_total": "0.33",
+            "fe": "1.26",
+            "mn": "<0.05",
+            "no3": "14",
+            "od": "4.9",
+            "ph": "7.08",
+            "sst": "230",
+            "temp": "26.4",
+            "turb": "130",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "18/12/2017",
+          "codigo_muestra": "26742",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.64",
+            "cond": "159",
+            "dqo": "18",
+            "p_total": "0.13",
+            "fe": "2.26",
+            "mn": "<0.2",
+            "od": "6",
+            "ph": "7.17",
+            "sst": "50",
+            "temp": "29.8",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "15/04/2018",
+          "codigo_muestra": "26908",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "11.8",
+            "cond": "162",
+            "fe": "19.8",
+            "mn": "0.414",
+            "od": "6.6",
+            "ph": "7.2",
+            "temp": "29.4",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "02/09/2021",
+          "codigo_muestra": "28471",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.991",
+            "cond": "138",
+            "dqo": "31",
+            "p_total": "0.68",
+            "fe": "2.96",
+            "mn": "<0.2",
+            "no3": "0.49",
+            "od": "5.4",
+            "ph": "7.64",
+            "sst": "404",
+            "temp": "28.6",
+            "turb": "290",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "06/05/2022",
+          "codigo_muestra": "28828",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "4.08",
+            "cond": "186",
+            "dqo": "25",
+            "p_total": "0.44",
+            "fe": "8.28",
+            "mn": "<0.2",
+            "no3": "0.66",
+            "od": "4.7",
+            "ph": "7.4",
+            "sst": "334",
+            "temp": "30",
+            "turb": "250",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "18/07/2023",
+          "codigo_muestra": "29473",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.52",
+            "cond": "153",
+            "dqo": "32",
+            "p_total": "0.38",
+            "fe": "1.91",
+            "mn": "<0.2",
+            "no3": "0.314",
+            "od": "6",
+            "ph": "6.99",
+            "sst": "184",
+            "temp": "29.9",
+            "turb": "160",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "11/11/2024",
+          "codigo_muestra": "29993",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "4.75",
+            "cond": "196",
+            "dqo": "39",
+            "p_total": "0.22",
+            "fe": "8.98",
+            "mn": "0.25",
+            "no3": "0.535",
+            "od": "6.6",
+            "ph": "7.48",
+            "sst": "519",
+            "temp": "25.7",
+            "turb": "310",
+            "zn": "0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 187,
+      "id": "29037020",
+      "nombre": "RCA_MAGDALENA_BOL_CALAMAR_CALAMAR",
+      "codigo": "29037020",
+      "corriente": "MAGDALENA",
+      "cuenca": "Bajo Magdalena",
+      "subzona": "Canal del Dique (mi)",
+      "codigo_szh": "2905",
+      "id_zona": 71,
+      "departamento": "BOLIVAR",
+      "municipio": "CALAMAR",
+      "lat": 10.243275,
+      "lon": -74.915017,
+      "elevacion": 8,
+      "totalMuestrasCSV": 38,
+      "muestras": [
+        {
+          "fecha": "04/08/2010",
+          "codigo_muestra": "19049",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3.77",
+            "cond": "155.1",
+            "dqo": "20",
+            "p_total": "0.18",
+            "fe": "5.5",
+            "mn": "0.107",
+            "no3": "0.31",
+            "od": "5",
+            "ph": "7.46",
+            "sst": "120",
+            "temp": "29.8",
+            "turb": "96",
+            "zn": "0.0697"
+          }
+        },
+        {
+          "fecha": "22/10/2010",
+          "codigo_muestra": "19407",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "150.2",
+            "dqo": "150",
+            "p_total": "0.22",
+            "no3": "6.3",
+            "od": "7.1",
+            "ph": "6.43",
+            "sst": "88",
+            "temp": "28.4",
+            "turb": "59"
+          }
+        },
+        {
+          "fecha": "28/03/2011",
+          "codigo_muestra": "20076",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "185.4",
+            "dqo": "23",
+            "p_total": "0.7",
+            "no3": "1.1",
+            "od": "5.5",
+            "ph": "7.52",
+            "sst": "820",
+            "temp": "29.7",
+            "turb": "600",
+            "zn": "0.179"
+          }
+        },
+        {
+          "fecha": "10/04/2011",
+          "codigo_muestra": "20145",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "14.4",
+            "cond": "183",
+            "dqo": "36",
+            "p_total": "1.1",
+            "fe": "23.6",
+            "mn": "0.392",
+            "no3": "0.75",
+            "od": "5.4",
+            "ph": "7.34",
+            "sst": "650",
+            "temp": "29",
+            "turb": "480",
+            "zn": "0.161"
+          }
+        },
+        {
+          "fecha": "04/08/2012",
+          "codigo_muestra": "21700",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "145",
+            "dqo": "12",
+            "p_total": "0.22",
+            "no3": "0.41",
+            "od": "6",
+            "ph": "6.87",
+            "sst": "220",
+            "temp": "30.5",
+            "turb": "250"
+          }
+        },
+        {
+          "fecha": "21/09/2012",
+          "codigo_muestra": "21776",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "127.9",
+            "dqo": "17",
+            "p_total": "0.29",
+            "no3": "0.51",
+            "od": "6.3",
+            "ph": "6.67",
+            "sst": "230",
+            "temp": "30.8",
+            "turb": "180"
+          }
+        },
+        {
+          "fecha": "26/07/2013",
+          "codigo_muestra": "22453",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "6.91",
+            "cond": "153",
+            "dqo": "23",
+            "p_total": "0.2",
+            "fe": "16.2",
+            "mn": "0.227",
+            "no3": "0.6",
+            "ph": "7.38",
+            "sst": "340",
+            "temp": "31",
+            "turb": "260",
+            "zn": "0.084"
+          }
+        },
+        {
+          "fecha": "24/10/2013",
+          "codigo_muestra": "22711",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "6.64",
+            "cond": "139.8",
+            "dqo": "25",
+            "p_total": "0.67",
+            "fe": "9.29",
+            "mn": "0.181",
+            "no3": "0.75",
+            "od": "5",
+            "ph": "7.24",
+            "sst": "250",
+            "temp": "30",
+            "turb": "230",
+            "zn": "0.079"
+          }
+        },
+        {
+          "fecha": "19/10/2015",
+          "codigo_muestra": "24198",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "7.91",
+            "cond": "177",
+            "dqo": "17",
+            "p_total": "0.072",
+            "fe": "9.49",
+            "mn": "0.165",
+            "no3": "0.55",
+            "od": "5.5",
+            "ph": "7",
+            "sst": "270",
+            "temp": "25.5",
+            "turb": "150",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "07/11/2015",
+          "codigo_muestra": "24305",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "113.1",
+            "dqo": "21",
+            "p_total": "0.25",
+            "no3": "0.77",
+            "od": "5.6",
+            "ph": "7.19",
+            "sst": "200",
+            "temp": "29.6",
+            "turb": "240"
+          }
+        },
+        {
+          "fecha": "22/09/2016",
+          "codigo_muestra": "25153",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.06",
+            "cond": "113.3",
+            "dqo": "21",
+            "p_total": "0.4",
+            "fe": "6.7",
+            "mn": "0.111",
+            "no3": "0.53",
+            "od": "6.3",
+            "ph": "7.18",
+            "sst": "160",
+            "temp": "30.4",
+            "turb": "150",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "14/11/2016",
+          "codigo_muestra": "25391",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.4",
+            "cond": "122.7",
+            "dqo": "<10",
+            "p_total": "0.27",
+            "fe": "7.24",
+            "mn": "0.132",
+            "no3": "0.59",
+            "od": "4.7",
+            "ph": "7.04",
+            "sst": "190",
+            "temp": "29.6",
+            "turb": "170",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "02/05/2017",
+          "codigo_muestra": "26338",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "8.37",
+            "cond": "138",
+            "dqo": "21",
+            "p_total": "0.3",
+            "fe": "9.49",
+            "mn": "0.139",
+            "no3": "0.9",
+            "od": "4.5",
+            "ph": "7.47",
+            "sst": "180",
+            "temp": "33.6",
+            "turb": "150",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "10/09/2021",
+          "codigo_muestra": "28480",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.56",
+            "cond": "117",
+            "dqo": "<10",
+            "p_total": "0.25",
+            "fe": "3.45",
+            "mn": "<0.2",
+            "no3": "0.34",
+            "od": "5.7",
+            "ph": "7.43",
+            "sst": "119",
+            "temp": "29.2",
+            "turb": "130",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "20/05/2022",
+          "codigo_muestra": "28846",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.48",
+            "cond": "157",
+            "dqo": "21",
+            "p_total": "0.34",
+            "fe": "10.7",
+            "mn": "0.22",
+            "no3": "0.38",
+            "od": "3.9",
+            "ph": "7.32",
+            "sst": "255",
+            "temp": "30.9",
+            "turb": "240",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "26/07/2023",
+          "codigo_muestra": "29486",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.4",
+            "cond": "155",
+            "dqo": "29",
+            "p_total": "0.31",
+            "fe": "2.17",
+            "mn": "<0.2",
+            "no3": "0.354",
+            "od": "5",
+            "ph": "7.41",
+            "sst": "265",
+            "temp": "30.2",
+            "turb": "180",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 4,
+      "id": "13067020",
+      "nombre": "RCA_SINU_COR_MONTERIA_MONTERIA",
+      "codigo": "13067020",
+      "corriente": "SINÚ",
+      "cuenca": "Sinú",
+      "subzona": "Bajo Sinú",
+      "codigo_szh": "1303",
+      "id_zona": 3,
+      "departamento": "CORDOBA",
+      "municipio": "MONTERÍA",
+      "lat": 8.751611111,
+      "lon": -75.89241667,
+      "elevacion": 15,
+      "totalMuestrasCSV": 36,
+      "muestras": [
+        {
+          "fecha": "03/03/2011",
+          "codigo_muestra": "19895",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "123",
+            "dqo": "10",
+            "p_total": "0.13",
+            "no3": "0.18",
+            "od": "6",
+            "ph": "7.65",
+            "sst": "180",
+            "temp": "28.8",
+            "turb": "220"
+          }
+        },
+        {
+          "fecha": "22/06/2011",
+          "codigo_muestra": "20457",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "131.7",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "0.35",
+            "od": "5.1",
+            "ph": "7.34",
+            "sst": "130",
+            "temp": "28",
+            "turb": "62"
+          }
+        },
+        {
+          "fecha": "13/09/2011",
+          "codigo_muestra": "20707",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "126.5",
+            "dqo": "29",
+            "p_total": "0.24",
+            "no3": "0.51",
+            "od": "5.1",
+            "ph": "6.16",
+            "sst": "440",
+            "temp": "28",
+            "turb": "400"
+          }
+        },
+        {
+          "fecha": "28/03/2012",
+          "codigo_muestra": "21379",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "132",
+            "dqo": "<10",
+            "no3": "0.28",
+            "od": "6.4",
+            "ph": "6.64",
+            "sst": "100",
+            "temp": "29.4",
+            "turb": "87"
+          }
+        },
+        {
+          "fecha": "13/08/2012",
+          "codigo_muestra": "21718",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "114.6",
+            "dqo": "15",
+            "p_total": "0.089",
+            "no3": "0.17",
+            "od": "6",
+            "ph": "7.22",
+            "sst": "87",
+            "temp": "28",
+            "turb": "92"
+          }
+        },
+        {
+          "fecha": "14/07/2013",
+          "codigo_muestra": "22434",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "136.5",
+            "dqo": "<10",
+            "p_total": "0.096",
+            "no3": "0.39",
+            "od": "6.7",
+            "ph": "7.46",
+            "sst": "59",
+            "temp": "29.5",
+            "turb": "65"
+          }
+        },
+        {
+          "fecha": "16/10/2013",
+          "codigo_muestra": "22678",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "135.2",
+            "dqo": "22",
+            "p_total": "0.12",
+            "no3": "0.63",
+            "od": "7",
+            "ph": "7",
+            "sst": "200",
+            "temp": "27",
+            "turb": "180"
+          }
+        },
+        {
+          "fecha": "11/05/2015",
+          "codigo_muestra": "23864",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "129.1",
+            "dqo": "14",
+            "p_total": "0.067",
+            "no3": "0.31",
+            "od": "5.7",
+            "ph": "7.6",
+            "sst": "38",
+            "temp": "31",
+            "turb": "6.7"
+          }
+        },
+        {
+          "fecha": "27/07/2016",
+          "codigo_muestra": "24894",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "125",
+            "dqo": "24",
+            "p_total": "0.26",
+            "no3": "0.8",
+            "od": "6.1",
+            "ph": "7.68",
+            "sst": "140",
+            "temp": "28.6",
+            "turb": "170"
+          }
+        },
+        {
+          "fecha": "18/09/2016",
+          "codigo_muestra": "25125",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "119",
+            "dqo": "10",
+            "p_total": "0.069",
+            "no3": "0.38",
+            "od": "5.1",
+            "ph": "7.77",
+            "sst": "44",
+            "turb": "54"
+          }
+        },
+        {
+          "fecha": "22/08/2017",
+          "codigo_muestra": "26516",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "113",
+            "dqo": "23",
+            "p_total": "0.13",
+            "no3": "<0.1",
+            "od": "6.1",
+            "ph": "7.6",
+            "sst": "120",
+            "temp": "28",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "17/10/2017",
+          "codigo_muestra": "26608",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "120",
+            "dqo": "19",
+            "p_total": "0.17",
+            "no3": "17",
+            "od": "4.8",
+            "ph": "7.24",
+            "sst": "120",
+            "temp": "19.7"
+          }
+        },
+        {
+          "fecha": "03/09/2021",
+          "codigo_muestra": "28487",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.475",
+            "cond": "108",
+            "dqo": "<10",
+            "p_total": "0.14",
+            "fe": "2.834",
+            "mn": "<0.2",
+            "no3": "0.51",
+            "od": "6.5",
+            "ph": "7.36",
+            "sst": "96",
+            "temp": "28.6",
+            "turb": "130",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "11/06/2022",
+          "codigo_muestra": "28912",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3",
+            "cond": "116",
+            "dqo": "<10",
+            "p_total": "0.49",
+            "fe": "4.7",
+            "mn": "<0.2",
+            "no3": "0.43",
+            "od": "3.8",
+            "ph": "7.58",
+            "sst": "110",
+            "temp": "27.2",
+            "turb": "150",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "23/07/2023",
+          "codigo_muestra": "29479",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.03",
+            "cond": "127",
+            "dqo": "24",
+            "p_total": "0.1",
+            "fe": "1.49",
+            "mn": "<0.2",
+            "no3": "0.146",
+            "od": "6",
+            "ph": "7.39",
+            "sst": "66",
+            "temp": "27.7",
+            "turb": "85",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "18/09/2025",
+          "codigo_muestra": "30344",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "2.616",
+            "cond": "118",
+            "dqo": "<10",
+            "p_total": "0.15",
+            "fe": "4.172",
+            "mn": "<0.2",
+            "no3": "0.253",
+            "od": "5.7",
+            "ph": "6.84",
+            "sst": "164",
+            "temp": "28.3",
+            "turb": "180",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 95,
+      "id": "23057140",
+      "nombre": "RCA_LA MIEL_ANT_SONSON_SAN MIGUEL",
+      "codigo": "23057140",
+      "corriente": "LA MIEL",
+      "cuenca": "Medio Magdalena",
+      "subzona": "Río La Miel (Samaná)",
+      "codigo_szh": "2305",
+      "id_zona": 35,
+      "departamento": "ANTIOQUIA",
+      "municipio": "SONSÓN",
+      "lat": 5.731027778,
+      "lon": -74.72583333,
+      "elevacion": 176,
+      "totalMuestrasCSV": 36,
+      "muestras": [
+        {
+          "fecha": "10/12/2011",
+          "codigo_muestra": "21089",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "43.8",
+            "dqo": "<10",
+            "p_total": "0.24",
+            "od": "7.7",
+            "ph": "7.11",
+            "sst": "140",
+            "temp": "25.6",
+            "turb": "49"
+          }
+        },
+        {
+          "fecha": "27/11/2015",
+          "codigo_muestra": "24378",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "62.56",
+            "dqo": "20",
+            "p_total": "0.11",
+            "od": "9.2",
+            "ph": "7.43",
+            "sst": "42",
+            "temp": "24.9",
+            "turb": "30"
+          }
+        },
+        {
+          "fecha": "21/05/2016",
+          "codigo_muestra": "24569",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "62.61",
+            "dqo": "14",
+            "p_total": "0.099",
+            "od": "5.8",
+            "ph": "7.27",
+            "sst": "15",
+            "temp": "26.6",
+            "turb": "3.8"
+          }
+        },
+        {
+          "fecha": "24/08/2016",
+          "codigo_muestra": "25081",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "85.6",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "od": "6",
+            "ph": "7.65",
+            "sst": "27",
+            "temp": "26.6",
+            "turb": "4"
+          }
+        },
+        {
+          "fecha": "24/11/2016",
+          "codigo_muestra": "25421",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "56.97",
+            "dqo": "<10",
+            "p_total": "0.085",
+            "od": "7.3",
+            "ph": "7.27",
+            "sst": "<4.5",
+            "temp": "24.5",
+            "turb": "7.4"
+          }
+        },
+        {
+          "fecha": "15/06/2017",
+          "codigo_muestra": "26422",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "50.51",
+            "dqo": "<10",
+            "p_total": "0.068",
+            "od": "12.9",
+            "ph": "7.18",
+            "sst": "28",
+            "temp": "24.4",
+            "turb": "13"
+          }
+        },
+        {
+          "fecha": "17/08/2017",
+          "codigo_muestra": "26502",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "58.6",
+            "dqo": "35",
+            "p_total": "0.31",
+            "od": "7.3",
+            "ph": "7.26",
+            "sst": "150",
+            "temp": "26.8",
+            "turb": "160"
+          }
+        },
+        {
+          "fecha": "17/12/2017",
+          "codigo_muestra": "26721",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "57",
+            "dqo": "<10",
+            "p_total": "0.073",
+            "od": "7.4",
+            "ph": "6.92",
+            "sst": "13"
+          }
+        },
+        {
+          "fecha": "12/03/2019",
+          "codigo_muestra": "31057",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "69",
+            "dqo": "15",
+            "p_total": "0.11",
+            "od": "7.3",
+            "ph": "7.4",
+            "sst": "16",
+            "temp": "25.2",
+            "turb": "30"
+          }
+        },
+        {
+          "fecha": "08/03/2020",
+          "codigo_muestra": "27881",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "55.2",
+            "dqo": "24",
+            "p_total": "0.25",
+            "od": "7.3",
+            "ph": "7.3",
+            "sst": "130",
+            "temp": "26.4",
+            "turb": "125"
+          }
+        },
+        {
+          "fecha": "20/07/2021",
+          "codigo_muestra": "28395",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "60.9",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "0.16",
+            "od": "5.2",
+            "ph": "7.57",
+            "sst": "18",
+            "temp": "28.6",
+            "turb": "13"
+          }
+        },
+        {
+          "fecha": "27/04/2022",
+          "codigo_muestra": "28793",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "34.8",
+            "dqo": "22",
+            "p_total": "0.22",
+            "no3": "0.15",
+            "od": "5.5",
+            "ph": "6.54",
+            "sst": "386",
+            "temp": "24.9",
+            "turb": "130"
+          }
+        },
+        {
+          "fecha": "20/04/2024",
+          "codigo_muestra": "29788",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "60",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "0.248",
+            "od": "4.6",
+            "ph": "7.25",
+            "sst": "19",
+            "temp": "28.2",
+            "turb": "23"
+          }
+        },
+        {
+          "fecha": "21/06/2024",
+          "codigo_muestra": "29894",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "37.5",
+            "dqo": "11",
+            "p_total": "0.21",
+            "no3": "0.234",
+            "od": "7",
+            "ph": "7.4",
+            "sst": "102",
+            "temp": "25",
+            "turb": "110"
+          }
+        },
+        {
+          "fecha": "05/07/2025",
+          "codigo_muestra": "30271",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "69",
+            "dqo": "<10",
+            "p_total": "0.057",
+            "no3": "0.107",
+            "od": "5.7",
+            "ph": "7.36",
+            "sst": "33",
+            "temp": "26.8",
+            "turb": "7.1"
+          }
+        },
+        {
+          "fecha": "30/08/2025",
+          "codigo_muestra": "30324",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "53",
+            "dqo": "18",
+            "p_total": "0.11",
+            "no3": "0.188",
+            "od": "6.5",
+            "ph": "7.17",
+            "sst": "44",
+            "temp": "25.2",
+            "turb": "40"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 166,
+      "id": "26167070",
+      "nombre": "RCA_CAUCA_CAL_NEIRA_IRRA",
+      "codigo": "26167070",
+      "corriente": "CAUCA",
+      "cuenca": "Cauca",
+      "subzona": "Río Tapias y otros Directos al Cauca",
+      "codigo_szh": "2616",
+      "id_zona": 56,
+      "departamento": "CALDAS",
+      "municipio": "NEIRA",
+      "lat": 5.268305556,
+      "lon": -75.66419444,
+      "elevacion": 766,
+      "totalMuestrasCSV": 36,
+      "muestras": [
+        {
+          "fecha": "28/11/2012",
+          "codigo_muestra": "22031",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "7.9",
+            "cond": "174.8",
+            "dqo": "23",
+            "p_total": "0.22",
+            "fe": "10.6",
+            "mn": "0.305",
+            "no3": "1.1",
+            "od": "6.4",
+            "ph": "6.98",
+            "temp": "28",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "05/07/2013",
+          "codigo_muestra": "22418",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3.37",
+            "cond": "182.2",
+            "dqo": "<10",
+            "p_total": "0.29",
+            "fe": "5.37",
+            "mn": "0.117",
+            "no3": "1.2",
+            "od": "6.6",
+            "ph": "6.3",
+            "sst": "53",
+            "temp": "23.4",
+            "turb": "61",
+            "zn": "<0.03"
+          }
+        },
+        {
+          "fecha": "22/09/2013",
+          "codigo_muestra": "22535",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.7",
+            "cond": "159.5",
+            "dqo": "12",
+            "p_total": "0.28",
+            "fe": "8.96",
+            "mn": "0.309",
+            "no3": "1.4",
+            "od": "6",
+            "ph": "7.87",
+            "sst": "100",
+            "temp": "27.3",
+            "turb": "110",
+            "zn": "0.101"
+          }
+        },
+        {
+          "fecha": "16/11/2013",
+          "codigo_muestra": "22859",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3.92",
+            "cond": "178.16",
+            "dqo": "28",
+            "p_total": "0.18",
+            "fe": "3.99",
+            "mn": "0.112",
+            "od": "3.3",
+            "ph": "7.71",
+            "sst": "85",
+            "temp": "27.3",
+            "turb": "89",
+            "zn": "<0.03"
+          }
+        },
+        {
+          "fecha": "25/07/2014",
+          "codigo_muestra": "23363",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.994",
+            "cond": "184.8",
+            "dqo": "19",
+            "p_total": "0.26",
+            "fe": "2.08",
+            "mn": "0.391",
+            "no3": "1.5",
+            "od": "6.4",
+            "ph": "7.79",
+            "sst": "76",
+            "temp": "28.7",
+            "turb": "47",
+            "zn": "0.051"
+          }
+        },
+        {
+          "fecha": "20/06/2015",
+          "codigo_muestra": "23943",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "2.18",
+            "cond": "198",
+            "dqo": "13",
+            "p_total": "0.24",
+            "fe": "3.12",
+            "mn": "0.114",
+            "no3": "1.4",
+            "od": "5.9",
+            "ph": "6.67",
+            "sst": "38",
+            "temp": "29",
+            "turb": "17",
+            "zn": "0.106"
+          }
+        },
+        {
+          "fecha": "20/09/2015",
+          "codigo_muestra": "24155",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "7.37",
+            "cond": "204.7",
+            "dqo": "24",
+            "p_total": "0.49",
+            "fe": "9.14",
+            "mn": "0.246",
+            "no3": "2.1",
+            "od": "6.4",
+            "ph": "7.65",
+            "sst": "140",
+            "temp": "25.7",
+            "turb": "130",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "07/06/2016",
+          "codigo_muestra": "24648",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "10.2",
+            "cond": "171.7",
+            "dqo": "34",
+            "p_total": "0.38",
+            "fe": "8.97",
+            "mn": "0.275",
+            "no3": "1.3",
+            "od": "5.8",
+            "ph": "7.7",
+            "sst": "140",
+            "temp": "15.4",
+            "turb": "140",
+            "zn": "0.231"
+          }
+        },
+        {
+          "fecha": "24/08/2016",
+          "codigo_muestra": "24997",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "0.144",
+            "dqo": "20",
+            "p_total": "0.36",
+            "no3": "1.6",
+            "od": "6",
+            "ph": "7.76",
+            "sst": "32",
+            "temp": "29",
+            "turb": "29"
+          }
+        },
+        {
+          "fecha": "05/04/2017",
+          "codigo_muestra": "26271",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "10.5",
+            "cond": "138.4",
+            "dqo": "33",
+            "p_total": "0.32",
+            "fe": "7.52",
+            "mn": "0.187",
+            "no3": "1",
+            "od": "6",
+            "ph": "7.38",
+            "sst": "240",
+            "temp": "18.9",
+            "turb": "170",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "29/10/2017",
+          "codigo_muestra": "26666",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "15.4",
+            "cond": "149",
+            "dqo": "27",
+            "p_total": "0.78",
+            "fe": "17.5",
+            "mn": "0.38",
+            "no3": "1.3",
+            "ph": "7.28",
+            "sst": "390",
+            "temp": "24.3",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "22/10/2021",
+          "codigo_muestra": "28547",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "5.58",
+            "cond": "155",
+            "dqo": "12",
+            "p_total": "0.28",
+            "fe": "8.29",
+            "mn": "<0.2",
+            "no3": "1.16",
+            "od": "6.4",
+            "ph": "7.6",
+            "sst": "249",
+            "temp": "25.1",
+            "turb": "310",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "14/07/2022",
+          "codigo_muestra": "28973",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "158",
+            "dqo": "28",
+            "p_total": "0.25",
+            "no3": "1.19",
+            "od": "7.1",
+            "ph": "6.08",
+            "sst": "280",
+            "temp": "25.1",
+            "turb": "210"
+          }
+        },
+        {
+          "fecha": "25/06/2023",
+          "codigo_muestra": "29436",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "3.16",
+            "cond": "153",
+            "dqo": "33",
+            "p_total": "0.29",
+            "fe": "3.65",
+            "mn": "0.319",
+            "no3": "0.459",
+            "od": "6.7",
+            "ph": "7.38",
+            "sst": "265",
+            "temp": "25.7",
+            "turb": "290",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "24/06/2025",
+          "codigo_muestra": "30264",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "146",
+            "dqo": "14",
+            "p_total": "0.41",
+            "no3": "0.931",
+            "od": "5.9",
+            "ph": "7.55",
+            "sst": "612",
+            "temp": "25",
+            "turb": "280"
+          }
+        },
+        {
+          "fecha": "11/09/2025",
+          "codigo_muestra": "30336",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "164",
+            "dqo": "<10",
+            "p_total": "0.2",
+            "no3": "1.2",
+            "od": "4.9",
+            "ph": "7.42",
+            "sst": "87",
+            "temp": "26.2",
+            "turb": "55"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 159,
+      "id": "26137110",
+      "nombre": "RCA_OTUN_RIS_PEREIRA_BANANERA LA 6-909",
+      "codigo": "26137110",
+      "corriente": "OTÚN",
+      "cuenca": "Cauca",
+      "subzona": "Río Otún y otros Directos al Cauca",
+      "codigo_szh": "2613",
+      "id_zona": 54,
+      "departamento": "RISARALDA",
+      "municipio": "PEREIRA",
+      "lat": 4.773388889,
+      "lon": -75.63305556,
+      "elevacion": 1589,
+      "totalMuestrasCSV": 35,
+      "muestras": [
+        {
+          "fecha": "08/11/2010",
+          "codigo_muestra": "19472",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "88.2",
+            "dqo": "14",
+            "p_total": "0.059",
+            "no3": "0.34",
+            "od": "7.8",
+            "ph": "6.77",
+            "sst": "60",
+            "temp": "17.5",
+            "turb": "5.6"
+          }
+        },
+        {
+          "fecha": "03/03/2011",
+          "codigo_muestra": "19901",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.949",
+            "cond": "84.7",
+            "dqo": "<10",
+            "p_total": "0.057",
+            "fe": "0.812",
+            "mn": "0.0595",
+            "no3": "0.13",
+            "od": "8.2",
+            "ph": "7.31",
+            "sst": "15",
+            "temp": "17.3",
+            "turb": "7.9",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "13/06/2011",
+          "codigo_muestra": "20422",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "137.7",
+            "dqo": "<10",
+            "p_total": "<0.05",
+            "no3": "0.25",
+            "od": "7.9",
+            "ph": "6.35",
+            "sst": "<4.5",
+            "temp": "21.8",
+            "turb": "3"
+          }
+        },
+        {
+          "fecha": "10/07/2012",
+          "codigo_muestra": "21665",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.284",
+            "cond": "161.9",
+            "dqo": "<10",
+            "p_total": "0.062",
+            "fe": "0.426",
+            "mn": "<0.04",
+            "no3": "0.11",
+            "od": "7.8",
+            "ph": "7.83",
+            "sst": "<4.5",
+            "temp": "19",
+            "turb": "3.3",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "29/05/2013",
+          "codigo_muestra": "22326",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.5",
+            "cond": "123.6",
+            "dqo": "<10",
+            "p_total": "0.12",
+            "fe": "0.492",
+            "mn": "<0.05",
+            "no3": "0.3",
+            "od": "6.6",
+            "ph": "7.76",
+            "sst": "<4.5",
+            "temp": "19.9",
+            "turb": "4.5",
+            "zn": "<0.03"
+          }
+        },
+        {
+          "fecha": "13/09/2013",
+          "codigo_muestra": "22514",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.5",
+            "cond": "190.9",
+            "dqo": "<10",
+            "p_total": "0.32",
+            "fe": "0.534",
+            "mn": "<0.05",
+            "no3": "0.27",
+            "od": "7",
+            "ph": "8.02",
+            "sst": "<4.5",
+            "temp": "18.5",
+            "turb": "5.3",
+            "zn": "0.043"
+          }
+        },
+        {
+          "fecha": "07/11/2013",
+          "codigo_muestra": "22799",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.5",
+            "cond": "92.4",
+            "dqo": "11",
+            "p_total": "0.097",
+            "fe": "0.53",
+            "mn": "<0.05",
+            "no3": "29",
+            "od": "7.4",
+            "ph": "7.53",
+            "sst": "4.5",
+            "temp": "15.8",
+            "turb": "5.3",
+            "zn": "<0.03"
+          }
+        },
+        {
+          "fecha": "04/09/2016",
+          "codigo_muestra": "25098",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.289",
+            "cond": "234",
+            "dqo": "<10",
+            "p_total": "0.062",
+            "mn": "0.0518",
+            "no3": "0.2",
+            "od": "6.9",
+            "ph": "7.99",
+            "sst": "<4.5",
+            "temp": "20.6",
+            "turb": "230"
+          }
+        },
+        {
+          "fecha": "09/10/2016",
+          "codigo_muestra": "25188",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.837",
+            "cond": "102.5",
+            "dqo": "<10",
+            "p_total": "0.099",
+            "fe": "0.698",
+            "mn": "<0.05",
+            "no3": "0.75",
+            "od": "7.2",
+            "ph": "7.85",
+            "sst": "8",
+            "temp": "18.9",
+            "turb": "8.1",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "26/08/2021",
+          "codigo_muestra": "28465",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "126",
+            "dqo": "<10",
+            "p_total": "0.051",
+            "fe": "0.22",
+            "mn": "<0.2",
+            "no3": "0.19",
+            "od": "6.3",
+            "ph": "7.62",
+            "sst": "<5",
+            "temp": "16.8",
+            "turb": "3.4",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "13/10/2021",
+          "codigo_muestra": "28546",
+          "proyecto": "Ideam",
+          "valores": {
+            "ph": "7.36"
+          }
+        },
+        {
+          "fecha": "15/10/2021",
+          "codigo_muestra": "28546",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "197",
+            "dqo": "<10",
+            "p_total": "0.054",
+            "fe": "0.209",
+            "mn": "<0.2",
+            "no3": "0.33",
+            "od": "6.9",
+            "sst": "<5",
+            "temp": "20",
+            "turb": "4.3",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "13/06/2022",
+          "codigo_muestra": "28913",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "94.4",
+            "dqo": "20",
+            "p_total": "0.69",
+            "no3": "0.41",
+            "od": "8.2",
+            "ph": "7.74",
+            "sst": "54",
+            "temp": "17.4",
+            "turb": "56"
+          }
+        },
+        {
+          "fecha": "20/07/2023",
+          "codigo_muestra": "29466",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "163",
+            "dqo": "<10",
+            "p_total": "0.076",
+            "fe": "0.548",
+            "mn": "<0.2",
+            "no3": "0.232",
+            "od": "6.8",
+            "ph": "8.03",
+            "sst": "<5",
+            "temp": "22.4",
+            "turb": "4.1",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "13/06/2025",
+          "codigo_muestra": "30220",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.446",
+            "cond": "77",
+            "dqo": "12",
+            "p_total": "0.19",
+            "fe": "0.526",
+            "mn": "<0.2",
+            "no3": "0.262",
+            "od": "6.9",
+            "ph": "7.37",
+            "sst": "16",
+            "temp": "16.5",
+            "turb": "13",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "10/09/2025",
+          "codigo_muestra": "30334",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.202",
+            "cond": "168",
+            "dqo": "12",
+            "p_total": "0.099",
+            "fe": "0.202",
+            "mn": "<0.2",
+            "no3": "0.198",
+            "od": "7.6",
+            "ph": "7.9",
+            "sst": "<5",
+            "temp": "18",
+            "turb": "2.8",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 194,
+      "id": "31097020",
+      "nombre": "RCA_INIRIDA_GUAI_INIRIDA_PTO.INIRIDA",
+      "codigo": "31097020",
+      "corriente": "INÍRIDA",
+      "cuenca": "Inírida",
+      "subzona": "Río Inírida (mi), hasta bocas Caño Bocón, y río Las Viñas",
+      "codigo_szh": "3108",
+      "id_zona": 73,
+      "departamento": "GUAINÍA",
+      "municipio": "INÍRIDA",
+      "lat": 3.867666667,
+      "lon": -67.931694444,
+      "elevacion": 81,
+      "totalMuestrasCSV": 35,
+      "muestras": [
+        {
+          "fecha": "28/11/2011",
+          "codigo_muestra": "21007",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.828",
+            "cond": "18.2",
+            "dqo": "26",
+            "p_total": "0.057",
+            "fe": "0.854",
+            "mn": "<0.04",
+            "od": "5.9",
+            "ph": "5.23",
+            "sst": "7.1",
+            "temp": "28.6",
+            "turb": "17",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "11/08/2012",
+          "codigo_muestra": "21717",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.459",
+            "cond": "9.1",
+            "dqo": "13",
+            "p_total": "<0.05",
+            "fe": "0.615",
+            "mn": "0.0448",
+            "od": "3.8",
+            "ph": "4.97",
+            "sst": "8",
+            "temp": "25.9",
+            "turb": "7.8",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "30/11/2012",
+          "codigo_muestra": "22042",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.472",
+            "cond": "12.05",
+            "dqo": "18",
+            "p_total": "<0.05",
+            "fe": "0.624",
+            "mn": "<0.04",
+            "od": "6",
+            "ph": "5.76",
+            "sst": "6",
+            "temp": "30.2",
+            "turb": "11",
+            "zn": "<0.04"
+          }
+        },
+        {
+          "fecha": "05/07/2013",
+          "codigo_muestra": "22427",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.5",
+            "cond": "15.15",
+            "dqo": "19",
+            "p_total": "<0.05",
+            "fe": "0.849",
+            "mn": "<0.05",
+            "od": "5.5",
+            "ph": "5.5",
+            "sst": "<4.5",
+            "temp": "26.2",
+            "turb": "6.4",
+            "zn": "<0.03"
+          }
+        },
+        {
+          "fecha": "18/09/2013",
+          "codigo_muestra": "22527",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "13.34",
+            "dqo": "17",
+            "p_total": "<0.05",
+            "od": "3.8",
+            "ph": "4.73",
+            "sst": "<4.5",
+            "temp": "25",
+            "turb": "9.1"
+          }
+        },
+        {
+          "fecha": "31/07/2014",
+          "codigo_muestra": "23409",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.5",
+            "cond": "14.8",
+            "dqo": "24",
+            "p_total": "0.05",
+            "fe": "0.766",
+            "mn": "<0.06",
+            "od": "3.5",
+            "ph": "6.24",
+            "sst": "<4.5",
+            "temp": "27.2",
+            "turb": "2.6",
+            "zn": "0.039"
+          }
+        },
+        {
+          "fecha": "22/10/2015",
+          "codigo_muestra": "24247",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.489",
+            "cond": "18.25",
+            "dqo": "19",
+            "p_total": "<0.05",
+            "fe": "0.552",
+            "mn": "<0.05",
+            "od": "4.1",
+            "ph": "4.82",
+            "sst": "14",
+            "temp": "25.2",
+            "turb": "5.3",
+            "zn": "<0.1"
+          }
+        },
+        {
+          "fecha": "02/06/2016",
+          "codigo_muestra": "24644",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "1.31",
+            "cond": "12.5",
+            "dqo": "28",
+            "p_total": "0.056",
+            "fe": "23.7",
+            "mn": "0.196",
+            "od": "5.5",
+            "ph": "5.76",
+            "sst": "7.5",
+            "temp": "27",
+            "turb": "11",
+            "zn": "0.299"
+          }
+        },
+        {
+          "fecha": "28/11/2016",
+          "codigo_muestra": "25433",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.639",
+            "cond": "19.86",
+            "dqo": "<10",
+            "p_total": "0.068",
+            "fe": "0.409",
+            "mn": "<0.05",
+            "od": "4.8",
+            "ph": "6.85",
+            "sst": "<4.5",
+            "temp": "27.4",
+            "turb": "5.8",
+            "zn": "0.104"
+          }
+        },
+        {
+          "fecha": "12/06/2017",
+          "codigo_muestra": "26417",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "13.98",
+            "dqo": "16",
+            "p_total": "<0.05",
+            "od": "5.8",
+            "ph": "6.39",
+            "sst": "7.2",
+            "temp": "27",
+            "turb": "13"
+          }
+        },
+        {
+          "fecha": "15/10/2017",
+          "codigo_muestra": "26662",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.369",
+            "cond": "9.8",
+            "dqo": "28",
+            "p_total": "<0.05",
+            "fe": "0.568",
+            "mn": "<0.2",
+            "od": "5.9",
+            "ph": "5.36",
+            "sst": "7.6",
+            "temp": "28.8",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "12/04/2018",
+          "codigo_muestra": "26913",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "0.583",
+            "cond": "11",
+            "fe": "0.707",
+            "mn": "<0.2",
+            "od": "5.1",
+            "ph": "5.41",
+            "temp": "27.4",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "17/08/2021",
+          "codigo_muestra": "28446",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "10.5",
+            "dqo": "19",
+            "p_total": "<0.05",
+            "fe": "0.289",
+            "mn": "<0.2",
+            "no3": "<0.1",
+            "od": "2.9",
+            "ph": "4.69",
+            "sst": "<5",
+            "temp": "27.6",
+            "turb": "4.2",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "15/06/2022",
+          "codigo_muestra": "28925",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "12.2",
+            "dqo": "21",
+            "p_total": "0.68",
+            "fe": "0.43",
+            "mn": "<0.2",
+            "no3": "0.36",
+            "od": "3.3",
+            "ph": "5.02",
+            "sst": "<5",
+            "temp": "20.3",
+            "turb": "7.1",
+            "zn": "<0.2"
+          }
+        },
+        {
+          "fecha": "08/09/2023",
+          "codigo_muestra": "29581",
+          "proyecto": "Ideam",
+          "valores": {
+            "cond": "9.5",
+            "od": "6.3",
+            "ph": "5.16",
+            "temp": "28.8"
+          }
+        },
+        {
+          "fecha": "16/06/2025",
+          "codigo_muestra": "30237",
+          "proyecto": "Ideam",
+          "valores": {
+            "al": "<0.2",
+            "cond": "12",
+            "dqo": "34",
+            "p_total": "<0.05",
+            "fe": "0.494",
+            "mn": "<0.2",
+            "no3": "0.307",
+            "od": "3.9",
+            "ph": "4.72",
+            "sst": "<5",
+            "temp": "31",
+            "turb": "6.6",
+            "zn": "<0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 42,
+      "id": "21087080",
+      "nombre": "RCA_YAGUARA_HUI_YAGUARA_HDA.VENECIA",
+      "codigo": "21087080",
+      "corriente": "YAGUARA",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Río Yaguará y río Íquira",
+      "codigo_szh": "2108",
+      "id_zona": 17,
+      "departamento": "HUILA",
+      "municipio": "YAGUARÁ",
+      "lat": 2.64,
+      "lon": -75.54,
+      "elevacion": 575,
+      "totalMuestrasCSV": 82,
+      "muestras": [
+        {
+          "fecha": "14/08/2021",
+          "codigo_muestra": "28441",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "125",
+            "dqo": "<10",
+            "p_total": "0.16",
+            "no3": "0.33",
+            "od": "6.9",
+            "ph": "9.67",
+            "sst": "34",
+            "temp": "25.8",
+            "turb": "25"
+          }
+        },
+        {
+          "fecha": "01/05/2022",
+          "codigo_muestra": "28803",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "131",
+            "dqo": "<10",
+            "p_total": "0.15",
+            "no3": "0.71",
+            "od": "7.7",
+            "ph": "8.06",
+            "sst": "31",
+            "temp": "22.8",
+            "turb": "27"
+          }
+        },
+        {
+          "fecha": "01/09/2022",
+          "codigo_muestra": "28984",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "112",
+            "dqo": "24",
+            "p_total": "0.13",
+            "no3": "0.22",
+            "od": "5.5",
+            "ph": "8.28",
+            "sst": "7",
+            "temp": "28.1",
+            "turb": "4.2"
+          }
+        },
+        {
+          "fecha": "16/10/2022",
+          "codigo_muestra": "29110",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "128",
+            "dqo": "26",
+            "p_total": "0.48",
+            "no3": "0.64",
+            "od": "6.9",
+            "ph": "8.04",
+            "sst": "144",
+            "temp": "25.6",
+            "turb": "150"
+          }
+        },
+        {
+          "fecha": "16/11/2022",
+          "codigo_muestra": "29176",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "102",
+            "dqo": "15",
+            "p_total": "0.17",
+            "no3": "0.33",
+            "od": "6",
+            "ph": "7.98",
+            "sst": "99",
+            "temp": "24",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "21/07/2023",
+          "codigo_muestra": "29467",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "147",
+            "dqo": "<10",
+            "p_total": "0.1",
+            "no3": "0.255",
+            "od": "5.4",
+            "ph": "8.29",
+            "sst": "8",
+            "temp": "24.5",
+            "turb": "10"
+          }
+        },
+        {
+          "fecha": "23/09/2023",
+          "codigo_muestra": "29539",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "181",
+            "dqo": "24",
+            "p_total": "0.092",
+            "no3": "0.178",
+            "od": "6.5",
+            "ph": "8",
+            "sst": "10",
+            "temp": "23.5",
+            "turb": "11"
+          }
+        },
+        {
+          "fecha": "08/11/2023",
+          "codigo_muestra": "29645",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "110",
+            "dqo": "13",
+            "p_total": "0.16",
+            "no3": "0.272",
+            "od": "6.1",
+            "ph": "8.04",
+            "sst": "43",
+            "temp": "24.3",
+            "turb": "45"
+          }
+        },
+        {
+          "fecha": "12/03/2024",
+          "codigo_muestra": "29760",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "152",
+            "dqo": "14",
+            "p_total": "0.11",
+            "no3": "0.175",
+            "od": "6.5",
+            "ph": "7.85",
+            "sst": "25",
+            "temp": "27.3",
+            "turb": "28"
+          }
+        },
+        {
+          "fecha": "09/05/2024",
+          "codigo_muestra": "29803",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "109",
+            "dqo": "28",
+            "p_total": "0.28",
+            "no3": "1.194",
+            "od": "7.3",
+            "ph": "7.83",
+            "sst": "387",
+            "temp": "26.3",
+            "turb": "450"
+          }
+        },
+        {
+          "fecha": "02/10/2024",
+          "codigo_muestra": "29952",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "149.9",
+            "dqo": "14",
+            "p_total": "0.24",
+            "no3": "0.43",
+            "od": "6.3",
+            "ph": "8.03",
+            "sst": "112",
+            "temp": "26.6",
+            "turb": "40"
+          }
+        },
+        {
+          "fecha": "15/11/2024",
+          "codigo_muestra": "30036",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "126",
+            "dqo": "10",
+            "p_total": "0.16",
+            "no3": "0.737",
+            "od": "6.4",
+            "ph": "7.55",
+            "sst": "59",
+            "temp": "22.1",
+            "turb": "75"
+          }
+        },
+        {
+          "fecha": "16/06/2025",
+          "codigo_muestra": "30219",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "128",
+            "dqo": "16",
+            "p_total": "0.19",
+            "no3": "0.577",
+            "od": "6.6",
+            "ph": "7.83",
+            "sst": "47",
+            "temp": "23",
+            "turb": "40"
+          }
+        },
+        {
+          "fecha": "09/09/2025",
+          "codigo_muestra": "30329",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "123",
+            "dqo": "<10",
+            "p_total": "0.11",
+            "no3": "0.199",
+            "od": "5.9",
+            "ph": "8.13",
+            "sst": "8",
+            "temp": "26.5",
+            "turb": "6.1"
+          }
+        },
+        {
+          "fecha": "01/10/2025",
+          "codigo_muestra": "30394",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "146",
+            "dqo": "14",
+            "p_total": "0.1",
+            "no3": "0.149",
+            "od": "6.5",
+            "ph": "7.79",
+            "sst": "9",
+            "temp": "23.5",
+            "turb": "8"
+          }
+        },
+        {
+          "fecha": "06/11/2025",
+          "codigo_muestra": "30469",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "128",
+            "dqo": "28",
+            "p_total": "0.219",
+            "no3": "0.409",
+            "od": "6",
+            "ph": "7.92",
+            "sst": "92",
+            "temp": "23.3",
+            "turb": "120"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 46,
+      "id": "21107020",
+      "nombre": "RCA_NEIVA_HUI_CAMPOALEGRE_PTE.MULAS",
+      "codigo": "21107020",
+      "corriente": "NEIVA",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Río Neiva",
+      "codigo_szh": "2110",
+      "id_zona": 19,
+      "departamento": "HUILA",
+      "municipio": "CAMPOALEGRE",
+      "lat": 2.566388889,
+      "lon": -75.37427778,
+      "elevacion": 740,
+      "totalMuestrasCSV": 78,
+      "muestras": [
+        {
+          "fecha": "20/02/2020",
+          "codigo_muestra": "27829",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "139",
+            "dqo": "18",
+            "p_total": "0.08",
+            "od": "8.5",
+            "ph": "8.48",
+            "sst": "9",
+            "temp": "23.4",
+            "turb": "3.06"
+          }
+        },
+        {
+          "fecha": "23/09/2020",
+          "codigo_muestra": "27994",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "124.4",
+            "dqo": "<10",
+            "p_total": "0.12",
+            "no3": "0.12",
+            "od": "7.8",
+            "ph": "8.4",
+            "sst": "18",
+            "temp": "21.2",
+            "turb": "4.5"
+          }
+        },
+        {
+          "fecha": "11/11/2020",
+          "codigo_muestra": "28099",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "151.2",
+            "dqo": "13",
+            "p_total": "0.084",
+            "no3": "<0.1",
+            "od": "7.9",
+            "ph": "8.22",
+            "sst": "28",
+            "temp": "24.8",
+            "turb": "18"
+          }
+        },
+        {
+          "fecha": "03/10/2021",
+          "codigo_muestra": "28504",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "136",
+            "dqo": "15",
+            "p_total": "0.12",
+            "no3": "0.13",
+            "od": "6.8",
+            "ph": "8.06",
+            "sst": "23",
+            "temp": "24.9",
+            "turb": "11"
+          }
+        },
+        {
+          "fecha": "02/05/2022",
+          "codigo_muestra": "28805",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "147",
+            "dqo": "<10",
+            "p_total": "0.16",
+            "no3": "0.39",
+            "od": "5.7",
+            "ph": "8.29",
+            "sst": "46",
+            "temp": "25.6",
+            "turb": "31"
+          }
+        },
+        {
+          "fecha": "15/10/2022",
+          "codigo_muestra": "29104",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "116",
+            "dqo": "66",
+            "p_total": "1.8",
+            "no3": "0.81",
+            "od": "6.9",
+            "ph": "8.04",
+            "sst": "1005",
+            "temp": "20.8",
+            "turb": "410"
+          }
+        },
+        {
+          "fecha": "15/11/2022",
+          "codigo_muestra": "29165",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "126",
+            "dqo": "28",
+            "p_total": "1.73",
+            "no3": "0.98",
+            "od": "6.7",
+            "ph": "8.28",
+            "sst": "761",
+            "temp": "21.3",
+            "turb": "420"
+          }
+        },
+        {
+          "fecha": "23/06/2023",
+          "codigo_muestra": "29431",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "120",
+            "dqo": "12",
+            "p_total": "0.099",
+            "no3": "0.109",
+            "od": "6.4",
+            "ph": "7.53",
+            "sst": "18",
+            "temp": "21",
+            "turb": "12"
+          }
+        },
+        {
+          "fecha": "20/09/2023",
+          "codigo_muestra": "29530",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "136",
+            "dqo": "18",
+            "p_total": "0.089",
+            "no3": "0.202",
+            "od": "6.7",
+            "ph": "8.17",
+            "sst": "12",
+            "temp": "20.3",
+            "turb": "15"
+          }
+        },
+        {
+          "fecha": "03/11/2023",
+          "codigo_muestra": "29623",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "122",
+            "dqo": "33",
+            "p_total": "0.3",
+            "no3": "0.076",
+            "od": "6.7",
+            "ph": "7.91",
+            "sst": "113",
+            "temp": "23.8",
+            "turb": "50"
+          }
+        },
+        {
+          "fecha": "25/02/2024",
+          "codigo_muestra": "29727",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "166",
+            "dqo": "43",
+            "p_total": "0.2",
+            "no3": "0.248",
+            "od": "6.8",
+            "ph": "8.1",
+            "sst": "67",
+            "temp": "24.4",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "01/10/2024",
+          "codigo_muestra": "29953",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "131.3",
+            "dqo": "17",
+            "p_total": "0.13",
+            "no3": "0.298",
+            "od": "7.3",
+            "ph": "8.12",
+            "sst": "34",
+            "temp": "22.7",
+            "turb": "17"
+          }
+        },
+        {
+          "fecha": "12/11/2024",
+          "codigo_muestra": "30013",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "143",
+            "dqo": "<10",
+            "p_total": "0.15",
+            "no3": "0.43",
+            "od": "7",
+            "ph": "7.77",
+            "sst": "36",
+            "temp": "19.7",
+            "turb": "33"
+          }
+        },
+        {
+          "fecha": "28/07/2025",
+          "codigo_muestra": "30293",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "110",
+            "dqo": "<10",
+            "p_total": "0.55",
+            "no3": "0.246",
+            "od": "6.3",
+            "ph": "7.99",
+            "sst": "14",
+            "temp": "20.7",
+            "turb": "10"
+          }
+        },
+        {
+          "fecha": "26/09/2025",
+          "codigo_muestra": "30371",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "117",
+            "dqo": "14",
+            "p_total": "0.073",
+            "no3": "0.201",
+            "od": "6.5",
+            "ph": "7.92",
+            "sst": "15",
+            "temp": "20.1",
+            "turb": "7.6"
+          }
+        },
+        {
+          "fecha": "04/11/2025",
+          "codigo_muestra": "30464",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "142",
+            "dqo": "<10",
+            "p_total": "0.084",
+            "no3": "0.248",
+            "od": "6.8",
+            "ph": "8.32",
+            "sst": "14",
+            "temp": "22.1",
+            "turb": "9"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 29,
+      "id": "21037010",
+      "nombre": "RCA_SUAZA_HUI_ALTAMIRA_PTE.GARCES",
+      "codigo": "21037010",
+      "corriente": "SUAZA",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Río Suaza",
+      "codigo_szh": "2103",
+      "id_zona": 13,
+      "departamento": "HUILA",
+      "municipio": "ALTAMIRA",
+      "lat": 2.03,
+      "lon": -75.78,
+      "elevacion": 893,
+      "totalMuestrasCSV": 71,
+      "muestras": [
+        {
+          "fecha": "16/06/2019",
+          "codigo_muestra": "27476",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "64.29",
+            "dqo": "32",
+            "p_total": "0.065",
+            "no3": "0.55",
+            "od": "7.4",
+            "ph": "7.99",
+            "sst": "331",
+            "temp": "24.8",
+            "turb": "296"
+          }
+        },
+        {
+          "fecha": "17/10/2019",
+          "codigo_muestra": "27633",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "64.8",
+            "dqo": "<10",
+            "no3": "<0.1",
+            "od": "7.3",
+            "ph": "8.19",
+            "sst": "20",
+            "temp": "23.1",
+            "turb": "11.2"
+          }
+        },
+        {
+          "fecha": "03/02/2020",
+          "codigo_muestra": "27801",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "70.9",
+            "dqo": "19",
+            "p_total": "0.055",
+            "no3": "0.31",
+            "od": "7.8",
+            "ph": "7.75",
+            "sst": "8",
+            "temp": "30.5",
+            "turb": "7.62"
+          }
+        },
+        {
+          "fecha": "17/11/2020",
+          "codigo_muestra": "28135",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "90.07",
+            "dqo": "31",
+            "p_total": "0.48",
+            "no3": "0.5",
+            "od": "7.5",
+            "ph": "7.73",
+            "sst": "225",
+            "temp": "21",
+            "turb": "220"
+          }
+        },
+        {
+          "fecha": "20/09/2021",
+          "codigo_muestra": "28489",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "73.8",
+            "dqo": "<10",
+            "p_total": "0.075",
+            "no3": "0.19",
+            "od": "6.9",
+            "ph": "7.84",
+            "sst": "43",
+            "temp": "21.7",
+            "turb": "19"
+          }
+        },
+        {
+          "fecha": "22/04/2022",
+          "codigo_muestra": "28784",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "73.2",
+            "dqo": "23",
+            "p_total": "0.13",
+            "no3": "<0.1",
+            "od": "6.5",
+            "ph": "7.98",
+            "sst": "128",
+            "temp": "26.4",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "18/10/2022",
+          "codigo_muestra": "29116",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "69.2",
+            "dqo": "<10",
+            "p_total": "0.11",
+            "no3": "0.29",
+            "od": "5.9",
+            "ph": "7.8",
+            "sst": "67",
+            "temp": "23.9",
+            "turb": "33"
+          }
+        },
+        {
+          "fecha": "18/11/2022",
+          "codigo_muestra": "29201",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "77.7",
+            "dqo": "14",
+            "p_total": "0.094",
+            "no3": "0.27",
+            "od": "6.2",
+            "ph": "7.42",
+            "sst": "32",
+            "temp": "22.5",
+            "turb": "40"
+          }
+        },
+        {
+          "fecha": "07/06/2023",
+          "codigo_muestra": "29395",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "57",
+            "dqo": "24",
+            "p_total": "0.18",
+            "no3": "0.081",
+            "od": "6.2",
+            "ph": "6.97",
+            "sst": "191",
+            "temp": "20.7",
+            "turb": "190"
+          }
+        },
+        {
+          "fecha": "27/09/2023",
+          "codigo_muestra": "29551",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "68",
+            "dqo": "31",
+            "p_total": "<0.05",
+            "no3": "0.06",
+            "od": "6.7",
+            "ph": "7.89",
+            "sst": "6",
+            "temp": "25.1",
+            "turb": "7.8"
+          }
+        },
+        {
+          "fecha": "10/11/2023",
+          "codigo_muestra": "29650",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "77",
+            "dqo": "11",
+            "p_total": "0.055",
+            "no3": "0.055",
+            "od": "6.5",
+            "ph": "7.76",
+            "sst": "12",
+            "temp": "21.2",
+            "turb": "9.6"
+          }
+        },
+        {
+          "fecha": "04/10/2024",
+          "codigo_muestra": "29962",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "64.91",
+            "dqo": "40",
+            "p_total": "0.29",
+            "no3": "0.209",
+            "od": "3.6",
+            "ph": "7.69",
+            "sst": "349",
+            "temp": "19.5",
+            "turb": "120"
+          }
+        },
+        {
+          "fecha": "15/11/2024",
+          "codigo_muestra": "30035",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "91.39",
+            "dqo": "<10",
+            "p_total": "0.11",
+            "no3": "0.345",
+            "od": "6.8",
+            "ph": "7.4",
+            "sst": "38",
+            "temp": "20.8",
+            "turb": "27"
+          }
+        },
+        {
+          "fecha": "14/07/2025",
+          "codigo_muestra": "30281",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "52",
+            "dqo": "<10",
+            "p_total": "1.8",
+            "no3": "0.51",
+            "od": "6.8",
+            "ph": "7.43",
+            "sst": "1212",
+            "temp": "19.1",
+            "turb": "700"
+          }
+        },
+        {
+          "fecha": "03/10/2025",
+          "codigo_muestra": "30400",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "52",
+            "od": "5.7",
+            "ph": "7.62",
+            "temp": "23.9",
+            "dqo": "17",
+            "p_total": "0.3",
+            "no3": "0.166",
+            "sst": "208",
+            "turb": "200"
+          }
+        },
+        {
+          "fecha": "07/11/2025",
+          "codigo_muestra": "30474",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "60",
+            "dqo": "13",
+            "p_total": "0.117",
+            "no3": "0.199",
+            "od": "6.7",
+            "ph": "6.98",
+            "sst": "79",
+            "temp": "21.2",
+            "turb": "65"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 39,
+      "id": "21077020",
+      "nombre": "RCA_MAGDALENA_HUI_GIGANTE_PASO DEL COLEGIO",
+      "codigo": "21077020",
+      "corriente": "MAGDALENA",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Ríos Directos Magdalena (md)",
+      "codigo_szh": "2106",
+      "id_zona": 15,
+      "departamento": "HUILA",
+      "municipio": "GIGANTE",
+      "lat": 2.462555556,
+      "lon": -75.56686111,
+      "elevacion": 536,
+      "totalMuestrasCSV": 62,
+      "muestras": [
+        {
+          "fecha": "18/10/2019",
+          "codigo_muestra": "27634",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "120",
+            "dqo": "<10",
+            "no3": "<0.1",
+            "od": "7.1",
+            "ph": "7.6",
+            "sst": "6",
+            "temp": "21",
+            "turb": "8.97"
+          }
+        },
+        {
+          "fecha": "03/02/2020",
+          "codigo_muestra": "27802",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "84",
+            "dqo": "18",
+            "p_total": "0.08",
+            "od": "7.3",
+            "ph": "6.66",
+            "sst": "12",
+            "temp": "24.2",
+            "turb": "11.5"
+          }
+        },
+        {
+          "fecha": "19/09/2020",
+          "codigo_muestra": "27978",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "108.3",
+            "dqo": "18",
+            "p_total": "0.054",
+            "no3": "<0.1",
+            "od": "6.9",
+            "ph": "7.14",
+            "sst": "13",
+            "temp": "21.4",
+            "turb": "13"
+          }
+        },
+        {
+          "fecha": "14/11/2020",
+          "codigo_muestra": "28120",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "176",
+            "dqo": "20",
+            "p_total": "0.42",
+            "no3": "0.2",
+            "od": "6",
+            "ph": "8.14",
+            "sst": "250",
+            "temp": "23",
+            "turb": "220"
+          }
+        },
+        {
+          "fecha": "15/09/2021",
+          "codigo_muestra": "28486",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "88.2",
+            "dqo": "<10",
+            "p_total": "0.058",
+            "no3": "0.2",
+            "od": "6.4",
+            "ph": "7.48",
+            "sst": "6",
+            "temp": "23.5",
+            "turb": "18"
+          }
+        },
+        {
+          "fecha": "30/04/2022",
+          "codigo_muestra": "28801",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "112",
+            "dqo": "16",
+            "p_total": "0.16",
+            "no3": "0.24",
+            "od": "6.7",
+            "ph": "7.4",
+            "sst": "78",
+            "temp": "23.2",
+            "turb": "90"
+          }
+        },
+        {
+          "fecha": "12/10/2022",
+          "codigo_muestra": "29085",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "108",
+            "dqo": "<10",
+            "p_total": "0.13",
+            "no3": "0.27",
+            "od": "5.3",
+            "ph": "7.28",
+            "sst": "108",
+            "temp": "21.9",
+            "turb": "90"
+          }
+        },
+        {
+          "fecha": "12/11/2022",
+          "codigo_muestra": "29158",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "93.8",
+            "dqo": "68",
+            "p_total": "1.4",
+            "no3": "0.47",
+            "od": "6.7",
+            "ph": "7.76",
+            "sst": "918",
+            "temp": "21.3",
+            "turb": "550"
+          }
+        },
+        {
+          "fecha": "05/06/2023",
+          "codigo_muestra": "29393",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "113",
+            "dqo": "46",
+            "p_total": "0.14",
+            "no3": "0.04",
+            "od": "4.6",
+            "ph": "6.35",
+            "sst": "39",
+            "temp": "22.8",
+            "turb": "100"
+          }
+        },
+        {
+          "fecha": "30/09/2023",
+          "codigo_muestra": "29568",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "104",
+            "dqo": "19",
+            "p_total": "0.071",
+            "no3": "0.121",
+            "od": "6.1",
+            "ph": "7.24",
+            "sst": "29",
+            "temp": "19.7",
+            "turb": "27"
+          }
+        },
+        {
+          "fecha": "13/11/2023",
+          "codigo_muestra": "29658",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "124",
+            "dqo": "24",
+            "p_total": "0.22",
+            "no3": "0.068",
+            "od": "6.2",
+            "ph": "7.44",
+            "sst": "124",
+            "temp": "21.3",
+            "turb": "65"
+          }
+        },
+        {
+          "fecha": "27/09/2024",
+          "codigo_muestra": "29933",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "190.65",
+            "dqo": "10",
+            "p_total": "<0.05",
+            "no3": "0.19",
+            "od": "7.6",
+            "ph": "7.67",
+            "sst": "18",
+            "temp": "23.4",
+            "turb": "8.1"
+          }
+        },
+        {
+          "fecha": "08/11/2024",
+          "codigo_muestra": "30002",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "165",
+            "dqo": "15",
+            "p_total": "0.088",
+            "no3": "0.24",
+            "od": "6",
+            "ph": "7.74",
+            "sst": "39",
+            "temp": "23.1",
+            "turb": "29"
+          }
+        },
+        {
+          "fecha": "10/07/2025",
+          "codigo_muestra": "30280",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "96",
+            "dqo": "16",
+            "p_total": "2.4",
+            "no3": "0.281",
+            "od": "6",
+            "ph": "7.47",
+            "sst": "900",
+            "temp": "19.9",
+            "turb": "550"
+          }
+        },
+        {
+          "fecha": "06/10/2025",
+          "codigo_muestra": "30411",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "97",
+            "dqo": "15",
+            "p_total": "0.12",
+            "no3": "0.228",
+            "od": "4.7",
+            "ph": "6.78",
+            "sst": "20",
+            "temp": "21.4",
+            "turb": "40"
+          }
+        },
+        {
+          "fecha": "31/10/2025",
+          "codigo_muestra": "30454",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "135",
+            "dqo": "20",
+            "p_total": "0.186",
+            "no3": "0.21",
+            "od": "5.8",
+            "ph": "7.88",
+            "sst": "267",
+            "temp": "21.1",
+            "turb": "150"
+          }
+        }
+      ]
+    },
+    {
+      "id_punto": 50,
+      "id": "21097070",
+      "nombre": "RCA_MAGDALENA_HUI_NEIVA_PTE.SANTANDER",
+      "codigo": "21097070",
+      "corriente": "MAGDALENA",
+      "cuenca": "Alto Magdalena",
+      "subzona": "Río Fortalecillas y otros",
+      "codigo_szh": "2111",
+      "id_zona": 20,
+      "departamento": "HUILA",
+      "municipio": "NEIVA",
+      "lat": 2.942611111,
+      "lon": -75.30852778,
+      "elevacion": 431,
+      "totalMuestrasCSV": 60,
+      "muestras": [
+        {
+          "fecha": "21/08/2020",
+          "codigo_muestra": "27952",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "107",
+            "dqo": "<10",
+            "p_total": "0.073",
+            "od": "7.9",
+            "ph": "7.48",
+            "sst": "11",
+            "temp": "25.2",
+            "turb": "18"
+          }
+        },
+        {
+          "fecha": "17/11/2020",
+          "codigo_muestra": "28134",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "122.6",
+            "dqo": "20",
+            "p_total": "0.1",
+            "no3": "0.32",
+            "od": "6.1",
+            "ph": "7.66",
+            "sst": "19",
+            "temp": "24.3",
+            "turb": "23"
+          }
+        },
+        {
+          "fecha": "20/08/2021",
+          "codigo_muestra": "28448",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "94.8",
+            "dqo": "<10",
+            "p_total": "0.12",
+            "no3": "0.2",
+            "od": "7.2",
+            "ph": "9.03",
+            "sst": "33",
+            "temp": "21.9",
+            "turb": "74"
+          }
+        },
+        {
+          "fecha": "03/05/2022",
+          "codigo_muestra": "28806",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "123",
+            "dqo": "11",
+            "p_total": "0.12",
+            "no3": "0.36",
+            "od": "5.9",
+            "ph": "7.5",
+            "sst": "19",
+            "temp": "25",
+            "turb": "34"
+          }
+        },
+        {
+          "fecha": "19/10/2022",
+          "codigo_muestra": "29129",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "118",
+            "dqo": "29",
+            "p_total": "0.32",
+            "no3": "0.53",
+            "od": "6.5",
+            "ph": "7.58",
+            "sst": "103",
+            "temp": "25.2",
+            "turb": "230"
+          }
+        },
+        {
+          "fecha": "19/11/2022",
+          "codigo_muestra": "29211",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "136",
+            "dqo": "<10",
+            "p_total": "0.27",
+            "no3": "0.42",
+            "od": "6",
+            "ph": "7.66",
+            "sst": "101",
+            "temp": "25.4",
+            "turb": "140"
+          }
+        },
+        {
+          "fecha": "31/07/2023",
+          "codigo_muestra": "29491",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "116",
+            "dqo": "12",
+            "p_total": "0.065",
+            "no3": "0.153",
+            "od": "6.9",
+            "ph": "7.72",
+            "sst": "11",
+            "temp": "24.8",
+            "turb": "20"
+          }
+        },
+        {
+          "fecha": "02/10/2023",
+          "codigo_muestra": "29572",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "138",
+            "dqo": "22",
+            "p_total": "0.07",
+            "no3": "0.149",
+            "od": "5.9",
+            "ph": "7.64",
+            "sst": "10",
+            "temp": "23.5",
+            "turb": "12"
+          }
+        },
+        {
+          "fecha": "15/11/2023",
+          "codigo_muestra": "29664",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "102",
+            "dqo": "18",
+            "p_total": "0.074",
+            "no3": "0.143",
+            "od": "5.9",
+            "ph": "7.73",
+            "sst": "13",
+            "temp": "24.6",
+            "turb": "14"
+          }
+        },
+        {
+          "fecha": "29/02/2024",
+          "codigo_muestra": "29748",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "136",
+            "dqo": "21",
+            "p_total": "<0.05",
+            "no3": "0.21",
+            "od": "7.1",
+            "ph": "7.75",
+            "sst": "5",
+            "temp": "27.4",
+            "turb": "8.5"
+          }
+        },
+        {
+          "fecha": "28/05/2024",
+          "codigo_muestra": "29833",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "123",
+            "dqo": "20",
+            "p_total": "0.13",
+            "no3": "0.264",
+            "od": "6.7",
+            "ph": "7.41",
+            "sst": "61",
+            "temp": "25.8",
+            "turb": "75"
+          }
+        },
+        {
+          "fecha": "08/10/2024",
+          "codigo_muestra": "29974",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "132.4",
+            "dqo": "21",
+            "p_total": "0.13",
+            "no3": "0.416",
+            "od": "5.2",
+            "ph": "7.35",
+            "sst": "65",
+            "temp": "24.6",
+            "turb": "40"
+          }
+        },
+        {
+          "fecha": "19/11/2024",
+          "codigo_muestra": "30047",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "133",
+            "dqo": "18",
+            "p_total": "0.39",
+            "no3": "0.404",
+            "od": "6.8",
+            "ph": "7.11",
+            "sst": "183",
+            "temp": "23.4",
+            "turb": "130"
+          }
+        },
+        {
+          "fecha": "28/06/2025",
+          "codigo_muestra": "30266",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "119",
+            "dqo": "14",
+            "p_total": "0.1",
+            "no3": "0.27",
+            "od": "7.1",
+            "ph": "7.76",
+            "sst": "41",
+            "temp": "24.5",
+            "turb": "65"
+          }
+        },
+        {
+          "fecha": "08/10/2025",
+          "codigo_muestra": "30420",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "110",
+            "dqo": "31",
+            "p_total": "0.16",
+            "no3": "0.279",
+            "od": "4.5",
+            "ph": "6.82",
+            "sst": "17",
+            "temp": "23",
+            "turb": "36"
+          }
+        },
+        {
+          "fecha": "11/11/2025",
+          "codigo_muestra": "30485",
+          "proyecto": "Convenio CAM - Ideam",
+          "valores": {
+            "cond": "115",
+            "dqo": "12",
+            "p_total": "0.094",
+            "no3": "0.276",
+            "od": "5.2",
+            "ph": "7.32",
+            "sst": "32",
+            "temp": "24.6",
+            "turb": "55"
+          }
+        }
+      ]
+    }
+  ]
+};

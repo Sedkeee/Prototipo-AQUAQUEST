@@ -1,5 +1,5 @@
 /* ============================================================
-   VISTA · DATOS REALES (info del punto, chips en React, gráfica, tabla)
+   VISTA · DATOS REALES (selector BD, info del punto, chips en React, gráfica, tabla)
    ============================================================ */
 (function () {
   const $ = AQ.utils.$;
@@ -13,6 +13,45 @@
   }
 
   AQ.views.Datos = {
+    renderEstadoBD(resumen, estaciones, codigoActual, onSelectEstacion, onImportarArchivo) {
+      const infoEl = $("db-status-texto");
+      if (infoEl) {
+        infoEl.innerHTML =
+          `<strong>BD Relacional IDEAM conectada:</strong> <code>${resumen.fuente}</code> · ` +
+          `${resumen.totalFilasCSV.toLocaleString("es-CO")} registros · ` +
+          `${estaciones.length} estaciones cargadas (${resumen.totalZonasCSV} subzonas)`;
+      }
+
+      const sel = $("select-estacion");
+      if (sel) {
+        sel.innerHTML = "";
+        estaciones.forEach(e => {
+          const opt = document.createElement("option");
+          opt.value = e.codigo || e.id;
+          opt.textContent = `${e.departamento} · ${e.municipio} — ${e.corriente} [${e.codigo}] (${e.muestras.length} muestras)`;
+          if ((e.codigo || e.id) === codigoActual) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        sel.onchange = ev => onSelectEstacion && onSelectEstacion(ev.target.value);
+      }
+
+      const { h, mount, ImportCsvButton } = AQ.components;
+      const inputCsv = $("input-csv-ideam");
+      mount(
+        $("btn-importar-csv-root"),
+        h(ImportCsvButton, {
+          onClick: () => inputCsv && inputCsv.click()
+        })
+      );
+      if (inputCsv) {
+        inputCsv.onchange = ev => {
+          const file = ev.target.files && ev.target.files[0];
+          inputCsv.value = "";
+          if (file && onImportarArchivo) onImportarArchivo(file);
+        };
+      }
+    },
+
     renderInfoPunto(p) {
       $("punto-nombre").textContent = p.nombre;
       $("punto-codigo").textContent = p.codigo;
@@ -44,7 +83,7 @@
 
       svg.innerHTML = "";
       if (puntos.length === 0) {
-        svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" fill="#8ba3b8" font-size="12" text-anchor="middle" font-style="italic">Sin datos numéricos para graficar</text>`;
+        svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" fill="#8ba3b8" font-size="12" text-anchor="middle" font-style="italic">Sin datos numéricos para graficar en esta estación</text>`;
         $("chart-rango").textContent = "—";
         $("chart-min").textContent = "";
         $("chart-max").textContent = "";
@@ -55,7 +94,8 @@
       let min = Math.min(...vals), max = Math.max(...vals);
       if (min === max) { min -= 1; max += 1; }
       const rangoY = max - min;
-      const x = i => pad.l + (i / (totalMuestras - 1)) * innerW;
+      const divisorX = Math.max(totalMuestras - 1, 1);
+      const x = i => pad.l + (i / divisorX) * innerW;
       const y = val => pad.t + innerH - ((val - min) / rangoY) * innerH;
 
       // Cuadrícula + etiquetas

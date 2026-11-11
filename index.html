@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui.css">
 </head>
 <body>
 
@@ -121,7 +122,12 @@
         <p class="auth-alt">¿Ya tienes cuenta? <a href="#" data-ir-tab="login">Inicia sesión</a></p>
       </form>
 
-      <!-- Nota: la persistencia en base de datos se conectará posteriormente con MySQL -->
+      <div class="auth-nota">
+        <strong>Cuentas de prueba en la tabla <code>USUARIOS</code>:</strong><br>
+        • Consultor: <code>camila@aquaquest.co</code> / Contraseña: <code>Agua2026!</code><br>
+        • Admin: <code>admin@aquaquest.co</code> / Contraseña: <code>Admin123!</code><br>
+        También puedes registrar una cuenta nueva en la pestaña <strong>Crear cuenta</strong>.
+      </div>
     </div>
   </div>
 </section>
@@ -154,9 +160,22 @@
   <section class="col-data">
     <div class="col-header">
       Datos reales
-      <small>Fuente: IDEAM — no modificables</small>
+      <small>Fuente: IDEAM — Base de Datos Relacional</small>
     </div>
     <div class="panel">
+      <div class="db-connector">
+        <div class="db-connector-top">
+          <span class="db-dot"></span>
+          <span id="db-status-texto" class="db-status-texto">Conectando base de datos IDEAM...</span>
+          <input type="file" id="input-csv-ideam" accept=".csv,text/csv" style="display:none">
+          <div id="btn-importar-csv-root" style="display:contents"></div>
+        </div>
+        <div class="db-selector-row">
+          <label for="select-estacion">Estación de monitoreo (`PUNTOS_MONITOREO`):</label>
+          <select id="select-estacion" class="select-estacion"></select>
+        </div>
+      </div>
+
       <div class="info-punto">
         <h3 id="punto-nombre">—</h3>
         <div class="grid-info">
@@ -309,21 +328,40 @@
   </div>
 </div>
 
+<!-- Modal Swagger OpenAPI 3.0 -->
+<div class="modal-fondo swagger-modal-fondo" id="swagger-modal-fondo">
+  <div class="swagger-modal" role="dialog" aria-modal="true" aria-labelledby="swagger-modal-titulo">
+    <div class="swagger-modal-header">
+      <div>
+        <h3 id="swagger-modal-titulo">Documentación interactiva API — AquaQuest Colombia</h3>
+        <small>OpenAPI 3.0 · Conectada en vivo con los modelos de la aplicación y la base de datos IDEAM</small>
+      </div>
+      <div class="swagger-modal-actions">
+        <a href="openapi.json" download="aquaquest-openapi.json" class="btn-swagger-download" title="Descargar especificación OpenAPI 3.0">⬇ openapi.json</a>
+        <div id="swagger-close-root" style="display:contents"></div>
+      </div>
+    </div>
+    <div id="swagger-ui" class="swagger-ui-container"></div>
+  </div>
+</div>
+
 </div><!-- /#app -->
 
 <div class="toast" id="toast"></div>
 
 <!-- =========================================================
-     REACT 18 (CDN) + SCRIPTS (utils → components → models → views → controllers)
+     REACT 18 (CDN) + SWAGGER UI + SCRIPTS (utils → components → models → views → controllers)
      ========================================================= -->
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
 
 <script src="js/utils/helpers.js"></script>
 <script src="js/components/ReactButtons.js"></script>
 
 <script src="js/models/StorageService.js"></script>
 <script src="js/models/AuthModel.js"></script>
+<script src="js/models/IdeamCsvData.js"></script>
 <script src="js/models/DatosModel.js"></script>
 <script src="js/models/JuegoModel.js"></script>
 <script src="js/models/ComunidadModel.js"></script>
@@ -338,6 +376,7 @@
 <script src="js/controllers/DatosController.js"></script>
 <script src="js/controllers/JuegoController.js"></script>
 <script src="js/controllers/ComunidadController.js"></script>
+<script src="js/controllers/SwaggerController.js"></script>
 <script src="js/controllers/AppController.js"></script>
 </body>
 </html>

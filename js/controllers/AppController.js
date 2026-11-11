@@ -7,14 +7,6 @@
   const UI = AQ.views.UI;
   let datosIniciados = false;
 
-  const USUARIO_INVITADO = {
-    id: "u_demo",
-    nombre: "Explorador/a",
-    correo: "invitado@aquaquest.co",
-    avatar: "AQ",
-    rol: "explorador"
-  };
-
   function entrarApp(usuario, esNuevo) {
     UI.mostrarPantalla("app");
     UI.renderHeaderUsuario(usuario);
@@ -27,8 +19,8 @@
     });
 
     UI.mostrarToast(esNuevo
-      ? `¡Bienvenida/o a AquaQuest, ${usuario.nombre}!`
-      : `Hola de nuevo, ${usuario.nombre}`);
+      ? `¡Cuenta creada en BD! Bienvenida/o, ${usuario.nombre}`
+      : `Sesión activa: ${usuario.nombre}`);
   }
 
   function mostrarLoginVisual() {
@@ -44,12 +36,18 @@
   AQ.controllers.App = {
     init() {
       AQ.controllers.Auth.init(entrarApp);
+      if (AQ.controllers.Swagger) AQ.controllers.Swagger.init();
       UI.bindLogout(salir);
       UI.bindVerLogin(mostrarLoginVisual);
+      UI.bindVerSwagger(() => AQ.controllers.Swagger && AQ.controllers.Swagger.abrirModal());
 
-      // Ingreso directo como invitado sin forzar login obligatorio
-      const usuario = Auth.usuarioActual() || USUARIO_INVITADO;
-      entrarApp(usuario, false);
+      // Si hay una sesión activa en la BD entra directo; si no, abre el Login
+      const usuario = Auth.usuarioActual();
+      if (usuario) {
+        entrarApp(usuario, false);
+      } else {
+        mostrarLoginVisual();
+      }
     }
   };
 

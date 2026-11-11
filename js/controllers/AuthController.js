@@ -1,7 +1,7 @@
 /* ============================================================
-   CONTROLADOR · Autenticación (login, registro)
-   Modo demostrativo visual: permite simular inicio y registro,
-   o continuar directamente como invitado sin cuenta obligatoria.
+   CONTROLADOR · Autenticación conectada a la Base de Datos (USUARIOS)
+   Valida credenciales contra la tabla USUARIOS (SHA-256 + sal) y
+   registra nuevas cuentas persistentes.
    ============================================================ */
 (function () {
   const Model = AQ.models.Auth;
@@ -11,11 +11,13 @@
 
   function usuarioInvitado() {
     return {
+      id_usuario: 0,
       id: "u_demo",
-      nombre: "Explorador/a",
+      nombre: "Explorador/a (Invitado)",
       correo: "invitado@aquaquest.co",
       avatar: "AQ",
-      rol: "explorador"
+      rol: "consultor",
+      esInvitado: true
     };
   }
 
@@ -24,27 +26,16 @@
     const { correo, password, recordar } = View.datosLogin();
     View.setCargando("login", true);
 
-    setTimeout(async () => {
-      let r = await Model.iniciarSesion(correo, password, recordar);
-      View.setCargando("login", false);
-      if (!r.ok) {
-        // En modo demostrativo visual sin MySQL, genera perfil según los datos escritos
-        const alias = (correo && correo.includes("@") ? correo.split("@")[0] : "") || "Explorador/a";
-        const nombre = alias.charAt(0).toUpperCase() + alias.slice(1);
-        r = {
-          ok: true,
-          usuario: {
-            id: "u_vis_" + Date.now().toString(36),
-            nombre,
-            correo: correo || "invitado@aquaquest.co",
-            avatar: "AQ",
-            rol: "explorador"
-          }
-        };
-      }
-      View.resetForms();
-      onAutenticado(r.usuario, false);
-    }, 200);
+    const r = await Model.iniciarSesion(correo, password, recordar);
+    View.setCargando("login", false);
+
+    if (!r.ok) {
+      View.mostrarError("login", r.error);
+      return;
+    }
+
+    View.resetForms();
+    onAutenticado(r.usuario, false);
   }
 
   async function registro() {
@@ -52,20 +43,16 @@
     const d = View.datosRegistro();
     View.setCargando("registro", true);
 
-    setTimeout(() => {
-      View.setCargando("registro", false);
-      const nombre = (d.nombre && d.nombre.trim()) || "Explorador/a";
-      const correo = (d.correo && d.correo.trim()) || "invitado@aquaquest.co";
-      const avatar = d.avatar || "AQ";
-      View.resetForms();
-      onAutenticado({
-        id: "u_vis_" + Date.now().toString(36),
-        nombre,
-        correo,
-        avatar,
-        rol: "explorador"
-      }, true);
-    }, 200);
+    const r = await Model.registrar(d);
+    View.setCargando("registro", false);
+
+    if (!r.ok) {
+      View.mostrarError("registro", r.error);
+      return;
+    }
+
+    View.resetForms();
+    onAutenticado(r.usuario, true);
   }
 
   function omitir() {

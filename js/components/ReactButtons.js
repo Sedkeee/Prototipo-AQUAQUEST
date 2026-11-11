@@ -11,8 +11,8 @@
   const h = (window.React && window.React.createElement)
     ? window.React.createElement
     : function fallbackCreateElement(type, props, ...children) {
-        return { __fallback: true, type, props: props || {}, children };
-      };
+      return { __fallback: true, type, props: props || {}, children };
+    };
 
   const roots = new WeakMap();
 
@@ -164,10 +164,16 @@
   }
 
   /* ---------- 1. Botones de Cabecera (Header) ---------- */
-  function HeaderActions({ onVerLogin, onLogout }) {
+  function HeaderActions({ onVerSwagger, onVerLogin, onLogout }) {
     return h(
       Fragment,
       null,
+      h(AQButton, {
+        id: "btn-swagger",
+        className: "btn-swagger",
+        title: "Abrir documentación interactiva OpenAPI / Swagger",
+        onClick: onVerSwagger
+      }, "{ } API Swagger"),
       h(AQButton, {
         id: "btn-ver-login",
         className: "btn-ver-login",
@@ -181,6 +187,15 @@
         onClick: onLogout
       }, "Salir")
     );
+  }
+
+  function SwaggerCloseButton({ onClose, onClick }) {
+    return h(AQButton, {
+      id: "btn-cerrar-swagger",
+      className: "btn-cerrar-swagger",
+      title: "Cerrar documentación API",
+      onClick: onClose || onClick
+    }, "✕ Cerrar");
   }
 
   /* ---------- 2. Botones de Autenticación ---------- */
@@ -295,7 +310,20 @@
     );
   }
 
-  /* ---------- 3. Botones de Datos Reales (Chips de Variables) ---------- */
+  /* ---------- 3. Botones de Datos Reales (Chips de Variables y Carga CSV) ---------- */
+  function ImportCsvButton({ onClick }) {
+    return h(
+      AQButton,
+      {
+        id: "btn-importar-csv",
+        className: "btn-importar-csv",
+        title: "Cargar archivo CSV exportado desde Excel / IDEAM",
+        onClick
+      },
+      "📂 Cargar CSV / Excel"
+    );
+  }
+
   function VariableChips({ variables, actual, onSelect }) {
     return h(
       Fragment,
@@ -505,11 +533,13 @@
     mount,
     AQButton,
     HeaderActions,
+    SwaggerCloseButton,
     CloseAuthButton,
     AuthTabs,
     PasswordToggleButton,
     AvatarSelector,
     AuthFormActions,
+    ImportCsvButton,
     VariableChips,
     RetoActionButton,
     ResetProgressButton,
