@@ -4,10 +4,18 @@
    funcione abriendo el HTML con doble clic (file://), sin servidor.
    Este archivo SIEMPRE debe cargarse primero.
    ============================================================ */
-window.AQ = window.AQ || { components: {}, models: {}, views: {}, controllers: {}, utils: {} };
+window.AQ = window.AQ || {
+  components: {},
+  models: {},
+  views: {},
+  controllers: {},
+  utils: {},
+};
 
 AQ.utils = {
-  $(id) { return document.getElementById(id); },
+  $(id) {
+    return document.getElementById(id);
+  },
 
   formatearNumero(n) {
     if (Math.abs(n) >= 1000) return n.toFixed(0);
@@ -17,12 +25,25 @@ AQ.utils = {
   },
 
   escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    return String(s).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
   },
 
   hoyDisplay() {
-    return new Date().toLocaleDateString("es-CO", { day: "2-digit", month: "2-digit", year: "numeric" });
+    return new Date().toLocaleDateString("es-CO", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
   },
 
   /* ---------- Comprimir imagen ---------- */
@@ -34,7 +55,10 @@ AQ.utils = {
         img.onload = () => {
           const canvas = document.createElement("canvas");
           let { width, height } = img;
-          if (width > maxW) { height = (height * maxW) / width; width = maxW; }
+          if (width > maxW) {
+            height = (height * maxW) / width;
+            width = maxW;
+          }
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext("2d");
@@ -47,5 +71,5 @@ AQ.utils = {
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
-  }
+  },
 };
