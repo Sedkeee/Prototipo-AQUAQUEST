@@ -15,18 +15,24 @@
       Model.estaciones(),
       p.codigo || p.id,
       cambiarEstacion,
-      importarArchivoCSV
+      importarArchivoCSV,
     );
     View.renderInfoPunto(p);
     View.renderChips(Model.VARIABLES, variableActual, seleccionarVariable);
-    View.renderChart(Model.VARIABLES[variableActual], Model.serie(variableActual));
+    View.renderChart(
+      Model.VARIABLES[variableActual],
+      Model.serie(variableActual),
+    );
     View.renderTabla(Model.ultimasMediciones(4));
   }
 
   function seleccionarVariable(id) {
     variableActual = id;
     View.renderChips(Model.VARIABLES, variableActual, seleccionarVariable);
-    View.renderChart(Model.VARIABLES[variableActual], Model.serie(variableActual));
+    View.renderChart(
+      Model.VARIABLES[variableActual],
+      Model.serie(variableActual),
+    );
   }
 
   function cambiarEstacion(idOCodigo) {
@@ -37,7 +43,7 @@
 
   function importarArchivoCSV(file) {
     const reader = new FileReader();
-    reader.onload = e => {
+    reader.onload = (e) => {
       const r = Model.importarCSV(e.target.result, file.name);
       if (!r.ok) {
         UI.mostrarToast(r.error || "Error al importar el CSV");
@@ -45,7 +51,7 @@
       }
       refrescarVista();
       UI.mostrarToast(
-        `BD actualizada: ${r.estaciones} estaciones y ${r.filas.toLocaleString("es-CO")} filas cargadas`
+        `BD actualizada: ${r.estaciones} estaciones y ${r.filas.toLocaleString("es-CO")} filas cargadas`,
       );
     };
     reader.onerror = () => UI.mostrarToast("No se pudo leer el archivo CSV");
@@ -56,6 +62,6 @@
     init() {
       refrescarVista();
     },
-    refrescar: refrescarVista
+    refrescar: refrescarVista,
   };
 })();
