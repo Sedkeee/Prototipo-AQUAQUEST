@@ -18,12 +18,18 @@ AQ.models.Storage = {
       localStorage.setItem(key, JSON.stringify(valor));
       return true;
     } catch (e) {
-      console.warn("No se pudo guardar. Posible límite de almacenamiento alcanzado.");
+      console.warn(
+        "No se pudo guardar. Posible límite de almacenamiento alcanzado.",
+      );
       return false;
     }
   },
 
   remove(key) {
-    try { localStorage.removeItem(key); } catch (e) { /* ignorar */ }
-  }
+    try {
+      localStorage.removeItem(key);
+    } catch (e) {
+      /* ignorar */
+    }
+  },
 };
