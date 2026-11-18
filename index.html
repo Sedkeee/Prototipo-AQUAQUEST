@@ -1,382 +1,1169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AquaQuest Colombia — Prueba de Concepto</title>
-<meta name="description" content="AquaQuest Colombia: explora datos reales de calidad del agua del IDEAM, completa retos de acción real y comparte con la comunidad.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/auth.css">
-<link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui.css">
-</head>
-<body>
-
-<!-- =========================================================
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AquaQuest Colombia — Prueba de Concepto</title>
+    <meta
+      name="description"
+      content="AquaQuest Colombia: explora datos reales de calidad del agua del IDEAM, completa retos de acción real y comparte con la comunidad."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui.css"
+    />
+  </head>
+  <body>
+    <!-- =========================================================
      VISTA · LOGIN / REGISTRO
      ========================================================= -->
-<section class="auth-screen" id="auth-screen" hidden>
-  <aside class="auth-hero" aria-hidden="true">
-    <span class="burbuja" style="left:8%;width:14px;height:14px;animation-duration:11s"></span>
-    <span class="burbuja" style="left:22%;width:24px;height:24px;animation-duration:15s;animation-delay:2s"></span>
-    <span class="burbuja" style="left:41%;width:10px;height:10px;animation-duration:9s;animation-delay:4s"></span>
-    <span class="burbuja" style="left:63%;width:18px;height:18px;animation-duration:13s;animation-delay:1s"></span>
-    <span class="burbuja" style="left:80%;width:12px;height:12px;animation-duration:10s;animation-delay:6s"></span>
+    <section class="auth-screen" id="auth-screen">
+      <aside class="auth-hero" aria-hidden="true">
+        <span
+          class="burbuja"
+          style="left: 8%; width: 14px; height: 14px; animation-duration: 11s"
+        ></span>
+        <span
+          class="burbuja"
+          style="
+            left: 22%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 15s;
+            animation-delay: 2s;
+          "
+        ></span>
+        <span
+          class="burbuja"
+          style="
+            left: 41%;
+            width: 10px;
+            height: 10px;
+            animation-duration: 9s;
+            animation-delay: 4s;
+          "
+        ></span>
+        <span
+          class="burbuja"
+          style="
+            left: 63%;
+            width: 18px;
+            height: 18px;
+            animation-duration: 13s;
+            animation-delay: 1s;
+          "
+        ></span>
+        <span
+          class="burbuja"
+          style="
+            left: 80%;
+            width: 12px;
+            height: 12px;
+            animation-duration: 10s;
+            animation-delay: 6s;
+          "
+        ></span>
 
-    <div class="logo-big"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--water-1)"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
-    <h2>Cada gota cuenta.<br><span>Tu acción también.</span></h2>
-    <p>Explora datos reales de calidad del agua del IDEAM, completa retos que cuidan el agua en tu entorno y comparte lo que haces con la comunidad.</p>
-    <div class="auth-pilares">
-      <span>Explora</span><span>Comprende</span><span>Protege</span><span>Comparte</span>
-    </div>
-    <div class="auth-stats">
-      <div><strong>13</strong><small>VARIABLES</small></div>
-      <div><strong>2005–2026</strong><small>COBERTURA IDEAM</small></div>
-      <div><strong>6</strong><small>RETOS REALES</small></div>
-    </div>
+        <div class="logo-big">
+          <svg
+            width="52"
+            height="52"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="color: var(--water-1)"
+          >
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+          </svg>
+        </div>
+        <h2>Cada gota cuenta.<br /><span>Tu acción también.</span></h2>
+        <p>
+          Explora datos reales de calidad del agua del IDEAM, completa retos que
+          cuidan el agua en tu entorno y comparte lo que haces con la comunidad.
+        </p>
+        <div class="auth-pilares">
+          <span>Explora</span><span>Comprende</span><span>Protege</span
+          ><span>Comparte</span>
+        </div>
+        <div class="auth-stats">
+          <div><strong>13</strong><small>VARIABLES</small></div>
+          <div><strong>2005–2026</strong><small>COBERTURA IDEAM</small></div>
+          <div><strong>6</strong><small>RETOS REALES</small></div>
+        </div>
 
-    <div class="olas">
-      <svg class="ola2" viewBox="0 0 1440 160" preserveAspectRatio="none"><path fill="#0077b6" d="M0,80 C240,140 480,20 720,80 C960,140 1200,20 1440,80 L1440,160 L0,160 Z"/></svg>
-      <svg class="ola1" viewBox="0 0 1440 160" preserveAspectRatio="none"><path fill="#00b4d8" d="M0,100 C180,60 360,140 540,100 C720,60 900,140 1080,100 C1260,60 1440,140 1440,100 L1440,160 L0,160 Z"/></svg>
-    </div>
-  </aside>
+        <div class="olas">
+          <svg class="ola2" viewBox="0 0 1440 160" preserveAspectRatio="none">
+            <path
+              fill="#0077b6"
+              d="M0,80 C240,140 480,20 720,80 C960,140 1200,20 1440,80 L1440,160 L0,160 Z"
+            />
+          </svg>
+          <svg class="ola1" viewBox="0 0 1440 160" preserveAspectRatio="none">
+            <path
+              fill="#00b4d8"
+              d="M0,100 C180,60 360,140 540,100 C720,60 900,140 1080,100 C1260,60 1440,140 1440,100 L1440,160 L0,160 Z"
+            />
+          </svg>
+        </div>
+      </aside>
 
-  <div class="auth-panel">
-    <div class="auth-card">
-      <div id="auth-close-root" style="display:flex;justify-content:flex-end;margin-bottom:8px;"></div>
-      <div class="mini-brand"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--water-1);vertical-align:middle;margin-right:6px"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>AquaQuest <span>Colombia</span></div>
-      <h1>Bienvenida/o</h1>
-      <p class="sub">Inicia sesión para guardar tu progreso y participar en la comunidad.</p>
+      <div class="auth-panel">
+        <div class="auth-card">
+          <div class="mini-brand">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="
+                color: var(--water-1);
+                vertical-align: middle;
+                margin-right: 6px;
+              "
+            >
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" /></svg
+            >AquaQuest <span>Colombia</span>
+          </div>
+          <h1>Bienvenida/o</h1>
+          <p class="sub">
+            Inicia sesión para guardar tu progreso y participar en la comunidad.
+          </p>
 
-      <div class="auth-tabs" id="auth-tabs" role="tablist"></div>
+          <div class="auth-tabs" id="auth-tabs" role="tablist"></div>
 
-      <!-- Login -->
-      <form class="auth-form" id="form-login" novalidate>
-        <div class="campo">
-          <label for="login-correo">Correo electrónico</label>
-          <div class="input-wrap">
-            <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-            <input id="login-correo" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com">
+          <!-- Login -->
+          <form class="auth-form" id="form-login" novalidate>
+            <div class="campo">
+              <label for="login-correo">Correo electrónico</label>
+              <div class="input-wrap">
+                <span class="ico"
+                  ><svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg
+                ></span>
+                <input
+                  id="login-correo"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="tucorreo@ejemplo.com"
+                />
+              </div>
+            </div>
+            <div class="campo">
+              <label for="login-password">Contraseña</label>
+              <div class="input-wrap">
+                <span class="ico"
+                  ><svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg
+                ></span>
+                <input
+                  id="login-password"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Tu contraseña"
+                />
+                <span
+                  data-toggle-pass-root="login-password"
+                  style="display: contents"
+                ></span>
+              </div>
+            </div>
+            <div class="fila-opciones">
+              <label class="check"
+                ><input type="checkbox" id="login-recordar" /> Recordarme</label
+              >
+            </div>
+            <div class="auth-error" id="login-error" role="alert" hidden></div>
+            <div id="login-actions-root" style="display: contents"></div>
+            <p class="auth-alt">
+              ¿No tienes cuenta?
+              <a href="#" data-ir-tab="registro">Créala gratis</a>
+            </p>
+          </form>
+
+          <!-- Registro -->
+          <form class="auth-form" id="form-registro" novalidate hidden>
+            <div class="campo">
+              <label for="reg-nombre">Nombre para mostrar</label>
+              <div class="input-wrap">
+                <span class="ico"
+                  ><svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" /></svg
+                ></span>
+                <input
+                  id="reg-nombre"
+                  type="text"
+                  maxlength="30"
+                  autocomplete="nickname"
+                  placeholder="Ej: Guardiana del agua"
+                />
+              </div>
+            </div>
+            <div class="campo">
+              <label for="reg-correo">Correo electrónico</label>
+              <div class="input-wrap">
+                <span class="ico"
+                  ><svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg
+                ></span>
+                <input
+                  id="reg-correo"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="tucorreo@ejemplo.com"
+                />
+              </div>
+            </div>
+            <div class="campo">
+              <label for="reg-password">Contraseña</label>
+              <div class="input-wrap">
+                <span class="ico"
+                  ><svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg
+                ></span>
+                <input
+                  id="reg-password"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Mínimo 6 caracteres"
+                />
+                <span
+                  data-toggle-pass-root="reg-password"
+                  style="display: contents"
+                ></span>
+              </div>
+              <div class="fuerza">
+                <div class="fuerza-track">
+                  <div class="fuerza-barra" id="fuerza-barra"></div>
+                </div>
+                <small id="fuerza-txt"></small>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="reg-password2">Confirmar contraseña</label>
+              <div class="input-wrap">
+                <span class="ico"
+                  ><svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg
+                ></span>
+                <input
+                  id="reg-password2"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="Repite la contraseña"
+                />
+                <span
+                  data-toggle-pass-root="reg-password2"
+                  style="display: contents"
+                ></span>
+              </div>
+            </div>
+            <div class="campo">
+              <label>Elige tu avatar</label>
+              <div class="avatares" id="reg-avatares"></div>
+            </div>
+            <div class="auth-error" id="reg-error" role="alert" hidden></div>
+            <div id="reg-actions-root" style="display: contents"></div>
+            <p class="auth-alt">
+              ¿Ya tienes cuenta?
+              <a href="#" data-ir-tab="login">Inicia sesión</a>
+            </p>
+          </form>
+
+          <div class="auth-nota">
+            Regístrate para crear una cuenta de usuario. El acceso de
+            administrador es asignado por la administración.
           </div>
         </div>
-        <div class="campo">
-          <label for="login-password">Contraseña</label>
-          <div class="input-wrap">
-            <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-            <input id="login-password" type="password" autocomplete="current-password" placeholder="Tu contraseña">
-            <span data-toggle-pass-root="login-password" style="display:contents"></span>
-          </div>
-        </div>
-        <div class="fila-opciones">
-          <label class="check"><input type="checkbox" id="login-recordar"> Recordarme</label>
-        </div>
-        <div class="auth-error" id="login-error" role="alert" hidden></div>
-        <div id="login-actions-root" style="display:contents"></div>
-        <p class="auth-alt">¿No tienes cuenta? <a href="#" data-ir-tab="registro">Créala gratis</a></p>
-      </form>
-
-      <!-- Registro -->
-      <form class="auth-form" id="form-registro" novalidate hidden>
-        <div class="campo">
-          <label for="reg-nombre">Nombre para mostrar</label>
-          <div class="input-wrap">
-            <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-            <input id="reg-nombre" type="text" maxlength="30" autocomplete="nickname" placeholder="Ej: Guardiana del agua">
-          </div>
-        </div>
-        <div class="campo">
-          <label for="reg-correo">Correo electrónico</label>
-          <div class="input-wrap">
-            <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-            <input id="reg-correo" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com">
-          </div>
-        </div>
-        <div class="campo">
-          <label for="reg-password">Contraseña</label>
-          <div class="input-wrap">
-            <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-            <input id="reg-password" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
-            <span data-toggle-pass-root="reg-password" style="display:contents"></span>
-          </div>
-          <div class="fuerza">
-            <div class="fuerza-track"><div class="fuerza-barra" id="fuerza-barra"></div></div>
-            <small id="fuerza-txt"></small>
-          </div>
-        </div>
-        <div class="campo">
-          <label for="reg-password2">Confirmar contraseña</label>
-          <div class="input-wrap">
-            <span class="ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-            <input id="reg-password2" type="password" autocomplete="new-password" placeholder="Repite la contraseña">
-            <span data-toggle-pass-root="reg-password2" style="display:contents"></span>
-          </div>
-        </div>
-        <div class="campo">
-          <label>Elige tu avatar</label>
-          <div class="avatares" id="reg-avatares"></div>
-        </div>
-        <div class="auth-error" id="reg-error" role="alert" hidden></div>
-        <div id="reg-actions-root" style="display:contents"></div>
-        <p class="auth-alt">¿Ya tienes cuenta? <a href="#" data-ir-tab="login">Inicia sesión</a></p>
-      </form>
-
-      <div class="auth-nota">
-        <strong>Cuentas de prueba en la tabla <code>USUARIOS</code>:</strong><br>
-        • Consultor: <code>camila@aquaquest.co</code> / Contraseña: <code>Agua2026!</code><br>
-        • Admin: <code>admin@aquaquest.co</code> / Contraseña: <code>Admin123!</code><br>
-        También puedes registrar una cuenta nueva en la pestaña <strong>Crear cuenta</strong>.
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- =========================================================
+    <!-- =========================================================
      VISTA · APLICACIÓN
      ========================================================= -->
-<div id="app">
-
-<header>
-  <div class="brand">
-    <span class="logo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--water-1);vertical-align:middle"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
-    <h1>AquaQuest <span>Colombia</span></h1>
-    <span class="tag">Explora · Comprende · Protege · Comparte</span>
-    <span class="badge-poc">PRUEBA DE CONCEPTO</span>
-    <div class="user-menu">
-      <div class="u-avatar" id="header-avatar">AQ</div>
-      <div class="u-info">
-        <div class="u-nombre" id="header-nombre">Explorador/a</div>
-        <div class="u-correo" id="header-correo">explorador@aquaquest.co</div>
-      </div>
-      <div id="header-actions-root" style="display:contents"></div>
-    </div>
-  </div>
-</header>
-
-<main class="grid">
-
-  <!-- DATOS REALES -->
-  <section class="col-data">
-    <div class="col-header">
-      Datos reales
-      <small>Fuente: IDEAM — Base de Datos Relacional</small>
-    </div>
-    <div class="panel">
-      <div class="db-connector">
-        <div class="db-connector-top">
-          <span class="db-dot"></span>
-          <span id="db-status-texto" class="db-status-texto">Conectando base de datos IDEAM...</span>
-          <input type="file" id="input-csv-ideam" accept=".csv,text/csv" style="display:none">
-          <div id="btn-importar-csv-root" style="display:contents"></div>
-        </div>
-        <div class="db-selector-row">
-          <label for="select-estacion">Estación de monitoreo (`PUNTOS_MONITOREO`):</label>
-          <select id="select-estacion" class="select-estacion"></select>
-        </div>
-      </div>
-
-      <div class="info-punto">
-        <h3 id="punto-nombre">—</h3>
-        <div class="grid-info">
-          <div><span class="k">Código:</span> <span class="v" id="punto-codigo">—</span></div>
-          <div><span class="k">Corriente:</span> <span class="v" id="punto-corriente">—</span></div>
-          <div><span class="k">Cuenca:</span> <span class="v" id="punto-cuenca">—</span></div>
-          <div><span class="k">Subzona:</span> <span class="v" id="punto-subzona">—</span></div>
-          <div><span class="k">Departamento:</span> <span class="v" id="punto-depto">—</span></div>
-          <div><span class="k">Municipio:</span> <span class="v" id="punto-muni">—</span></div>
-          <div><span class="k">Coordenadas:</span> <span class="v" id="punto-coord">—</span></div>
-          <div><span class="k">Elevación:</span> <span class="v" id="punto-elev">—</span></div>
-        </div>
-      </div>
-
-      <div class="vars-title">Variables medidas (toca una para ver su serie)</div>
-      <div class="chips" id="chips-vars"></div>
-
-      <div class="chart-title">Serie histórica · <span id="chart-nombre">—</span></div>
-      <div class="chart-wrap">
-        <div class="chart-legend">
-          <span>Unidad: <strong id="chart-unidad">—</strong></span>
-          <span id="chart-rango">—</span>
-        </div>
-        <svg id="chart" viewBox="0 0 520 200" preserveAspectRatio="none" style="width:100%;height:200px;display:block"></svg>
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);padding:4px 8px 0">
-          <span id="chart-min">—</span>
-          <span id="chart-max">—</span>
-        </div>
-      </div>
-
-      <div class="tabla-title">Últimas mediciones del punto</div>
-      <table class="datos" id="tabla-datos">
-        <thead>
-          <tr><th>Fecha</th><th>Variable</th><th style="text-align:right">Valor</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-
-      <div class="nota-lcm">
-        <strong>Nota sobre los valores "&lt;X":</strong> cuando el IDEAM reporta un valor como
-        <em>&lt;0,05</em>, significa que el resultado está <strong>por debajo del Límite de
-        Cuantificación del Método (LCM)</strong>. El LCM puede cambiar con el tiempo para la
-        misma variable. Por eso AquaQuest muestra estos valores tal como fueron reportados,
-        sin inventar cifras.
-      </div>
-
-      <div class="fuente">
-        Datos: IDEAM — Red de Referencia Nacional de Calidad del Agua.<br>
-        Cobertura 2005 – 2026. Última actualización: julio 2026.
-      </div>
-    </div>
-  </section>
-
-  <!-- JUEGO -->
-  <section class="col-game">
-    <div class="col-header">
-      Tu juego
-      <small>Acciones tuyas — no vienen de los datos</small>
-    </div>
-    <div class="panel">
-      <div class="aviso-juego">
-        <strong>Importante:</strong> el XP aquí se gana por <em>lo que tú haces</em> por el agua,
-        no por los valores que reporta el IDEAM. El XP <strong>solo</strong> sirve como tu
-        reputación personal: refleja tu camino, no desbloquea nada. Los datos de la izquierda
-        te inspiran; tu acción es lo que cuenta.
-      </div>
-
-      <div class="perfil">
-        <div class="perfil-top">
-          <div class="avatar" id="perfil-avatar">AQ</div>
-          <div class="perfil-info">
-            <input id="usuario-nombre" type="text" value="" maxlength="30" title="Haz clic para editar tu nombre">
-            <div class="nivel" id="usuario-nivel">Nivel 1 · Semilla</div>
-          </div>
-          <div class="xp-bloque">
-            <div class="num" id="usuario-xp">0</div>
-            <div class="lbl">XP TOTAL</div>
+    <div id="app" hidden>
+      <header>
+        <div class="brand">
+          <span class="logo"
+            ><svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: var(--water-1); vertical-align: middle"
+            >
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" /></svg
+          ></span>
+          <h1>AquaQuest <span>Colombia</span></h1>
+          <span class="tag">Explora · Comprende · Protege · Comparte</span>
+          <span class="badge-poc">PRUEBA DE CONCEPTO</span>
+          <div class="user-menu">
+            <div class="u-avatar" id="header-avatar">AQ</div>
+            <div class="u-info">
+              <div class="u-nombre" id="header-nombre">Explorador/a</div>
+              <div class="u-correo" id="header-correo">
+                explorador@aquaquest.co
+              </div>
+            </div>
+            <div id="header-actions-root" style="display: contents"></div>
           </div>
         </div>
-        <div class="progreso"><div class="progreso-fill" id="progreso-fill"></div></div>
-        <div class="progreso-txt">
-          <span id="progreso-txt-min">0 XP</span>
-          <span id="progreso-txt-max">100 XP al siguiente nivel</span>
+      </header>
+
+      <div class="app-layout">
+        <aside class="app-sidebar" aria-label="Navegación principal">
+          <div class="sidebar-caption">EXPLORA AQUAQUEST</div>
+          <nav class="sidebar-nav">
+            <button
+              class="sidebar-link active"
+              type="button"
+              data-ir-seccion="inicio"
+              aria-current="page"
+            >
+              <span class="nav-icon" aria-hidden="true">⌂</span>
+              <span>Inicio</span>
+            </button>
+            <button class="sidebar-link" type="button" data-ir-seccion="datos">
+              <span class="nav-icon" aria-hidden="true">◉</span>
+              <span>Datos reales</span>
+            </button>
+            <button class="sidebar-link" type="button" data-ir-seccion="juego">
+              <span class="nav-icon" aria-hidden="true">✦</span>
+              <span>Tu juego</span>
+            </button>
+            <button
+              class="sidebar-link"
+              type="button"
+              data-ir-seccion="comunidad"
+            >
+              <span class="nav-icon" aria-hidden="true">◎</span>
+              <span>Comunidad</span>
+            </button>
+            <button class="sidebar-link" type="button" data-ir-seccion="guia">
+              <span class="nav-icon" aria-hidden="true">💧</span>
+              <span>Guía del agua</span>
+            </button>
+          </nav>
+          <div class="sidebar-note">
+            Explora los datos, participa en retos y comparte tus acciones por el
+            agua.
+          </div>
+        </aside>
+
+        <main class="app-content">
+          <section
+            class="dashboard-home app-page"
+            id="page-inicio"
+            data-app-page="inicio"
+          >
+            <div class="dashboard-hero">
+              <div class="dashboard-hero-copy">
+                <span class="dashboard-eyebrow">AQUAQUEST COLOMBIA</span>
+                <h2>Hola, <span id="dashboard-nombre">explorador/a</span></h2>
+                <p>
+                  Cada gota cuenta. Explora la calidad del agua, convierte lo
+                  que aprendes en acciones y conecta con una comunidad que
+                  también quiere protegerla.
+                </p>
+                <div class="dashboard-tags">
+                  <span>Explora</span><span>Comprende</span><span>Protege</span>
+                </div>
+              </div>
+              <div class="dashboard-art" aria-hidden="true">
+                <div class="dashboard-orb">💧</div>
+                <span class="dashboard-orbit orbit-one"></span>
+                <span class="dashboard-orbit orbit-two"></span>
+              </div>
+            </div>
+
+            <div class="dashboard-section-title">
+              <h2>¿A dónde quieres ir?</h2>
+            </div>
+
+            <div class="dashboard-cards">
+              <a
+                class="dashboard-card card-datos"
+                href="#page-datos"
+                data-ir-seccion="datos"
+              >
+                <div class="dashboard-card-icon" aria-hidden="true">◉</div>
+                <span class="card-label">CONOCE TU ENTORNO</span>
+                <h3>Datos reales</h3>
+                <p>
+                  Escoge una estación de monitoreo y consulta sus datos,
+                  variables medidas, gráfica histórica y últimas mediciones.
+                </p>
+                <span class="dashboard-link">
+                  Explorar estaciones <span aria-hidden="true">→</span>
+                </span>
+              </a>
+              <a
+                class="dashboard-card card-juego"
+                href="#page-juego"
+                data-ir-seccion="juego"
+              >
+                <div class="dashboard-card-icon" aria-hidden="true">✦</div>
+                <span class="card-label">PASA A LA ACCIÓN</span>
+                <h3>Tu juego</h3>
+                <p>
+                  Encuentra retos para cuidar el agua, registra lo que hiciste y
+                  sigue tu progreso y tus logros.
+                </p>
+                <span class="dashboard-link">
+                  Ver mis retos <span aria-hidden="true">→</span>
+                </span>
+              </a>
+              <a
+                class="dashboard-card card-comunidad"
+                href="#page-comunidad"
+                data-ir-seccion="comunidad"
+              >
+                <div class="dashboard-card-icon" aria-hidden="true">◎</div>
+                <span class="card-label">COMPARTE E INSPIRA</span>
+                <h3>Comunidad</h3>
+                <p>
+                  Publica ideas y acciones, conoce las experiencias de otras
+                  personas y conversa sobre el cuidado del agua.
+                </p>
+                <span class="dashboard-link">
+                  Ir a la comunidad <span aria-hidden="true">→</span>
+                </span>
+              </a>
+              <a
+                class="dashboard-card card-guia"
+                href="#page-guia"
+                data-ir-seccion="guia"
+              >
+                <div class="dashboard-card-icon" aria-hidden="true">💧</div>
+                <span class="card-label">APRENDE JUGANDO</span>
+                <h3>Guía del agua</h3>
+                <p>
+                  Recorre seis retos interactivos, pon a prueba lo que sabes y
+                  calcula cuánto podrías ahorrar en la ducha.
+                </p>
+                <span class="dashboard-link">
+                  Empezar la guía <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </div>
+          </section>
+
+          <section
+            class="grid app-page"
+            id="page-datos"
+            data-app-page="datos"
+            hidden
+          >
+            <!-- DATOS REALES -->
+            <section class="col-data">
+              <div class="col-header">
+                Datos reales
+                <small class="admin-only"
+                  >Fuente: IDEAM — Base de Datos Relacional</small
+                >
+              </div>
+              <div class="panel">
+                <div class="db-connector">
+                  <div class="db-connector-top">
+                    <span class="db-dot"></span>
+                    <span id="db-status-texto" class="db-status-texto"
+                      >Conectando base de datos IDEAM...</span
+                    >
+                    <input
+                      type="file"
+                      id="input-csv-ideam"
+                      accept=".csv,text/csv"
+                      style="display: none"
+                    />
+                    <div
+                      id="btn-importar-csv-root"
+                      style="display: contents"
+                    ></div>
+                  </div>
+                  <div class="db-selector-row">
+                    <label for="select-estacion"
+                      >Estación de monitoreo (`PUNTOS_MONITOREO`):</label
+                    >
+                    <select
+                      id="select-estacion"
+                      class="select-estacion"
+                    ></select>
+                  </div>
+                </div>
+
+                <div class="info-punto">
+                  <h3 id="punto-nombre">—</h3>
+                  <div class="grid-info">
+                    <div>
+                      <span class="k">Código:</span>
+                      <span class="v" id="punto-codigo">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Corriente:</span>
+                      <span class="v" id="punto-corriente">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Cuenca:</span>
+                      <span class="v" id="punto-cuenca">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Subzona:</span>
+                      <span class="v" id="punto-subzona">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Departamento:</span>
+                      <span class="v" id="punto-depto">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Municipio:</span>
+                      <span class="v" id="punto-muni">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Coordenadas:</span>
+                      <span class="v" id="punto-coord">—</span>
+                    </div>
+                    <div>
+                      <span class="k">Elevación:</span>
+                      <span class="v" id="punto-elev">—</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vars-title">
+                  Variables medidas (toca una para ver su serie)
+                </div>
+                <div class="chips" id="chips-vars"></div>
+
+                <div class="chart-title">
+                  Serie histórica · <span id="chart-nombre">—</span>
+                </div>
+                <div class="chart-wrap">
+                  <div class="chart-legend">
+                    <span>Unidad: <strong id="chart-unidad">—</strong></span>
+                    <span id="chart-rango">—</span>
+                  </div>
+                  <svg
+                    id="chart"
+                    viewBox="0 0 520 200"
+                    preserveAspectRatio="none"
+                    style="width: 100%; height: 200px; display: block"
+                  ></svg>
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      font-size: 10px;
+                      color: var(--muted);
+                      padding: 4px 8px 0;
+                    "
+                  >
+                    <span id="chart-min">—</span>
+                    <span id="chart-max">—</span>
+                  </div>
+                </div>
+
+                <div class="tabla-title">Últimas mediciones del punto</div>
+                <table class="datos" id="tabla-datos">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Variable</th>
+                      <th style="text-align: right">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+
+                <div class="nota-lcm">
+                  <strong>Nota sobre los valores "&lt;X":</strong> cuando el
+                  IDEAM reporta un valor como <em>&lt;0,05</em>, significa que
+                  el resultado está
+                  <strong
+                    >por debajo del Límite de Cuantificación del Método
+                    (LCM)</strong
+                  >. El LCM puede cambiar con el tiempo para la misma variable.
+                  Por eso AquaQuest muestra estos valores tal como fueron
+                  reportados, sin inventar cifras.
+                </div>
+
+                <div class="fuente">
+                  Datos: IDEAM — Red de Referencia Nacional de Calidad del
+                  Agua.<br />
+                  Cobertura 2005 – 2026. Última actualización: julio 2026.
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <section
+            class="grid app-page"
+            id="page-juego"
+            data-app-page="juego"
+            hidden
+          >
+            <section class="col-game">
+              <div class="col-header">
+                Tu juego
+                <small>Acciones tuyas — no vienen de los datos</small>
+              </div>
+              <div class="panel">
+                <div class="aviso-juego">
+                  <strong>Importante:</strong> el XP aquí se gana por
+                  <em>lo que tú haces</em> por el agua, no por los valores que
+                  reporta el IDEAM. El XP <strong>solo</strong> sirve como tu
+                  reputación personal: refleja tu camino, no desbloquea nada.
+                  Los datos de la izquierda te inspiran; tu acción es lo que
+                  cuenta.
+                </div>
+
+                <div class="perfil">
+                  <div class="perfil-top">
+                    <div class="avatar" id="perfil-avatar">AQ</div>
+                    <div class="perfil-info">
+                      <input
+                        id="usuario-nombre"
+                        type="text"
+                        value=""
+                        maxlength="30"
+                        title="Haz clic para editar tu nombre"
+                      />
+                      <div class="nivel" id="usuario-nivel">
+                        Nivel 1 · Semilla
+                      </div>
+                    </div>
+                    <div class="xp-bloque">
+                      <div class="num" id="usuario-xp">0</div>
+                      <div class="lbl">XP TOTAL</div>
+                    </div>
+                  </div>
+                  <div class="progreso">
+                    <div class="progreso-fill" id="progreso-fill"></div>
+                  </div>
+                  <div class="progreso-txt">
+                    <span id="progreso-txt-min">0 XP</span>
+                    <span id="progreso-txt-max">100 XP al siguiente nivel</span>
+                  </div>
+                </div>
+
+                <div class="retos-title">Retos de acción real (tipo B)</div>
+                <div class="retos-lista" id="retos-lista"></div>
+
+                <div class="retos-title">Tu bitácora de acciones</div>
+                <div class="bitacora" id="bitacora">
+                  <div class="bitacora-vacia">
+                    Aún no has registrado acciones.<br />Completa un reto para
+                    empezar.
+                  </div>
+                </div>
+
+                <div id="btn-reset-root" style="display: contents"></div>
+              </div>
+            </section>
+          </section>
+
+          <!-- COMUNIDAD -->
+          <section
+            class="comunidad-wrap app-page"
+            id="page-comunidad"
+            data-app-page="comunidad"
+            hidden
+          >
+            <div class="comunidad-header">
+              Comunidad
+              <small
+                >Lo que compartimos entre todos — no son datos del IDEAM</small
+              >
+            </div>
+            <div class="comunidad-panel">
+              <div class="comunidad-aviso">
+                <strong>Este es un espacio entre personas.</strong> Aquí
+                compartimos lo que hacemos por el agua: acciones, ideas,
+                preguntas y logros. Nada de esto viene del IDEAM. Aquí no se
+                gana XP: se comparte porque vale la pena. La recompensa es
+                inspirar a otras personas a cuidar el agua.
+              </div>
+
+              <!-- Composer -->
+              <div class="composer">
+                <div class="composer-top">
+                  <div class="composer-avatar" id="composer-avatar">AQ</div>
+                  <textarea
+                    id="post-texto"
+                    placeholder="¿Qué hiciste hoy por el agua? ¿Una idea? ¿Una pregunta? Cuéntanos..."
+                    maxlength="500"
+                  ></textarea>
+                </div>
+
+                <div class="composer-categorias" id="composer-categorias"></div>
+
+                <div class="composer-preview" id="composer-preview">
+                  <img id="composer-preview-img" alt="Vista previa" />
+                  <span
+                    id="composer-quitar-root"
+                    style="display: contents"
+                  ></span>
+                </div>
+
+                <div class="composer-footer">
+                  <input
+                    type="file"
+                    id="input-foto"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                  <div
+                    id="composer-footer-root"
+                    style="display: contents"
+                  ></div>
+                </div>
+              </div>
+
+              <!-- Filtros -->
+              <div class="filtros" id="filtros"></div>
+
+              <!-- Feed -->
+              <div class="feed" id="feed"></div>
+            </div>
+          </section>
+
+          <section
+            class="guia-page app-page"
+            id="page-guia"
+            data-app-page="guia"
+            hidden
+          >
+            <section class="guia-intro" id="guia-intro">
+              <div class="guia-intro-copy">
+                <span class="guia-eyebrow">UNA MISIÓN PARA CADA GOTA</span>
+                <h2>El agua cuenta contigo</h2>
+                <p>
+                  Seis pasos cortos, ideas que sí puedes poner en práctica y
+                  datos que te van a sorprender. ¿Listo/a para convertirte en
+                  guardián del agua?
+                </p>
+                <div class="guia-intro-tags">
+                  <span>6 pasos</span><span>Preguntas rápidas</span
+                  ><span>Reto personal</span>
+                </div>
+                <button
+                  class="guia-btn guia-btn-principal"
+                  id="guia-empezar"
+                  type="button"
+                >
+                  Empezar <span aria-hidden="true">→</span>
+                </button>
+              </div>
+              <div class="guia-intro-art" aria-hidden="true">
+                <div class="guia-intro-burbuja burbuja-a"></div>
+                <div class="guia-intro-burbuja burbuja-b"></div>
+                <div class="guia-intro-gota">💧</div>
+                <div class="guia-intro-anillo"></div>
+              </div>
+            </section>
+
+            <section class="guia-recorrido" id="guia-recorrido" hidden>
+              <div class="guia-encabezado">
+                <div>
+                  <span class="guia-eyebrow">TU RUTA DE 6 PASOS</span>
+                  <h2>Pequeños cambios, gran impacto</h2>
+                </div>
+                <div
+                  class="guia-progreso"
+                  id="guia-progreso"
+                  role="progressbar"
+                  aria-label="Pasos completados"
+                  aria-valuemin="0"
+                  aria-valuemax="6"
+                  aria-valuenow="0"
+                >
+                  <svg
+                    class="guia-gota-progreso"
+                    viewBox="0 0 72 88"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <clipPath id="guia-gota-recorte">
+                        <path
+                          d="M36 5C29 17 10 39 10 56a26 26 0 0 0 52 0C62 39 43 17 36 5Z"
+                        />
+                      </clipPath>
+                      <linearGradient
+                        id="guia-agua-gradiente"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop offset="0" stop-color="#90e0ef" />
+                        <stop offset="1" stop-color="#00b4d8" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      class="guia-gota-fondo"
+                      d="M36 5C29 17 10 39 10 56a26 26 0 0 0 52 0C62 39 43 17 36 5Z"
+                    />
+                    <rect
+                      id="guia-agua"
+                      x="0"
+                      y="82"
+                      width="72"
+                      height="0"
+                      fill="url(#guia-agua-gradiente)"
+                      clip-path="url(#guia-gota-recorte)"
+                    />
+                    <path
+                      class="guia-gota-borde"
+                      d="M36 5C29 17 10 39 10 56a26 26 0 0 0 52 0C62 39 43 17 36 5Z"
+                    />
+                    <path class="guia-gota-brillo" d="M25 51c1-8 5-15 10-22" />
+                  </svg>
+                  <span id="guia-progreso-texto">0 de 6 pasos</span>
+                </div>
+              </div>
+
+              <article class="guia-paso-tarjeta">
+                <div class="guia-paso-arte" aria-hidden="true">
+                  <div class="guia-paso-aro"></div>
+                  <span id="guia-icono" class="guia-paso-icono">🚿</span>
+                  <span class="guia-paso-numero">
+                    PASO <span id="guia-numero-paso">1</span><small> / 6</small>
+                  </span>
+                </div>
+                <div class="guia-paso-contenido">
+                  <div id="guia-lectura">
+                    <span class="guia-eyebrow">UN HÁBITO QUE SUMA</span>
+                    <h3 id="guia-titulo-paso"></h3>
+
+                    <div class="guia-consejo">
+                      <span class="guia-caja-etiqueta">PRUÉBALO HOY</span>
+                      <p id="guia-consejo-texto"></p>
+                    </div>
+
+                    <div class="guia-dato">
+                      <span class="guia-dato-icono" aria-hidden="true">✦</span>
+                      <div>
+                        <strong>Dato curioso</strong>
+                        <p id="guia-dato-texto"></p>
+                        <a
+                          id="guia-fuente"
+                          href="#"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Ver fuente oficial ↗
+                        </a>
+                      </div>
+                    </div>
+
+                    <section
+                      class="guia-calculadora"
+                      id="guia-calculadora"
+                      hidden
+                    >
+                      <div>
+                        <span class="guia-caja-etiqueta">TU RETO PERSONAL</span>
+                        <h4>¿Cuánto podrías ahorrar en la ducha?</h4>
+                        <p>
+                          Escribe cuántos minutos te duchas al día y mira qué
+                          pasaría si la reduces a 5 minutos.
+                        </p>
+                      </div>
+                      <label for="guia-minutos-ducha"
+                        >Minutos de ducha al día</label
+                      >
+                      <div class="guia-minutos-control">
+                        <input
+                          id="guia-minutos-ducha"
+                          type="number"
+                          min="0"
+                          max="60"
+                          step="1"
+                          inputmode="numeric"
+                        />
+                        <span>min / día</span>
+                      </div>
+                      <div class="guia-ahorro-resultados">
+                        <div>
+                          <strong id="guia-ahorro-dia">—</strong
+                          ><span>L / día</span>
+                        </div>
+                        <div>
+                          <strong id="guia-ahorro-mes">—</strong
+                          ><span>L / mes</span>
+                        </div>
+                        <div>
+                          <strong id="guia-ahorro-anio">—</strong
+                          ><span>L / año</span>
+                        </div>
+                      </div>
+                      <p
+                        class="guia-calculadora-mensaje"
+                        id="guia-calculadora-mensaje"
+                        aria-live="polite"
+                      >
+                        Ingresa tus minutos para ver una estimación.
+                      </p>
+                      <small class="guia-calculadora-nota">
+                        Estimación basada en un caudal de ducha estándar de
+                        aproximadamente 9,5 L/min; el consumo real puede variar.
+                      </small>
+                    </section>
+
+                    <button
+                      class="guia-btn guia-btn-principal guia-responder"
+                      id="guia-abrir-pregunta"
+                      type="button"
+                    >
+                      Responder pregunta relámpago →
+                    </button>
+                  </div>
+
+                  <section
+                    class="guia-pregunta"
+                    id="guia-pregunta"
+                    aria-labelledby="guia-pregunta-texto"
+                    hidden
+                  >
+                    <span class="guia-caja-etiqueta">PREGUNTA RELÁMPAGO</span>
+                    <h4 id="guia-pregunta-texto"></h4>
+                    <div
+                      class="guia-opciones"
+                      id="guia-opciones"
+                      role="group"
+                      aria-labelledby="guia-pregunta-texto"
+                    ></div>
+                    <p
+                      class="guia-respuesta-mensaje"
+                      id="guia-respuesta-mensaje"
+                      aria-live="polite"
+                    ></p>
+                  </section>
+
+                  <p
+                    class="guia-aviso"
+                    id="guia-aviso-pregunta"
+                    role="status"
+                    aria-live="polite"
+                    hidden
+                  ></p>
+                  <div class="guia-navegacion">
+                    <button
+                      class="guia-btn guia-btn-secundario"
+                      id="guia-anterior"
+                      type="button"
+                    >
+                      ← Anterior
+                    </button>
+                    <span id="guia-paso-resumen">Paso 1 de 6</span>
+                    <button
+                      class="guia-btn guia-btn-principal"
+                      id="guia-siguiente"
+                      type="button"
+                      disabled
+                    >
+                      Siguiente →
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </section>
+
+            <section class="guia-final" id="guia-final" hidden>
+              <div class="guia-lluvia" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="guia-final-contenido">
+                <div class="guia-final-icono" aria-hidden="true">💧</div>
+                <span class="guia-eyebrow">MISIÓN CUMPLIDA</span>
+                <h2>¡Cada gota cuenta y la tuya también!</h2>
+                <p>
+                  Completaste los seis pasos. Elige un hábito para empezar hoy,
+                  compártelo y anima a alguien más a cuidar el agua.
+                </p>
+                <div class="guia-final-botones">
+                  <button
+                    class="guia-btn guia-btn-principal"
+                    id="guia-compartir"
+                    type="button"
+                  >
+                    Compartir logro ↗
+                  </button>
+                  <button
+                    class="guia-btn guia-btn-secundario"
+                    id="guia-reiniciar"
+                    type="button"
+                  >
+                    Volver a empezar
+                  </button>
+                </div>
+              </div>
+            </section>
+          </section>
+        </main>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal-fondo" id="modal-fondo">
+        <div
+          class="modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-titulo"
+        >
+          <h3 id="modal-titulo">Registrar acción</h3>
+          <p id="modal-desc">Cuéntanos brevemente qué hiciste.</p>
+          <textarea
+            id="modal-evidencia"
+            placeholder="Ej: Cerré la llave mientras me cepillé durante 2 minutos esta mañana..."
+          ></textarea>
+          <div class="modal-botones" id="modal-botones"></div>
         </div>
       </div>
 
-      <div class="retos-title">Retos de acción real (tipo B)</div>
-      <div class="retos-lista" id="retos-lista"></div>
-
-      <div class="retos-title">Tu bitácora de acciones</div>
-      <div class="bitacora" id="bitacora">
-        <div class="bitacora-vacia">Aún no has registrado acciones.<br>Completa un reto para empezar.</div>
-      </div>
-
-      <div id="btn-reset-root" style="display:contents"></div>
-    </div>
-  </section>
-
-</main>
-
-<!-- COMUNIDAD -->
-<section class="comunidad-wrap">
-  <div class="comunidad-header">
-    Comunidad
-    <small>Lo que compartimos entre todos — no son datos del IDEAM</small>
-  </div>
-  <div class="comunidad-panel">
-    <div class="comunidad-aviso">
-      <strong>Este es un espacio entre personas.</strong> Aquí compartimos lo que hacemos
-      por el agua: acciones, ideas, preguntas y logros. Nada de esto viene del IDEAM.
-      Aquí no se gana XP: se comparte porque vale la pena. La recompensa es inspirar
-      a otras personas a cuidar el agua.
-    </div>
-
-    <!-- Composer -->
-    <div class="composer">
-      <div class="composer-top">
-        <div class="composer-avatar" id="composer-avatar">AQ</div>
-        <textarea id="post-texto" placeholder="¿Qué hiciste hoy por el agua? ¿Una idea? ¿Una pregunta? Cuéntanos..." maxlength="500"></textarea>
-      </div>
-
-      <div class="composer-categorias" id="composer-categorias"></div>
-
-      <div class="composer-preview" id="composer-preview">
-        <img id="composer-preview-img" alt="Vista previa">
-        <span id="composer-quitar-root" style="display:contents"></span>
-      </div>
-
-      <div class="composer-footer">
-        <input type="file" id="input-foto" accept="image/*" style="display:none">
-        <div id="composer-footer-root" style="display:contents"></div>
+      <!-- Modal Swagger OpenAPI 3.0 -->
+      <div class="modal-fondo swagger-modal-fondo" id="swagger-modal-fondo">
+        <div
+          class="swagger-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="swagger-modal-titulo"
+        >
+          <div class="swagger-modal-header">
+            <div>
+              <h3 id="swagger-modal-titulo">
+                Documentación interactiva API — AquaQuest Colombia
+              </h3>
+              <small
+                >OpenAPI 3.0 · Conectada en vivo con los modelos de la
+                aplicación y la base de datos IDEAM</small
+              >
+            </div>
+            <div class="swagger-modal-actions">
+              <a
+                href="openapi.json"
+                download="aquaquest-openapi.json"
+                class="btn-swagger-download"
+                title="Descargar especificación OpenAPI 3.0"
+                >⬇ openapi.json</a
+              >
+              <div id="swagger-close-root" style="display: contents"></div>
+            </div>
+          </div>
+          <div id="swagger-ui" class="swagger-ui-container"></div>
+        </div>
       </div>
     </div>
+    <!-- /#app -->
 
-    <!-- Filtros -->
-    <div class="filtros" id="filtros"></div>
+    <div class="toast" id="toast"></div>
 
-    <!-- Feed -->
-    <div class="feed" id="feed"></div>
-  </div>
-</section>
-
-<!-- Modal -->
-<div class="modal-fondo" id="modal-fondo">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
-    <h3 id="modal-titulo">Registrar acción</h3>
-    <p id="modal-desc">Cuéntanos brevemente qué hiciste.</p>
-    <textarea id="modal-evidencia" placeholder="Ej: Cerré la llave mientras me cepillé durante 2 minutos esta mañana..."></textarea>
-    <div class="modal-botones" id="modal-botones"></div>
-  </div>
-</div>
-
-<!-- Modal Swagger OpenAPI 3.0 -->
-<div class="modal-fondo swagger-modal-fondo" id="swagger-modal-fondo">
-  <div class="swagger-modal" role="dialog" aria-modal="true" aria-labelledby="swagger-modal-titulo">
-    <div class="swagger-modal-header">
-      <div>
-        <h3 id="swagger-modal-titulo">Documentación interactiva API — AquaQuest Colombia</h3>
-        <small>OpenAPI 3.0 · Conectada en vivo con los modelos de la aplicación y la base de datos IDEAM</small>
-      </div>
-      <div class="swagger-modal-actions">
-        <a href="openapi.json" download="aquaquest-openapi.json" class="btn-swagger-download" title="Descargar especificación OpenAPI 3.0">⬇ openapi.json</a>
-        <div id="swagger-close-root" style="display:contents"></div>
-      </div>
-    </div>
-    <div id="swagger-ui" class="swagger-ui-container"></div>
-  </div>
-</div>
-
-</div><!-- /#app -->
-
-<div class="toast" id="toast"></div>
-
-<!-- =========================================================
+    <!-- =========================================================
      REACT 18 (CDN) + SWAGGER UI + SCRIPTS (utils → components → models → views → controllers)
      ========================================================= -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"
+    ></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/components/ReactButtons.js"></script>
 
-<script src="js/utils/helpers.js"></script>
-<script src="js/components/ReactButtons.js"></script>
+    <script src="js/models/StorageService.js"></script>
+    <script src="js/models/AuthModel.js"></script>
+    <script src="js/models/IdeamCsvData.js"></script>
+    <script src="js/models/DatosModel.js"></script>
+    <script src="js/models/JuegoModel.js"></script>
+    <script src="js/models/ComunidadModel.js"></script>
 
-<script src="js/models/StorageService.js"></script>
-<script src="js/models/AuthModel.js"></script>
-<script src="js/models/IdeamCsvData.js"></script>
-<script src="js/models/DatosModel.js"></script>
-<script src="js/models/JuegoModel.js"></script>
-<script src="js/models/ComunidadModel.js"></script>
+    <script src="js/views/UIView.js"></script>
+    <script src="js/views/GuiaView.js"></script>
+    <script src="js/views/AuthView.js"></script>
+    <script src="js/views/DatosView.js"></script>
+    <script src="js/views/JuegoView.js"></script>
+    <script src="js/views/ComunidadView.js"></script>
 
-<script src="js/views/UIView.js"></script>
-<script src="js/views/AuthView.js"></script>
-<script src="js/views/DatosView.js"></script>
-<script src="js/views/JuegoView.js"></script>
-<script src="js/views/ComunidadView.js"></script>
-
-<script src="js/controllers/AuthController.js"></script>
-<script src="js/controllers/DatosController.js"></script>
-<script src="js/controllers/JuegoController.js"></script>
-<script src="js/controllers/ComunidadController.js"></script>
-<script src="js/controllers/SwaggerController.js"></script>
-<script src="js/controllers/AppController.js"></script>
-</body>
+    <script src="js/controllers/AuthController.js"></script>
+    <script src="js/controllers/DatosController.js"></script>
+    <script src="js/controllers/JuegoController.js"></script>
+    <script src="js/controllers/ComunidadController.js"></script>
+    <script src="js/controllers/SwaggerController.js"></script>
+    <script src="js/controllers/GuiaController.js"></script>
+    <script src="js/controllers/AppController.js"></script>
+  </body>
 </html>
