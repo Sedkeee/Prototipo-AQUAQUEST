@@ -87,12 +87,42 @@
     },
 
     bindNavegacion() {
+      const hamburger = $("hamburger-btn");
+      const sidebar = document.querySelector(".app-sidebar");
+      const overlay = $("sidebar-overlay");
+
+      function toggleSidebar(open) {
+        if (!sidebar) return;
+        const isOpen = typeof open === "boolean" ? open : !sidebar.classList.contains("open");
+        sidebar.classList.toggle("open", isOpen);
+        if (overlay) overlay.classList.toggle("active", isOpen);
+        if (hamburger) hamburger.setAttribute("aria-expanded", String(isOpen));
+        document.body.style.overflow = isOpen ? "hidden" : "";
+      }
+
+      if (hamburger) {
+        hamburger.addEventListener("click", function () { toggleSidebar(); });
+      }
+      if (overlay) {
+        overlay.addEventListener("click", function () { toggleSidebar(false); });
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && sidebar && sidebar.classList.contains("open")) {
+          toggleSidebar(false);
+        }
+      });
+
       $("app").addEventListener("click", (evento) => {
         const enlace =
           evento.target.closest && evento.target.closest("[data-ir-seccion]");
         if (!enlace || !$("app").contains(enlace)) return;
         evento.preventDefault();
         mostrarSeccion(enlace.dataset.irSeccion);
+        /* Close sidebar on mobile after navigation */
+        if (window.innerWidth <= 768) {
+          toggleSidebar(false);
+        }
       });
     },
 

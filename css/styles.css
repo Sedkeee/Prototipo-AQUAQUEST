@@ -2680,3 +2680,418 @@ table.datos .valor {
     transition: none;
   }
 }
+
+
+/* ============================================================
+   FASE 1 · RESPONSIVE GLOBAL
+   Hamburguesa, sidebar colapsable, tablas scroll, ajustes móvil
+   ============================================================ */
+
+/* ---------- Hamburger Button ---------- */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(15, 36, 56, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.hamburger-btn:hover {
+  border-color: var(--water-1);
+  background: rgba(0, 180, 216, 0.1);
+}
+.hamburger-btn[aria-expanded="true"] {
+  border-color: var(--water-1);
+}
+.hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ---------- Sidebar Overlay ---------- */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 49;
+  backdrop-filter: blur(2px);
+}
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ---------- Table Responsive Wrapper ---------- */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Footer ---------- */
+.app-footer {
+  padding: 24px 32px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.app-footer a {
+  color: var(--water-3);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+.app-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.footer-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ===== MOBILE: <= 768px ===== */
+@media (max-width: 768px) {
+  /* Show hamburger */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Header adjustments */
+  header {
+    padding: 12px 16px;
+  }
+  .brand {
+    gap: 8px;
+  }
+  .brand .tag {
+    display: none;
+  }
+  .brand h1 {
+    font-size: 17px;
+  }
+  .brand .badge-poc {
+    display: none;
+  }
+
+  /* Sidebar as drawer */
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 260px;
+    max-width: 80vw;
+    z-index: 50;
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(18, 43, 64, 0.99), rgba(10, 25, 41, 0.99));
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    padding: 24px 16px;
+    box-shadow: none;
+  }
+  .app-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Restore sidebar styles when open as drawer */
+  .app-sidebar .sidebar-caption,
+  .app-sidebar .sidebar-note {
+    display: block;
+  }
+  .app-sidebar .sidebar-nav {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .app-sidebar .sidebar-link {
+    justify-content: flex-start;
+    flex-direction: row;
+    font-size: 13px;
+    padding: 10px 12px;
+    white-space: normal;
+  }
+  .app-sidebar .nav-icon {
+    width: 22px;
+    font-size: 17px;
+  }
+
+  /* Layout single column */
+  .app-layout {
+    grid-template-columns: 1fr;
+    padding: 12px 14px 32px;
+    gap: 12px;
+  }
+
+  /* Dashboard */
+  .dashboard-hero {
+    min-height: 0;
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+  .dashboard-hero h2 {
+    font-size: 26px;
+  }
+  .dashboard-hero p {
+    font-size: 12px;
+  }
+  .dashboard-art {
+    width: 100px;
+    height: 100px;
+    flex-basis: auto;
+  }
+  .dashboard-orb {
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+  }
+  .dashboard-orbit, .orbit-two {
+    display: none;
+  }
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .dashboard-card {
+    min-height: 180px;
+    padding: 18px;
+  }
+  .dashboard-section-title h2 {
+    font-size: 18px;
+  }
+
+  /* Data panel */
+  .info-punto .grid-info {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .chart-wrap {
+    padding: 10px 6px 4px;
+  }
+  .chart-legend {
+    flex-direction: column;
+    gap: 2px;
+    font-size: 10px;
+  }
+
+  /* Tables: horizontal scroll */
+  table.datos {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  /* Chips: horizontal scroll */
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    gap: 6px;
+  }
+  .chip {
+    flex-shrink: 0;
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  /* Community */
+  .comunidad-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .comunidad-header small {
+    margin-left: 0;
+  }
+  .composer-categorias,
+  .composer-footer,
+  .composer-preview {
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .feed {
+    grid-template-columns: 1fr;
+  }
+
+  /* Game */
+  .perfil-top {
+    flex-wrap: wrap;
+  }
+  .xp-bloque {
+    text-align: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .xp-bloque .num {
+    font-size: 18px;
+  }
+  .reto {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Guide */
+  .guia-intro {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    min-height: 0;
+  }
+  .guia-intro-art {
+    min-height: 140px;
+  }
+  .guia-paso-tarjeta {
+    grid-template-columns: 1fr;
+  }
+  .guia-paso-arte {
+    min-height: 140px;
+  }
+  .guia-paso-contenido {
+    padding: 16px;
+  }
+  .guia-opciones {
+    grid-template-columns: 1fr;
+  }
+
+  /* Modals */
+  .modal-fondo {
+    padding: 12px;
+  }
+  .modal {
+    max-width: 100%;
+    padding: 18px;
+  }
+  .swagger-modal {
+    width: 100%;
+    height: 92vh;
+  }
+
+  /* Toast */
+  .toast {
+    right: 12px;
+    left: 12px;
+    max-width: none;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  /* Footer */
+  .app-footer {
+    padding: 20px 14px;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+
+/* ===== SMALL MOBILE: <= 360px ===== */
+@media (max-width: 360px) {
+  header {
+    padding: 10px 10px;
+  }
+  .brand h1 {
+    font-size: 15px;
+  }
+  .hamburger-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .user-menu {
+    padding: 2px;
+  }
+  .user-menu .u-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+  .app-layout {
+    padding: 8px 8px 24px;
+  }
+  .dashboard-hero {
+    padding: 16px;
+  }
+  .dashboard-hero h2 {
+    font-size: 22px;
+  }
+  .dashboard-card {
+    min-height: 160px;
+    padding: 14px;
+  }
+  .panel {
+    padding: 14px;
+  }
+  .comunidad-panel {
+    padding: 14px;
+  }
+  .composer {
+    padding: 12px;
+  }
+  .guia-intro {
+    padding: 16px;
+  }
+  .guia-paso-contenido {
+    padding: 14px;
+  }
+  .guia-final {
+    padding: 16px;
+  }
+  .guia-ahorro-resultados {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== TABLET: 769px - 1024px ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .app-layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 16px;
+    padding: 18px;
+  }
+  .sidebar-link {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .dashboard-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dashboard-hero {
+    padding: 24px;
+    min-height: 220px;
+  }
+}
