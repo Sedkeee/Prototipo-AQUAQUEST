@@ -3556,10 +3556,13 @@ table.datos .valor {
   box-shadow: 0 0 16px rgba(0, 180, 216, 0.25);
   overflow: hidden;
 }
-.nosotros-avatar img {
+.nosotros-avatar img,
+.equipo-avatar {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
+  display: block;
 }
 .nosotros-avatar-placeholder {
   font-size: 22px;
@@ -3713,4 +3716,9 @@ table.datos .valor {
   .contacto-titulo {
     font-size: 19px;
   }
+}
+
+/* Truco para hacer el mapa oscuro sin API Key */
+.leaflet-layer {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }

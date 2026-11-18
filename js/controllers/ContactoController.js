@@ -5,12 +5,32 @@
 (function () {
   const UI = AQ.views.UI;
 
-  /* Credenciales EmailJS — reemplaza con tus valores de .env.example */
+  /* Credenciales EmailJS — pega aquí tus claves o en el archivo .env */
   const EMAILJS_CONFIG = {
-    serviceId: "service_aquaquest",
-    templateId: "template_contacto",
+    serviceId: "tu_service_id_aqui",
+    templateId: "tu_template_id_aqui",
     publicKey: "tu_public_key_aqui",
   };
+
+  /* Intenta cargar .env automáticamente si se ejecuta desde un servidor local */
+  function cargarDotEnv() {
+    if (typeof fetch !== "function") return;
+    fetch(".env")
+      .then((r) => (r.ok ? r.text() : ""))
+      .then((txt) => {
+        if (!txt) return;
+        txt.split(/\r?\n/).forEach((line) => {
+          const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.+?)\s*$/);
+          if (!m) return;
+          const k = m[1];
+          const v = m[2].replace(/^['"]|['"]$/g, "");
+          if (k === "EMAILJS_SERVICE_ID" && !isPlaceholder(v)) EMAILJS_CONFIG.serviceId = v;
+          if (k === "EMAILJS_TEMPLATE_ID" && !isPlaceholder(v)) EMAILJS_CONFIG.templateId = v;
+          if (k === "EMAILJS_PUBLIC_KEY" && !isPlaceholder(v)) EMAILJS_CONFIG.publicKey = v;
+        });
+      })
+      .catch(() => {});
+  }
 
   /* Permite sobreescribir credenciales desde window.AQUAQUEST_CONFIG */
   function getConfig() {
@@ -27,6 +47,8 @@
       !val ||
       val === "service_aquaquest" ||
       val === "template_contacto" ||
+      val === "tu_service_id_aqui" ||
+      val === "tu_template_id_aqui" ||
       val === "tu_public_key_aqui" ||
       val.startsWith("YOUR_")
     );
@@ -125,9 +147,17 @@
     }
 
     try {
-      emailjs.init({ publicKey: config.publicKey });
+      /* Inicializa EmailJS con tu Public Key */
+      emailjs.init(config.publicKey);
+
+      /* Envía el correo con Service ID, Template ID y las variables del template */
       emailjs
-        .sendForm(config.serviceId, config.templateId, form)
+        .send(config.serviceId, config.templateId, {
+          from_name: nombre,
+          reply_to: email,
+          subject: asunto || "Mensaje desde AquaQuest Colombia",
+          message: mensaje,
+        })
         .then(() => {
           setStatus("success", "<strong>¡Mensaje enviado con éxito!</strong> Nos pondremos en contacto pronto.");
           UI.mostrarToast("Correo enviado exitosamente");
@@ -153,6 +183,7 @@
 
   AQ.controllers.Contacto = {
     init() {
+      cargarDotEnv();
       const form = document.getElementById("contacto-form");
       if (!form) return;
       form.removeEventListener("submit", handleSubmit);
