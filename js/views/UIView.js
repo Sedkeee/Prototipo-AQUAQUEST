@@ -6,25 +6,45 @@
   const esc = AQ.utils.escapeHtml;
   let toastTimer = null;
   let logoutHandler = null;
-  let verLoginHandler = null;
   let verSwaggerHandler = null;
+
+  function mostrarSeccion(nombre) {
+    let existe = false;
+    document.querySelectorAll("[data-app-page]").forEach((pagina) => {
+      const activa = pagina.dataset.appPage === nombre;
+      pagina.hidden = !activa;
+      if (activa) existe = true;
+    });
+    if (!existe) return;
+
+    document.querySelectorAll(".sidebar-link").forEach((enlace) => {
+      const activo = enlace.dataset.irSeccion === nombre;
+      enlace.classList.toggle("active", activo);
+      if (activo) enlace.setAttribute("aria-current", "page");
+      else enlace.removeAttribute("aria-current");
+    });
+    window.scrollTo(0, 0);
+  }
 
   function renderBotonesHeader() {
     const { h, mount, HeaderActions } = AQ.components;
     mount(
       $("header-actions-root"),
       h(HeaderActions, {
+        esAdmin: $("app").dataset.role === "admin",
         onVerSwagger: () => verSwaggerHandler && verSwaggerHandler(),
-        onVerLogin: () => verLoginHandler && verLoginHandler(),
-        onLogout: () => logoutHandler && logoutHandler()
-      })
+        onLogout: () => logoutHandler && logoutHandler(),
+      }),
     );
   }
 
   AQ.views.UI = {
     mostrarToast(msg, tipo) {
       const t = $("toast");
-      t.innerHTML = esc(msg).replace(/(\+?\d+\s*XP)/, '<span class="xp">$1</span>');
+      t.innerHTML = esc(msg).replace(
+        /(\+?\d+\s*XP)/,
+        '<span class="xp">$1</span>',
+      );
       t.className = "toast" + (tipo ? " " + tipo : "");
       void t.offsetWidth;
       t.classList.add("visible");
@@ -32,7 +52,9 @@
       toastTimer = setTimeout(() => t.classList.remove("visible"), 2600);
     },
 
-    confirmar(msg) { return window.confirm(msg); },
+    confirmar(msg) {
+      return window.confirm(msg);
+    },
 
     /** Alterna entre la pantalla de login y la aplicación. */
     mostrarPantalla(nombre) {
@@ -49,6 +71,8 @@
       $("header-avatar").textContent = usuario.avatar;
       $("header-nombre").textContent = usuario.nombre;
       $("header-correo").textContent = usuario.correo;
+      $("dashboard-nombre").textContent = usuario.nombre;
+      $("app").dataset.role = usuario.rol === "admin" ? "admin" : "consultor";
       renderBotonesHeader();
     },
 
@@ -57,14 +81,21 @@
       renderBotonesHeader();
     },
 
-    bindVerLogin(handler) {
-      verLoginHandler = handler;
-      renderBotonesHeader();
-    },
-
     bindVerSwagger(handler) {
       verSwaggerHandler = handler;
       renderBotonesHeader();
-    }
+    },
+
+    bindNavegacion() {
+      $("app").addEventListener("click", (evento) => {
+        const enlace =
+          evento.target.closest && evento.target.closest("[data-ir-seccion]");
+        if (!enlace || !$("app").contains(enlace)) return;
+        evento.preventDefault();
+        mostrarSeccion(enlace.dataset.irSeccion);
+      });
+    },
+
+    mostrarSeccion,
   };
 })();
