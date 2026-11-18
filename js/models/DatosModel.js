@@ -6,6 +6,14 @@
    PUNTOS_MONITOREO, VARIABLES, MUESTRAS y MEDICIONES).
    ============================================================ */
 (function () {
+  /* ---------- Metadatos del estudio (Fase 4) ---------- */
+  const META_ESTUDIO = {
+    nombre: "Monitoreo de Calidad del Agua Superficial — Red IDEAM Colombia",
+    objetivo:
+      "Evaluar y monitorear la calidad del recurso hídrico superficial en Colombia mediante el análisis de variables fisicoquímicas y microbiológicas, generando información técnica para la toma de decisiones en gestión ambiental y protección del agua.",
+    sector: "Medio ambiente — Recursos hídricos",
+  };
+
   const VARIABLES = {
     ph: {
       id_variable: 1,
@@ -352,6 +360,18 @@
 
   AQ.models.Datos = {
     VARIABLES,
+
+    /** Metadatos fijos del estudio IDEAM (Fase 4) */
+    metaEstudio(variableActualId) {
+      var v = VARIABLES[variableActualId];
+      return {
+        nombre: META_ESTUDIO.nombre,
+        objetivo: META_ESTUDIO.objetivo,
+        sector: META_ESTUDIO.sector,
+        variable: v ? v.nombre + " (" + v.unidad + ")" : "—",
+        variableCategoria: v ? v.categoria : "",
+      };
+    },
 
     get PUNTO() {
       return estacionActual;

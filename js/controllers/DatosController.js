@@ -22,6 +22,7 @@
     );
     View.renderInfoPunto(p);
     View.renderChips(Model.VARIABLES, variableActual, seleccionarVariable);
+    View.renderResenaEstudio(Model.metaEstudio(variableActual));
     View.renderChart(
       Model.VARIABLES[variableActual],
       Model.serie(variableActual),
@@ -41,6 +42,7 @@
   function seleccionarVariable(id) {
     variableActual = id;
     View.renderChips(Model.VARIABLES, variableActual, seleccionarVariable);
+    View.renderResenaEstudio(Model.metaEstudio(variableActual));
     View.renderChart(
       Model.VARIABLES[variableActual],
       Model.serie(variableActual),

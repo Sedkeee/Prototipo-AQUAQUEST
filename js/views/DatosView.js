@@ -376,6 +376,24 @@
     },
 
     /**
+     * Render study description cards (Phase 4).
+     * @param {object} meta - { nombre, objetivo, sector, variable, variableCategoria }
+     */
+    renderResenaEstudio(meta) {
+      var el;
+      el = $("resena-nombre");
+      if (el) el.textContent = meta.nombre;
+      el = $("resena-objetivo");
+      if (el) el.textContent = meta.objetivo;
+      el = $("resena-variable");
+      if (el) el.textContent = meta.variable;
+      el = $("resena-variable-cat");
+      if (el) el.textContent = meta.variableCategoria ? "Categoría: " + meta.variableCategoria : "";
+      el = $("resena-sector");
+      if (el) el.textContent = meta.sector;
+    },
+
+    /**
      * Render chart with Chart.js or fallback SVG.
      * @param {object} variable - Variable metadata { nombre, unidad, ... }
      * @param {object} serie - { puntos, totalMuestras, primeraFecha, ultimaFecha }

@@ -3351,3 +3351,128 @@ table.datos .valor {
     font-size: 12px;
   }
 }
+
+/* ============================================================
+   FASE 4 · RESEÑA / DESCRIPCIÓN DEL ESTUDIO (cards con íconos SVG)
+   ============================================================ */
+.resena-estudio {
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+.resena-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--water-3);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  margin-bottom: 12px;
+}
+.resena-title-icon {
+  font-size: 16px;
+}
+.resena-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.resena-card {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.resena-card:hover {
+  border-color: var(--water-1);
+  box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.1);
+}
+.resena-card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(0, 180, 216, 0.1);
+  color: var(--water-1);
+}
+.resena-card--variable .resena-card-icon {
+  background: rgba(82, 183, 136, 0.12);
+  color: var(--green-1);
+}
+.resena-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.resena-card-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.resena-card-value {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.45;
+  word-break: break-word;
+}
+.resena-card--variable .resena-card-value {
+  color: var(--green-1);
+  font-weight: 700;
+  font-size: 14px;
+}
+.resena-card-sub {
+  font-size: 10.5px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Responsive: 2x2 on tablet */
+@media (max-width: 1024px) {
+  .resena-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Responsive: 1 column on mobile */
+@media (max-width: 600px) {
+  .resena-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .resena-card {
+    padding: 12px;
+    gap: 10px;
+  }
+  .resena-card-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .resena-card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .resena-card-value {
+    font-size: 12px;
+  }
+  .resena-card--variable .resena-card-value {
+    font-size: 13px;
+  }
+}
+@media (max-width: 360px) {
+  .resena-title {
+    font-size: 12px;
+  }
+  .resena-card {
+    padding: 10px;
+  }
+}
