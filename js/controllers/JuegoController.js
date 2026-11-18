@@ -16,7 +16,7 @@
     const xp = Model.xp();
     View.renderPerfil(usuario, xp, Model.calcularNivel(xp));
     View.renderRetos(Model.RETOS, Model.retosCompletados(), abrirModal);
-    View.renderBitacora(Model.acciones(), id => Model.obtenerReto(id));
+    View.renderBitacora(Model.acciones(), (id) => Model.obtenerReto(id));
   }
 
   function abrirModal(retoId) {
@@ -31,7 +31,10 @@
 
   function confirmarAccion() {
     if (!retoSeleccionado) return;
-    const xpGanado = Model.registrarAccion(retoSeleccionado.id, View.evidencia());
+    const xpGanado = Model.registrarAccion(
+      retoSeleccionado.id,
+      View.evidencia(),
+    );
     if (xpGanado === null) return;
     Auth.actualizarPerfil({ xp_total: Model.xp() });
     cerrarModal();
@@ -40,14 +43,21 @@
   }
 
   function cambiarNombre(valor) {
-    const actualizado = Auth.actualizarPerfil({ nombre: valor.trim() || "Anónimo" });
+    const actualizado = Auth.actualizarPerfil({
+      nombre: valor.trim() || "Anónimo",
+    });
     if (!actualizado) return;
     usuario = actualizado;
     onPerfilCambiado(usuario);
   }
 
   function resetProgreso() {
-    if (!UI.confirmar("¿Seguro que quieres borrar tu progreso (XP, retos, bitácora y posts propios)?\nLas publicaciones de otras personas se mantendrán.")) return;
+    if (
+      !UI.confirmar(
+        "¿Seguro que quieres borrar tu progreso (XP, retos, bitácora y posts propios)?\nLas publicaciones de otras personas se mantendrán.",
+      )
+    )
+      return;
     Model.reset();
     Auth.actualizarPerfil({ xp_total: 0 });
     AQ.models.Comunidad.resetUsuario();
@@ -68,13 +78,14 @@
         View.bindModal({
           onCancelar: cerrarModal,
           onConfirmar: confirmarAccion,
-          onEvidencia: txt => View.setConfirmarHabilitado(txt.trim().length >= 3)
+          onEvidencia: (txt) =>
+            View.setConfirmarHabilitado(txt.trim().length >= 3),
         });
         View.bindReset(resetProgreso);
         enlazado = true;
       }
       cerrarModal();
       renderTodo();
-    }
+    },
   };
 })();
