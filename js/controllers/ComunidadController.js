@@ -14,25 +14,36 @@
   const comentariosAbiertos = new Set();
 
   const handlersFeed = {
-    onLike(id) { Model.toggleLike(id); refrescar(); },
+    onLike(id) {
+      Model.toggleLike(id);
+      refrescar();
+    },
     onComentar(id, texto) {
       const t = String(texto || "").trim();
       if (t.length < 2) return;
-      if (!Model.comentar(id, usuario.nombre, t)) return UI.mostrarToast("No se pudo guardar el comentario");
+      if (!Model.comentar(id, usuario.nombre, t))
+        return UI.mostrarToast("No se pudo guardar el comentario");
       comentariosAbiertos.add(id);
       refrescar();
     },
     onToggleComentarios(id, abierto) {
-      if (abierto) comentariosAbiertos.add(id); else comentariosAbiertos.delete(id);
-    }
+      if (abierto) comentariosAbiertos.add(id);
+      else comentariosAbiertos.delete(id);
+    },
   };
 
   function refrescar() {
-    View.renderFeed(Model.obtenerPosts(filtroActual), Model.CATEGORIAS, handlersFeed, comentariosAbiertos);
+    View.renderFeed(
+      Model.obtenerPosts(filtroActual),
+      Model.CATEGORIAS,
+      handlersFeed,
+      comentariosAbiertos,
+    );
   }
 
   async function adjuntarFoto(file) {
-    if (!file.type.startsWith("image/")) return UI.mostrarToast("Solo se permiten imágenes");
+    if (!file.type.startsWith("image/"))
+      return UI.mostrarToast("Solo se permiten imágenes");
     try {
       imagenComposer = await AQ.utils.comprimirImagen(file, 800, 0.7);
       View.mostrarPreview(imagenComposer);
@@ -51,10 +62,14 @@
     const texto = View.textoComposer().trim();
     if (texto.length < 3) return;
     const post = Model.publicar({
-      autor: usuario.nombre, avatar: usuario.avatar,
-      categoria: categoriaComposer, texto, imagen: imagenComposer
+      autor: usuario.nombre,
+      avatar: usuario.avatar,
+      categoria: categoriaComposer,
+      texto,
+      imagen: imagenComposer,
     });
-    if (!post) return UI.mostrarToast("Espacio lleno. Considera borrar algunas fotos.");
+    if (!post)
+      return UI.mostrarToast("Espacio lleno. Considera borrar algunas fotos.");
     imagenComposer = null;
     View.limpiarComposer();
     refrescar();
@@ -69,13 +84,18 @@
 
       if (!enlazado) {
         View.bindComposer({
-          onTexto: t => View.setPublicarHabilitado(t.trim().length >= 3),
-          onCategoria: c => { categoriaComposer = c; },
+          onTexto: (t) => View.setPublicarHabilitado(t.trim().length >= 3),
+          onCategoria: (c) => {
+            categoriaComposer = c;
+          },
           onFoto: adjuntarFoto,
           onQuitarFoto: quitarFoto,
-          onPublicar: publicar
+          onPublicar: publicar,
         });
-        View.bindFiltros(f => { filtroActual = f; refrescar(); });
+        View.bindFiltros((f) => {
+          filtroActual = f;
+          refrescar();
+        });
         enlazado = true;
       }
 
@@ -90,6 +110,6 @@
       View.renderComposerAvatar(u.avatar);
     },
 
-    refrescar
+    refrescar,
   };
 })();
