@@ -14,8 +14,12 @@
   const AVATARES = ["AQ", "CO", "AG", "EX", "PR", "ID", "CU", "SN"];
   const RE_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  const toHex = bytes => Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("");
-  const normalizar = c => String(c || "").trim().toLowerCase();
+  const toHex = (bytes) =>
+    Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+  const normalizar = (c) =>
+    String(c || "")
+      .trim()
+      .toLowerCase();
 
   function generarSal() {
     const a = new Uint8Array(16);
@@ -30,12 +34,15 @@
       return toHex(new Uint8Array(buf));
     }
     let h = 2166136261;
-    for (const b of data) { h ^= b; h = Math.imul(h, 16777619); }
+    for (const b of data) {
+      h ^= b;
+      h = Math.imul(h, 16777619);
+    }
     return "fnv" + (h >>> 0).toString(16);
   }
 
   const leerTablaUsuarios = () => S.get(USUARIOS_KEY, {});
-  const guardarTablaUsuarios = u => S.set(USUARIOS_KEY, u);
+  const guardarTablaUsuarios = (u) => S.set(USUARIOS_KEY, u);
 
   /** Quita los campos sensibles antes de exponer el registro de USUARIOS. */
   function publico(u) {
@@ -46,18 +53,24 @@
 
   function leerSesion() {
     try {
-      const raw = sessionStorage.getItem(SESION_KEY) || localStorage.getItem(SESION_KEY);
+      const raw =
+        sessionStorage.getItem(SESION_KEY) || localStorage.getItem(SESION_KEY);
       return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; }
+    } catch (e) {
+      return null;
+    }
   }
 
   function guardarSesion(correo, recordar) {
-    const sesion = JSON.stringify({ correo: normalizar(correo), inicio: Date.now() });
+    const sesion = JSON.stringify({
+      correo: normalizar(correo),
+      inicio: Date.now(),
+    });
     (recordar ? localStorage : sessionStorage).setItem(SESION_KEY, sesion);
   }
 
   function siguienteIdUsuario(lista) {
-    const ids = Object.values(lista).map(u => Number(u.id_usuario) || 0);
+    const ids = Object.values(lista).map((u) => Number(u.id_usuario) || 0);
     return ids.length ? Math.max(...ids) + 1 : 1;
   }
 
@@ -83,7 +96,7 @@
         creado: "2026-09-01T10:00:00.000Z",
         sal: salCamila,
         hash: hashCamila,
-        contrasena_hash: `${salCamila}:${hashCamila}`
+        contrasena_hash: `${salCamila}:${hashCamila}`,
       };
     }
 
@@ -101,7 +114,7 @@
         creado: "2026-09-01T10:00:00.000Z",
         sal: salAdmin,
         hash: hashAdmin,
-        contrasena_hash: `${salAdmin}:${hashAdmin}`
+        contrasena_hash: `${salAdmin}:${hashAdmin}`,
       };
     }
 
@@ -115,7 +128,7 @@
       const res = await fetch(ruta, {
         method: metodo,
         headers: { "Content-Type": "application/json" },
-        body: body ? JSON.stringify(body) : undefined
+        body: body ? JSON.stringify(body) : undefined,
       });
       if (res.status === 404) return null;
       return await res.json();
@@ -131,11 +144,16 @@
 
     /** Devuelve un mensaje de error o null si los datos son válidos. */
     validarRegistro({ nombre, correo, password, password2 }) {
-      if (!nombre || nombre.trim().length < 2) return "Tu nombre debe tener al menos 2 caracteres.";
-      if (nombre.trim().length > 30) return "Tu nombre puede tener máximo 30 caracteres.";
-      if (!RE_CORREO.test(normalizar(correo))) return "Escribe un correo electrónico válido.";
-      if (!password || password.length < 6) return "La contraseña debe tener al menos 6 caracteres.";
-      if (password2 !== undefined && password !== password2) return "Las contraseñas no coinciden.";
+      if (!nombre || nombre.trim().length < 2)
+        return "Tu nombre debe tener al menos 2 caracteres.";
+      if (nombre.trim().length > 30)
+        return "Tu nombre puede tener máximo 30 caracteres.";
+      if (!RE_CORREO.test(normalizar(correo)))
+        return "Escribe un correo electrónico válido.";
+      if (!password || password.length < 6)
+        return "La contraseña debe tener al menos 6 caracteres.";
+      if (password2 !== undefined && password !== password2)
+        return "Las contraseñas no coinciden.";
       return null;
     },
 
@@ -160,24 +178,37 @@
 
     async registrar({ nombre, correo, password, password2, avatar }) {
       await promesaSemilla;
-      const error = this.validarRegistro({ nombre, correo, password, password2 });
+      const error = this.validarRegistro({
+        nombre,
+        correo,
+        password,
+        password2,
+      });
       if (error) return { ok: false, error };
 
       // Si el backend está activo, registrar también en el servidor
       const remoto = await peticionBackend("/api/db/auth/register", "POST", {
-        nombre, correo, password, avatar
+        nombre,
+        correo,
+        password,
+        avatar,
       });
       if (remoto && !remoto.ok) return remoto;
 
       const c = normalizar(correo);
       const lista = leerTablaUsuarios();
-      if (lista[c]) return { ok: false, error: "Ya existe una cuenta registrada con ese correo." };
+      if (lista[c])
+        return {
+          ok: false,
+          error: "Ya existe una cuenta registrada con ese correo.",
+        };
 
       const sal = generarSal();
       const hash = await hashPassword(password, sal);
-      const idNum = remoto && remoto.usuario && remoto.usuario.id_usuario
-        ? remoto.usuario.id_usuario
-        : siguienteIdUsuario(lista);
+      const idNum =
+        remoto && remoto.usuario && remoto.usuario.id_usuario
+          ? remoto.usuario.id_usuario
+          : siguienteIdUsuario(lista);
 
       const usuario = {
         id_usuario: idNum,
@@ -190,12 +221,15 @@
         creado: new Date().toISOString(),
         sal,
         hash,
-        contrasena_hash: `${sal}:${hash}`
+        contrasena_hash: `${sal}:${hash}`,
       };
 
       lista[c] = usuario;
       if (!guardarTablaUsuarios(lista)) {
-        return { ok: false, error: "No se pudo guardar el usuario en la base de datos." };
+        return {
+          ok: false,
+          error: "No se pudo guardar el usuario en la base de datos.",
+        };
       }
 
       this.cerrarSesion();
@@ -206,10 +240,17 @@
     async iniciarSesion(correo, password, recordar = false) {
       await promesaSemilla;
       const c = normalizar(correo);
-      if (!c || !password) return { ok: false, error: "Ingresa tu correo electrónico y tu contraseña." };
+      if (!c || !password)
+        return {
+          ok: false,
+          error: "Ingresa tu correo electrónico y tu contraseña.",
+        };
 
       // Intentar validar contra el servidor backend si está activo
-      const remoto = await peticionBackend("/api/db/auth/login", "POST", { correo: c, password });
+      const remoto = await peticionBackend("/api/db/auth/login", "POST", {
+        correo: c,
+        password,
+      });
       if (remoto) {
         if (!remoto.ok) return remoto;
         const lista = leerTablaUsuarios();
@@ -221,9 +262,11 @@
       }
 
       const u = leerTablaUsuarios()[c];
-      const ERROR = "Correo o contraseña incorrectos. Verifica tus datos o crea una cuenta.";
+      const ERROR =
+        "Correo o contraseña incorrectos. Verifica tus datos o crea una cuenta.";
       if (!u) return { ok: false, error: ERROR };
-      if ((await hashPassword(password, u.sal)) !== u.hash) return { ok: false, error: ERROR };
+      if ((await hashPassword(password, u.sal)) !== u.hash)
+        return { ok: false, error: ERROR };
 
       this.cerrarSesion();
       guardarSesion(c, recordar);
@@ -234,7 +277,9 @@
       try {
         sessionStorage.removeItem(SESION_KEY);
         localStorage.removeItem(SESION_KEY);
-      } catch (e) { /* ignorar */ }
+      } catch (e) {
+        /* ignorar */
+      }
     },
 
     usuarioActual() {
@@ -249,12 +294,17 @@
       const lista = leerTablaUsuarios();
       const u = lista[s.correo];
       if (!u) return null;
-      if (typeof cambios.nombre === "string") u.nombre = cambios.nombre.slice(0, 30);
-      if (cambios.avatar && AVATARES.includes(cambios.avatar)) u.avatar = cambios.avatar;
+      if (typeof cambios.nombre === "string")
+        u.nombre = cambios.nombre.slice(0, 30);
+      if (cambios.avatar && AVATARES.includes(cambios.avatar))
+        u.avatar = cambios.avatar;
       if (typeof cambios.xp_total === "number") u.xp_total = cambios.xp_total;
       guardarTablaUsuarios(lista);
-      peticionBackend("/api/db/auth/profile", "PATCH", { correo: s.correo, ...cambios });
+      peticionBackend("/api/db/auth/profile", "PATCH", {
+        correo: s.correo,
+        ...cambios,
+      });
       return publico(u);
-    }
+    },
   };
 })();
