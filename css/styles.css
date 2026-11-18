@@ -3095,3 +3095,65 @@ table.datos .valor {
     min-height: 220px;
   }
 }
+
+
+/* ============================================================
+   FASE 2 · SELECTOR DE TIPO DE GRÁFICO
+   ============================================================ */
+.chart-type-selector {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+.chart-type-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+.chart-type-btn:hover {
+  border-color: var(--water-1);
+  color: var(--water-3);
+}
+.chart-type-btn.active {
+  background: var(--water-2);
+  border-color: var(--water-1);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.18);
+}
+.chart-type-icon {
+  font-size: 13px;
+}
+@media (max-width: 768px) {
+  .chart-type-selector {
+    gap: 5px;
+  }
+  .chart-type-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 360px) {
+  .chart-type-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  .chart-type-icon {
+    font-size: 11px;
+  }
+}

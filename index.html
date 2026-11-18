@@ -609,16 +609,33 @@
                 <div class="chart-title">
                   Serie histórica · <span id="chart-nombre">—</span>
                 </div>
+                <div class="chart-type-selector" id="chart-type-selector" role="group" aria-label="Tipo de gráfico">
+                  <button class="chart-type-btn active" data-chart-type="line" type="button" aria-pressed="true">
+                    <span class="chart-type-icon" aria-hidden="true">📈</span> Líneas
+                  </button>
+                  <button class="chart-type-btn" data-chart-type="bar" type="button" aria-pressed="false">
+                    <span class="chart-type-icon" aria-hidden="true">📊</span> Barras
+                  </button>
+                  <button class="chart-type-btn" data-chart-type="doughnut" type="button" aria-pressed="false">
+                    <span class="chart-type-icon" aria-hidden="true">🍩</span> Dona
+                  </button>
+                  <button class="chart-type-btn" data-chart-type="area" type="button" aria-pressed="false">
+                    <span class="chart-type-icon" aria-hidden="true">🏔️</span> Área
+                  </button>
+                </div>
                 <div class="chart-wrap">
                   <div class="chart-legend">
                     <span>Unidad: <strong id="chart-unidad">—</strong></span>
                     <span id="chart-rango">—</span>
                   </div>
+                  <!-- Chart.js canvas (primary) -->
+                  <canvas id="chart-canvas" style="width:100%;max-height:280px;display:block"></canvas>
+                  <!-- SVG fallback if Chart.js CDN fails -->
                   <svg
                     id="chart"
                     viewBox="0 0 520 200"
                     preserveAspectRatio="none"
-                    style="width: 100%; height: 200px; display: block"
+                    style="width: 100%; height: 200px; display: none"
                   ></svg>
                   <div
                     style="
@@ -1153,6 +1170,11 @@
     <script
       crossorigin
       src="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"
+    ></script>
+    <script
+      defer
+      crossorigin
+      src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"
     ></script>
     <script src="js/utils/helpers.js"></script>
     <script src="js/components/ReactButtons.js"></script>
