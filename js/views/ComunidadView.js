@@ -17,22 +17,24 @@
       $("composer-categorias"),
       h(ComposerCategoryButtons, {
         activa: categoriaActiva,
-        onSelect: cat => {
+        onSelect: (cat) => {
           categoriaActiva = cat;
           renderCategorias();
           if (composerHandlers.onCategoria) composerHandlers.onCategoria(cat);
-        }
-      })
+        },
+      }),
     );
   }
 
   function renderComposerFooter() {
-    const { h, mount, ComposerFooterActions, RemovePreviewButton } = AQ.components;
+    const { h, mount, ComposerFooterActions, RemovePreviewButton } =
+      AQ.components;
     mount(
       $("composer-quitar-root"),
       h(RemovePreviewButton, {
-        onClick: () => composerHandlers.onQuitarFoto && composerHandlers.onQuitarFoto()
-      })
+        onClick: () =>
+          composerHandlers.onQuitarFoto && composerHandlers.onQuitarFoto(),
+      }),
     );
     mount(
       $("composer-footer-root"),
@@ -42,8 +44,9 @@
           const inputFoto = $("input-foto");
           if (inputFoto) inputFoto.click();
         },
-        onPublicar: () => composerHandlers.onPublicar && composerHandlers.onPublicar()
-      })
+        onPublicar: () =>
+          composerHandlers.onPublicar && composerHandlers.onPublicar(),
+      }),
     );
   }
 
@@ -53,12 +56,12 @@
       $("filtros"),
       h(CommunityFilterButtons, {
         activo: filtroActivo,
-        onSelect: f => {
+        onSelect: (f) => {
           filtroActivo = f;
           renderFiltros();
           if (filtroHandler) filtroHandler(f);
-        }
-      })
+        },
+      }),
     );
   }
 
@@ -73,17 +76,24 @@
         <span class="post-cat ${cat.clase}">${cat.label}</span>
       </div>
       <div class="post-cuerpo">${esc(p.texto)}</div>
-      ${p.imagen && String(p.imagen).startsWith("data:image/")
-        ? `<div class="post-imagen"><img src="${p.imagen}" alt="Imagen del post" loading="lazy"></div>` : ""}
+      ${
+        p.imagen && String(p.imagen).startsWith("data:image/")
+          ? `<div class="post-imagen"><img src="${p.imagen}" alt="Imagen del post" loading="lazy"></div>`
+          : ""
+      }
       <div class="post-footer" data-post-footer></div>
       <div class="comentarios" data-comentarios>
         <div class="comentarios-lista">
-          ${p.comentarios.map(c => `
+          ${p.comentarios
+            .map(
+              (c) => `
             <div class="comentario">
               <span class="c-nombre">${esc(c.autor)}</span>
               <span class="c-fecha">${esc(c.fecha)}</span><br>
               <span class="c-texto">${esc(c.texto)}</span>
-            </div>`).join("")}
+            </div>`,
+            )
+            .join("")}
         </div>
         <div class="comentario-form">
           <input type="text" placeholder="Escribe un comentario..." maxlength="200" data-input-comentario>
@@ -109,7 +119,7 @@
         return;
       }
 
-      posts.forEach(p => {
+      posts.forEach((p) => {
         const cat = categorias[p.categoria] || categorias.accion;
         const el = document.createElement("article");
         el.className = "post";
@@ -127,26 +137,35 @@
             onLike: () => handlers.onLike(p.id),
             onToggleComentarios: () => {
               bloque.classList.toggle("abierto");
-              handlers.onToggleComentarios(p.id, bloque.classList.contains("abierto"));
-            }
-          })
+              handlers.onToggleComentarios(
+                p.id,
+                bloque.classList.contains("abierto"),
+              );
+            },
+          }),
         );
 
         const input = el.querySelector("[data-input-comentario]");
         const enviar = () => handlers.onComentar(p.id, input.value);
         mount(
           el.querySelector("[data-comentario-btn-root]"),
-          h(CommentSendButton, { onSend: enviar })
+          h(CommentSendButton, { onSend: enviar }),
         );
-        input.addEventListener("keydown", e => { if (e.key === "Enter") enviar(); });
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") enviar();
+        });
 
         cont.appendChild(el);
       });
     },
 
     /* ---------- Composer ---------- */
-    renderComposerAvatar(avatar) { $("composer-avatar").textContent = avatar; },
-    textoComposer() { return $("post-texto").value; },
+    renderComposerAvatar(avatar) {
+      $("composer-avatar").textContent = avatar;
+    },
+    textoComposer() {
+      return $("post-texto").value;
+    },
     setPublicarHabilitado(ok) {
       publicarHabilitado = Boolean(ok);
       renderComposerFooter();
@@ -168,14 +187,20 @@
 
     /* ---------- Bindings ---------- */
     bindComposer({ onTexto, onCategoria, onFoto, onQuitarFoto, onPublicar }) {
-      composerHandlers = { onTexto, onCategoria, onFoto, onQuitarFoto, onPublicar };
-      $("post-texto").addEventListener("input", e => onTexto(e.target.value));
+      composerHandlers = {
+        onTexto,
+        onCategoria,
+        onFoto,
+        onQuitarFoto,
+        onPublicar,
+      };
+      $("post-texto").addEventListener("input", (e) => onTexto(e.target.value));
 
       renderCategorias();
       renderComposerFooter();
 
       const inputFoto = $("input-foto");
-      inputFoto.addEventListener("change", e => {
+      inputFoto.addEventListener("change", (e) => {
         const file = e.target.files[0];
         inputFoto.value = "";
         if (file) onFoto(file);
@@ -185,6 +210,6 @@
     bindFiltros(handler) {
       filtroHandler = handler;
       renderFiltros();
-    }
+    },
   };
 })();
