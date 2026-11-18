@@ -9,18 +9,6 @@
 
   let onAutenticado = () => {};
 
-  function usuarioInvitado() {
-    return {
-      id_usuario: 0,
-      id: "u_demo",
-      nombre: "Explorador/a (Invitado)",
-      correo: "invitado@aquaquest.co",
-      avatar: "AQ",
-      rol: "consultor",
-      esInvitado: true
-    };
-  }
-
   async function login() {
     View.limpiarErrores();
     const { correo, password, recordar } = View.datosLogin();
@@ -55,25 +43,19 @@
     onAutenticado(r.usuario, true);
   }
 
-  function omitir() {
-    View.resetForms();
-    onAutenticado(Model.usuarioActual() || usuarioInvitado(), false);
-  }
-
   AQ.controllers.Auth = {
     /** @param callback (usuario, esNuevo) => void */
     init(callback) {
       onAutenticado = callback;
       View.init(Model.AVATARES);
-      View.bindTabs(tab => View.mostrarTab(tab));
+      View.bindTabs((tab) => View.mostrarTab(tab));
       View.bindLogin(login);
       View.bindRegistro(registro);
-      View.bindPasswordInput(p => View.renderFuerza(Model.fuerzaPassword(p)));
-      View.bindOmitir(omitir);
+      View.bindPasswordInput((p) => View.renderFuerza(Model.fuerzaPassword(p)));
     },
 
     mostrar(tab = "login") {
       View.mostrarTab(tab);
-    }
+    },
   };
 })();
