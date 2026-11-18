@@ -15,9 +15,11 @@
       $("modal-botones"),
       h(ModalActions, {
         confirmarHabilitado: modalConfirmarHabilitado,
-        onCancelar: () => modalHandlers.onCancelar && modalHandlers.onCancelar(),
-        onConfirmar: () => modalHandlers.onConfirmar && modalHandlers.onConfirmar()
-      })
+        onCancelar: () =>
+          modalHandlers.onCancelar && modalHandlers.onCancelar(),
+        onConfirmar: () =>
+          modalHandlers.onConfirmar && modalHandlers.onConfirmar(),
+      }),
     );
   }
 
@@ -26,8 +28,8 @@
     mount(
       $("btn-reset-root"),
       h(ResetProgressButton, {
-        onClick: () => resetHandler && resetHandler()
-      })
+        onClick: () => resetHandler && resetHandler(),
+      }),
     );
   }
 
@@ -37,18 +39,20 @@
       if (document.activeElement !== input) input.value = usuario.nombre;
       $("perfil-avatar").textContent = usuario.avatar;
       $("usuario-xp").textContent = xp;
-      $("usuario-nivel").textContent = `Nivel ${nivel.numero} · ${nivel.actual.nombre}`;
+      $("usuario-nivel").textContent =
+        `Nivel ${nivel.numero} · ${nivel.actual.nombre}`;
       $("progreso-fill").style.width = nivel.pct + "%";
       $("progreso-txt-min").textContent = `${xp} XP`;
-      $("progreso-txt-max").textContent =
-        nivel.siguiente ? `${nivel.techo} XP al siguiente nivel` : "Nivel máximo alcanzado";
+      $("progreso-txt-max").textContent = nivel.siguiente
+        ? `${nivel.techo} XP al siguiente nivel`
+        : "Nivel máximo alcanzado";
     },
 
     renderRetos(retos, completados, onRegistrar) {
       const { h, mount, RetoActionButton } = AQ.components;
       const cont = $("retos-lista");
       cont.innerHTML = "";
-      retos.forEach(r => {
+      retos.forEach((r) => {
         const hecho = completados.includes(r.id);
         const el = document.createElement("div");
         el.className = "reto" + (hecho ? " completado" : "");
@@ -66,8 +70,8 @@
           el.querySelector(".reto-btn-root"),
           h(RetoActionButton, {
             hecho,
-            onClick: () => onRegistrar(r.id)
-          })
+            onClick: () => onRegistrar(r.id),
+          }),
         );
         cont.appendChild(el);
       });
@@ -80,19 +84,22 @@
         return;
       }
       cont.innerHTML = "";
-      acciones.slice().reverse().forEach(a => {
-        const reto = obtenerReto(a.retoId);
-        const div = document.createElement("div");
-        div.className = "bitacora-item";
-        div.innerHTML = `
+      acciones
+        .slice()
+        .reverse()
+        .forEach((a) => {
+          const reto = obtenerReto(a.retoId);
+          const div = document.createElement("div");
+          div.className = "bitacora-item";
+          div.innerHTML = `
           <span class="f">${a.fecha}</span>
           <span class="t">
             <strong>${reto ? reto.icono + " · " + reto.titulo : esc(a.retoId)}</strong><br>
             <span style="color:var(--muted);font-size:11.5px">${esc(a.evidencia || "(sin evidencia)")}</span>
           </span>
           <span class="xp">+${a.xp}</span>`;
-        cont.appendChild(div);
-      });
+          cont.appendChild(div);
+        });
     },
 
     /* ---------- Modal ---------- */
@@ -106,8 +113,12 @@
       $("modal-fondo").classList.add("activo");
       setTimeout(() => $("modal-evidencia").focus(), 100);
     },
-    cerrarModal() { $("modal-fondo").classList.remove("activo"); },
-    evidencia() { return $("modal-evidencia").value; },
+    cerrarModal() {
+      $("modal-fondo").classList.remove("activo");
+    },
+    evidencia() {
+      return $("modal-evidencia").value;
+    },
     setConfirmarHabilitado(ok) {
       modalConfirmarHabilitado = Boolean(ok);
       renderBotonesModal();
@@ -115,20 +126,27 @@
 
     /* ---------- Bindings ---------- */
     bindNombre(handler) {
-      $("usuario-nombre").addEventListener("input", e => handler(e.target.value));
+      $("usuario-nombre").addEventListener("input", (e) =>
+        handler(e.target.value),
+      );
     },
     bindModal({ onCancelar, onConfirmar, onEvidencia }) {
       modalHandlers = { onCancelar, onConfirmar };
       renderBotonesModal();
-      $("modal-evidencia").addEventListener("input", e => onEvidencia(e.target.value));
-      $("modal-fondo").addEventListener("click", e => { if (e.target.id === "modal-fondo") onCancelar(); });
-      document.addEventListener("keydown", e => {
-        if (e.key === "Escape" && $("modal-fondo").classList.contains("activo")) onCancelar();
+      $("modal-evidencia").addEventListener("input", (e) =>
+        onEvidencia(e.target.value),
+      );
+      $("modal-fondo").addEventListener("click", (e) => {
+        if (e.target.id === "modal-fondo") onCancelar();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && $("modal-fondo").classList.contains("activo"))
+          onCancelar();
       });
     },
     bindReset(handler) {
       resetHandler = handler;
       renderBotonReset();
-    }
+    },
   };
 })();
