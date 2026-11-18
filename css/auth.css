@@ -44,6 +44,52 @@
   filter: drop-shadow(0 0 22px rgba(0, 180, 216, 0.55));
   animation: flotar 4s ease-in-out infinite;
 }
+
+/* Fase 5: Logo image animation */
+.logo-login-img {
+  display: block;
+  border-radius: 20%;
+  object-fit: contain;
+  position: relative;
+}
+.auth-hero .logo-big {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: 20%;
+}
+/* Shine sweep effect */
+.auth-hero .logo-big::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 70%
+  );
+  animation: brillo 3.5s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+@keyframes brillo {
+  0% { left: -100%; }
+  60% { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* Accessibility: respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .auth-hero .logo-big,
+  .auth-hero .logo-big::after,
+  .burbuja,
+  .ola1, .ola2 {
+    animation: none !important;
+  }
+}
 .auth-hero h2 {
   font-size: 44px;
   line-height: 1.08;

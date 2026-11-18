@@ -1,0 +1,163 @@
+/* ============================================================
+   CONTROLADOR · CONTACTO (EmailJS + Validación + Anti-spam)
+   Fase 6: Formulario de contacto con honeypot y EmailJS
+   ============================================================ */
+(function () {
+  const UI = AQ.views.UI;
+
+  /* Credenciales EmailJS — reemplaza con tus valores de .env.example */
+  const EMAILJS_CONFIG = {
+    serviceId: "service_aquaquest",
+    templateId: "template_contacto",
+    publicKey: "tu_public_key_aqui",
+  };
+
+  /* Permite sobreescribir credenciales desde window.AQUAQUEST_CONFIG */
+  function getConfig() {
+    const ext = window.AQUAQUEST_CONFIG || {};
+    return {
+      serviceId: ext.EMAILJS_SERVICE_ID || EMAILJS_CONFIG.serviceId,
+      templateId: ext.EMAILJS_TEMPLATE_ID || EMAILJS_CONFIG.templateId,
+      publicKey: ext.EMAILJS_PUBLIC_KEY || EMAILJS_CONFIG.publicKey,
+    };
+  }
+
+  function isPlaceholder(val) {
+    return (
+      !val ||
+      val === "service_aquaquest" ||
+      val === "template_contacto" ||
+      val === "tu_public_key_aqui" ||
+      val.startsWith("YOUR_")
+    );
+  }
+
+  function validarEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function setStatus(tipo, mensaje) {
+    const statusEl = document.getElementById("contacto-status");
+    if (!statusEl) return;
+    statusEl.className = "contacto-status " + tipo;
+    statusEl.innerHTML = mensaje;
+  }
+
+  function clearStatus() {
+    const statusEl = document.getElementById("contacto-status");
+    if (!statusEl) return;
+    statusEl.className = "contacto-status";
+    statusEl.innerHTML = "";
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    clearStatus();
+
+    const form = e.target;
+    const hp = form.elements["website"] ? form.elements["website"].value : "";
+
+    /* 1. Protección anti-spam Honeypot */
+    if (hp && hp.trim().length > 0) {
+      console.warn("Spam detectado vía honeypot");
+      setStatus("error", "Error al procesar el formulario.");
+      return;
+    }
+
+    const nombre = (form.elements["from_name"]?.value || "").trim();
+    const email = (form.elements["reply_to"]?.value || "").trim();
+    const asunto = (form.elements["subject"]?.value || "").trim();
+    const mensaje = (form.elements["message"]?.value || "").trim();
+
+    /* 2. Validación de campos */
+    if (nombre.length < 2) {
+      setStatus("error", "Por favor ingresa tu nombre completo (mínimo 2 caracteres).");
+      form.elements["from_name"]?.focus();
+      return;
+    }
+    if (!validarEmail(email)) {
+      setStatus("error", "Por favor ingresa un correo electrónico válido.");
+      form.elements["reply_to"]?.focus();
+      return;
+    }
+    if (mensaje.length < 10) {
+      setStatus("error", "Por favor escribe un mensaje de al menos 10 caracteres.");
+      form.elements["message"]?.focus();
+      return;
+    }
+
+    /* 3. Estado de carga */
+    const submitBtn = document.getElementById("contacto-submit");
+    const txtSpan = submitBtn ? submitBtn.querySelector(".contacto-submit-text") : null;
+    const loadSpan = submitBtn ? submitBtn.querySelector(".contacto-submit-loading") : null;
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (txtSpan) txtSpan.hidden = true;
+    if (loadSpan) loadSpan.hidden = false;
+
+    const config = getConfig();
+
+    /* 4. Verificación de modo demostración */
+    if (isPlaceholder(config.serviceId) || isPlaceholder(config.publicKey)) {
+      setTimeout(() => {
+        if (submitBtn) submitBtn.disabled = false;
+        if (txtSpan) txtSpan.hidden = false;
+        if (loadSpan) loadSpan.hidden = true;
+
+        setStatus(
+          "success",
+          "<strong>¡Mensaje validado correctamente!</strong><br />" +
+          "<small style='opacity:0.9'>Modo demostración: para envíos reales a tu bandeja, ingresa tus credenciales de EmailJS en <code>.env.example</code> o en <code>js/controllers/ContactoController.js</code>.</small>"
+        );
+        UI.mostrarToast("Mensaje de prueba registrado con éxito");
+        form.reset();
+      }, 700);
+      return;
+    }
+
+    /* 5. Envío real con EmailJS SDK */
+    if (typeof emailjs === "undefined") {
+      if (submitBtn) submitBtn.disabled = false;
+      if (txtSpan) txtSpan.hidden = false;
+      if (loadSpan) loadSpan.hidden = true;
+      setStatus("error", "No se pudo cargar la librería EmailJS. Revisa tu conexión a internet.");
+      return;
+    }
+
+    try {
+      emailjs.init({ publicKey: config.publicKey });
+      emailjs
+        .sendForm(config.serviceId, config.templateId, form)
+        .then(() => {
+          setStatus("success", "<strong>¡Mensaje enviado con éxito!</strong> Nos pondremos en contacto pronto.");
+          UI.mostrarToast("Correo enviado exitosamente");
+          form.reset();
+        })
+        .catch((err) => {
+          console.error("Error al enviar con EmailJS:", err);
+          setStatus("error", "Error al enviar el mensaje. Intenta nuevamente más tarde.");
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+          if (txtSpan) txtSpan.hidden = false;
+          if (loadSpan) loadSpan.hidden = true;
+        });
+    } catch (err) {
+      console.error("Excepción en EmailJS:", err);
+      if (submitBtn) submitBtn.disabled = false;
+      if (txtSpan) txtSpan.hidden = false;
+      if (loadSpan) loadSpan.hidden = true;
+      setStatus("error", "Ocurrió un error inesperado al enviar el mensaje.");
+    }
+  }
+
+  AQ.controllers.Contacto = {
+    init() {
+      const form = document.getElementById("contacto-form");
+      if (!form) return;
+      form.removeEventListener("submit", handleSubmit);
+      form.addEventListener("submit", handleSubmit);
+    },
+    config: EMAILJS_CONFIG,
+  };
+})();

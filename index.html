@@ -80,19 +80,14 @@
         ></span>
 
         <div class="logo-big">
-          <svg
-            width="52"
-            height="52"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            style="color: var(--water-1)"
-          >
-            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-          </svg>
+          <img
+            src="assets/logo.webp"
+            alt="AquaQuest Colombia — Logo oficial: gota de agua con hoja verde"
+            width="120"
+            height="120"
+            class="logo-login-img"
+            loading="lazy"
+          />
         </div>
         <h2>Cada gota cuenta.<br /><span>Tu acción también.</span></h2>
         <p>
@@ -421,6 +416,14 @@
             <button class="sidebar-link" type="button" data-ir-seccion="guia">
               <span class="nav-icon" aria-hidden="true">💧</span>
               <span>Guía del agua</span>
+            </button>
+            <button class="sidebar-link" type="button" data-ir-seccion="nosotros">
+              <span class="nav-icon" aria-hidden="true">👥</span>
+              <span>Quiénes Somos</span>
+            </button>
+            <button class="sidebar-link" type="button" data-ir-seccion="contacto">
+              <span class="nav-icon" aria-hidden="true">✉</span>
+              <span>Contacto</span>
             </button>
           </nav>
           <div class="sidebar-note">
@@ -1174,6 +1177,147 @@
               </div>
             </section>
           </section>
+          <!-- =========================================================
+           PÁGINA · QUIÉNES SOMOS (Fase 6)
+           ========================================================= -->
+          <section
+            class="app-page"
+            id="page-nosotros"
+            data-app-page="nosotros"
+            hidden
+          >
+            <div class="nosotros-hero">
+              <h2 class="nosotros-titulo">
+                <span class="nosotros-icon" aria-hidden="true">👥</span>
+                Quiénes Somos
+              </h2>
+              <p class="nosotros-intro">
+                Somos un equipo de estudiantes de la <strong>Universidad Libre de Pereira</strong>,
+                apasionados por la tecnología y el cuidado del medio ambiente.
+                <strong>AquaQuest</strong> nace para democratizar la información hídrica en Colombia,
+                poniendo los datos abiertos del IDEAM al alcance de todos a través de una
+                experiencia interactiva y educativa.
+              </p>
+            </div>
+
+            <div class="nosotros-equipo-titulo">Nuestro Equipo</div>
+            <div class="nosotros-grid">
+              <!-- Integrante 1 -->
+              <div class="nosotros-card">
+                <div class="nosotros-avatar">
+                  <!-- TODO: foto de Rafael → reemplazar con <img src="assets/team/rafael.webp" alt="Rafael Hernandez"> -->
+                  <span class="nosotros-avatar-placeholder" aria-hidden="true">RH</span>
+                </div>
+                <h3 class="nosotros-nombre">Rafael Hernandez Gomez</h3>
+                <span class="nosotros-rol">Frontend Developer</span>
+                <span class="nosotros-uni">Universidad Libre de Pereira</span>
+              </div>
+              <!-- Integrante 2 -->
+              <div class="nosotros-card">
+                <div class="nosotros-avatar">
+                  <!-- TODO: foto de Francisco → reemplazar con <img src="assets/team/francisco.webp" alt="Francisco Bermudez"> -->
+                  <span class="nosotros-avatar-placeholder" aria-hidden="true">FB</span>
+                </div>
+                <h3 class="nosotros-nombre">Francisco Manuel Bermudez</h3>
+                <span class="nosotros-rol">Backend Developer</span>
+                <span class="nosotros-uni">Universidad Libre de Pereira</span>
+              </div>
+              <!-- Integrante 3 -->
+              <div class="nosotros-card">
+                <div class="nosotros-avatar">
+                  <!-- TODO: foto de Juan Jose → reemplazar con <img src="assets/team/juanjose.webp" alt="Juan Jose Herrera"> -->
+                  <span class="nosotros-avatar-placeholder" aria-hidden="true">JH</span>
+                </div>
+                <h3 class="nosotros-nombre">Juan Jose Herrera Largo</h3>
+                <span class="nosotros-rol">UI/UX Designer</span>
+                <span class="nosotros-uni">Universidad Libre de Pereira</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- =========================================================
+           PÁGINA · CONTACTO (Fase 6)
+           ========================================================= -->
+          <section
+            class="app-page"
+            id="page-contacto"
+            data-app-page="contacto"
+            hidden
+          >
+            <div class="contacto-hero">
+              <h2 class="contacto-titulo">
+                <span class="contacto-icon" aria-hidden="true">✉</span>
+                Contacto
+              </h2>
+              <p class="contacto-intro">
+                ¿Tienes preguntas, sugerencias o quieres colaborar con AquaQuest?
+                Escríbenos y te responderemos lo antes posible.
+              </p>
+            </div>
+
+            <form class="contacto-form" id="contacto-form" novalidate>
+              <!-- Honeypot anti-spam (hidden from users) -->
+              <div class="contacto-hp" aria-hidden="true" tabindex="-1">
+                <label for="contacto-website">Website</label>
+                <input type="text" id="contacto-website" name="website" autocomplete="off" tabindex="-1" />
+              </div>
+
+              <div class="contacto-field">
+                <label for="contacto-nombre">Nombre completo <span class="req">*</span></label>
+                <input
+                  type="text"
+                  id="contacto-nombre"
+                  name="from_name"
+                  required
+                  minlength="2"
+                  maxlength="100"
+                  placeholder="Tu nombre"
+                  autocomplete="name"
+                />
+              </div>
+              <div class="contacto-field">
+                <label for="contacto-email">Correo electrónico <span class="req">*</span></label>
+                <input
+                  type="email"
+                  id="contacto-email"
+                  name="reply_to"
+                  required
+                  placeholder="tu@correo.com"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="contacto-field">
+                <label for="contacto-asunto">Asunto</label>
+                <input
+                  type="text"
+                  id="contacto-asunto"
+                  name="subject"
+                  maxlength="200"
+                  placeholder="Asunto del mensaje (opcional)"
+                />
+              </div>
+              <div class="contacto-field">
+                <label for="contacto-mensaje">Mensaje <span class="req">*</span></label>
+                <textarea
+                  id="contacto-mensaje"
+                  name="message"
+                  required
+                  minlength="10"
+                  maxlength="2000"
+                  rows="5"
+                  placeholder="Escribe tu mensaje aquí..."
+                ></textarea>
+              </div>
+              <div class="contacto-actions">
+                <button type="submit" class="contacto-submit" id="contacto-submit">
+                  <span class="contacto-submit-text">Enviar mensaje</span>
+                  <span class="contacto-submit-loading" hidden>Enviando...</span>
+                </button>
+              </div>
+              <div class="contacto-status" id="contacto-status" role="status" aria-live="polite"></div>
+            </form>
+          </section>
+
         </main>
       </div>
 
@@ -1267,6 +1411,12 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <!-- EmailJS SDK (Fase 6: formulario de contacto) -->
+    <script
+      defer
+      crossorigin
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
     <script src="js/utils/helpers.js"></script>
     <script src="js/components/ReactButtons.js"></script>
 
@@ -1290,6 +1440,7 @@
     <script src="js/controllers/ComunidadController.js"></script>
     <script src="js/controllers/SwaggerController.js"></script>
     <script src="js/controllers/GuiaController.js"></script>
+    <script src="js/controllers/ContactoController.js"></script>
     <script src="js/controllers/AppController.js"></script>
   </body>
 </html>

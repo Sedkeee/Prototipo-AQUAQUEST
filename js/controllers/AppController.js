@@ -47,6 +47,7 @@
       UI.bindVerSwagger(() => AQ.controllers.Swagger.abrirModal());
       UI.bindNavegacion();
       AQ.controllers.Swagger.init();
+      if (AQ.controllers.Contacto) AQ.controllers.Contacto.init();
 
       const usuario = Auth.usuarioActual();
       if (usuario) entrarApp(usuario, false);

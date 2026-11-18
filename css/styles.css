@@ -3476,3 +3476,241 @@ table.datos .valor {
     padding: 10px;
   }
 }
+
+
+/* ============================================================
+   FASE 6 · QUIÉNES SOMOS + CONTACTO (EmailJS)
+   ============================================================ */
+
+/* ---------- Quiénes Somos ---------- */
+.nosotros-hero,
+.contacto-hero {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.nosotros-titulo,
+.contacto-titulo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.nosotros-icon,
+.contacto-icon {
+  font-size: 24px;
+}
+.nosotros-intro,
+.contacto-intro {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+  max-width: 780px;
+}
+.nosotros-intro strong {
+  color: var(--water-3);
+}
+.nosotros-equipo-titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--water-3);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+.nosotros-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.nosotros-card {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.nosotros-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--water-1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.nosotros-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--panel);
+  border: 2.5px solid var(--water-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 0 16px rgba(0, 180, 216, 0.25);
+  overflow: hidden;
+}
+.nosotros-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nosotros-avatar-placeholder {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--water-3);
+  letter-spacing: 1px;
+}
+.nosotros-nombre {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.nosotros-rol {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--green-1);
+  display: block;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.nosotros-uni {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Contacto ---------- */
+.contacto-form {
+  max-width: 620px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.contacto-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+.contacto-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.contacto-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.contacto-field .req {
+  color: var(--danger);
+}
+.contacto-field input,
+.contacto-field textarea {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13.5px;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.contacto-field input:focus,
+.contacto-field textarea:focus {
+  border-color: var(--water-1);
+  box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+}
+.contacto-field input::placeholder,
+.contacto-field textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+.contacto-actions {
+  margin-top: 20px;
+}
+.contacto-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--water-2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 24px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.contacto-submit:hover:not(:disabled) {
+  background: var(--water-1);
+  transform: translateY(-1px);
+}
+.contacto-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.contacto-status {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: none;
+  line-height: 1.5;
+}
+.contacto-status.success {
+  display: block;
+  background: rgba(82, 183, 136, 0.15);
+  border: 1px solid var(--green-1);
+  color: var(--green-1);
+}
+.contacto-status.error {
+  display: block;
+  background: rgba(230, 57, 70, 0.15);
+  border: 1px solid var(--danger);
+  color: #ff9999;
+}
+.contacto-status.info {
+  display: block;
+  background: rgba(0, 180, 216, 0.15);
+  border: 1px solid var(--water-1);
+  color: var(--water-3);
+}
+
+/* Responsive: Quiénes Somos & Contacto */
+@media (max-width: 900px) {
+  .nosotros-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .nosotros-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .nosotros-hero,
+  .contacto-hero,
+  .contacto-form {
+    padding: 16px;
+  }
+  .nosotros-titulo,
+  .contacto-titulo {
+    font-size: 19px;
+  }
+}
