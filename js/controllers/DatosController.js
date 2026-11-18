@@ -1,6 +1,7 @@
 /* ============================================================
    CONTROLADOR · DATOS REALES + CONEXIÓN CSV / BASE DE DATOS
    Fase 2: Selector de tipo de gráfico (line, bar, doughnut, area)
+   Fase 3: Mapa interactivo Leaflet (renderMapa)
    ============================================================ */
 (function () {
   const Model = AQ.models.Datos;
@@ -28,6 +29,13 @@
     );
     View.renderTabla(Model.ultimasMediciones(4));
     View.updateChartTypeButtons(tipoGrafico);
+
+    /* Fase 3: render map with all stations, highlight current */
+    View.renderMapa(
+      Model.estaciones(),
+      p.codigo || p.id,
+      cambiarEstacion,
+    );
   }
 
   function seleccionarVariable(id) {

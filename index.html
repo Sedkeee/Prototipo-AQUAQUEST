@@ -16,6 +16,13 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/auth.css" />
+    <!-- Leaflet CSS (Fase 3: mapa interactivo) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
     <link
       rel="stylesheet"
       href="https://unpkg.com/swagger-ui-dist@5.17.14/swagger-ui.css"
@@ -601,6 +608,17 @@
                   </div>
                 </div>
 
+                <!-- Fase 3: Mapa interactivo de estaciones -->
+                <div class="mapa-section">
+                  <div class="mapa-title" aria-label="Mapa de ubicación de estaciones">
+                    <span class="mapa-title-icon" aria-hidden="true">🗺️</span>
+                    Ubicación de estaciones
+                  </div>
+                  <div class="mapa-wrap" id="mapa-wrap">
+                    <div id="mapa-estaciones" style="height:380px;border-radius:8px"></div>
+                  </div>
+                </div>
+
                 <div class="vars-title">
                   Variables medidas (toca una para ver su serie)
                 </div>
@@ -1175,6 +1193,14 @@
       defer
       crossorigin
       src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"
+    ></script>
+    <!-- Leaflet JS (Fase 3: mapa interactivo) -->
+    <script
+      defer
+      crossorigin
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
     ></script>
     <script src="js/utils/helpers.js"></script>
     <script src="js/components/ReactButtons.js"></script>

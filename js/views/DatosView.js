@@ -1,6 +1,6 @@
 /* ============================================================
    VISTA · DATOS REALES (selector BD, info del punto, chips en React,
-   gráfica Chart.js con fallback SVG, tabla)
+   gráfica Chart.js con fallback SVG, tabla, mapa Leaflet)
    ============================================================ */
 (function () {
   const $ = AQ.utils.$;
@@ -45,6 +45,39 @@
     "rgba(200, 120, 255, 0.85)",
   ];
   const BORDERS = COLORS.map(c => c.replace("0.85", "1"));
+
+  /* ---------- Leaflet map management ---------- */
+  let mapInstance = null;
+  let mapMarkers = [];
+  let leafletAvailable = null;
+
+  function isLeafletReady() {
+    if (leafletAvailable !== null) return leafletAvailable;
+    leafletAvailable = typeof L !== "undefined" && L.map;
+    return leafletAvailable;
+  }
+
+  function createMarkerIcon(isActive) {
+    if (!isLeafletReady()) return null;
+    return L.divIcon({
+      className: "marker-custom",
+      html: '<div class="marker-pin' + (isActive ? " active" : "") + '"><span class="marker-pin-inner"></span></div>',
+      iconSize: [28, 28],
+      iconAnchor: [14, 28],
+      popupAnchor: [0, -30],
+    });
+  }
+
+  function buildPopupHTML(estacion) {
+    return '<div class="popup-estacion">' +
+      '<div class="popup-nombre">' + AQ.utils.escapeHtml(estacion.nombre) + '</div>' +
+      '<div class="popup-row"><span class="popup-icon" aria-hidden="true">🌊</span><span class="popup-label">Corriente:</span><span class="popup-value">' + AQ.utils.escapeHtml(estacion.corriente) + '</span></div>' +
+      '<div class="popup-row"><span class="popup-icon" aria-hidden="true">📍</span><span class="popup-label">Departamento:</span><span class="popup-value">' + AQ.utils.escapeHtml(estacion.departamento) + '</span></div>' +
+      '<div class="popup-row"><span class="popup-icon" aria-hidden="true">🏘️</span><span class="popup-label">Municipio:</span><span class="popup-value">' + AQ.utils.escapeHtml(estacion.municipio) + '</span></div>' +
+      '<div class="popup-row"><span class="popup-icon" aria-hidden="true">📊</span><span class="popup-label">Muestras:</span><span class="popup-value">' + estacion.muestras.length + '</span></div>' +
+      '<button class="popup-btn" data-select-estacion="' + estacion.codigo + '" aria-label="Seleccionar estación ' + AQ.utils.escapeHtml(estacion.nombre) + '">📌 Seleccionar estación</button>' +
+      '</div>';
+  }
 
   /* ---------- Render chart with Chart.js ---------- */
   function renderChartJS(canvas, tipo, variable, serie) {
@@ -389,10 +422,17 @@
         return;
       }
 
-      /* Fallback: SVG */
+      /* Fallback: SVG — disable type selector buttons */
       if (canvas) canvas.style.display = "none";
       svg.style.display = "block";
       destroyChart();
+      var selectorBtns = document.querySelectorAll(".chart-type-btn");
+      selectorBtns.forEach(function(btn) {
+        btn.disabled = true;
+        btn.title = "Gráfico interactivo no disponible (Chart.js no cargado)";
+        btn.style.opacity = "0.4";
+        btn.style.cursor = "not-allowed";
+      });
       renderChartSVG(variable, serie);
     },
 
@@ -421,6 +461,103 @@
           '</td>';
         tbody.appendChild(tr);
       });
+    },
+
+    /**
+     * Render interactive Leaflet map with station markers.
+     * @param {Array} estaciones - All stations with lat/lon
+     * @param {string} codigoActual - Current selected station code
+     * @param {function} onSelectEstacion - Callback when a station is selected from map
+     */
+    renderMapa(estaciones, codigoActual, onSelectEstacion) {
+      var wrap = $("mapa-wrap");
+      var container = $("mapa-estaciones");
+      if (!wrap || !container) return;
+
+      /* CDN fallback: if Leaflet didn't load, hide the map section entirely */
+      if (!isLeafletReady()) {
+        wrap.innerHTML = '<div class="mapa-fallback" role="status"><span aria-hidden="true">⚠️</span> Mapa no disponible (Leaflet no cargado)</div>';
+        return;
+      }
+
+      /* Initialize map only once */
+      if (!mapInstance) {
+        mapInstance = L.map(container, {
+          zoomControl: true,
+          attributionControl: true,
+          scrollWheelZoom: true,
+        });
+
+        /* Dark tile layer (CartoDB Dark Matter) */
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+          subdomains: "abcd",
+          maxZoom: 18,
+        }).addTo(mapInstance);
+
+        /* Handle popup button clicks (event delegation) */
+        mapInstance.on("popupopen", function (e) {
+          var popup = e.popup;
+          var content = popup.getElement();
+          if (!content) return;
+          var btn = content.querySelector("[data-select-estacion]");
+          if (btn) {
+            btn.addEventListener("click", function () {
+              var codigo = this.getAttribute("data-select-estacion");
+              mapInstance.closePopup();
+              if (onSelectEstacion) onSelectEstacion(codigo);
+            });
+          }
+        });
+      }
+
+      /* Clear previous markers */
+      mapMarkers.forEach(function (m) { mapInstance.removeLayer(m); });
+      mapMarkers = [];
+
+      /* Add markers for all stations */
+      var bounds = [];
+      estaciones.forEach(function (est) {
+        if (typeof est.lat !== "number" || typeof est.lon !== "number") return;
+        if (est.lat === 0 && est.lon === 0) return;
+
+        var isActive = (est.codigo || est.id) === codigoActual;
+        var icon = createMarkerIcon(isActive);
+        var marker = L.marker([est.lat, est.lon], {
+          icon: icon,
+          title: est.nombre,
+          alt: "Estación " + est.nombre,
+          zIndexOffset: isActive ? 1000 : 0,
+        });
+
+        marker.bindPopup(buildPopupHTML(est), {
+          maxWidth: 260,
+          minWidth: 180,
+          className: "dark-popup",
+        });
+
+        marker.addTo(mapInstance);
+        mapMarkers.push(marker);
+        bounds.push([est.lat, est.lon]);
+
+        /* Auto-open popup for active station */
+        if (isActive) {
+          setTimeout(function () { marker.openPopup(); }, 300);
+        }
+      });
+
+      /* Fit map to show all markers */
+      if (bounds.length > 0) {
+        mapInstance.fitBounds(bounds, { padding: [30, 30], maxZoom: 10 });
+      } else {
+        /* Default: center on Colombia */
+        mapInstance.setView([4.5, -73.5], 6);
+      }
+
+      /* Fix Leaflet rendering on initially hidden containers */
+      setTimeout(function () {
+        if (mapInstance) mapInstance.invalidateSize();
+      }, 200);
     },
   };
 })();
