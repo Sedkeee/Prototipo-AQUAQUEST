@@ -9,7 +9,7 @@
     { txt: "Débil", clase: "f1" },
     { txt: "Aceptable", clase: "f2" },
     { txt: "Buena", clase: "f3" },
-    { txt: "Muy segura", clase: "f4" }
+    { txt: "Muy segura", clase: "f4" },
   ];
 
   let listaAvatares = [];
@@ -18,7 +18,6 @@
   let cargandoLogin = false;
   let cargandoRegistro = false;
   let tabHandler = null;
-  let omitirHandler = null;
 
   function renderTabs() {
     const { h, mount, AuthTabs } = AQ.components;
@@ -26,8 +25,8 @@
       $("auth-tabs"),
       h(AuthTabs, {
         activeTab: tabActual,
-        onSelectTab: t => tabHandler && tabHandler(t)
-      })
+        onSelectTab: (t) => tabHandler && tabHandler(t),
+      }),
     );
   }
 
@@ -38,42 +37,39 @@
       h(AvatarSelector, {
         avatares: listaAvatares,
         seleccionado: avatarSel,
-        onSelect: a => {
+        onSelect: (a) => {
           avatarSel = a;
           renderAvatares();
-        }
-      })
+        },
+      }),
     );
   }
 
   function renderAccionesAuth() {
-    const { h, mount, CloseAuthButton, AuthFormActions } = AQ.components;
-    mount(
-      $("auth-close-root"),
-      h(CloseAuthButton, { onOmitir: () => omitirHandler && omitirHandler() })
-    );
+    const { h, mount, AuthFormActions } = AQ.components;
     mount(
       $("login-actions-root"),
       h(AuthFormActions, {
         modo: "login",
         cargando: cargandoLogin,
-        onOmitir: () => omitirHandler && omitirHandler()
-      })
+      }),
     );
     mount(
       $("reg-actions-root"),
       h(AuthFormActions, {
         modo: "registro",
         cargando: cargandoRegistro,
-        onOmitir: () => omitirHandler && omitirHandler()
-      })
+      }),
     );
   }
 
   function renderPasswordToggles() {
     const { h, mount, PasswordToggleButton } = AQ.components;
-    document.querySelectorAll("[data-toggle-pass-root]").forEach(cont => {
-      mount(cont, h(PasswordToggleButton, { inputId: cont.dataset.togglePassRoot }));
+    document.querySelectorAll("[data-toggle-pass-root]").forEach((cont) => {
+      mount(
+        cont,
+        h(PasswordToggleButton, { inputId: cont.dataset.togglePassRoot }),
+      );
     });
   }
 
@@ -101,7 +97,7 @@
       return {
         correo: $("login-correo").value,
         password: $("login-password").value,
-        recordar: $("login-recordar").checked
+        recordar: $("login-recordar").checked,
       };
     },
 
@@ -111,7 +107,7 @@
         correo: $("reg-correo").value,
         password: $("reg-password").value,
         password2: $("reg-password2").value,
-        avatar: avatarSel
+        avatar: avatarSel,
       };
     },
 
@@ -158,21 +154,29 @@
     bindTabs(handler) {
       tabHandler = handler;
       renderTabs();
-      document.querySelectorAll("[data-ir-tab]").forEach(a =>
-        a.addEventListener("click", e => { e.preventDefault(); handler(a.dataset.irTab); }));
+      document.querySelectorAll("[data-ir-tab]").forEach((a) =>
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          handler(a.dataset.irTab);
+        }),
+      );
     },
     bindLogin(handler) {
-      $("form-login").addEventListener("submit", e => { e.preventDefault(); handler(); });
+      $("form-login").addEventListener("submit", (e) => {
+        e.preventDefault();
+        handler();
+      });
     },
     bindRegistro(handler) {
-      $("form-registro").addEventListener("submit", e => { e.preventDefault(); handler(); });
+      $("form-registro").addEventListener("submit", (e) => {
+        e.preventDefault();
+        handler();
+      });
     },
     bindPasswordInput(handler) {
-      $("reg-password").addEventListener("input", e => handler(e.target.value));
+      $("reg-password").addEventListener("input", (e) =>
+        handler(e.target.value),
+      );
     },
-    bindOmitir(handler) {
-      omitirHandler = handler;
-      renderAccionesAuth();
-    }
   };
 })();
