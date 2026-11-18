@@ -13,7 +13,13 @@
   }
 
   AQ.views.Datos = {
-    renderEstadoBD(resumen, estaciones, codigoActual, onSelectEstacion, onImportarArchivo) {
+    renderEstadoBD(
+      resumen,
+      estaciones,
+      codigoActual,
+      onSelectEstacion,
+      onImportarArchivo,
+    ) {
       const infoEl = $("db-status-texto");
       if (infoEl) {
         infoEl.innerHTML =
@@ -25,14 +31,15 @@
       const sel = $("select-estacion");
       if (sel) {
         sel.innerHTML = "";
-        estaciones.forEach(e => {
+        estaciones.forEach((e) => {
           const opt = document.createElement("option");
           opt.value = e.codigo || e.id;
           opt.textContent = `${e.departamento} · ${e.municipio} — ${e.corriente} [${e.codigo}] (${e.muestras.length} muestras)`;
           if ((e.codigo || e.id) === codigoActual) opt.selected = true;
           sel.appendChild(opt);
         });
-        sel.onchange = ev => onSelectEstacion && onSelectEstacion(ev.target.value);
+        sel.onchange = (ev) =>
+          onSelectEstacion && onSelectEstacion(ev.target.value);
       }
 
       const { h, mount, ImportCsvButton } = AQ.components;
@@ -40,11 +47,11 @@
       mount(
         $("btn-importar-csv-root"),
         h(ImportCsvButton, {
-          onClick: () => inputCsv && inputCsv.click()
-        })
+          onClick: () => inputCsv && inputCsv.click(),
+        }),
       );
       if (inputCsv) {
-        inputCsv.onchange = ev => {
+        inputCsv.onchange = (ev) => {
           const file = ev.target.files && ev.target.files[0];
           inputCsv.value = "";
           if (file && onImportarArchivo) onImportarArchivo(file);
@@ -61,15 +68,13 @@
       $("punto-depto").textContent = p.departamento;
       $("punto-muni").textContent = p.municipio;
       $("punto-coord").textContent = p.lat.toFixed(4) + ", " + p.lon.toFixed(4);
-      $("punto-elev").textContent = p.elevacion.toLocaleString("es-CO") + " m.s.n.m.";
+      $("punto-elev").textContent =
+        p.elevacion.toLocaleString("es-CO") + " m.s.n.m.";
     },
 
     renderChips(variables, actual, onSelect) {
       const { h, mount, VariableChips } = AQ.components;
-      mount(
-        $("chips-vars"),
-        h(VariableChips, { variables, actual, onSelect })
-      );
+      mount($("chips-vars"), h(VariableChips, { variables, actual, onSelect }));
     },
 
     renderChart(variable, serie) {
@@ -77,8 +82,11 @@
       $("chart-unidad").textContent = variable.unidad;
 
       const svg = $("chart");
-      const W = 520, H = 200, pad = { l: 40, r: 14, t: 16, b: 22 };
-      const innerW = W - pad.l - pad.r, innerH = H - pad.t - pad.b;
+      const W = 520,
+        H = 200,
+        pad = { l: 40, r: 14, t: 16, b: 22 };
+      const innerW = W - pad.l - pad.r,
+        innerH = H - pad.t - pad.b;
       const { puntos, totalMuestras } = serie;
 
       svg.innerHTML = "";
@@ -90,20 +98,39 @@
         return;
       }
 
-      const vals = puntos.map(p => p.valor);
-      let min = Math.min(...vals), max = Math.max(...vals);
-      if (min === max) { min -= 1; max += 1; }
+      const vals = puntos.map((p) => p.valor);
+      let min = Math.min(...vals),
+        max = Math.max(...vals);
+      if (min === max) {
+        min -= 1;
+        max += 1;
+      }
       const rangoY = max - min;
       const divisorX = Math.max(totalMuestras - 1, 1);
-      const x = i => pad.l + (i / divisorX) * innerW;
-      const y = val => pad.t + innerH - ((val - min) / rangoY) * innerH;
+      const x = (i) => pad.l + (i / divisorX) * innerW;
+      const y = (val) => pad.t + innerH - ((val - min) / rangoY) * innerH;
 
       // Cuadrícula + etiquetas
       const grid = svgEl("g", {});
       for (let i = 0; i <= 4; i++) {
         const yv = pad.t + (i / 4) * innerH;
-        grid.appendChild(svgEl("line", { x1: pad.l, x2: W - pad.r, y1: yv, y2: yv, stroke: "#1f4160", "stroke-dasharray": "3 4" }));
-        const t = svgEl("text", { x: pad.l - 6, y: yv + 3, fill: "#8ba3b8", "font-size": "9.5", "text-anchor": "end" });
+        grid.appendChild(
+          svgEl("line", {
+            x1: pad.l,
+            x2: W - pad.r,
+            y1: yv,
+            y2: yv,
+            stroke: "#1f4160",
+            "stroke-dasharray": "3 4",
+          }),
+        );
+        const t = svgEl("text", {
+          x: pad.l - 6,
+          y: yv + 3,
+          fill: "#8ba3b8",
+          "font-size": "9.5",
+          "text-anchor": "end",
+        });
         t.textContent = fmt(max - (i / 4) * rangoY);
         grid.appendChild(t);
       }
@@ -112,7 +139,8 @@
       // Área + línea
       if (puntos.length > 1) {
         let d = `M ${x(puntos[0].idx)} ${y(puntos[0].valor)}`;
-        for (let i = 1; i < puntos.length; i++) d += ` L ${x(puntos[i].idx)} ${y(puntos[i].valor)}`;
+        for (let i = 1; i < puntos.length; i++)
+          d += ` L ${x(puntos[i].idx)} ${y(puntos[i].valor)}`;
         const base = pad.t + innerH;
         const dArea = `${d} L ${x(puntos[puntos.length - 1].idx)} ${base} L ${x(puntos[0].idx)} ${base} Z`;
 
@@ -122,17 +150,29 @@
             <stop offset="100%" stop-color="#00b4d8" stop-opacity="0"/></linearGradient>`;
         svg.appendChild(defs);
         svg.appendChild(svgEl("path", { d: dArea, fill: "url(#grad-area)" }));
-        svg.appendChild(svgEl("path", {
-          d, fill: "none", stroke: "#00b4d8", "stroke-width": "2.2",
-          "stroke-linejoin": "round", "stroke-linecap": "round", class: "chart-line"
-        }));
+        svg.appendChild(
+          svgEl("path", {
+            d,
+            fill: "none",
+            stroke: "#00b4d8",
+            "stroke-width": "2.2",
+            "stroke-linejoin": "round",
+            "stroke-linecap": "round",
+            class: "chart-line",
+          }),
+        );
       }
 
       // Puntos con tooltip
-      puntos.forEach(p => {
+      puntos.forEach((p) => {
         const c = svgEl("circle", {
-          cx: x(p.idx), cy: y(p.valor), r: "4", fill: "#90e0ef",
-          stroke: "#0077b6", "stroke-width": "1.5", class: "chart-dot"
+          cx: x(p.idx),
+          cy: y(p.valor),
+          r: "4",
+          fill: "#90e0ef",
+          stroke: "#0077b6",
+          "stroke-width": "1.5",
+          class: "chart-dot",
         });
         const t = svgEl("title", {});
         t.textContent = `${p.fecha} · ${fmt(p.valor)} ${variable.unidad}`;
@@ -142,24 +182,27 @@
 
       $("chart-min").textContent = serie.primeraFecha;
       $("chart-max").textContent = serie.ultimaFecha;
-      $("chart-rango").textContent = `Rango: ${fmt(min)} – ${fmt(max)} ${variable.unidad}`;
+      $("chart-rango").textContent =
+        `Rango: ${fmt(min)} – ${fmt(max)} ${variable.unidad}`;
     },
 
     renderTabla(filas) {
       const tbody = document.querySelector("#tabla-datos tbody");
       tbody.innerHTML = "";
-      filas.forEach(f => {
+      filas.slice(0, 10).forEach((f) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td class="fecha">${f.fecha}</td>
           <td>${f.variable.nombre}</td>
           <td class="valor" style="text-align:right">
-            ${f.esBajo
-              ? `<span class="bajo-lcm">&lt;${f.raw.slice(1)}</span>`
-              : `${f.raw} <span style="color:var(--muted);font-size:11px">${f.variable.unidad}</span>`}
+            ${
+              f.esBajo
+                ? `<span class="bajo-lcm">&lt;${f.raw.slice(1)}</span>`
+                : `${f.raw} <span style="color:var(--muted);font-size:11px">${f.variable.unidad}</span>`
+            }
           </td>`;
         tbody.appendChild(tr);
       });
-    }
+    },
   };
 })();
