@@ -5,34 +5,48 @@
    Incluye un respaldo ligero si no hay conexión a internet.
    ============================================================ */
 (function () {
-  const Fragment = (window.React && window.React.Fragment) ? window.React.Fragment : "__fragment__";
+  const Fragment =
+    window.React && window.React.Fragment
+      ? window.React.Fragment
+      : "__fragment__";
 
   // Respaldo mínimo en caso de abrir sin internet (offline)
-  const h = (window.React && window.React.createElement)
-    ? window.React.createElement
-    : function fallbackCreateElement(type, props, ...children) {
-      return { __fallback: true, type, props: props || {}, children };
-    };
+  const h =
+    window.React && window.React.createElement
+      ? window.React.createElement
+      : function fallbackCreateElement(type, props, ...children) {
+          return { __fallback: true, type, props: props || {}, children };
+        };
 
   const roots = new WeakMap();
 
   function renderFallbackNode(vnode) {
-    if (vnode == null || vnode === false || vnode === true) return document.createTextNode("");
-    if (typeof vnode === "string" || typeof vnode === "number") return document.createTextNode(String(vnode));
+    if (vnode == null || vnode === false || vnode === true)
+      return document.createTextNode("");
+    if (typeof vnode === "string" || typeof vnode === "number")
+      return document.createTextNode(String(vnode));
     if (Array.isArray(vnode)) {
       const frag = document.createDocumentFragment();
-      vnode.forEach(c => frag.appendChild(renderFallbackNode(c)));
+      vnode.forEach((c) => frag.appendChild(renderFallbackNode(c)));
       return frag;
     }
     if (vnode.type === Fragment) {
       const frag = document.createDocumentFragment();
-      (vnode.children || []).flat(Infinity).forEach(c => frag.appendChild(renderFallbackNode(c)));
+      (vnode.children || [])
+        .flat(Infinity)
+        .forEach((c) => frag.appendChild(renderFallbackNode(c)));
       return frag;
     }
     if (typeof vnode.type === "function") {
-      return renderFallbackNode(vnode.type(Object.assign({}, vnode.props, { children: vnode.children })));
+      return renderFallbackNode(
+        vnode.type(
+          Object.assign({}, vnode.props, { children: vnode.children }),
+        ),
+      );
     }
-    const isSvg = ["svg", "path", "circle", "rect", "line"].includes(vnode.type);
+    const isSvg = ["svg", "path", "circle", "rect", "line"].includes(
+      vnode.type,
+    );
     const el = isSvg
       ? document.createElementNS("http://www.w3.org/2000/svg", vnode.type)
       : document.createElement(vnode.type);
@@ -59,7 +73,7 @@
       }
     });
 
-    (vnode.children || []).flat(Infinity).forEach(child => {
+    (vnode.children || []).flat(Infinity).forEach((child) => {
       el.appendChild(renderFallbackNode(child));
     });
     return el;
@@ -97,7 +111,7 @@
       role,
       dataset = {},
       onClick,
-      children
+      children,
     } = props;
 
     const attrs = {
@@ -107,7 +121,7 @@
       disabled,
       title,
       role,
-      onClick
+      onClick,
     };
     if (ariaLabel !== undefined) attrs["aria-label"] = ariaLabel;
     if (ariaSelected !== undefined) attrs["aria-selected"] = ariaSelected;
@@ -123,18 +137,36 @@
     if (!visible) {
       return h(
         "svg",
-        { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2" },
+        {
+          width: "16",
+          height: "16",
+          viewBox: "0 0 24 24",
+          fill: "none",
+          stroke: "currentColor",
+          strokeWidth: "2",
+        },
         h("path", { d: "M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" }),
-        h("circle", { cx: "12", cy: "12", r: "3" })
+        h("circle", { cx: "12", cy: "12", r: "3" }),
       );
     }
     return h(
       "svg",
-      { width: "16", height: "16", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2" },
+      {
+        width: "16",
+        height: "16",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+      },
       h("path", { d: "M9.88 9.88a3 3 0 1 0 4.24 4.24" }),
-      h("path", { d: "M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" }),
-      h("path", { d: "M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" }),
-      h("line", { x1: "2", x2: "22", y1: "2", y2: "22" })
+      h("path", {
+        d: "M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68",
+      }),
+      h("path", {
+        d: "M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61",
+      }),
+      h("line", { x1: "2", x2: "22", y1: "2", y2: "22" }),
     );
   }
 
@@ -147,88 +179,101 @@
         viewBox: "0 0 24 24",
         fill: active ? "currentColor" : "none",
         stroke: "currentColor",
-        strokeWidth: "2"
+        strokeWidth: "2",
       },
       h("path", {
-        d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-      })
+        d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
+      }),
     );
   }
 
   function CommentIcon() {
     return h(
       "svg",
-      { width: "14", height: "14", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2" },
-      h("path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" })
+      {
+        width: "14",
+        height: "14",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+      },
+      h("path", {
+        d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+      }),
     );
   }
 
   /* ---------- 1. Botones de Cabecera (Header) ---------- */
-  function HeaderActions({ onVerSwagger, onVerLogin, onLogout }) {
+  function HeaderActions({ esAdmin, onVerSwagger, onLogout }) {
     return h(
       Fragment,
       null,
-      h(AQButton, {
-        id: "btn-swagger",
-        className: "btn-swagger",
-        title: "Abrir documentación interactiva OpenAPI / Swagger",
-        onClick: onVerSwagger
-      }, "{ } API Swagger"),
-      h(AQButton, {
-        id: "btn-ver-login",
-        className: "btn-ver-login",
-        title: "Iniciar sesión",
-        onClick: onVerLogin
-      }, "Iniciar sesión"),
-      h(AQButton, {
-        id: "btn-logout",
-        className: "btn-logout",
-        title: "Cerrar sesión",
-        onClick: onLogout
-      }, "Salir")
+      esAdmin &&
+        h(
+          AQButton,
+          {
+            id: "btn-swagger",
+            className: "btn-swagger",
+            title: "Abrir documentación interactiva OpenAPI / Swagger",
+            onClick: onVerSwagger,
+          },
+          "{ } API Swagger",
+        ),
+      h(
+        AQButton,
+        {
+          id: "btn-logout",
+          className: "btn-logout",
+          title: "Cerrar sesión",
+          onClick: onLogout,
+        },
+        "Salir",
+      ),
     );
   }
 
   function SwaggerCloseButton({ onClose, onClick }) {
-    return h(AQButton, {
-      id: "btn-cerrar-swagger",
-      className: "btn-cerrar-swagger",
-      title: "Cerrar documentación API",
-      onClick: onClose || onClick
-    }, "✕ Cerrar");
+    return h(
+      AQButton,
+      {
+        id: "btn-cerrar-swagger",
+        className: "btn-cerrar-swagger",
+        title: "Cerrar documentación API",
+        onClick: onClose || onClick,
+      },
+      "✕ Cerrar",
+    );
   }
 
   /* ---------- 2. Botones de Autenticación ---------- */
-  function CloseAuthButton({ onOmitir }) {
-    return h(AQButton, {
-      className: "btn-volver-app",
-      title: "Cerrar",
-      onClick: e => {
-        e.preventDefault();
-        if (onOmitir) onOmitir();
-      }
-    }, "✕");
-  }
-
   function AuthTabs({ activeTab, onSelectTab }) {
     const isLogin = activeTab === "login";
     return h(
       Fragment,
       null,
-      h(AQButton, {
-        id: "tab-login",
-        className: "auth-tab" + (isLogin ? " active" : ""),
-        role: "tab",
-        ariaSelected: isLogin,
-        onClick: () => onSelectTab && onSelectTab("login")
-      }, "Iniciar sesión"),
-      h(AQButton, {
-        id: "tab-registro",
-        className: "auth-tab" + (!isLogin ? " active" : ""),
-        role: "tab",
-        ariaSelected: !isLogin,
-        onClick: () => onSelectTab && onSelectTab("registro")
-      }, "Crear cuenta")
+      h(
+        AQButton,
+        {
+          id: "tab-login",
+          className: "auth-tab" + (isLogin ? " active" : ""),
+          role: "tab",
+          ariaSelected: isLogin,
+          onClick: () => onSelectTab && onSelectTab("login"),
+        },
+        "Iniciar sesión",
+      ),
+      h(
+        AQButton,
+        {
+          id: "tab-registro",
+          className: "auth-tab" + (!isLogin ? " active" : ""),
+          role: "tab",
+          ariaSelected: !isLogin,
+          onClick: () => onSelectTab && onSelectTab("registro"),
+        },
+        "Crear cuenta",
+      ),
     );
   }
 
@@ -236,7 +281,7 @@
     const useState = window.React && window.React.useState;
     const [visible, setVisible] = useState ? useState(false) : [false, null];
 
-    const handleClick = e => {
+    const handleClick = (e) => {
       const input = document.getElementById(inputId);
       if (!input) return;
       const nowVisible = input.type === "password";
@@ -246,7 +291,9 @@
       } else {
         const btn = e.currentTarget;
         btn.innerHTML = "";
-        btn.appendChild(renderFallbackNode(h(EyeIcon, { visible: nowVisible })));
+        btn.appendChild(
+          renderFallbackNode(h(EyeIcon, { visible: nowVisible })),
+        );
       }
     };
 
@@ -255,9 +302,9 @@
       {
         className: "toggle-pass",
         ariaLabel: visible ? "Ocultar contraseña" : "Mostrar contraseña",
-        onClick: handleClick
+        onClick: handleClick,
       },
-      h(EyeIcon, { visible })
+      h(EyeIcon, { visible }),
     );
   }
 
@@ -265,22 +312,22 @@
     return h(
       Fragment,
       null,
-      avatares.map(a =>
+      avatares.map((a) =>
         h(
           AQButton,
           {
             key: a,
             className: "avatar-opt" + (a === seleccionado ? " active" : ""),
             ariaLabel: "Elegir avatar " + a,
-            onClick: () => onSelect(a)
+            onClick: () => onSelect(a),
           },
-          a
-        )
-      )
+          a,
+        ),
+      ),
     );
   }
 
-  function AuthFormActions({ modo, cargando, onOmitir }) {
+  function AuthFormActions({ modo, cargando }) {
     const esLogin = modo === "login";
     return h(
       Fragment,
@@ -290,23 +337,14 @@
         {
           id: esLogin ? "btn-login" : "btn-registro",
           type: "submit",
-          className: "btn-auth" + (esLogin ? "" : " verde") + (cargando ? " cargando" : ""),
-          disabled: cargando
+          className:
+            "btn-auth" +
+            (esLogin ? "" : " verde") +
+            (cargando ? " cargando" : ""),
+          disabled: cargando,
         },
-        esLogin ? "Entrar" : "Crear cuenta y entrar"
+        esLogin ? "Entrar" : "Crear cuenta y entrar",
       ),
-      h(
-        AQButton,
-        {
-          id: esLogin ? "btn-omitir-auth" : undefined,
-          className: "btn-auth btn-invitado",
-          onClick: e => {
-            e.preventDefault();
-            if (onOmitir) onOmitir();
-          }
-        },
-        "Continuar sin cuenta"
-      )
     );
   }
 
@@ -318,9 +356,9 @@
         id: "btn-importar-csv",
         className: "btn-importar-csv",
         title: "Cargar archivo CSV exportado desde Excel / IDEAM",
-        onClick
+        onClick,
       },
-      "📂 Cargar CSV / Excel"
+      "📂 Cargar CSV / Excel",
     );
   }
 
@@ -334,12 +372,12 @@
           {
             key: id,
             className: "chip" + (id === actual ? " active" : ""),
-            onClick: () => onSelect(id)
+            onClick: () => onSelect(id),
           },
           v.nombre,
-          h("span", { className: "u" }, v.unidad)
-        )
-      )
+          h("span", { className: "u" }, v.unidad),
+        ),
+      ),
     );
   }
 
@@ -350,9 +388,9 @@
       {
         className: "btn-completar",
         disabled: hecho,
-        onClick: hecho ? undefined : onClick
+        onClick: hecho ? undefined : onClick,
       },
-      hecho ? "Completado" : "Registrar acción"
+      hecho ? "Completado" : "Registrar acción",
     );
   }
 
@@ -362,9 +400,9 @@
       {
         id: "btn-reset",
         className: "btn-reset",
-        onClick
+        onClick,
       },
-      "Reiniciar mi progreso"
+      "Reiniciar mi progreso",
     );
   }
 
@@ -377,9 +415,9 @@
         {
           id: "modal-cancelar",
           className: "btn btn-sec",
-          onClick: onCancelar
+          onClick: onCancelar,
         },
-        "Cancelar"
+        "Cancelar",
       ),
       h(
         AQButton,
@@ -387,10 +425,10 @@
           id: "modal-confirmar",
           className: "btn btn-pri",
           disabled: !confirmarHabilitado,
-          onClick: onConfirmar
+          onClick: onConfirmar,
         },
-        "Registrar y ganar XP"
-      )
+        "Registrar y ganar XP",
+      ),
     );
   }
 
@@ -399,7 +437,7 @@
     { id: "accion", label: "Acción" },
     { id: "idea", label: "Idea" },
     { id: "pregunta", label: "Pregunta" },
-    { id: "logro", label: "Logro" }
+    { id: "logro", label: "Logro" },
   ];
 
   const FILTROS_COMUNIDAD = [
@@ -407,25 +445,25 @@
     { id: "accion", label: "Acciones" },
     { id: "idea", label: "Ideas" },
     { id: "pregunta", label: "Preguntas" },
-    { id: "logro", label: "Logros" }
+    { id: "logro", label: "Logros" },
   ];
 
   function ComposerCategoryButtons({ activa, onSelect }) {
     return h(
       Fragment,
       null,
-      CATEGORIAS_COMPOSER.map(c =>
+      CATEGORIAS_COMPOSER.map((c) =>
         h(
           AQButton,
           {
             key: c.id,
             className: "cat-btn" + (c.id === activa ? " active" : ""),
             dataset: { cat: c.id },
-            onClick: () => onSelect(c.id)
+            onClick: () => onSelect(c.id),
           },
-          c.label
-        )
-      )
+          c.label,
+        ),
+      ),
     );
   }
 
@@ -436,13 +474,17 @@
         id: "composer-quitar",
         className: "quitar",
         title: "Quitar foto",
-        onClick
+        onClick,
       },
-      "✕"
+      "✕",
     );
   }
 
-  function ComposerFooterActions({ publicarHabilitado, onAdjuntar, onPublicar }) {
+  function ComposerFooterActions({
+    publicarHabilitado,
+    onAdjuntar,
+    onPublicar,
+  }) {
     return h(
       Fragment,
       null,
@@ -451,9 +493,9 @@
         {
           id: "btn-adjuntar",
           className: "btn-adjuntar",
-          onClick: onAdjuntar
+          onClick: onAdjuntar,
         },
-        "Adjuntar foto"
+        "Adjuntar foto",
       ),
       h("span", { className: "xp-nota" }, "Compartir no da XP — solo inspira"),
       h(
@@ -462,10 +504,10 @@
           id: "btn-publicar",
           className: "btn-publicar",
           disabled: !publicarHabilitado,
-          onClick: onPublicar
+          onClick: onPublicar,
         },
-        "Publicar"
-      )
+        "Publicar",
+      ),
     );
   }
 
@@ -473,22 +515,28 @@
     return h(
       Fragment,
       null,
-      FILTROS_COMUNIDAD.map(f =>
+      FILTROS_COMUNIDAD.map((f) =>
         h(
           AQButton,
           {
             key: f.id,
             className: "filtro-btn" + (f.id === activo ? " active" : ""),
             dataset: { filtro: f.id },
-            onClick: () => onSelect(f.id)
+            onClick: () => onSelect(f.id),
           },
-          f.label
-        )
-      )
+          f.label,
+        ),
+      ),
     );
   }
 
-  function PostFooterButtons({ reaccionado, totalLikes, totalComentarios, onLike, onToggleComentarios }) {
+  function PostFooterButtons({
+    reaccionado,
+    totalLikes,
+    totalComentarios,
+    onLike,
+    onToggleComentarios,
+  }) {
     return h(
       Fragment,
       null,
@@ -497,23 +545,23 @@
         {
           className: "btn-reaccion" + (reaccionado ? " reaccionado" : ""),
           dataset: { accion: "like" },
-          onClick: onLike
+          onClick: onLike,
         },
         h(HeartIcon, { active: reaccionado }),
         " ",
-        h("span", { className: "num" }, String(totalLikes))
+        h("span", { className: "num" }, String(totalLikes)),
       ),
       h(
         AQButton,
         {
           className: "btn-comentar",
           dataset: { accion: "comentar" },
-          onClick: onToggleComentarios
+          onClick: onToggleComentarios,
         },
         h(CommentIcon),
         " ",
-        h("span", { className: "num" }, String(totalComentarios))
-      )
+        h("span", { className: "num" }, String(totalComentarios)),
+      ),
     );
   }
 
@@ -522,9 +570,9 @@
       AQButton,
       {
         dataset: { accion: "enviar-comentario" },
-        onClick: onSend
+        onClick: onSend,
       },
-      "Enviar"
+      "Enviar",
     );
   }
 
@@ -534,7 +582,6 @@
     AQButton,
     HeaderActions,
     SwaggerCloseButton,
-    CloseAuthButton,
     AuthTabs,
     PasswordToggleButton,
     AvatarSelector,
@@ -549,7 +596,6 @@
     ComposerFooterActions,
     CommunityFilterButtons,
     PostFooterButtons,
-    CommentSendButton
+    CommentSendButton,
   };
 })();
-
