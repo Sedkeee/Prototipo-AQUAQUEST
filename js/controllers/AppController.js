@@ -10,17 +10,23 @@
   function entrarApp(usuario, esNuevo) {
     UI.mostrarPantalla("app");
     UI.renderHeaderUsuario(usuario);
+    UI.mostrarSeccion("inicio");
 
-    if (!datosIniciados) { AQ.controllers.Datos.init(); datosIniciados = true; }
+    if (!datosIniciados) {
+      AQ.controllers.Datos.init();
+      datosIniciados = true;
+    }
     AQ.controllers.Comunidad.init(usuario);
-    AQ.controllers.Juego.init(usuario, u => {
+    AQ.controllers.Juego.init(usuario, (u) => {
       UI.renderHeaderUsuario(u);
       AQ.controllers.Comunidad.actualizarUsuario(u);
     });
 
-    UI.mostrarToast(esNuevo
-      ? `¡Cuenta creada en BD! Bienvenida/o, ${usuario.nombre}`
-      : `Sesión activa: ${usuario.nombre}`);
+    UI.mostrarToast(
+      esNuevo
+        ? `¡Bienvenida/o a AquaQuest, ${usuario.nombre}!`
+        : `Hola de nuevo, ${usuario.nombre}`,
+    );
   }
 
   function mostrarLoginVisual() {
@@ -36,20 +42,19 @@
   AQ.controllers.App = {
     init() {
       AQ.controllers.Auth.init(entrarApp);
-      if (AQ.controllers.Swagger) AQ.controllers.Swagger.init();
+      AQ.controllers.Guia.init();
       UI.bindLogout(salir);
-      UI.bindVerLogin(mostrarLoginVisual);
-      UI.bindVerSwagger(() => AQ.controllers.Swagger && AQ.controllers.Swagger.abrirModal());
+      UI.bindVerSwagger(() => AQ.controllers.Swagger.abrirModal());
+      UI.bindNavegacion();
+      AQ.controllers.Swagger.init();
 
-      // Si hay una sesión activa en la BD entra directo; si no, abre el Login
       const usuario = Auth.usuarioActual();
-      if (usuario) {
-        entrarApp(usuario, false);
-      } else {
-        mostrarLoginVisual();
-      }
-    }
+      if (usuario) entrarApp(usuario, false);
+      else mostrarLoginVisual();
+    },
   };
 
-  document.addEventListener("DOMContentLoaded", () => AQ.controllers.App.init());
+  document.addEventListener("DOMContentLoaded", () =>
+    AQ.controllers.App.init(),
+  );
 })();
