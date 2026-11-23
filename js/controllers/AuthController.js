@@ -45,13 +45,14 @@
 
   AQ.controllers.Auth = {
     /** @param callback (usuario, esNuevo) => void */
-    init(callback) {
+    init(callback, onOmitir) {
       onAutenticado = callback;
       View.init(Model.AVATARES);
       View.bindTabs((tab) => View.mostrarTab(tab));
       View.bindLogin(login);
       View.bindRegistro(registro);
       View.bindPasswordInput((p) => View.renderFuerza(Model.fuerzaPassword(p)));
+      if (View.bindOmitir && onOmitir) View.bindOmitir(onOmitir);
     },
 
     mostrar(tab = "login") {

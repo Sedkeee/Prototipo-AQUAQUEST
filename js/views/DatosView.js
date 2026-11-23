@@ -49,6 +49,11 @@
   /* ---------- Leaflet map management ---------- */
   let mapInstance = null;
   let mapMarkers = [];
+  let markersByCodigo = new Map();
+  let mapEstacionesRef = null;
+  let codigoActivoMapa = null;
+  let onSelectEstacionMapa = null;
+  let selectEstacionesRef = null;
   let leafletAvailable = null;
 
   function isLeafletReady() {
@@ -332,14 +337,23 @@
 
       const sel = $("select-estacion");
       if (sel) {
-        sel.innerHTML = "";
-        estaciones.forEach(e => {
-          const opt = document.createElement("option");
-          opt.value = e.codigo || e.id;
-          opt.textContent = e.departamento + " · " + e.municipio + " — " + e.corriente + " [" + e.codigo + "] (" + e.muestras.length + " muestras)";
-          if ((e.codigo || e.id) === codigoActual) opt.selected = true;
-          sel.appendChild(opt);
-        });
+        /* Solo reconstruir los <option> si cambió la lista de estaciones */
+        if (selectEstacionesRef !== estaciones || sel.options.length !== estaciones.length) {
+          selectEstacionesRef = estaciones;
+          const frag = document.createDocumentFragment();
+          estaciones.forEach(e => {
+            const opt = document.createElement("option");
+            const cod = e.codigo || e.id;
+            opt.value = cod;
+            opt.textContent = e.departamento + " · " + e.municipio + " — " + e.corriente + " [" + e.codigo + "] (" + e.muestras.length + " muestras)";
+            if (cod === codigoActual) opt.selected = true;
+            frag.appendChild(opt);
+          });
+          sel.innerHTML = "";
+          sel.appendChild(frag);
+        } else {
+          sel.value = codigoActual;
+        }
         sel.onchange = ev => onSelectEstacion && onSelectEstacion(ev.target.value);
       }
 
@@ -482,7 +496,7 @@
     },
 
     /**
-     * Render interactive Leaflet map with station markers.
+     * Render interactive Leaflet map with station markers (optimized: reuses markers & lazy-inits when visible).
      * @param {Array} estaciones - All stations with lat/lon
      * @param {string} codigoActual - Current selected station code
      * @param {function} onSelectEstacion - Callback when a station is selected from map
@@ -492,10 +506,24 @@
       var container = $("mapa-estaciones");
       if (!wrap || !container) return;
 
-      /* CDN fallback: if Leaflet didn't load, hide the map section entirely */
-      if (!isLeafletReady()) {
-        wrap.innerHTML = '<div class="mapa-fallback" role="status"><span aria-hidden="true">⚠️</span> Mapa no disponible (Leaflet no cargado)</div>';
+      const prevCodigo = codigoActivoMapa;
+      const listaCambio = mapEstacionesRef !== estaciones;
+      mapEstacionesRef = estaciones;
+      codigoActivoMapa = codigoActual;
+      onSelectEstacionMapa = onSelectEstacion;
+
+      /* Si la sección Datos está oculta (display:none), posponer el montaje pesado hasta que sea visible */
+      if (container.clientWidth === 0 || container.offsetParent === null) {
         return;
+      }
+
+      /* CDN fallback: if Leaflet didn't load, show fallback only if script really failed */
+      if (!isLeafletReady()) {
+        leafletAvailable = null;
+        if (!isLeafletReady()) {
+          wrap.innerHTML = '<div class="mapa-fallback" role="status"><span aria-hidden="true">⚠️</span> Mapa no disponible (Leaflet no cargado)</div>';
+          return;
+        }
       }
 
       /* Initialize map only once */
@@ -504,12 +532,17 @@
           zoomControl: true,
           attributionControl: true,
           scrollWheelZoom: true,
+          preferCanvas: true,
+          fadeAnimation: false,
         });
 
-        /* Mapa estándar OpenStreetMap (oscurecido con filtro CSS en .leaflet-layer) */
+        /* Mapa estándar OpenStreetMap optimizado (oscurecido con filtro CSS en .leaflet-layer) */
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           attribution: "© OpenStreetMap",
           maxZoom: 19,
+          updateWhenIdle: false,
+          updateWhenZooming: false,
+          keepBuffer: 4,
         }).addTo(mapInstance);
 
         /* Handle popup button clicks (event delegation) */
@@ -519,26 +552,45 @@
           if (!content) return;
           var btn = content.querySelector("[data-select-estacion]");
           if (btn) {
-            btn.addEventListener("click", function () {
+            btn.onclick = function () {
               var codigo = this.getAttribute("data-select-estacion");
               mapInstance.closePopup();
-              if (onSelectEstacion) onSelectEstacion(codigo);
-            });
+              if (onSelectEstacionMapa) onSelectEstacionMapa(codigo);
+            };
           }
         });
       }
 
-      /* Clear previous markers */
+      /* Si los marcadores ya existen y solo cambió la estación seleccionada, actualizar en O(1) sin recrear todo */
+      if (!listaCambio && markersByCodigo.size > 0) {
+        if (prevCodigo && prevCodigo !== codigoActual && markersByCodigo.has(prevCodigo)) {
+          const prevM = markersByCodigo.get(prevCodigo);
+          prevM.setIcon(createMarkerIcon(false));
+          prevM.setZIndexOffset(0);
+        }
+        const actM = markersByCodigo.get(codigoActual);
+        if (actM) {
+          actM.setIcon(createMarkerIcon(true));
+          actM.setZIndexOffset(1000);
+          mapInstance.panTo(actM.getLatLng(), { animate: true, duration: 0.3 });
+          actM.openPopup();
+        }
+        return;
+      }
+
+      /* Reconstruir marcadores solo cuando cambia la lista completa de estaciones (primera carga o nuevo CSV) */
       mapMarkers.forEach(function (m) { mapInstance.removeLayer(m); });
       mapMarkers = [];
+      markersByCodigo.clear();
 
-      /* Add markers for all stations */
       var bounds = [];
+      var activeMarker = null;
       estaciones.forEach(function (est) {
         if (typeof est.lat !== "number" || typeof est.lon !== "number") return;
         if (est.lat === 0 && est.lon === 0) return;
 
-        var isActive = (est.codigo || est.id) === codigoActual;
+        var cod = est.codigo || est.id;
+        var isActive = cod === codigoActual;
         var icon = createMarkerIcon(isActive);
         var marker = L.marker([est.lat, est.lon], {
           icon: icon,
@@ -551,30 +603,41 @@
           maxWidth: 260,
           minWidth: 180,
           className: "dark-popup",
+          autoPanPadding: [20, 20],
         });
 
         marker.addTo(mapInstance);
         mapMarkers.push(marker);
+        markersByCodigo.set(cod, marker);
         bounds.push([est.lat, est.lon]);
 
-        /* Auto-open popup for active station */
-        if (isActive) {
-          setTimeout(function () { marker.openPopup(); }, 300);
-        }
+        if (isActive) activeMarker = marker;
       });
 
-      /* Fit map to show all markers */
+      mapInstance.invalidateSize();
       if (bounds.length > 0) {
-        mapInstance.fitBounds(bounds, { padding: [30, 30], maxZoom: 10 });
+        mapInstance.fitBounds(bounds, { padding: [30, 30], maxZoom: 10, animate: false });
       } else {
-        /* Default: center on Colombia */
-        mapInstance.setView([4.5, -73.5], 6);
+        mapInstance.setView([4.5, -73.5], 6, { animate: false });
       }
 
-      /* Fix Leaflet rendering on initially hidden containers */
-      setTimeout(function () {
-        if (mapInstance) mapInstance.invalidateSize();
-      }, 200);
+      if (activeMarker) {
+        activeMarker.openPopup();
+      }
+    },
+
+    /** Llamado automáticamente cuando el usuario entra a la pestaña "Datos reales" */
+    onSeccionVisible() {
+      if (mapEstacionesRef) {
+        if (!mapInstance || markersByCodigo.size === 0) {
+          this.renderMapa(mapEstacionesRef, codigoActivoMapa, onSelectEstacionMapa);
+        } else {
+          mapInstance.invalidateSize();
+        }
+      }
+      if (chartInstance) {
+        chartInstance.resize();
+      }
     },
   };
 })();

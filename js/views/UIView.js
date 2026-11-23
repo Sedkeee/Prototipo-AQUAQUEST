@@ -6,7 +6,9 @@
   const esc = AQ.utils.escapeHtml;
   let toastTimer = null;
   let logoutHandler = null;
+  let verLoginHandler = null;
   let verSwaggerHandler = null;
+  let esInvitadoActual = false;
 
   function mostrarSeccion(nombre) {
     let existe = false;
@@ -24,6 +26,10 @@
       else enlace.removeAttribute("aria-current");
     });
     window.scrollTo(0, 0);
+
+    if (nombre === "datos" && AQ.views.Datos && AQ.views.Datos.onSeccionVisible) {
+      requestAnimationFrame(() => AQ.views.Datos.onSeccionVisible());
+    }
   }
 
   function renderBotonesHeader() {
@@ -32,7 +38,9 @@
       $("header-actions-root"),
       h(HeaderActions, {
         esAdmin: $("app").dataset.role === "admin",
+        esInvitado: esInvitadoActual,
         onVerSwagger: () => verSwaggerHandler && verSwaggerHandler(),
+        onVerLogin: () => verLoginHandler && verLoginHandler(),
         onLogout: () => logoutHandler && logoutHandler(),
       }),
     );
@@ -68,16 +76,22 @@
     },
 
     renderHeaderUsuario(usuario) {
+      esInvitadoActual = !!usuario.esInvitado;
       $("header-avatar").textContent = usuario.avatar;
       $("header-nombre").textContent = usuario.nombre;
       $("header-correo").textContent = usuario.correo;
-      $("dashboard-nombre").textContent = usuario.nombre;
+      if ($("dashboard-nombre")) $("dashboard-nombre").textContent = usuario.nombre;
       $("app").dataset.role = usuario.rol === "admin" ? "admin" : "consultor";
       renderBotonesHeader();
     },
 
     bindLogout(handler) {
       logoutHandler = handler;
+      renderBotonesHeader();
+    },
+
+    bindVerLogin(handler) {
+      verLoginHandler = handler;
       renderBotonesHeader();
     },
 

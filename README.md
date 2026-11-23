@@ -125,42 +125,56 @@ Prototipo-AQUAQUEST/
 
 ---
 
-## 5. Instalación Paso a Paso
+## 5. Instalación y Configuración Paso a Paso
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone https://github.com/tu-usuario/Prototipo-AQUAQUEST.git
-cd Prototipo-AQUAQUEST
+git clone https://github.com/Sedkeee/Prototipo-AQUAQUEST.git
+cd Prototipo-AQUAQUEST-main
 ```
+*(No necesitas ejecutar `npm install`, ya que el servidor Node.js utiliza únicamente módulos nativos y el frontend carga React 18, Chart.js, Leaflet y Swagger UI desde CDN con respaldo local).*
 
-### 2. Configuración de Variables de Entorno (Opcional para EmailJS)
-Copia el archivo de plantilla a tu configuración local si deseas habilitar el envío real de correos de contacto:
-```bash
-cp .env.example .env
-```
-Edita `.env` o configura tus claves en `js/controllers/ContactoController.js`:
-- `EMAILJS_SERVICE_ID`: ID del servicio de correo en EmailJS.
-- `EMAILJS_TEMPLATE_ID`: ID de la plantilla en EmailJS.
-- `EMAILJS_PUBLIC_KEY`: Llave pública de tu cuenta en EmailJS.
+### 2. Configurar el Correo Real con EmailJS (Opcional)
+Por defecto, el formulario de contacto funciona en **Modo Demostración** (valida los campos y simula el envío). Para recibir correos reales:
+1. Crea una cuenta gratuita en [emailjs.com](https://www.emailjs.com/).
+2. En **Email Services → Add New Service**, conecta tu correo (ej. Gmail) y copia tu **`Service ID`**.
+3. En **Email Templates → Create New Template**, usa estas variables en la plantilla:
+   - **Asunto:** `{{subject}}`
+   - **Cuerpo:** `De: {{from_name}} ({{reply_to}}) - Mensaje: {{message}}`
+   - Guarda y copia tu **`Template ID`**.
+4. En **Account → General**, copia tu **`Public Key`**.
+5. Pega tus 3 claves en el archivo `.env` en la raíz del proyecto (o directamente en `EMAILJS_CONFIG` dentro de `js/controllers/ContactoController.js`):
+   ```env
+   EMAILJS_SERVICE_ID=tu_service_id_aqui
+   EMAILJS_TEMPLATE_ID=tu_template_id_aqui
+   EMAILJS_PUBLIC_KEY=tu_public_key_aqui
+   PORT=3000
+   ```
 
-*(Nota: Si no configuras las claves, el formulario funciona en modo demostración validando todos los campos y notificando al usuario).*
+### 3. Fotos del Equipo en "Quiénes Somos" (Opcional)
+Coloca las fotos de los 3 integrantes dentro de la carpeta `assets/` con estos nombres:
+- `assets/rafael.jpg` (*Rafael Hernandez Gomez*)
+- `assets/francisco.jpg` (*Francisco Manuel Bermudez*)
+- `assets/juan.jpg` (*Juan Jose Herrera Largo*)
+
+*(Si alguna foto no está en la carpeta `assets/`, la tarjeta muestra automáticamente las iniciales del integrante sin romper el diseño).*
 
 ---
 
 ## 6. Base de Datos y Modelado Relacional
 
-El modelo de datos se diseñó a partir de la estructura relacional del archivo de monitoreo oficial del IDEAM:
+El modelo de datos se diseñó a partir de la estructura relacional del archivo de monitoreo oficial del IDEAM (`Data_Histórica_de_Calidad_de_Agua_Superficial_y_Sedimentos_20260911.csv`, con **143.818 registros**, **243 estaciones** y **101 subzonas hidrográficas**):
 
 ### Diagrama Entidad-Relación (10 Tablas)
 1. `ZONAS_HIDROGRAFICAS`: Identificadores de área y subzonas hidrográficas (`codigo_szh`).
 2. `PUNTOS_MONITOREO`: Estaciones de monitoreo con latitud, longitud, elevación, cuenca, departamento y municipio.
-3. `VARIABLES`: Diccionario de parámetros de calidad del agua (pH, OD, DQO, etc.) con sus unidades y categorías.
+3. `VARIABLES`: Diccionario de las 13 variables medidas por el IDEAM (pH, OD, DQO, Turbidez, Conductividad, Metales, Nutrientes, etc.).
 4. `MUESTRAS`: Registros de toma de muestra asociados a una fecha, estación y proyecto.
-5. `MEDICIONES`: Valor cuantitativo registrado para cada variable en cada muestra.
-6. `USUARIOS`: Cuentas registradas con contraseñas encriptadas con sal SHA-256 y roles (`admin`, `consultor`).
-7. `RETOS`: Retos ecológicos disponibles con puntos de experiencia asociados.
+5. `MEDICIONES`: Valor cuantitativo registrado para cada variable en cada muestra (respetando valores `<LCM`).
+6. `USUARIOS`: Cuentas registradas con contraseñas encriptadas con sal (`SHA-256 + sal`) y roles (`admin`, `consultor`).
+7. `RETOS`: Retos ecológicos de acción real con puntos de experiencia (XP).
 8. `ACCIONES_USUARIO`: Historial de retos completados por los usuarios con evidencias.
-9. `LOGROS`: Medallas y condecoraciones del sistema.
+9. `LOGROS`: Medallas y niveles del sistema.
 10. `USUARIO_LOGROS`: Relación muchos a muchos entre usuarios y medallas desbloqueadas.
 
 Para desplegar esta estructura en motores **MySQL** o **MariaDB**, ejecuta el script provisto en:
@@ -170,32 +184,57 @@ database/schema_mysql.sql
 
 ---
 
-## 7. Cómo Ejecutar el Proyecto
+## 7. Cómo Montar y Ejecutar el Proyecto
 
-### Opción 1: Ejecución Directa en el Navegador (Sin dependencias)
-1. Navega hasta la carpeta del proyecto.
-2. Haz **doble clic** sobre el archivo `index.html` (o haz clic derecho y selecciona *Abrir con Google Chrome / tu navegador preferido*).
-3. ¡Listo! La aplicación cargará automáticamente con las 25 estaciones representativas precargadas en memoria.
+Puedes montar y correr el proyecto de **3 formas diferentes**:
 
-### Opción 2: Servidor Backend Node.js (Recomendado)
-El proyecto incluye un servidor HTTP nativo escrito en Node.js sin frameworks externos (`express` no es requerido):
+### Opción 1: Con el Servidor Backend en Node.js (Recomendado)
+Ejecuta en la terminal desde la carpeta raíz del proyecto:
 
 ```bash
 node server.js
 ```
 
-El servidor imprimirá en consola:
+Verás en la consola:
+```text
+============================================================
+AquaQuest Colombia — Servidor y Base de Datos activos
+URL: http://localhost:3000
+Estaciones IDEAM cargadas: 25 (de 243 en CSV)
+Usuarios en tabla USUARIOS: 2
+============================================================
 ```
-Servidor AquaQuest escuchando en http://localhost:3000
-Base de datos: database/ideam_db.json conectada
-```
-Abre en tu navegador: **`http://localhost:3000`**
+Luego abre en tu navegador: **`http://localhost:3000`**
 
-### Re-importar Datos desde un nuevo CSV del IDEAM
-Si dispones de un archivo CSV actualizado del IDEAM, puedes procesarlo con el script ETL:
-```bash
-node database/import_csv.js "ruta/a/tu/archivo_ideam.csv"
-```
+### Opción 2: Con Live Server en Visual Studio Code
+1. Abre la carpeta del proyecto en **VS Code**.
+2. Haz clic derecho sobre `index.html` y selecciona **"Open with Live Server"** (o pulsa `Go Live` en la barra inferior).
+3. Se abrirá en `http://127.0.0.1:5500`.
+
+### Opción 3: Ejecución Directa (Sin servidor)
+1. Haz **doble clic** directamente sobre el archivo `index.html`.
+2. La aplicación funciona 100 % en el navegador gracias a la base de datos precargada en `js/models/IdeamCsvData.js` y la persistencia en `localStorage`.
+
+---
+
+### 🔐 Acceso, Modo Libre y Cuentas de Prueba
+
+- **Modo Invitado (Sin iniciar sesión):** Al abrir la página entras **directamente** a la aplicación como `Explorador/a Invitado` sin obligación de iniciar sesión.
+- **Iniciar Sesión / Cambiar de Rol:** Haz clic en el botón **`Iniciar sesión`** arriba a la derecha para crear una cuenta nueva o ingresar con las cuentas preconfiguradas en la base de datos (`database/usuarios_db.json`):
+
+| Rol | Correo | Contraseña | Permisos especiales |
+|-----|--------|------------|---------------------|
+| **Administrador IDEAM** (`admin`) | `admin@aquaquest.co` | `Admin123!` | Habilita el botón **`{ } API Swagger`**, el botón **`📂 Cargar CSV / Excel`** en la vista de datos y la visualización de códigos técnicos de estación. |
+| **Consultor / Explorador** (`consultor`) | `camila@aquaquest.co` | `Agua2026!` | Exploración completa de estaciones, gráficas, mapa interactivo, retos con XP, guía del agua y muro comunitario. |
+
+---
+
+### 📂 Cómo Cargar un Archivo CSV Completo del IDEAM
+- **Desde la interfaz web:** Inicia sesión como **Admin** (`admin@aquaquest.co` / `Admin123!`), entra a **Datos reales** y haz clic en el botón **`📂 Cargar CSV / Excel`** para seleccionar el archivo `.csv` del IDEAM desde tu computador.
+- **Desde la terminal (script ETL):**
+  ```bash
+  node database/import_csv.js "ruta/a/Data_Histórica_de_Calidad_de_Agua_Superficial_y_Sedimentos_20260911.csv"
+  ```
 
 ---
 

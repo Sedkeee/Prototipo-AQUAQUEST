@@ -80,43 +80,40 @@
    */
   async function inicializarSemillaBD() {
     const lista = leerTablaUsuarios();
-    if (lista["camila@aquaquest.co"] && lista["admin@aquaquest.co"]) return;
 
     const salCamila = "a1b2c3d4e5f60123456789abcdef0123";
     const hashCamila = await hashPassword("Agua2026!", salCamila);
-    if (!lista["camila@aquaquest.co"]) {
-      lista["camila@aquaquest.co"] = {
-        id_usuario: 1,
-        id: "u_1",
-        nombre: "Camila Ríos",
-        correo: "camila@aquaquest.co",
-        avatar: "CO",
-        rol: "consultor",
-        xp_total: 120,
-        creado: "2026-09-01T10:00:00.000Z",
-        sal: salCamila,
-        hash: hashCamila,
-        contrasena_hash: `${salCamila}:${hashCamila}`,
-      };
-    }
+    lista["camila@aquaquest.co"] = {
+      id_usuario: 1,
+      id: "u_1",
+      nombre: "Camila Ríos",
+      correo: "camila@aquaquest.co",
+      avatar: "CO",
+      rol: "consultor",
+      xp_total: 120,
+      creado: "2026-09-01T10:00:00.000Z",
+      ...(lista["camila@aquaquest.co"] || {}),
+      sal: salCamila,
+      hash: hashCamila,
+      contrasena_hash: `${salCamila}:${hashCamila}`,
+    };
 
     const salAdmin = "f6e5d4c3b2a10123456789abcdef9876";
     const hashAdmin = await hashPassword("Admin123!", salAdmin);
-    if (!lista["admin@aquaquest.co"]) {
-      lista["admin@aquaquest.co"] = {
-        id_usuario: 2,
-        id: "u_2",
-        nombre: "Admin IDEAM",
-        correo: "admin@aquaquest.co",
-        avatar: "ID",
-        rol: "admin",
-        xp_total: 500,
-        creado: "2026-09-01T10:00:00.000Z",
-        sal: salAdmin,
-        hash: hashAdmin,
-        contrasena_hash: `${salAdmin}:${hashAdmin}`,
-      };
-    }
+    lista["admin@aquaquest.co"] = {
+      id_usuario: 2,
+      id: "u_2",
+      nombre: "Admin IDEAM",
+      correo: "admin@aquaquest.co",
+      avatar: "ID",
+      rol: "admin",
+      xp_total: 500,
+      creado: "2026-09-01T10:00:00.000Z",
+      ...(lista["admin@aquaquest.co"] || {}),
+      sal: salAdmin,
+      hash: hashAdmin,
+      contrasena_hash: `${salAdmin}:${hashAdmin}`,
+    };
 
     guardarTablaUsuarios(lista);
   }
@@ -130,7 +127,7 @@
         headers: { "Content-Type": "application/json" },
         body: body ? JSON.stringify(body) : undefined,
       });
-      if (res.status === 404) return null;
+      if (res.status === 404 || res.status === 405) return null;
       return await res.json();
     } catch (e) {
       return null;

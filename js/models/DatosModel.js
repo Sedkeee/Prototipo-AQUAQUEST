@@ -413,22 +413,30 @@
     },
 
     /**
-     * Importa en el navegador un archivo CSV del IDEAM (como el Excel exportado a CSV)
+     * Importa en el navegador un archivo CSV del IDEAM (optimizado sin split masivo en RAM)
      * y puebla las tablas relacionales ZONAS_HIDROGRAFICAS, PUNTOS_MONITOREO, MUESTRAS y MEDICIONES.
      */
     importarCSV(contenidoCSV, nombreArchivo = "CSV_IDEAM.csv") {
-      const lineas = String(contenidoCSV || "").split(/\r?\n/);
-      if (lineas.length < 2)
+      const texto = String(contenidoCSV || "");
+      const len = texto.length;
+      let pos = texto.indexOf("\n");
+      if (pos === -1 || pos >= len - 1)
         return { ok: false, error: "El archivo CSV está vacío." };
+      pos++; // Saltar cabecera
 
       const zonasMap = new Map();
       const puntosMap = new Map();
       const muestrasPorPunto = new Map();
       let filasValidas = 0;
 
-      for (let i = 1; i < lineas.length; i++) {
-        const linea = lineas[i].trim();
-        if (!linea) continue;
+      while (pos < len) {
+        let nextNL = texto.indexOf("\n", pos);
+        if (nextNL === -1) nextNL = len;
+        let end = nextNL > pos && texto.charCodeAt(nextNL - 1) === 13 ? nextNL - 1 : nextNL;
+        const linea = texto.slice(pos, end);
+        pos = nextNL + 1;
+
+        if (linea.length < 15) continue;
         const cols = parseCSVLine(linea);
         if (cols.length < 14) continue;
         filasValidas++;

@@ -205,7 +205,7 @@
   }
 
   /* ---------- 1. Botones de Cabecera (Header) ---------- */
-  function HeaderActions({ esAdmin, onVerSwagger, onLogout }) {
+  function HeaderActions({ esAdmin, esInvitado, onVerSwagger, onVerLogin, onLogout }) {
     return h(
       Fragment,
       null,
@@ -223,13 +223,24 @@
       h(
         AQButton,
         {
-          id: "btn-logout",
-          className: "btn-logout",
-          title: "Cerrar sesión",
-          onClick: onLogout,
+          id: "btn-ver-login",
+          className: "btn-ver-login",
+          title: "Iniciar sesión o cambiar de cuenta",
+          onClick: onVerLogin,
         },
-        "Salir",
+        "Iniciar sesión",
       ),
+      !esInvitado &&
+        h(
+          AQButton,
+          {
+            id: "btn-logout",
+            className: "btn-logout",
+            title: "Cerrar sesión",
+            onClick: onLogout,
+          },
+          "Salir",
+        ),
     );
   }
 
@@ -327,7 +338,7 @@
     );
   }
 
-  function AuthFormActions({ modo, cargando }) {
+  function AuthFormActions({ modo, cargando, onOmitir }) {
     const esLogin = modo === "login";
     return h(
       Fragment,
@@ -344,6 +355,18 @@
           disabled: cargando,
         },
         esLogin ? "Entrar" : "Crear cuenta y entrar",
+      ),
+      h(
+        AQButton,
+        {
+          id: esLogin ? "btn-omitir-auth" : undefined,
+          className: "btn-auth btn-invitado",
+          onClick: (e) => {
+            e.preventDefault();
+            if (onOmitir) onOmitir();
+          },
+        },
+        "Continuar sin cuenta",
       ),
     );
   }

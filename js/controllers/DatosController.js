@@ -52,7 +52,26 @@
 
   function cambiarEstacion(idOCodigo) {
     var p = Model.seleccionarEstacion(idOCodigo);
-    refrescarVista();
+    View.renderEstadoBD(
+      Model.resumenBD(),
+      Model.estaciones(),
+      p.codigo || p.id,
+      cambiarEstacion,
+      importarArchivoCSV,
+    );
+    View.renderInfoPunto(p);
+    View.renderResenaEstudio(Model.metaEstudio(variableActual));
+    View.renderChart(
+      Model.VARIABLES[variableActual],
+      Model.serie(variableActual),
+      tipoGrafico,
+    );
+    View.renderTabla(Model.ultimasMediciones(4));
+    View.renderMapa(
+      Model.estaciones(),
+      p.codigo || p.id,
+      cambiarEstacion,
+    );
     UI.mostrarToast("Estación activa: " + p.municipio + " (" + p.corriente + ")");
   }
 

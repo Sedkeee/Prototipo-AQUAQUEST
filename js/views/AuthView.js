@@ -18,6 +18,7 @@
   let cargandoLogin = false;
   let cargandoRegistro = false;
   let tabHandler = null;
+  let omitirHandler = null;
 
   function renderTabs() {
     const { h, mount, AuthTabs } = AQ.components;
@@ -52,6 +53,7 @@
       h(AuthFormActions, {
         modo: "login",
         cargando: cargandoLogin,
+        onOmitir: () => omitirHandler && omitirHandler(),
       }),
     );
     mount(
@@ -59,6 +61,7 @@
       h(AuthFormActions, {
         modo: "registro",
         cargando: cargandoRegistro,
+        onOmitir: () => omitirHandler && omitirHandler(),
       }),
     );
   }
@@ -177,6 +180,10 @@
       $("reg-password").addEventListener("input", (e) =>
         handler(e.target.value),
       );
+    },
+    bindOmitir(handler) {
+      omitirHandler = handler;
+      renderAccionesAuth();
     },
   };
 })();
