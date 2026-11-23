@@ -3718,7 +3718,287 @@ table.datos .valor {
   }
 }
 
-/* Truco para hacer el mapa oscuro sin API Key */
+  /* Truco para hacer el mapa oscuro sin API Key */
 .leaflet-layer {
   filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* ============================================================
+   OPTIMIZACIÓN MÓVIL INTEGRAL (CELULARES Y TABLETS)
+   Corrige z-index sobre Leaflet, cabecera compacta, tablas y formularios
+   ============================================================ */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Garantizar que header, menú lateral, modales y toasts queden siempre encima del mapa Leaflet (z-index 400-1000) */
+header {
+  z-index: 1100;
+}
+.sidebar-overlay {
+  z-index: 1150;
+}
+.modal-fondo {
+  z-index: 1300;
+}
+.swagger-modal-fondo {
+  z-index: 1350;
+}
+.toast {
+  z-index: 1400;
+}
+
+/* Corregir conflicto de sidebar entre 769px y 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .app-sidebar {
+    top: 90px;
+    padding: 14px 10px;
+  }
+  .app-sidebar .sidebar-caption,
+  .app-sidebar .sidebar-note {
+    display: block;
+  }
+  .app-sidebar .sidebar-nav {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .app-sidebar .sidebar-link {
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+}
+
+/* Ajustes para celulares (<= 768px) */
+@media (max-width: 768px) {
+  header {
+    padding: 10px 12px;
+  }
+  .brand {
+    flex-wrap: nowrap;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .hamburger-btn {
+    order: -1;
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+  }
+  .brand .logo svg {
+    width: 22px;
+    height: 22px;
+  }
+  .brand h1 {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-menu {
+    margin-left: auto;
+    gap: 6px;
+    padding: 3px 4px 3px 5px;
+    flex-shrink: 0;
+  }
+  .user-menu .u-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 10.5px;
+  }
+  .btn-ver-login,
+  .btn-logout,
+  .btn-swagger {
+    padding: 5px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  /* Menú lateral (drawer) por encima de Leaflet */
+  .app-sidebar {
+    z-index: 1200;
+    top: 0 !important;
+    width: 270px;
+    max-width: 82vw;
+    padding: 20px 14px 28px;
+  }
+  .app-sidebar .sidebar-link {
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  /* Contenedores y paneles sin desborde horizontal */
+  .app-layout {
+    padding: 12px 10px 36px;
+  }
+  .panel,
+  .comunidad-panel {
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+  .col-header,
+  .comunidad-header {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  /* Selector de estaciones e inputs adaptados a móvil (16px evita zoom en iOS) */
+  .select-estacion {
+    font-size: 14px;
+    padding: 10px;
+    max-width: 100%;
+    text-overflow: ellipsis;
+  }
+  .db-connector {
+    padding: 10px 12px;
+  }
+  .db-connector-top {
+    font-size: 11.5px;
+  }
+  .btn-importar-csv {
+    width: 100%;
+    text-align: center;
+    padding: 8px 10px;
+  }
+
+  /* Tabla de mediciones 100% visible en pantalla de celular */
+  table.datos {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    white-space: normal;
+    font-size: 11.5px;
+  }
+  table.datos th,
+  table.datos td {
+    padding: 7px 4px;
+    word-break: break-word;
+  }
+  table.datos th:first-child,
+  table.datos td:first-child {
+    width: 28%;
+  }
+  table.datos th:nth-child(2),
+  table.datos td:nth-child(2) {
+    width: 42%;
+  }
+  table.datos th:last-child,
+  table.datos td:last-child {
+    width: 30%;
+  }
+
+  /* Mapa interactivo en celular */
+  #mapa-estaciones {
+    height: 260px !important;
+  }
+  .leaflet-popup-content {
+    margin: 8px 10px !important;
+    font-size: 11.5px !important;
+  }
+
+  /* Retos y juego en celular */
+  .reto .btn-completar {
+    width: 100%;
+    padding: 9px 12px;
+    text-align: center;
+  }
+  .modal-botones {
+    flex-direction: column-reverse;
+  }
+  .modal-botones .btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Comunidad en celular */
+  .composer-top {
+    gap: 8px;
+  }
+  .composer-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .composer-footer .xp-nota {
+    width: 100%;
+    order: 3;
+    text-align: center;
+  }
+  .btn-adjuntar,
+  .btn-publicar {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+  }
+  .filtros {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .filtro-btn {
+    flex-shrink: 0;
+  }
+
+  /* Guía del agua en celular */
+  .guia-encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .guia-minutos-control {
+    flex-wrap: wrap;
+  }
+  .guia-minutos-control input {
+    flex: 1;
+    min-width: 90px;
+    font-size: 16px;
+  }
+  .guia-final-botones .guia-btn {
+    width: 100%;
+  }
+
+  /* Contacto en celular */
+  .contacto-field input,
+  .contacto-field textarea {
+    font-size: 16px;
+  }
+  .contacto-submit {
+    width: 100%;
+  }
+
+  /* Modal Swagger en celular */
+  .swagger-modal-header {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .swagger-modal-header h3 {
+    font-size: 13.5px;
+  }
+  .swagger-modal-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Ajustes para celulares pequeños (<= 420px) */
+@media (max-width: 420px) {
+  .brand h1 span {
+    display: none; /* Muestra "AquaQuest" limpio si hay varios botones en la barra */
+  }
+  .dashboard-hero {
+    padding: 18px 14px;
+  }
+  .dashboard-hero h2 {
+    font-size: 23px;
+  }
+  .dashboard-card {
+    min-height: 0;
+    padding: 16px 14px;
+  }
+  .guia-ahorro-resultados {
+    grid-template-columns: 1fr;
+  }
 }

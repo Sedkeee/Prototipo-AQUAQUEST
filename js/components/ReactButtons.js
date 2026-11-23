@@ -220,27 +220,27 @@
           },
           "{ } API Swagger",
         ),
-      h(
-        AQButton,
-        {
-          id: "btn-ver-login",
-          className: "btn-ver-login",
-          title: "Iniciar sesión o cambiar de cuenta",
-          onClick: onVerLogin,
-        },
-        "Iniciar sesión",
-      ),
-      !esInvitado &&
-        h(
-          AQButton,
-          {
-            id: "btn-logout",
-            className: "btn-logout",
-            title: "Cerrar sesión",
-            onClick: onLogout,
-          },
-          "Salir",
-        ),
+      esInvitado
+        ? h(
+            AQButton,
+            {
+              id: "btn-ver-login",
+              className: "btn-ver-login",
+              title: "Iniciar sesión o crear cuenta",
+              onClick: onVerLogin,
+            },
+            "Iniciar sesión",
+          )
+        : h(
+            AQButton,
+            {
+              id: "btn-logout",
+              className: "btn-logout",
+              title: "Cerrar sesión",
+              onClick: onLogout,
+            },
+            "Salir",
+          ),
     );
   }
 

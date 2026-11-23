@@ -531,6 +531,54 @@
   background: linear-gradient(135deg, var(--green-1), var(--green-2));
   box-shadow: 0 10px 24px rgba(45, 106, 79, 0.4);
 }
+.btn-auth.btn-invitado {
+  background: rgba(10, 25, 41, 0.65);
+  border: 1px solid var(--border);
+  color: var(--water-3);
+  box-shadow: none;
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.btn-auth.btn-invitado:hover:not(:disabled) {
+  border-color: var(--water-1);
+  background: rgba(0, 180, 216, 0.14);
+  color: #fff;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .auth-panel {
+    padding: 16px 12px;
+    align-items: flex-start;
+  }
+  .auth-card {
+    padding: 22px 18px 20px;
+    border-radius: 14px;
+    margin: auto 0;
+  }
+  .auth-card h1 {
+    font-size: 20px;
+  }
+  .auth-card .sub {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+  .auth-tabs {
+    margin-bottom: 16px;
+  }
+  .auth-tab {
+    padding: 8px 6px;
+    font-size: 12.5px;
+  }
+  .input-wrap input {
+    font-size: 16px; /* Evita auto-zoom en iOS / Android */
+    padding: 10px 38px 10px 36px;
+  }
+  .btn-auth {
+    padding: 11px;
+    font-size: 14px;
+  }
+}
 .btn-auth.cargando {
   color: transparent;
 }
