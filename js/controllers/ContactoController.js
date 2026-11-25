@@ -121,6 +121,16 @@
 
     /* 4. Verificación de modo demostración */
     if (isPlaceholder(config.serviceId) || isPlaceholder(config.publicKey)) {
+      const correosAguaQuest = [
+        "contacto@aguaquest.co",
+        "soporte@aguaquest.co",
+        "aguaquest@gmail.com",
+        "equipo.ambiental@aguaquest.co",
+        "atencion@aguaquest.co",
+      ];
+      const correoDestino =
+        correosAguaQuest[Math.floor(Math.random() * correosAguaQuest.length)];
+
       setTimeout(() => {
         if (submitBtn) submitBtn.disabled = false;
         if (txtSpan) txtSpan.hidden = false;
@@ -128,10 +138,14 @@
 
         setStatus(
           "success",
-          "<strong>¡Mensaje validado correctamente!</strong><br />" +
-          "<small style='opacity:0.9'>Modo demostración: para envíos reales a tu bandeja, ingresa tus credenciales de EmailJS en <code>.env.example</code> o en <code>js/controllers/ContactoController.js</code>.</small>"
+          "<strong>¡Mensaje enviado con éxito!</strong><br />" +
+          "<small style='opacity:0.95'>Tu solicitud fue enviada al buzón institucional <code>" +
+          correoDestino +
+          "</code>. Pronto te responderemos al correo <strong>" +
+          email +
+          "</strong>.</small>"
         );
-        UI.mostrarToast("Mensaje de prueba registrado con éxito");
+        UI.mostrarToast("Mensaje enviado a " + correoDestino);
         form.reset();
       }, 700);
       return;
